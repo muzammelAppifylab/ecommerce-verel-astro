@@ -1,0 +1,30 @@
+# Local development only. The deployed site uses the platform's Site Database.
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: varel-astro-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: varel
+      POSTGRES_PASSWORD: varel
+      POSTGRES_DB: varel
+    ports:
+      - "127.0.0.1:5436:5432"
+    volumes:
+      - varel-astro-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U varel -d varel"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  # Throwaway database for integration tests (EMPTIED by every run).
+  test-db:
+    image: postgres:17-alpine
+    container_name: varel-astro-test-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: dev
+    ports:
+      - "127.0.0.1:5437:5432"
+volumes:
+  varel-astro-db-data:
