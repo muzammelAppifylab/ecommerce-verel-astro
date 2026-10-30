@@ -86,6 +86,9 @@ where a decision below says otherwise. Built by ~31 agents in 3 waves.
    screens render in your dev server with the seed data, and a hand-off note
    `docs/migration/handoff/<id>.md` (what was ported, what differs from VAREL, Requests,
    known gaps). Commit on `wp/<id>` with the attribution trailer.
+8. **Prep spec:** if `C:\Users\Appifylab\Projects\varel-astro-wt\_specs\<id>.md` exists, read
+   it before starting: it is a port spec for your package written from the VAREL source
+   while Wave 0 ran. Check its assumptions against what Wave 0 actually built (Wave 0 wins).
 
 ---
 
