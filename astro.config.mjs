@@ -1,5 +1,6 @@
 import cloudflare from '@astrojs/cloudflare';
 import react from '@astrojs/react';
+import tailwindcss from '@tailwindcss/vite';
 import {defineConfig} from 'astro/config';
 
 // Pages render on request on a Cloudflare Worker (marketing and account pages
@@ -49,6 +50,9 @@ export default defineConfig({
   // them on, any `Astro.session` call would fail at request time. Sign-in is
   // the site's own (src/platform/auth), on cookies.
   session: false,
+  // Tailwind v4 compiles at build time into the storefront's stylesheet
+  // (src/styles/storefront.css imports it); nothing inline, so the CSP holds.
+  vite: {plugins: [tailwindcss()]},
   redirects: {'/account': '/account/login/'},
   // No Markdown code blocks here; Shiki's inline styles would break the CSP.
   markdown: {syntaxHighlight: false},
