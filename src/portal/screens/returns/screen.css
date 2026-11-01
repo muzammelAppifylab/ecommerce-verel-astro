@@ -1,0 +1,6 @@
+/* Returns screens (WP-19) share the orders screens' classes (`.sales-*` in ../orders/screen.css).
+   Only what is specific to returns lives here. */
+
+.sales-reason .sales-subtle {
+  font-size: 0.75rem;
+}
