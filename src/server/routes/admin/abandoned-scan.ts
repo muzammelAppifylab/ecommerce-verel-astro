@@ -13,7 +13,8 @@ import {Prisma} from '../../../generated/prisma/client';
 import type {AbandonedBagRow, AbandonedStatus} from '../../../lib/types/admin/merchandising';
 import {contactEmail} from '../../lib/abandoned';
 import type {Db} from '../../lib/db';
-import {type CursorPage, type CursorValue, decodeCursor, keysetPage} from '../../lib/http';
+import type {CursorPage} from '../../../lib/types/common';
+import {type CursorValue, decodeCursor, keysetPage} from '../../lib/http';
 import {fromCents, round2} from '../../lib/money';
 import {photoOf} from '../../lib/serializers';
 
@@ -207,7 +208,7 @@ export function sliceAfter(sorted: AbandonedBagRow[], sort: AbandonedSort, curso
 // ─── Database reads (all bounded) ───────────────────────────────────────────
 
 /** Details for ids in the given order; bags without published lines or a contact email drop out. */
-async function bagsByIds(db: Db, ids: number[]): Promise<Bag[]> {
+export async function bagsByIds(db: Db, ids: number[]): Promise<Bag[]> {
   if (!ids.length) return [];
   const rows = await db.cart.findMany({where: {id: {in: ids}}, select: bagSelect, take: ids.length});
   const byId = new Map(rows.map(r => [r.id, r]));
