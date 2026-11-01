@@ -1,15 +1,23 @@
 ---
 /**
- * Any address on the site that matches no page. Rendered on request (so it
- * shows the brand) with a 404 status.
+ * Any address that matches no page (VAREL `src/pages/NotFound.tsx`): rendered on request with a 404
+ * status, in the URL's language (`/da/xyz/` is Danish: the middleware sets `Astro.locals.locale`).
+ * The product picks are read in-process and hidden when that read fails. Server HTML only (no island).
  */
-import NotFound from '../components/NotFound.astro';
-import Base from '../layouts/Base.astro';
-import {pageContext} from '../server/page';
+import {NotFoundView} from '@/components/pages/NotFoundView';
+import {notFoundPicks} from '@/components/pages/picks';
+import {dictsFor} from '@/components/layout/dictionaries';
+import Storefront from '@/layouts/Storefront.astro';
+import {t} from '@/lib/i18n/server';
+import {pageContext} from '@/server/page';
 
-const {site, viewer} = await pageContext(Astro.request, Astro.response);
+const locale = Astro.locals.locale ?? 'en';
+const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
+const picks = await notFoundPicks(api);
+const dicts = dictsFor(locale, {notfound: true, layout: ['ui']});
+Astro.response.status = 404;
 ---
 
-<Base site={site} viewer={viewer} title="Page not found" noindex>
-  <NotFound site={site} />
-</Base>
+<Storefront api={api} site={site} viewer={viewer} title={t(locale, 'notfound', 'title')} noindex>
+  <NotFoundView locale={locale} dicts={dicts} picks={picks} />
+</Storefront>

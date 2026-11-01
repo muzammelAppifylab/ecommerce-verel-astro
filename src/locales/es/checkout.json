@@ -42,6 +42,7 @@
   "removeCode": "Quitar código",
   "pay": "Pagar {{total}}",
   "placeOrder": "Realizar pedido",
+  "paying": "Procesando…",
   "methodDigital": "digital",
   "errors": {
     "email": "Introduce un correo electrónico válido",

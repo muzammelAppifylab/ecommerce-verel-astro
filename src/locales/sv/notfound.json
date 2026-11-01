@@ -14,5 +14,11 @@
     "contact": "Kontakt"
   },
   "alt": "Tomt hörn av studion i dagsljus",
-  "picks": "I studion just nu"
+  "picks": "I studion just nu",
+  "error": {
+    "title": "Något gick fel",
+    "heading": "Sidan kunde inte visas",
+    "body": "Försök igen om en minut.",
+    "home": "Tillbaka till startsidan"
+  }
 }

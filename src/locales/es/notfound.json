@@ -14,5 +14,11 @@
     "contact": "Contacto"
   },
   "alt": "Rincón vacío del estudio con luz natural",
-  "picks": "Ahora en el estudio"
+  "picks": "Ahora en el estudio",
+  "error": {
+    "title": "Algo ha salido mal",
+    "heading": "No se ha podido mostrar esta página",
+    "body": "Vuelve a intentarlo en un minuto.",
+    "home": "Volver al inicio"
+  }
 }
