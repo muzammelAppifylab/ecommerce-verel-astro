@@ -1,0 +1,23 @@
+---
+/**
+ * /styleguide/: the VAREL storefront design system (every component in src/components/varel, its variants
+ * and states) inside the real storefront chrome. Dev server and editor Preview only; 404 on the live site.
+ */
+import NotFound from '@/components/NotFound.astro';
+import {dictsFor} from '@/components/layout/dictionaries';
+import {DEFAULT_LOCALE} from '@/components/varel/href';
+import {Styleguide} from '@/components/varel/Styleguide';
+import Storefront from '@/layouts/Storefront.astro';
+import {config} from '@/platform/config';
+import {pageContext} from '@/server/page';
+
+const enabled = import.meta.env.DEV || config.preview;
+if (!enabled) Astro.response.status = 404;
+const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
+const locale = (Astro.locals as {locale?: string}).locale ?? DEFAULT_LOCALE;
+const dicts = dictsFor(locale, {common: true, layout: true, product: true, journal: ['newsletterForm']});
+---
+
+<Storefront site={site} viewer={viewer} api={api} title="Styleguide" description="VAREL design system." noindex>
+  {enabled ? <Styleguide client:load locale={locale} dicts={dicts} /> : <NotFound />}
+</Storefront>

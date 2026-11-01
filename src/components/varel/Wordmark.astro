@@ -1,0 +1,32 @@
+---
+/**
+ * The type-set VAREL wordmark for server-rendered chrome (auth and checkout shells): the same markup and
+ * classes as the React `Wordmark` (Lato 300, 0.42em tracking, optical left padding), without hydrating.
+ */
+interface Props {
+  /** 20, 22 or 24 px */
+  size?: 20 | 22 | 24;
+  /** The localized home; null renders a plain span */
+  href?: string | null;
+  /** aria-label of the link ("VAREL home") */
+  label?: string;
+  class?: string;
+}
+const {size = 24, href = '/', label = 'VAREL home', class: className} = Astro.props;
+const SIZE = {20: 'text-[20px]', 22: 'text-[22px]', 24: 'text-[24px]'} as const;
+const cls = [
+  'wordmark font-sans font-light tracking-wordmark whitespace-nowrap text-text-primary uppercase',
+  SIZE[size],
+  className,
+];
+---
+
+{
+  href === null ? (
+    <span class:list={cls}>VAREL</span>
+  ) : (
+    <a href={href} aria-label={label} data-wordmark="true" class:list={[...cls, 'border-0 hover:text-text-primary']}>
+      VAREL
+    </a>
+  )
+}

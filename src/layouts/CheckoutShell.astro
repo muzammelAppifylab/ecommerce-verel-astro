@@ -1,0 +1,57 @@
+---
+/**
+ * Minimal checkout chrome (VAREL `layout/CheckoutLayout.tsx`): back to bag · wordmark · secure checkout.
+ * No footer. Wraps <Base chrome="none">; checkout and confirmation pages pass `noindex`.
+ *
+ *   <CheckoutShell site={site} viewer={viewer} title="Checkout" noindex>…</CheckoutShell>
+ *
+ * The page's own CSP needs (Stripe Payment Element, D3) are the page's business (WP-12), not this shell's.
+ */
+import '../styles/storefront.css';
+
+import type {ComponentProps} from 'astro/types';
+
+import {serverText} from '@/components/layout/dictionaries';
+import NavigationProgress from '@/components/layout/NavigationProgress.astro';
+import {DEFAULT_LOCALE, localizeHref} from '@/components/varel/href';
+import Wordmark from '@/components/varel/Wordmark.astro';
+
+import {Toaster} from '@/components/varel/Toast';
+
+import Base from './Base.astro';
+
+type BaseProps = ComponentProps<typeof Base>;
+
+interface Props extends Omit<BaseProps, 'chrome' | 'locale' | 'alternates'> {
+  /** Store currency for `money()` in islands (`data-store-currency`); default USD. */
+  currency?: string;
+}
+
+const {currency = 'USD', ...base} = Astro.props;
+const locale = (Astro.locals as {locale?: string}).locale ?? DEFAULT_LOCALE;
+const t = serverText(locale);
+---
+
+<Base {...base} chrome="none" locale={locale}>
+  <Fragment slot="head">
+    <meta name="theme-color" content="#FFFFFF" />
+    <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <slot name="head" />
+  </Fragment>
+  <NavigationProgress />
+  <Toaster client:idle />
+  <div class="min-h-screen w-full bg-surface-page" data-store-currency={currency}>
+    <header class="grid h-20 grid-cols-[1fr_auto_1fr] items-center gap-6 border-b border-hairline px-6 md:px-12">
+      <a href={localizeHref(locale, '/cart')} class="border-0 text-label-sm tracking-label text-text-muted uppercase">
+        {t('layout', 'checkout.backToBag')}
+      </a>
+      <Wordmark size={22} href={localizeHref(locale, '/')} label={t('layout', 'ui.home')} />
+      <span class="justify-self-end text-label-sm tracking-label text-text-muted uppercase max-sm:hidden">
+        {t('layout', 'checkout.secure')}
+      </span>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+  </div>
+</Base>

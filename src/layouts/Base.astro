@@ -17,8 +17,20 @@
  *
  * Structured data (JSON-LD, src/lib/seo.ts): the home page gets `WebSite` +
  * `Organization`; a page passes its own in `jsonLd` (a post, a job).
+ *
+ * Chrome (VAREL port, docs/migration/PLAN.md F2): `chrome="site"` (default) is
+ * the template's header, footer and stylesheet (`global.css`). The storefront
+ * layouts (`Storefront.astro`, `AuthShell.astro`, `CheckoutShell.astro`) pass
+ * `chrome="none"` and draw their own chrome inside the slot with
+ * `storefront.css`; `global.css` is then NOT linked (its unlayered rules would
+ * override Tailwind's layers). Extra `<head>` tags go in `<slot name="head" />`.
+ *
+ * Languages (D7): `<html lang>` is the page locale (`locale` prop, else
+ * `Astro.locals.locale` set by src/middleware.ts, else `SITE.lang`). The
+ * canonical URL keeps the locale prefix (`/da/shop/`), and `alternates` (the
+ * same page in every enabled language) become `hreflang` links + `x-default`.
  */
-import '../styles/global.css';
+import globalCssUrl from '../styles/global.css?url';
 
 import {ClientRouter} from 'astro:transitions';
 
@@ -28,6 +40,7 @@ import type {Site, Viewer} from '../lib/types';
 import {initials} from '../lib/format';
 import {absoluteUrl, type JsonLd, jsonLdText, siteJsonLd} from '../lib/seo';
 import {config} from '../platform/config';
+import {DEFAULT_LOCALE, localizeHref, stripLocale} from '../components/varel/href';
 
 interface Props {
   site: Site | null;
@@ -57,6 +70,12 @@ interface Props {
   secretInUrl?: boolean;
   /** The page's own structured data (src/lib/seo.ts): `postJsonLd(…)`, `jobJsonLd(…)`. */
   jsonLd?: JsonLd;
+  /** `site`: the template header/footer + global.css. `none`: the page draws its own (storefront layouts). */
+  chrome?: 'site' | 'none';
+  /** The page language (`da`); default `Astro.locals.locale`, else `SITE.lang`. */
+  locale?: string;
+  /** The same page in each enabled language, for `hreflang` (`href` is a path like `/da/shop/`). */
+  alternates?: {code: string; href: string}[];
 }
 
 const {
@@ -73,7 +92,11 @@ const {
   noindex = false,
   secretInUrl = false,
   jsonLd,
+  chrome = 'site',
+  locale: localeProp,
+  alternates = [],
 } = Astro.props;
+const locale = localeProp ?? (Astro.locals as {locale?: string}).locale ?? SITE.lang;
 const name = site?.name ?? 'My site';
 const fullTitle = title ? `${title} · ${name}` : name;
 const description = pageDescription ?? withName(SITE.description, name);
@@ -81,7 +104,18 @@ const path = Astro.url.pathname;
 /** Every page URL ends with `/`: prerendered pages are served there (`/about` redirects to `/about/`). */
 const withSlash = (p: string) => (p.endsWith('/') ? p : `${p}/`);
 // One URL per page for search engines: the path without its query (filters, paging).
-const canonical = noindex || secretInUrl ? null : absoluteUrl(withSlash(path));
+// The page in its own language, `/da/shop/` (a middleware rewrite may have dropped the prefix from Astro.url).
+const localePath = localizeHref(locale, stripLocale(path)).split(/[?#]/)[0];
+const canonical = noindex || secretInUrl ? null : absoluteUrl(withSlash(localePath));
+// hreflang: every enabled language plus `x-default` (the default language), absolute.
+const bare = (href: string) => absoluteUrl(href.split(/[?#]/)[0]);
+const hreflang =
+  canonical && alternates.length > 1
+    ? [
+        ...alternates.map(a => ({lang: a.code, href: bare(a.href)})),
+        {lang: 'x-default', href: bare((alternates.find(a => a.code === DEFAULT_LOCALE) ?? alternates[0]).href)},
+      ].filter((a): a is {lang: string; href: string} => !!a.href)
+    : [];
 const socialImage = image ? absoluteUrl(image) : null;
 const active = (href: string) => (href === '/' ? path === '/' : withSlash(path).startsWith(withSlash(href)));
 // Back to this page after signing in. A PATH only (`safeNext` refuses anything else).
@@ -92,18 +126,19 @@ const hydrate = isStatic || (config.preview && viewer.state !== 'user');
 // The home page tells search engines the site's name; other pages bring their own.
 const indexable = !noindex && !secretInUrl;
 const structured = indexable
-  ? [...(path === '/' ? [siteJsonLd({name, logo: site?.logo}, description, SITE.lang)] : []), ...(jsonLd ? [jsonLd] : [])]
+  ? [...(stripLocale(path) === '/' ? [siteJsonLd({name, logo: site?.logo}, description, locale)] : []), ...(jsonLd ? [jsonLd] : [])]
   : [];
 ---
 
 <!doctype html>
-<html lang={SITE.lang}>
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {canonical && <link rel="canonical" href={canonical} />}
+    {hreflang.map(a => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
     {noindex && <meta name="robots" content="noindex" />}
     {secretInUrl && <meta name="referrer" content="no-referrer" />}
     <meta property="og:site_name" content={name} />
@@ -119,17 +154,20 @@ const structured = indexable
     <meta name="twitter:title" content={title ?? name} />
     <meta name="twitter:description" content={description} />
     {socialImage && <meta name="twitter:image" content={socialImage} />}
-    <meta name="color-scheme" content="light dark" />
+    {chrome === 'site' && <meta name="color-scheme" content="light dark" />}
+    {chrome === 'site' && <link rel="stylesheet" href={globalCssUrl} />}
     {site?.favIcon ? <link rel="icon" href={site.favIcon} /> : <link rel="icon" href="/favicon.svg" type="image/svg+xml" />}
     <link rel="alternate" type="application/rss+xml" title={`${name} blog`} href="/rss.xml" />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     {structured.map(data => <script type="application/ld+json" set:html={jsonLdText(data)} />)}
+    <slot name="head" />
     {/* Client navigation: a click swaps the next page in without a reload (prefetched on hover). The
         portal has no router, so a link to it is a normal page load. Page scripts run on `astro:page-load`. */}
     <ClientRouter />
   </head>
   <body data-viewer={viewer.state} data-static={hydrate ? '1' : undefined}>
-    <a class="skip-link" href="#main">Skip to content</a>
+    {chrome === 'site' && <a class="skip-link" href="#main">Skip to content</a>}
+    {chrome === 'site' && (
     <header class="site-header">
       <div class="wrap site-header-inner">
         <a href="/" class="brand" data-astro-prefetch>
@@ -178,9 +216,11 @@ const structured = indexable
         </div>
       </div>
     </header>
+    )}
 
     <slot />
 
+    {chrome === 'site' && (
     <footer class="site-footer">
       <div class="wrap site-footer-inner">
         <div class="footer-brand">
@@ -227,6 +267,7 @@ const structured = indexable
         <span data-brand-text="© {year} {name}">© {new Date().getUTCFullYear()} {name}</span>
       </div>
     </footer>
+    )}
 
     <script>
       import {logout, refreshSession} from '../platform/browser';

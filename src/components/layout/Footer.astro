@@ -1,0 +1,168 @@
+---
+/**
+ * Obsidian footer (VAREL `layout/Footer.tsx`): newsletter, studio details + link columns, legal bar, and the
+ * full-width ghost wordmark. Server-rendered; only the newsletter form and the language control are islands
+ * (`client:visible`). The "Cookie settings" button reopens the consent dialog (`[data-consent-open]`, the
+ * script below → `openConsentSettings()`, heard by the CookieBanner island).
+ *
+ * The account column follows the session: "Sign in" (/login) becomes "Account" once signed in. On a
+ * prerendered page the visitor is unknown at build time, so both are rendered and the browser shows the right
+ * one (`data-guest-only` / `data-user-only`, filled in by Base's static-page hydration).
+ */
+import {Icon} from '@/components/varel/Icon';
+
+import type {Chrome} from './chrome';
+import {serverText} from './dictionaries';
+import {FooterLanguage, FooterNewsletter} from './FooterIslands';
+
+interface Props {
+  chrome: Chrome;
+}
+const {chrome} = Astro.props;
+const text = serverText(chrome.locale);
+const t = (key: string, vars?: Record<string, string | number>) => text('layout', key, vars);
+const year = new Date().getFullYear();
+const {contact} = chrome;
+const addressLines = contact.addressLines ?? [t('footer.addressLine1'), t('footer.addressLine2')];
+
+const heading = 'm-0 font-sans text-label-sm font-normal tracking-label text-ink-400 uppercase';
+const link = 'self-start text-body-md text-text-inverse hover:text-text-inverse';
+const fine = 'text-label-sm tracking-label text-ink-400 uppercase hover:text-text-inverse';
+// Each island gets only the catalogs it reads.
+const islandDicts = {i18n: chrome.dicts.i18n ?? {}};
+const newsletterDicts = {journal: chrome.dicts.journal ?? {}, common: chrome.dicts.common ?? {}};
+---
+
+<footer class="relative overflow-hidden bg-ink-900 text-text-inverse">
+  <div class="mx-auto max-w-page px-6 md:px-12">
+    {/* Newsletter */}
+    <section
+      id="newsletter"
+      aria-labelledby="footer-newsletter"
+      class="grid scroll-mt-24 gap-8 border-b border-ink-000/16 py-14 md:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-end lg:gap-[72px]">
+      <div class="flex flex-col gap-3.5">
+        <h2 id="footer-newsletter" class="m-0 max-w-[18ch] font-display text-display-4 font-normal text-balance md:text-display-3">
+          {t('footer.newsletterTitle')}
+        </h2>
+        <p class="m-0 max-w-[42ch] text-[15px] leading-body text-ink-300">
+          {t('footer.newsletterBody')}
+        </p>
+      </div>
+      <FooterNewsletter client:visible locale={chrome.locale} dicts={newsletterDicts} />
+    </section>
+
+    {/* Studio + link columns */}
+    <div class="grid grid-cols-2 gap-x-6 gap-y-12 py-14 md:grid-cols-4 md:py-16 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
+      <address class="col-span-2 flex flex-col gap-4 not-italic md:col-span-4 lg:col-span-1">
+        <h2 class={heading}>{t('footer.studio')}</h2>
+        <p class="m-0 text-body-md leading-normal">
+          {addressLines.map(line => <span class="block">{line}</span>)}
+        </p>
+        <div class="flex flex-col gap-1.5">
+          <a href={`mailto:${contact.email}`} class={link}>{contact.email}</a>
+          <a href={contact.phoneHref} class={link}>{contact.phone}</a>
+        </div>
+        <ul class="m-0 mt-2 flex list-none gap-6 p-0">
+          {
+            chrome.socials.map(s => (
+              <li>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 text-label-md tracking-label text-text-inverse uppercase hover:text-text-inverse">
+                  {s.label}
+                  <Icon name="arrow-up-right" size={13} />
+                  <span class="sr-only">{t('footer.newTab')}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </address>
+
+      {
+        chrome.footer.map(menu => (
+          <nav aria-labelledby={`footer-${menu.key}`} class="flex flex-col gap-4">
+            <h2 id={`footer-${menu.key}`} class={heading}>
+              {menu.title}
+            </h2>
+            <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
+              {menu.items.map(l =>
+                l.url === '/login' ? (
+                  <>
+                    <li data-guest-only hidden={chrome.signedIn}>
+                      <a href={l.href} class={link}>
+                        {l.label}
+                      </a>
+                    </li>
+                    <li data-user-only hidden={!chrome.signedIn}>
+                      <a href={chrome.links.account} class={link}>
+                        {t('menu.labels.account')}
+                      </a>
+                    </li>
+                  </>
+                ) : (
+                  <li>
+                    {l.external ? (
+                      <a href={l.href} class={link} target="_blank" rel="noopener noreferrer">
+                        {l.label}
+                      </a>
+                    ) : (
+                      <a href={l.href} class={link}>
+                        {l.label}
+                      </a>
+                    )}
+                  </li>
+                )
+              )}
+            </ul>
+          </nav>
+        ))
+      }
+    </div>
+
+    {/* Legal bar */}
+    <div class="flex flex-col gap-4 border-t border-ink-000/16 py-6 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-col gap-1">
+        <p class="m-0 text-body-xs text-ink-400">{t('footer.copyright', {year})}</p>
+        {chrome.legal && <p class="m-0 text-body-xs text-ink-400">{chrome.legal}</p>}
+      </div>
+      <ul class="m-0 flex list-none flex-wrap gap-x-6 gap-y-2 p-0">
+        <li><a href={chrome.links.terms} class={fine}>{t('footer.terms')}</a></li>
+        <li><a href={chrome.links.privacy} class={fine}>{t('footer.privacy')}</a></li>
+        <li>
+          <button type="button" data-consent-open class:list={['cursor-pointer border-0 bg-transparent p-0', fine]}>
+            {text('privacy', 'settingsLink')}
+          </button>
+        </li>
+        <li>
+          <FooterLanguage
+            client:visible
+            locale={chrome.locale}
+            dicts={islandDicts}
+            languages={chrome.languages}
+            signedIn={chrome.signedIn}
+          />
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  {/* Ghost wordmark: letters justified across the page column so it always fills the width. */}
+  <div aria-hidden="true" class="mx-auto max-w-page overflow-hidden px-6 select-none md:px-12">
+    <div class="ghost-wordmark flex justify-between font-sans font-light text-ink-000/10">
+      {'VAREL'.split('').map(ch => <span>{ch}</span>)}
+    </div>
+  </div>
+</footer>
+
+<script>
+  import {openConsentSettings} from '@/lib/stores/consent';
+
+  // Once per document (the footer is re-rendered on every client navigation, so listen on the document).
+  document.addEventListener('click', event => {
+    const target = event.target instanceof Element ? event.target.closest('[data-consent-open]') : null;
+    if (target) openConsentSettings();
+  });
+</script>

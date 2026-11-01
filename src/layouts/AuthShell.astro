@@ -1,0 +1,75 @@
+---
+/**
+ * Split auth layout (VAREL `layout/AuthLayout.tsx`, Login / Signup / Reset password): wordmark + form column,
+ * full-height editorial image. No header or footer. Wraps <Base chrome="none"> (all SEO behaviour holds; sign-in
+ * pages pass `noindex`/`isStatic` as before).
+ *
+ *   <AuthShell site={site} viewer={viewer} title="Sign in" isStatic noindex image={AUTH_IMAGES.login}>
+ *     <h1>…</h1><form>…</form>
+ *     <Fragment slot="footer">Small print…</Fragment>
+ *   </AuthShell>
+ *
+ * Images: `AUTH_IMAGES` (src/components/layout/auth-images.ts). Styles: storefront.css only.
+ */
+import '../styles/storefront.css';
+
+import type {ComponentProps} from 'astro/types';
+
+import {AUTH_IMAGES} from '@/components/layout/auth-images';
+import {serverText} from '@/components/layout/dictionaries';
+import NavigationProgress from '@/components/layout/NavigationProgress.astro';
+import {DEFAULT_LOCALE, localizeHref} from '@/components/varel/href';
+import {Img} from '@/components/varel/Img';
+import type {Photo} from '@/components/varel/support';
+import Wordmark from '@/components/varel/Wordmark.astro';
+
+import {Toaster} from '@/components/varel/Toast';
+
+import Base from './Base.astro';
+
+type BaseProps = ComponentProps<typeof Base>;
+
+interface Props extends Omit<BaseProps, 'chrome' | 'locale' | 'alternates'> {
+  image?: Photo;
+  imageAlt?: string;
+  /** Login & Reset: image right. Signup: image left. */
+  imageSide?: 'left' | 'right';
+  /** Form column max width (440 login/reset, 460 signup) */
+  maxWidth?: 440 | 460;
+}
+
+const {image = AUTH_IMAGES.login, imageAlt = '', imageSide = 'right', maxWidth = 440, ...base} = Astro.props;
+const locale = (Astro.locals as {locale?: string}).locale ?? DEFAULT_LOCALE;
+const t = serverText(locale);
+const right = imageSide === 'right';
+---
+
+<Base {...base} chrome="none" locale={locale}>
+  <Fragment slot="head">
+    <meta name="theme-color" content="#FFFFFF" />
+    <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <slot name="head" />
+  </Fragment>
+  <NavigationProgress />
+  <Toaster client:idle />
+  <div class="mx-auto grid min-h-screen max-w-page bg-surface-page lg:grid-cols-2">
+    <div class:list={['relative hidden min-h-screen bg-ink-100 lg:block', right ? 'lg:order-2' : 'lg:order-1']}>
+      <Img photo={image} alt={imageAlt} ratio="fill" width={1400} sizes="50vw" priority media={false} />
+    </div>
+    <div class:list={['flex flex-col gap-12 p-6 md:p-12', right ? 'lg:order-1' : 'lg:order-2']}>
+      <Wordmark size={22} href={localizeHref(locale, '/')} label={t('layout', 'ui.home')} class="self-start" />
+      <main
+        id="main"
+        class:list={['flex w-full flex-1 flex-col justify-center', maxWidth === 460 ? 'max-w-[460px]' : 'max-w-[440px]']}>
+        <slot />
+      </main>
+      {
+        Astro.slots.has('footer') && (
+          <div class="text-label-md text-text-muted normal-case">
+            <slot name="footer" />
+          </div>
+        )
+      }
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,1044 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   VAREL storefront stylesheet (Tailwind v4). Imported ONLY by the storefront
+   layouts (src/layouts/Storefront.astro, AuthShell.astro, CheckoutShell.astro)
+   and src/pages/styleguide.astro — never by the dashboard (/dashboard has its
+   own kit, src/styles/global.css + app.css).
+
+   Ported from VAREL `src/index.css` + `src/styles/tokens.css` + the shadcn
+   variants (`shadcn/tailwind.css`). Compiles to a linked /_astro/*.css file, so
+   the CSP holds: nothing here is inline.
+
+   Sources: only the storefront folders are scanned, so dashboard class names
+   never end up in this file.
+   ───────────────────────────────────────────────────────────────────────────── */
+@import "tailwindcss" source(none);
+@import "tw-animate-css";
+
+@source "../components";
+@source "../layouts";
+@source "../pages";
+@source "../account";
+@source "../lib";
+
+/* ── Fonts: self-hosted (SIL OFL 1.1, public/fonts/OFL-*.txt) ──────────────
+   Cormorant Garamond is a variable font (one file serves 400 and 500). The
+   display face (latin, normal) is preloaded by the storefront layouts. */
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/cormorant-garamond-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/cormorant-garamond-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/cormorant-garamond-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/cormorant-garamond-italic-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/lato-300-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/lato-300-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/lato-400-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/lato-400-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/lato-700-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/lato-700-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ── shadcn custom variants (shadcn/tailwind.css, the parts the storefront uses) ── */
+@theme inline {
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(
+        --radix-accordion-content-height,
+        var(--accordion-panel-height, auto)
+      );
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(
+        --radix-accordion-content-height,
+        var(--accordion-panel-height, auto)
+      );
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+/* Custom variants */
+@custom-variant data-open {
+  &:where([data-state="open"]),
+  &:where([data-open]:not([data-open="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-closed {
+  &:where([data-state="closed"]),
+  &:where([data-closed]:not([data-closed="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-checked {
+  &:where([data-state="checked"]),
+  &:where([data-checked]:not([data-checked="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-unchecked {
+  &:where([data-state="unchecked"]),
+  &:where([data-unchecked]:not([data-unchecked="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-selected {
+  &:where([data-selected="true"]) {
+    @slot;
+  }
+}
+
+@custom-variant data-disabled {
+  &:where([data-disabled="true"]),
+  &:where([data-disabled]:not([data-disabled="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-active {
+  &:where([data-state="active"]),
+  &:where([data-active]:not([data-active="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-horizontal {
+  &:where([data-orientation="horizontal"]) {
+    @slot;
+  }
+}
+
+@custom-variant data-vertical {
+  &:where([data-orientation="vertical"]) {
+    @slot;
+  }
+}
+
+
+/* VAREL design tokens — ported verbatim from the VAREL design handoff (design-system/tokens/*.css).
+   Fonts are self-hosted (@font-face at the top of this file).
+   Base element rules (tokens/base.css) live in @layer base below so Tailwind utilities can override them. */
+
+/* ── tokens/colors.css ── */
+:root{
+  /* Base — the four brand book colors plus tints derived from them */
+  --varel-obsidian:#1A1A1A;
+  --varel-sage:#8C8C8C;
+  --varel-pebble:#D9D9D9;
+  --varel-chalk:#F5F5F5;
+  --ink-900:#1A1A1A;
+  --ink-700:#3D3D3D;
+  --ink-500:#6E6E6E;
+  --ink-400:#8C8C8C;
+  --ink-300:#B3B3B3;
+  --ink-200:#D9D9D9;
+  --ink-100:#E8E8E8;
+  --ink-050:#F5F5F5;
+  --ink-000:#FFFFFF;
+
+  /* Functional — intentional additions, desaturated to sit inside the palette */
+  --signal-positive:#3F5B45;
+  --signal-critical:#8A3A2E;
+  --signal-notice:#7A6A4F;
+
+  /* Semantic text */
+  --text-primary:var(--ink-900);
+  --text-secondary:var(--ink-500);
+  --text-muted:var(--ink-400);
+  --text-disabled:var(--ink-300);
+  --text-inverse:var(--ink-000);
+  --text-link:var(--ink-900);
+
+  /* Semantic surfaces */
+  --surface-page:var(--ink-000);
+  --surface-sunken:var(--ink-050);
+  --surface-raised:var(--ink-000);
+  --surface-inverse:var(--ink-900);
+  --surface-overlay:rgba(26,26,26,.44);
+  --surface-scrim:rgba(255,255,255,.86);
+
+  /* Semantic borders */
+  --border-hairline:var(--ink-200);
+  --border-quiet:var(--ink-100);
+  --border-strong:var(--ink-900);
+  --border-focus:var(--ink-900);
+}
+
+/* ── tokens/typography.css ── */
+:root{
+  --font-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --font-body:"Lato","Helvetica Neue",Arial,sans-serif;
+  --font-mono:ui-monospace,"SFMono-Regular",Menlo,monospace;
+
+  --weight-light:300;
+  --weight-regular:400;
+  --weight-medium:500;
+  --weight-bold:700;
+
+  /* Editorial display scale (Cormorant Garamond) */
+  --display-1:88px;
+  --display-2:64px;
+  --display-3:44px;
+  --display-4:32px;
+  --display-5:24px;
+
+  /* Body scale (Lato) */
+  --body-lg:18px;
+  --body-md:16px;
+  --body-sm:14px;
+  --body-xs:13px;
+
+  /* Tracked micro-labels — the brand's workhorse UI text */
+  --label-lg:13px;
+  --label-md:12px;
+  --label-sm:11px;
+
+  --leading-tight:1.06;
+  --leading-display:1.14;
+  --leading-snug:1.35;
+  --leading-body:1.62;
+  --leading-loose:1.8;
+
+  --tracking-display:-0.015em;
+  --tracking-normal:0;
+  --tracking-wide:0.06em;
+  --tracking-label:0.14em;
+  --tracking-label-loose:0.22em;
+
+  --text-body:var(--body-md);
+  --text-caption:var(--body-xs);
+}
+
+/* ── tokens/spacing.css ── */
+:root{
+  --space-0:0;
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-5:20px;
+  --space-6:24px;
+  --space-8:32px;
+  --space-10:40px;
+  --space-12:48px;
+  --space-16:64px;
+  --space-20:80px;
+  --space-24:96px;
+  --space-32:128px;
+  --space-40:160px;
+
+  --gutter-page:24px;
+  --gutter-page-lg:48px;
+  --grid-gutter:20px;
+  --grid-gutter-tight:2px;
+  --section-y:96px;
+  --section-y-lg:160px;
+  --measure-prose:62ch;
+  --max-page:1440px;
+  --max-editorial:820px;
+}
+
+/* ── tokens/borders.css ── */
+:root{
+  /* Squared by default. Radius is an exception, never a habit. */
+  --radius-none:0;
+  --radius-xs:1px;
+  --radius-sm:2px;
+  --radius-md:4px;
+  --radius-pill:999px;
+  --radius-circle:50%;
+
+  --hairline:1px;
+  --rule-thick:2px;
+  --border-default:var(--hairline) solid var(--border-hairline);
+  --border-quiet-line:var(--hairline) solid var(--border-quiet);
+  --border-ink:var(--hairline) solid var(--border-strong);
+}
+
+/* ── tokens/elevation.css ── */
+:root{
+  /* Elevation is expressed by hairlines and negative space.
+     Shadows exist only for elements that float over content. */
+  --shadow-none:none;
+  --shadow-overlay:0 24px 64px -24px rgba(26,26,26,.28);
+  --shadow-drawer:-24px 0 64px -32px rgba(26,26,26,.24);
+  --shadow-lift:0 2px 12px -6px rgba(26,26,26,.18);
+  --blur-scrim:blur(8px); /* @kind other */
+  --blur-header:blur(14px); /* @kind other */
+}
+
+/* ── tokens/motion.css ── */
+:root{
+  --duration-instant:100ms; /* @kind other */
+  --duration-fast:160ms; /* @kind other */
+  --duration-base:240ms; /* @kind other */
+  --duration-slow:400ms; /* @kind other */
+  --duration-editorial:640ms; /* @kind other */
+
+  /* Calm, no overshoot. Nothing in VAREL bounces. */
+  --ease-standard:cubic-bezier(.2,.6,.2,1); /* @kind other */
+  --ease-out:cubic-bezier(.16,1,.3,1); /* @kind other */
+  --ease-in:cubic-bezier(.7,0,.84,0); /* @kind other */
+
+  --transition-hover:color var(--duration-fast) var(--ease-standard),background-color var(--duration-fast) var(--ease-standard),border-color var(--duration-fast) var(--ease-standard),opacity var(--duration-fast) var(--ease-standard);
+  --transition-media:transform var(--duration-editorial) var(--ease-out),opacity var(--duration-base) var(--ease-standard);
+
+  --hover-opacity:.62; /* @kind other */
+  --press-opacity:.48; /* @kind other */
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   VAREL theme for Tailwind v4.
+   Utilities are generated from these names, e.g. text-ink-500, bg-chalk,
+   border-hairline, font-display, text-display-3, text-label-sm,
+   tracking-label, shadow-drawer, ease-standard, max-w-page.
+   Default Tailwind colours are removed on purpose: use tokens, never raw hex.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  --color-*: initial;
+
+  /* Typography (literal values — identical to tokens/typography.css) */
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Lato", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Lato", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Display scale — Cormorant Garamond 400 */
+  --text-display-1: 88px;
+  --text-display-1--line-height: 1.06;
+  --text-display-1--letter-spacing: -0.015em;
+  --text-display-2: 64px;
+  --text-display-2--line-height: 1.06;
+  --text-display-2--letter-spacing: -0.015em;
+  --text-display-3: 44px;
+  --text-display-3--line-height: 1.06;
+  --text-display-3--letter-spacing: -0.015em;
+  --text-display-4: 32px;
+  --text-display-4--line-height: 1.14;
+  --text-display-4--letter-spacing: -0.015em;
+  --text-display-5: 24px;
+  --text-display-5--line-height: 1.14;
+  --text-display-5--letter-spacing: -0.015em;
+
+  /* Body scale — Lato 300, leading 1.62 */
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.62;
+  --text-body-md: 16px;
+  --text-body-md--line-height: 1.62;
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 1.62;
+  --text-body-xs: 13px;
+  --text-body-xs--line-height: 1.62;
+
+  /* UI labels — Lato 400 uppercase (pair with `label` utility or tracking-label uppercase) */
+  --text-label-lg: 13px;
+  --text-label-lg--line-height: 1.35;
+  --text-label-md: 12px;
+  --text-label-md--line-height: 1.35;
+  --text-label-sm: 11px;
+  --text-label-sm--line-height: 1.35;
+
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+
+  --tracking-display: -0.015em;
+  --tracking-wide: 0.06em;
+  --tracking-label: 0.14em;
+  --tracking-loose: 0.22em;
+  --tracking-wordmark: 0.42em;
+
+  --leading-tight: 1.06;
+  --leading-display: 1.14;
+  --leading-snug: 1.35;
+  --leading-body: 1.62;
+  --leading-loose: 1.8;
+
+  /* Elevation — floating layers only */
+  --shadow-lift: 0 2px 12px -6px rgba(26, 26, 26, 0.18);
+  --shadow-overlay: 0 24px 64px -24px rgba(26, 26, 26, 0.28);
+  --shadow-drawer: -24px 0 64px -32px rgba(26, 26, 26, 0.24);
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+
+  /* Widths */
+  --container-page: 1440px;
+  --container-editorial: 820px;
+  /* max-w-measure = 62ch prose measure (Tailwind's built-in max-w-prose is 65ch — don't use it) */
+  --container-measure: 62ch;
+
+  /* backdrop-blur-veil (modal scrim 8px), backdrop-blur-glass (header 14px).
+     Named differently from the --blur-scrim/--blur-header tokens, which hold full filter values. */
+  --blur-veil: 8px;
+  --blur-glass: 14px;
+
+  --breakpoint-xs: 480px;
+}
+
+@theme inline {
+  /* Brand book */
+  --color-obsidian: var(--varel-obsidian);
+  --color-sage: var(--varel-sage);
+  --color-pebble: var(--varel-pebble);
+  --color-chalk: var(--varel-chalk);
+  --color-white: var(--ink-000);
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Ink ramp */
+  --color-ink-900: var(--ink-900);
+  --color-ink-700: var(--ink-700);
+  --color-ink-500: var(--ink-500);
+  --color-ink-400: var(--ink-400);
+  --color-ink-300: var(--ink-300);
+  --color-ink-200: var(--ink-200);
+  --color-ink-100: var(--ink-100);
+  --color-ink-050: var(--ink-050);
+  --color-ink-000: var(--ink-000);
+
+  /* Functional signals — never decorative */
+  --color-signal-positive: var(--signal-positive);
+  --color-signal-critical: var(--signal-critical);
+  --color-signal-notice: var(--signal-notice);
+
+  /* Semantic text (text-text-primary, text-text-secondary, …) */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-disabled: var(--text-disabled);
+  --color-text-inverse: var(--text-inverse);
+  --color-text-link: var(--text-link);
+
+  /* Semantic surfaces (bg-surface-page, bg-surface-sunken, …) */
+  --color-surface-page: var(--surface-page);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-inverse: var(--surface-inverse);
+  --color-surface-overlay: var(--surface-overlay);
+  --color-surface-scrim: var(--surface-scrim);
+
+  /* Semantic borders (border-hairline, border-quiet, border-strong, border-focus) */
+  --color-hairline: var(--border-hairline);
+  --color-quiet: var(--border-quiet);
+  --color-strong: var(--border-strong);
+  --color-focus: var(--border-focus);
+
+  /* shadcn semantic aliases → VAREL */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+  --radius-pill: 999px;
+}
+
+:root {
+  /* shadcn variables mapped onto VAREL tokens */
+  --background: var(--surface-page);
+  --foreground: var(--text-primary);
+  --card: var(--surface-raised);
+  --card-foreground: var(--text-primary);
+  --popover: var(--surface-raised);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--ink-900);
+  --primary-foreground: var(--ink-000);
+  --secondary: var(--ink-050);
+  --secondary-foreground: var(--ink-900);
+  --muted: var(--ink-050);
+  --muted-foreground: var(--ink-500);
+  --accent: var(--ink-050);
+  --accent-foreground: var(--ink-900);
+  --destructive: var(--signal-critical);
+  --border: var(--border-hairline);
+  --input: var(--border-hairline);
+  --ring: var(--border-focus);
+  --radius: 0;
+}
+
+/* ── Base: tokens/base.css + the shared prototype page rules ─────────────── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border-color: var(--border-hairline);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--surface-page);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--body-md);
+    font-weight: var(--weight-light);
+    line-height: var(--leading-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-regular);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-display);
+    margin: 0;
+  }
+  p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+  /* base.css gives links a hairline rule; prototype pages drop it in header/footer.
+     Add `border-0` to block links (cards, image links) that should not carry it. */
+  a {
+    color: var(--text-link);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-hairline);
+    transition: var(--transition-hover);
+  }
+  a:hover {
+    color: var(--ink-500);
+    border-bottom-color: var(--border-strong);
+  }
+  header a,
+  footer a,
+  [data-wordmark] {
+    border-bottom: none;
+  }
+  header a:hover,
+  footer a:hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+  }
+  /* The wordmark's 0.42em tracking also follows the last letter, so a text underline would run past the "L".
+     Draw the hover rule instead, from the first glyph to the last (left padding and trailing tracking excluded). */
+  a[data-wordmark] {
+    position: relative;
+  }
+  header a[data-wordmark]:hover,
+  footer a[data-wordmark]:hover {
+    text-decoration: none;
+  }
+  a[data-wordmark]::after {
+    content: '';
+    position: absolute;
+    left: 0.42em;
+    right: 0.42em;
+    bottom: -5px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-standard);
+  }
+  a[data-wordmark]:hover::after,
+  a[data-wordmark]:focus-visible::after {
+    opacity: 1;
+  }
+  button {
+    font: inherit;
+    color: inherit;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="menuitem"]:not([data-disabled]),
+  [role="menuitemcheckbox"]:not([data-disabled]),
+  [role="menuitemradio"]:not([data-disabled]),
+  [role="option"]:not([data-disabled]),
+  [role="tab"]:not([data-disabled]),
+  a[href],
+  summary,
+  label[for],
+  select:not(:disabled) {
+    cursor: pointer;
+  }
+  input,
+  select,
+  textarea {
+    font-family: inherit;
+    font-weight: 300;
+  }
+  img {
+    display: block;
+    max-width: 100%;
+  }
+  ::selection {
+    background: var(--ink-900);
+    color: var(--ink-000);
+  }
+  *:focus-visible {
+    outline: 1px solid var(--border-focus);
+    outline-offset: 2px;
+  }
+}
+
+/* ── Component helpers ──────────────────────────────────────────────────── */
+@layer components {
+  /* Tracked micro-label (tokens/base.css) */
+  .varel-label {
+    font-family: var(--font-body);
+    font-size: var(--label-md);
+    font-weight: var(--weight-regular);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+  .varel-rule {
+    border: 0;
+    border-top: var(--border-default);
+    margin: 0;
+  }
+  /* The VAREL photographic grade: cool, matte */
+  .img-grade {
+    filter: saturate(0.32) contrast(1.03);
+  }
+  /* Product tile hover: [data-card]:hover scales [data-media] and underlines [data-name] */
+  [data-media] {
+    transition: var(--transition-media);
+  }
+  [data-card]:hover [data-media] {
+    transform: scale(1.028);
+  }
+  [data-name] {
+    border-bottom: 1px solid transparent;
+    transition: var(--transition-hover);
+  }
+  [data-card]:hover [data-name] {
+    border-bottom-color: var(--border-strong);
+  }
+  /* Filled heart for wishlisted state */
+  [data-wish="on"] svg {
+    fill: currentColor;
+  }
+}
+
+/* ── Rich text (descriptions written in the admin editor) ─────────────────
+   One style for <RichText> on the storefront and the editor surface in the
+   admin, so what staff write is what shoppers see. Colour comes from the
+   container; headings step up to the display face. */
+@layer components {
+  .rich-text {
+    --rt-size: 15px;
+    font-size: var(--rt-size);
+    line-height: var(--leading-body);
+    overflow-wrap: anywhere;
+  }
+  .rich-text[data-size="sm"] {
+    --rt-size: 14px;
+  }
+  .rich-text > * {
+    margin: 0;
+  }
+  .rich-text > * + * {
+    margin-top: 0.85em;
+  }
+  .rich-text > :is(h1, h2, h3, h4, h5, h6) + * {
+    margin-top: 0.45em;
+  }
+  .rich-text > * + :is(h1, h2, h3, h4, h5, h6) {
+    margin-top: 1.5em;
+  }
+  .rich-text :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-display);
+    color: var(--text-primary);
+    text-wrap: balance;
+  }
+  /* Size follows the level the author picked (data-depth on the storefront, the tag itself in the editor),
+     not the outline tag the page needed: an editor H1 inside a product page is an <h2> that still looks H1. */
+  .rich-text h1:not([data-depth]),
+  .rich-text [data-depth="1"] {
+    font-size: calc(var(--rt-size) * 2);
+  }
+  .rich-text h2:not([data-depth]),
+  .rich-text [data-depth="2"] {
+    font-size: calc(var(--rt-size) * 1.6);
+  }
+  .rich-text h3:not([data-depth]),
+  .rich-text [data-depth="3"] {
+    font-size: calc(var(--rt-size) * 1.3);
+  }
+  .rich-text h4:not([data-depth]),
+  .rich-text [data-depth="4"] {
+    font-size: calc(var(--rt-size) * 1.12);
+  }
+  /* H5 and H6 drop the serif for the tracked UI label, the house small-heading voice */
+  .rich-text :is(h5, h6):not([data-depth]),
+  .rich-text :is([data-depth="5"], [data-depth="6"]) {
+    font-family: var(--font-body);
+    font-weight: 400;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    line-height: var(--leading-snug);
+  }
+  .rich-text h5:not([data-depth]),
+  .rich-text [data-depth="5"] {
+    font-size: calc(var(--rt-size) * 0.86);
+  }
+  .rich-text h6:not([data-depth]),
+  .rich-text [data-depth="6"] {
+    font-size: calc(var(--rt-size) * 0.76);
+    color: var(--text-secondary);
+  }
+  .rich-text u {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+  .rich-text mark {
+    background: var(--ink-100);
+    color: inherit;
+    padding: 0.05em 0.15em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .rich-text :is(sub, sup) {
+    font-size: 0.72em;
+    line-height: 0;
+  }
+  .rich-text strong {
+    font-weight: 400;
+    color: var(--text-primary);
+  }
+  .rich-text a {
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-strong);
+  }
+  .rich-text :is(ul, ol) {
+    padding-left: 1.25em;
+  }
+  .rich-text ul {
+    list-style: disc;
+  }
+  .rich-text ol {
+    list-style: decimal;
+  }
+  .rich-text li + li {
+    margin-top: 0.3em;
+  }
+  .rich-text li::marker {
+    color: var(--text-muted);
+  }
+  .rich-text li > p {
+    margin: 0;
+  }
+  .rich-text blockquote {
+    border-left: 1px solid var(--border-strong);
+    padding-left: 1em;
+    font-family: var(--font-display);
+    font-size: calc(var(--rt-size) * 1.2);
+    font-style: italic;
+    line-height: var(--leading-snug);
+    color: var(--text-primary);
+  }
+  .rich-text blockquote > * + * {
+    margin-top: 0.5em;
+  }
+  .rich-text hr {
+    border: 0;
+    border-top: 1px solid var(--border-hairline);
+  }
+  .rich-text code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+  }
+}
+
+/* UI label utility: 11–13px Lato 400 uppercase 0.14em */
+/* Mouse/trackpad only — touch screens keep hover-revealed controls visible */
+@custom-variant can-hover (@media (hover: hover) and (pointer: fine));
+
+@utility label {
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.35;
+}
+@utility transition-hover {
+  transition: var(--transition-hover);
+}
+@utility transition-media {
+  transition: var(--transition-media);
+}
+@utility press {
+  &:active:not(:disabled) {
+    opacity: var(--press-opacity);
+  }
+}
+@utility gutter-x {
+  padding-inline: var(--gutter-page);
+  @media (width >= 48rem) {
+    padding-inline: var(--gutter-page-lg);
+  }
+}
+
+/* ── Motion utilities (VAREL "admin motion", also used by the account area) ──
+   Arrivals settle on --ease-out and every animation starts from a visible end
+   state (fill-mode both) so content is never stuck hidden. Stagger with the
+   `--d` custom property, set from a class (e.g. `[--d:60ms]`), never style="". */
+@keyframes admin-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes admin-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@keyframes admin-grow-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+@keyframes admin-grow-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+@utility motion-fade {
+  animation: admin-fade var(--duration-base) var(--ease-out) var(--d, 0ms) both;
+}
+@utility motion-rise {
+  animation: admin-rise var(--duration-slow) var(--ease-out) var(--d, 0ms) both;
+}
+/* Bars grow from their baseline; works on SVG shapes via fill-box. */
+@utility motion-grow-y {
+  transform-box: fill-box;
+  transform-origin: bottom;
+  animation: admin-grow-y 560ms var(--ease-out) var(--d, 0ms) both;
+}
+@utility motion-grow-x {
+  transform-origin: left;
+  animation: admin-grow-x 640ms var(--ease-out) var(--d, 0ms) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Page transitions ────────────────────────────────────────────────────
+   Storefront navigations run through Astro's <ClientRouter /> (a view
+   transition; <html> carries `data-astro-transition` while it runs). The
+   outgoing page dissolves quickly; the new one rises 12px into place on
+   --ease-out, editorial and unhurried. The header and progress bar carry their
+   own names so they hold still above the change. */
+.site-header {
+  view-transition-name: site-header;
+}
+.nav-progress {
+  view-transition-name: nav-progress;
+}
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+html[data-astro-transition]::view-transition-old(root) {
+  animation: page-out var(--duration-fast) var(--ease-in) both;
+}
+html[data-astro-transition]::view-transition-new(root) {
+  animation: page-in 440ms var(--ease-out) 40ms both;
+}
+/* Header text (bag count, active department) swaps without a cross-fade ghost */
+html[data-astro-transition]::view-transition-group(site-header) {
+  animation-duration: 0s;
+}
+
+/* Quiet loader waits a beat before appearing, then fades in */
+@keyframes loader-in {
+  from {
+    opacity: 0;
+  }
+}
+.page-loader {
+  animation: loader-in var(--duration-base) var(--ease-standard) 240ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* ── Navigation progress (src/components/layout/NavigationProgress.astro) ──
+   Hairline ink bar; the script sets transform/opacity through element.style
+   (CSSOM, allowed by the CSP), never a style="" attribute. */
+.nav-progress-bar {
+  height: 100%;
+  transform-origin: left;
+  transform: scaleX(0);
+  opacity: 0;
+  background: var(--ink-900);
+  transition:
+    transform var(--duration-slow) var(--ease-out),
+    opacity var(--duration-base) var(--ease-standard);
+}
+.nav-progress-bar[data-reset] {
+  transition: none;
+}
+
+/* ── Replacements for VAREL inline styles (the CSP forbids style="") ───── */
+@layer components {
+  /* Footer ghost wordmark: letters justified across the page column. Shown whole:
+     line-height 0.8 just fits Lato's caps, plus a little room below. */
+  .ghost-wordmark {
+    font-size: clamp(84px, 22vw, 320px);
+    line-height: 0.8;
+    padding-bottom: 0.12em;
+  }
+  /* Type-set wordmark: 0.42em tracking with matching left padding for optical centring. */
+  .wordmark {
+    padding-left: 0.42em;
+    line-height: 1;
+  }
+  /* Rich text colours from the editor palette (src/lib/rich-text.ts TEXT_COLORS / HIGHLIGHTS).
+     Other colours are applied after hydration through element.style. */
+  .rich-text .rt-c-obsidian { color: #1a1a1a; }
+  .rich-text .rt-c-graphite { color: #3d3d3d; }
+  .rich-text .rt-c-stone { color: #6e6e6e; }
+  .rich-text .rt-c-moss { color: #3f5b45; }
+  .rich-text .rt-c-rust { color: #8a3a2e; }
+  .rich-text .rt-c-ochre { color: #7a6a4f; }
+  .rich-text .rt-hl-chalk { background-color: #ececec; }
+  .rich-text .rt-hl-pebble { background-color: #d9d9d9; }
+  .rich-text .rt-hl-moss { background-color: #dfe6e0; }
+  .rich-text .rt-hl-rust { background-color: #f2e2de; }
+  .rich-text .rt-hl-ochre { background-color: #efe9dc; }
+}
+
+/* Order invoice (account area): while it is mounted, printing shows only the invoice on A4. */
+@media print {
+  body:has(> #invoice-print) > :not(#invoice-print) {
+    display: none !important;
+  }
+  body:has(> #invoice-print) {
+    background: #fff;
+  }
+  @page {
+    size: A4;
+    margin: 16mm 16mm 18mm;
+  }
+}

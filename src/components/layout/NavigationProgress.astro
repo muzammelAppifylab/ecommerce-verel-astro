@@ -1,0 +1,74 @@
+---
+/**
+ * Hairline ink bar pinned to the top of the viewport while the next page loads (VAREL
+ * `layout/NavigationProgress.tsx`). Driven by the ClientRouter's lifecycle instead of TanStack Router:
+ * `astro:before-preparation` starts it, `astro:after-swap` finishes it. Waits 120 ms before showing, so
+ * instant (prefetched) navigations never flash the bar; trickles toward 90 % (never claims to be done),
+ * then sweeps to 100 % and fades. The bar persists across navigations; its transform and opacity are set
+ * through element.style (CSSOM), never a style="" attribute (CSP). Styles: `.nav-progress-bar`.
+ */
+---
+
+<div
+  aria-hidden="true"
+  class="nav-progress pointer-events-none fixed inset-x-0 top-0 z-[100] h-0.5"
+  transition:persist="nav-progress">
+  <div class="nav-progress-bar" data-nav-progress></div>
+</div>
+
+<script>
+  const SHOW_DELAY = 120;
+  let progress = 0;
+  let shown = false;
+  let showTimer = 0;
+  let trickle = 0;
+  let fadeTimer = 0;
+  let resetTimer = 0;
+
+  const bar = () => document.querySelector<HTMLElement>('[data-nav-progress]');
+  const paint = (visible: boolean) => {
+    const el = bar();
+    if (!el) return;
+    el.style.transform = `scaleX(${progress})`;
+    el.style.opacity = visible ? '1' : '0';
+  };
+  const clearAll = () => {
+    window.clearTimeout(showTimer);
+    window.clearInterval(trickle);
+    window.clearTimeout(fadeTimer);
+    window.clearTimeout(resetTimer);
+  };
+
+  document.addEventListener('astro:before-preparation', () => {
+    clearAll();
+    bar()?.removeAttribute('data-reset');
+    showTimer = window.setTimeout(() => {
+      shown = true;
+      progress = 0.12;
+      paint(true);
+      trickle = window.setInterval(() => {
+        progress += (0.9 - progress) * 0.12;
+        paint(true);
+      }, 180);
+    }, SHOW_DELAY);
+  });
+
+  const done = () => {
+    window.clearTimeout(showTimer);
+    window.clearInterval(trickle);
+    if (!shown) return;
+    shown = false;
+    // Sweep to 100 %, fade once it lands, then reset out of sight (no transition back to 0).
+    progress = 1;
+    paint(true);
+    fadeTimer = window.setTimeout(() => paint(false), 300);
+    resetTimer = window.setTimeout(() => {
+      bar()?.setAttribute('data-reset', '');
+      progress = 0;
+      paint(false);
+    }, 600);
+  };
+  document.addEventListener('astro:after-swap', done);
+  // A navigation that failed or was cancelled falls back to a full load or stays put: never leave the bar running.
+  window.addEventListener('pageshow', done);
+</script>
