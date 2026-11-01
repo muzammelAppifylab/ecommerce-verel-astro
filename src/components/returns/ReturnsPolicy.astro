@@ -1,0 +1,118 @@
+---
+/**
+ * The Returns page's policy body (VAREL src/pages/Returns.tsx + policy/PolicyLayout.tsx `PolicyBody`,
+ * `PolicySection`, `PolicyP`, `PolicyRows`): sticky "On this page" contents + a 62ch column of sections. Zero JS.
+ * The markup of VAREL's policy layout is copied here (WP-07 ports the same look for Privacy / Terms); the refund
+ * rows use a fixed 200px label column as a class (VAREL set it through an inline CSS variable, which the CSP
+ * forbids).
+ */
+import type {TFunction} from '@/lib/i18n';
+import {accountLink, href} from '@/lib/links';
+
+interface Props {
+  /** `returns` namespace */
+  t: TFunction;
+  /** `policy` namespace (contents labels) */
+  tp: TFunction;
+  locale: string;
+}
+
+const {t, tp, locale} = Astro.props;
+
+const META = 'text-[11px] leading-snug tracking-label uppercase text-text-muted';
+const TOC = [
+  {id: 'window', key: 'window'},
+  {id: 'condition', key: 'condition'},
+  {id: 'refunds', key: 'refunds'},
+  {id: 'exchanges', key: 'exchanges'},
+  {id: 'digitalret', key: 'digital'},
+  {id: 'faults', key: 'faults'},
+] as const;
+const REFUND_ROWS = ['method', 'timing', 'shipping', 'discounts'] as const;
+const related = [
+  {href: href('/terms/', locale), label: t('related.terms')},
+  {href: href('/privacy/', locale), label: t('related.privacy')},
+];
+const sectionClass = 'flex scroll-mt-24 flex-col gap-4';
+const titleClass = 'm-0 font-display text-[28px] font-normal leading-[1.1] tracking-normal md:text-[32px]';
+const pClass = 'm-0 text-body-md leading-[1.7] text-text-secondary';
+---
+
+<div
+  class="grid grid-cols-1 items-start gap-10 px-6 pt-10 pb-16 md:px-12 md:pt-12 md:pb-24 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-16"
+>
+  <nav aria-label={tp('sections')} class="flex flex-col gap-3 lg:sticky lg:top-24">
+    <span class={`${META} pb-1.5`}>{tp('onThisPage')}</span>
+    {
+      TOC.map(({id, key}) => (
+        <a href={`#${id}`} class="self-start border-0 text-body-sm leading-[1.5]">
+          {t(`${key}.title`)}
+        </a>
+      ))
+    }
+    <div class="mt-4 flex flex-col gap-3 border-t border-hairline pt-4">
+      {
+        related.map(r => (
+          <a href={r.href} class="self-start border-0 text-body-sm leading-[1.5] text-text-secondary">
+            {r.label}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+
+  <div class="flex max-w-[62ch] min-w-0 flex-col gap-10">
+    <section id="window" aria-labelledby="window-title" class={sectionClass}>
+      <h2 id="window-title" class={titleClass}>{t('window.title')}</h2>
+      <p class={pClass}>{t('window.p1')}</p>
+    </section>
+
+    <section id="condition" aria-labelledby="condition-title" class={sectionClass}>
+      <h2 id="condition-title" class={titleClass}>{t('condition.title')}</h2>
+      <p class={pClass}>{t('condition.p1')}</p>
+    </section>
+
+    <section id="refunds" aria-labelledby="refunds-title" class={sectionClass}>
+      <h2 id="refunds-title" class={titleClass}>{t('refunds.title')}</h2>
+      <dl class="m-0 flex flex-col border-t border-hairline">
+        {
+          REFUND_ROWS.map(k => (
+            <div class="grid grid-cols-1 gap-2 border-b border-hairline py-[18px] sm:grid-cols-[200px_1fr] sm:gap-6">
+              <dt class={META}>{t(`refunds.${k}Label`)}</dt>
+              <dd class="m-0 text-[15px] leading-body text-text-secondary">{t(`refunds.${k}`)}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section id="exchanges" aria-labelledby="exchanges-title" class={sectionClass}>
+      <h2 id="exchanges-title" class={titleClass}>{t('exchanges.title')}</h2>
+      <p class={pClass}>{t('exchanges.p1')}</p>
+    </section>
+
+    <section id="digitalret" aria-labelledby="digitalret-title" class={sectionClass}>
+      <h2 id="digitalret-title" class={titleClass}>{t('digital.title')}</h2>
+      <p class={pClass}>{t('digital.p1')}</p>
+    </section>
+
+    <section id="faults" aria-labelledby="faults-title" class={`${sectionClass} border-t border-hairline pt-8`}>
+      <h2 id="faults-title" class={titleClass}>{t('faults.title')}</h2>
+      <p class={pClass}>{t('faults.p1')}</p>
+      <div class="mt-2 flex flex-wrap gap-3">
+        <a
+          href={href('/contact/', locale)}
+          class="border border-transparent bg-ink-900 px-6 py-[15px] text-[11px] leading-snug tracking-label text-text-inverse uppercase transition-hover hover:border-transparent hover:bg-ink-700 hover:text-text-inverse"
+        >
+          {t('writeStudio')}
+        </a>
+        <a
+          href={`${accountLink(locale)}orders/`}
+          class="self-start border border-strong px-6 py-3.5 text-[11px] leading-snug tracking-label text-text-primary uppercase transition-hover hover:border-strong hover:bg-ink-900 hover:text-text-inverse"
+        >
+          {t('faults.findOrder')}
+        </a>
+      </div>
+    </section>
+  </div>
+</div>

@@ -104,7 +104,13 @@
     "empty": {
       "title": "Ingen ordrer i denne visning",
       "description": "Skift filter, eller begynd med noget fra efterårets udvalg."
-    }
+    },
+    "countMore_one": "{{count}}+ ordre",
+    "countMore_other": "{{count}}+ ordrer",
+    "countSinceMore_one": "{{count}}+ ordre siden {{since}}",
+    "countSinceMore_other": "{{count}}+ ordrer siden {{since}}",
+    "more": "Vis flere ordrer",
+    "loadingMore": "Henter ordrer…"
   },
   "card": {
     "order": "Ordre",
@@ -168,7 +174,8 @@
     },
     "paidWith": "Betalt med {{card}}",
     "refunded": "Denne ordre er refunderet.",
-    "footer": "Tak fordi du handler hos {{store}}. Spørgsmål til fakturaen? Skriv til {{email}} og oplys fakturanummeret."
+    "footer": "Tak fordi du handler hos {{store}}. Spørgsmål til fakturaen? Skriv til {{email}} og oplys fakturanummeret.",
+    "documentTitle": "{{store}} faktura {{number}}"
   },
   "cancel": {
     "button": "Annuller ordre",

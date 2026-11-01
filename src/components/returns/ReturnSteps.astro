@@ -1,0 +1,27 @@
+---
+/** "How returns work": the four chalk tiles of the Returns page (VAREL src/pages/Returns.tsx). Zero JS. */
+import type {TFunction} from '@/lib/i18n';
+
+interface Props {
+  /** `returns` namespace */
+  t: TFunction;
+}
+
+const {t} = Astro.props;
+const STEPS = [1, 2, 3, 4] as const;
+---
+
+<section
+  aria-label={t('steps.label')}
+  class="grid grid-cols-1 gap-0.5 border-b border-hairline px-6 py-12 sm:grid-cols-2 md:px-12 lg:grid-cols-4"
+>
+  {
+    STEPS.map(n => (
+      <div class="flex flex-col gap-3 bg-chalk p-6 md:p-8">
+        <span class="text-[11px] leading-snug tracking-label text-text-muted uppercase">{t('steps.step', {n})}</span>
+        <span class="font-display text-[26px] leading-[1.1]">{t(`steps.s${n}Title`)}</span>
+        <span class="text-body-sm text-text-secondary">{t(`steps.s${n}Body`)}</span>
+      </div>
+    ))
+  }
+</section>

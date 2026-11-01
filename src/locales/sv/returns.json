@@ -8,7 +8,9 @@
     "button": "Sök",
     "note": "Ditt ordernummer börjar med VRL- och finns i ditt bekräftelsemejl",
     "enterNumber": "Ange ordernumret från ditt bekräftelsemejl",
-    "notFound": "Vi hittar inte det ordernumret"
+    "notFound": "Vi hittar inte det ordernumret",
+    "pending": "Söker…",
+    "emailLabel": "E-post som användes för ordern"
   },
   "steps": {
     "label": "Så fungerar returer",
@@ -81,6 +83,9 @@
     "quantity": "Antal",
     "reason": "Orsak",
     "chooseReason": "Välj en orsak",
-    "reasonPlaceholder": "För stor över axlarna"
+    "reasonPlaceholder": "För stor över axlarna",
+    "emailHint": "Vi matchar den mot ordern innan returen bokas.",
+    "emailNeeded": "Ange e-postadressen du använde för ordern",
+    "submitting": "Skickar begäran…"
   }
 }
