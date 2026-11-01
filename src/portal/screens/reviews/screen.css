@@ -1,0 +1,251 @@
+/* /dashboard/reviews (WP-04): the moderation queue. Tokens only (src/styles/global.css). */
+
+.screen-reviews .review-settings {
+  margin-bottom: 1.5rem;
+}
+
+.screen-reviews .review-settings-grid {
+  display: grid;
+  gap: 1rem 2rem;
+}
+
+@media (min-width: 640px) {
+  .screen-reviews .review-settings-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.screen-reviews .reviews-toolbar {
+  margin-bottom: 1rem;
+}
+
+.screen-reviews .reviews-search {
+  flex: 1 1 20rem;
+  max-width: 20rem;
+}
+
+.screen-reviews .reviews-search .search-input {
+  width: 100%;
+}
+
+.screen-reviews .reviews-select-page {
+  align-items: center;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.screen-reviews .reviews-updating {
+  font-size: 0.75rem;
+}
+
+.screen-reviews .reviews-error {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.screen-reviews .reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.screen-reviews .reviews-bulk-spacer {
+  height: 4rem;
+}
+
+/* One review */
+
+.review-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  background: var(--card);
+  transition: border-color 0.16s ease;
+}
+
+.review-card[data-selected] {
+  border-color: var(--ink);
+}
+
+@media (min-width: 640px) {
+  .review-card {
+    padding: 1.25rem;
+  }
+}
+
+.review-card-check {
+  display: inline-flex;
+  padding-top: 0.25rem;
+  cursor: pointer;
+}
+
+.review-card-check input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--ink);
+}
+
+.review-card-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.review-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+
+.review-card-product {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.review-card-product img {
+  flex-shrink: 0;
+  width: 36px;
+  height: 48px;
+  object-fit: cover;
+  background: var(--ink-050);
+}
+
+.review-card-product-text {
+  min-width: 0;
+}
+
+.review-card-product-name {
+  display: block;
+  overflow: hidden;
+  font-size: 0.84rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-underline-offset: 4px;
+}
+
+.review-card-product:hover .review-card-product-name {
+  text-decoration: underline;
+}
+
+.review-card-date {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--subtle);
+}
+
+.review-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.review-card-text p {
+  margin: 0;
+}
+
+.review-stars {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.review-stars svg {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.review-stars svg[data-on] {
+  fill: var(--ink);
+}
+
+.review-card-title {
+  font-size: 0.94rem;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.review-card-body {
+  max-width: 78ch;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--muted);
+  white-space: pre-line;
+}
+
+.review-card-author {
+  font-size: 0.78rem;
+  color: var(--subtle);
+}
+
+.review-card-author a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.review-card-author a:hover {
+  color: var(--ink);
+}
+
+.review-reply {
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--line-strong);
+}
+
+.review-reply p {
+  margin: 0;
+}
+
+.review-reply-label {
+  font-size: 0.75rem;
+  color: var(--subtle);
+}
+
+.review-reply-text {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--muted);
+  white-space: pre-line;
+}
+
+.review-reply-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.review-reply-count {
+  margin-left: auto;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.review-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.review-card-actions .review-card-delete {
+  margin-left: auto;
+}
+
+.review-card-actions .review-card-delete:hover:not(:disabled) {
+  color: var(--danger);
+}
