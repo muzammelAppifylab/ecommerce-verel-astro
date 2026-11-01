@@ -67,7 +67,7 @@ function HeaderBar({header, links, signedIn, languages, locale, path}: SiteHeade
         </div>
 
         {/* centre */}
-        <Wordmark size={24} href={links.home} className="max-lg:text-[20px]" />
+        <Wordmark size={24} href={links.home} />
 
         {/* right */}
         <nav
