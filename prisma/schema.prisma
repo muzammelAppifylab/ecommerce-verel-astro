@@ -33,18 +33,18 @@ datasource db {
 /// A person with an account on this site. `email` is stored trimmed and
 /// lower-cased. Only the user and holders of `site:user:read` ever see it.
 model User {
-  id              Int       @id @default(autoincrement())
-  email           String    @unique @db.VarChar(254)
+  id                Int       @id @default(autoincrement())
+  email             String    @unique @db.VarChar(254)
   /// `pbkdf2-sha256$v1$<iterations>$<salt>$<key>` (src/platform/auth/password.ts).
-  passwordHash    String    @map("password_hash") @db.VarChar(255)
-  name            String    @db.VarChar(80)
+  passwordHash      String    @map("password_hash") @db.VarChar(255)
+  name              String    @db.VarChar(80)
   /// `active` or `suspended`.
-  status          String    @default("active") @db.VarChar(16)
-  emailVerifiedAt DateTime? @map("email_verified_at")
+  status            String    @default("active") @db.VarChar(16)
+  emailVerifiedAt   DateTime? @map("email_verified_at")
   /// Bumped on password change, logout-all and suspension: every access token
   /// carrying an older value stops working at once.
-  sessionVersion  Int       @default(1) @map("session_version")
-  lastLoginAt     DateTime? @map("last_login_at")
+  sessionVersion    Int       @default(1) @map("session_version")
+  lastLoginAt       DateTime? @map("last_login_at")
   /// Two-step sign-in (src/platform/auth/two-factor.ts): the authenticator secret, SEALED
   /// (never in clear), set once the user confirmed a first code (`totpEnabledAt`).
   totpSecretSealed  String?   @map("totp_secret_sealed") @db.VarChar(255)
@@ -53,8 +53,8 @@ model User {
   totpEnabledAt     DateTime? @map("totp_enabled_at")
   /// The 30-second step of the last accepted code: that code (and older) never works again.
   totpLastStep      Int?      @map("totp_last_step")
-  createdAt       DateTime  @default(now()) @map("created_at")
-  updatedAt       DateTime  @updatedAt @map("updated_at")
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
 
   roles              UserRole[]
   refreshTokens      RefreshToken[]
@@ -1249,13 +1249,18 @@ model ActivityLog {
 
 /// A transactional email template: `order_confirmation`, `order_shipped`…
 model EmailTemplate {
-  key       String   @id @db.VarChar(60)
-  subject   String   @db.VarChar(200)
+  key         String    @id @db.VarChar(60)
+  subject     String    @db.VarChar(200)
   /// Plain text with `{{variables}}`; rendered into the branded HTML layout.
-  body      String   @db.VarChar(20000)
-  enabled   Boolean  @default(true)
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  body        String    @db.VarChar(20000)
+  enabled     Boolean   @default(true)
+  /// Messages sent or stored with this template (WP-22: kept on write, no per-request count).
+  sentCount   Int       @default(0) @map("sent_count")
+  /// Messages that failed with this template.
+  failedCount Int       @default(0) @map("failed_count")
+  lastSentAt  DateTime? @map("last_sent_at") @db.Timestamptz(3)
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
 
   @@map("email_templates")
 }
@@ -1270,17 +1275,24 @@ model EmailMessage {
   text        String
   /// Provider that handled it (`outbox` = stored only).
   provider    String    @db.VarChar(20)
-  /// `queued` | `sent` | `failed` | `stored`.
+  /// `queued` | `sent` | `failed` | `stored` | `skipped`.
   status      String    @default("queued") @db.VarChar(10)
   error       String?   @db.VarChar(2000)
   providerId  String?   @map("provider_id") @db.VarChar(255)
   /// `order`, `user`, `cart`…
   relatedType String?   @map("related_type") @db.VarChar(40)
   relatedId   String?   @map("related_id") @db.VarChar(60)
+  /// Reply-to of this message (kept for delivery by the job and for resends).
+  replyTo     String?   @map("reply_to") @db.VarChar(254)
+  /// Set while a send-email job delivers it (one delivery at a time; stale after 5 minutes).
+  claimedAt   DateTime? @map("claimed_at") @db.Timestamptz(3)
+  /// Delivery attempts so far.
+  attempts    Int       @default(0)
   createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
   sentAt      DateTime? @map("sent_at") @db.Timestamptz(3)
 
   @@index([createdAt(sort: Desc), id(sort: Desc)])
+  @@index([template, createdAt(sort: Desc), id(sort: Desc)])
   @@index([to])
   @@index([relatedType, relatedId])
   @@index([status, createdAt])
