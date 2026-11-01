@@ -28,7 +28,12 @@ const relatedOf = api.products[':slug'].related.$get as unknown as (args: {
 const related = first ? await read<RelatedProduct[]>(relatedOf({param: {slug: first}, query: {limit: '3'}})) : null;
 if (!cart) Astro.response.status = 503;
 
-const dicts = dictsFor(locale, {cart: true, checkout: true, product: ['stock'], layout: ['ui', 'bag'], common: true});
+const dicts = dictsFor(locale, {
+  cart: true,
+  checkout: ['discount', 'totals', 'qty', 'removeCode'],
+  product: ['stock'],
+  layout: ['ui'],
+});
 const title = serverText(locale)('cart', 'title');
 ---
 
