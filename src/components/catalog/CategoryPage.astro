@@ -6,30 +6,22 @@
  * Server-rendered: the taxonomy decides 404 (unknown department, or a category not in THAT department) and
  * 503 (the taxonomy read failed: never a 404 on an outage). Hero, department nav and the "about" section are
  * plain HTML; the category chips, toolbar, active filters and grid are one island (`CatalogListing`,
- * category mode). Reads, in parallel: page context ∥ taxonomy ∥ products (+ base listing).
+ * category mode). The reads and the status decision are loadCategoryPage() (category-page.ts), run in the page.
  */
 import {CatalogCrumbs} from '@/components/catalog/CatalogCrumbs';
 import CatalogListing, {type CategoryChip} from '@/components/catalog/CatalogListing';
-import {type CatalogListing as CatalogListingData, parseListingSearch, sortItems, sortOf, toApiQuery} from '@/components/catalog/listing';
+import {type CategoryPageData, categoryTitle, COPY_SLUGS, META_SLUGS} from '@/components/catalog/category-page';
 import {dictsFor, serverText} from '@/components/layout/dictionaries';
-import {Button, EmptyState, Img, type Photo} from '@/components/varel';
+import {CatalogNotice} from '@/components/catalog/CatalogNotice';
+import {Img, type Photo} from '@/components/varel';
 import Storefront from '@/layouts/Storefront.astro';
-import {dotJoin} from '@/lib/format';
 import {categoryLink, deptLink, homeLink, journalLink, shopLink} from '@/lib/links';
-import type {Department} from '@/lib/types/catalog';
 import {cn} from '@/lib/utils';
-import {backend, read} from '@/server/backend';
-import {pageContext} from '@/server/page';
 
 interface Props {
-  dept: string;
-  category?: string;
+  /** From loadCategoryPage(), called in the page frontmatter (it sets the status and headers) */
+  data: CategoryPageData;
 }
-
-/* Editorial copy per department slug (verbatim from the Category prototype): `catalog:category.copy.<slug>`. */
-const COPY_SLUGS = ['women', 'men', 'shoes', 'bags', 'accessories', 'lifestyle'];
-/* Meta descriptions that differ from the copy: `catalog:category.meta.<slug>`. */
-const META_SLUGS = ['women'];
 
 /* Editorial imagery from the prototype (not commerce data). */
 const HERO: Photo = {
@@ -43,36 +35,18 @@ const EDITORIAL: Photo = {
   creditHref: 'https://unsplash.com/@missmeg_mac',
 };
 
-const {dept: deptSlug, category: catSlug} = Astro.props;
+const {data} = Astro.props;
+const {ctx, state, deptSlug, catSlug, search, taxonomy, dept, category, list} = data;
 const locale = Astro.locals.locale ?? 'en';
-const search = parseListingSearch(Astro.url.searchParams, 'category');
 const scope = {dept: deptSlug, category: catSlug};
-const api = backend(Astro.request);
-const headers = {headers: {'x-locale': locale}};
-const [ctx, taxonomy, fetched] = await Promise.all([
-  pageContext(Astro.request, Astro.response),
-  read<Department[]>(api.taxonomy.$get({}, headers)),
-  read<CatalogListingData>(api.products.$get({query: toApiQuery(search, scope, catSlug ? 'category' : 'dept')} as never, headers)),
-]);
 
 const t = serverText(locale);
 const tc = (key: string, vars?: Record<string, string | number>) => t('catalog', key, vars);
 
-// Slugs match as given (VAREL: `d.slug === deptSlug`): an upper-case URL is a 404, not a redirect.
-const dept = taxonomy?.find(d => d.slug === deptSlug);
-const category = catSlug ? dept?.categories.find(c => c.slug === catSlug) : undefined;
-const state = !taxonomy ? 'unavailable' : !dept || (catSlug && !category) ? 'not-found' : 'ready';
-const list = state === 'ready' ? fetched : null;
-if (state === 'unavailable') Astro.response.status = 503;
-else if (state === 'not-found') Astro.response.status = 404;
-else if (!list) Astro.response.status = 503;
-if (list) list.items = sortItems(list.items, sortOf(search));
-
 const deptName = dept?.name ?? deptSlug;
 const catName = catSlug ? (category?.name ?? catSlug) : undefined;
 const copy = COPY_SLUGS.includes(deptSlug) ? tc(`category.copy.${deptSlug}`) : undefined;
-const title =
-  state === 'ready' ? (catName ? dotJoin(catName, deptName) : deptName) : state === 'not-found' ? tc('category.notFoundTitle') : tc('results.errorTitle');
+const title = categoryTitle(data, tc);
 const description = state === 'ready' ? (META_SLUGS.includes(deptSlug) ? tc(`category.meta.${deptSlug}`) : copy) : undefined;
 
 const crumbs = [
@@ -105,14 +79,11 @@ const navCls = (on: boolean) =>
   {
     state === 'not-found' && (
       <div class="mx-auto max-w-page px-6 pt-10 pb-24 md:px-12">
-        <EmptyState
+        <CatalogNotice
           title={tc('category.notFoundTitle')}
           description={tc('category.notFoundBody')}
-          action={
-            <Button href={shopLink(locale)} variant="outline">
-              {tc('category.allProducts')}
-            </Button>
-          }
+          actionLabel={tc('category.allProducts')}
+          actionHref={shopLink(locale)}
         />
       </div>
     )
@@ -120,14 +91,11 @@ const navCls = (on: boolean) =>
   {
     state === 'unavailable' && (
       <div class="mx-auto max-w-page px-6 pt-10 pb-24 md:px-12">
-        <EmptyState
+        <CatalogNotice
           title={tc('results.errorTitle')}
           description={tc('results.errorBody')}
-          action={
-            <Button href={Astro.url.pathname + Astro.url.search} variant="outline">
-              {tc('results.tryAgain')}
-            </Button>
-          }
+          actionLabel={tc('results.tryAgain')}
+          actionHref={Astro.url.pathname + Astro.url.search}
         />
       </div>
     )
