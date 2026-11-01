@@ -42,6 +42,7 @@
   "removeCode": "Fjern kode",
   "pay": "Betal {{total}}",
   "placeOrder": "Afgiv ordre",
+  "paying": "Behandler…",
   "methodDigital": "digital",
   "errors": {
     "email": "Indtast en gyldig e-mailadresse",

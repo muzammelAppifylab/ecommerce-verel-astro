@@ -42,6 +42,7 @@
   "removeCode": "Ta bort kod",
   "pay": "Betala {{total}}",
   "placeOrder": "Lägg order",
+  "paying": "Bearbetar…",
   "methodDigital": "digital",
   "errors": {
     "email": "Ange en giltig e-postadress",
