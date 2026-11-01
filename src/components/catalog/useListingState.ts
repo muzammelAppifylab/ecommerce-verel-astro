@@ -119,15 +119,18 @@ export function useListingState({mode, scope, initialSearch, initialList, initia
   // Back / forward between filter states of this page.
   useEffect(() => {
     const path = location.pathname;
-    const onPop = () => {
+    const onPop = (event: PopStateEvent) => {
       if (location.pathname !== path) return; // another page: the ClientRouter swaps it
+      // Same page, another filter state: handled here. Stop the ClientRouter (its listener runs after this
+      // capture one) from re-fetching and swapping the whole page, which left the old grid on screen.
+      event.stopImmediatePropagation();
       const next = parseListingSearch(new URLSearchParams(location.search), mode);
       searchRef.current = next;
       setSearch(next);
       load(next);
     };
-    window.addEventListener('popstate', onPop);
-    return () => window.removeEventListener('popstate', onPop);
+    window.addEventListener('popstate', onPop, {capture: true});
+    return () => window.removeEventListener('popstate', onPop, {capture: true});
   }, [mode, load]);
 
   const update = useCallback(
