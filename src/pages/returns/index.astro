@@ -1,0 +1,50 @@
+---
+/**
+ * Returns & refunds (VAREL src/pages/Returns.tsx): breadcrumb, the title + order lookup + return request (one
+ * island, server-rendered then hydrated), the four steps and the policy body (static, zero JS). SSR, not
+ * prerendered: the locale prefixes are rewritten here (D7) and `?order=` prefills the lookup without a flash.
+ * WP-14 (docs/migration/PLAN.md §5).
+ */
+import {ReturnsLookup} from '@/components/returns/ReturnsLookup';
+import ReturnSteps from '@/components/returns/ReturnSteps.astro';
+import ReturnsPolicy from '@/components/returns/ReturnsPolicy.astro';
+import {GUTTER} from '@/components/returns/ReturnRequest';
+import {ORDER_MAX} from '@/components/returns/returns-api';
+import {Breadcrumb} from '@/components/varel';
+import {dictionary, tFor} from '@/lib/i18n/server';
+import {homeLink} from '@/lib/links';
+import type {PublicSettings} from '@/lib/types/settings';
+import {cn} from '@/lib/utils';
+import Storefront from '@/layouts/Storefront.astro';
+import {read} from '@/server/backend';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
+const locale = (Astro.locals as {locale?: string}).locale ?? 'en';
+const t = tFor(locale, 'returns');
+const tp = tFor(locale, 'policy');
+
+const client = api as unknown as {settings: {public: {$get: (a?: unknown, o?: unknown) => Promise<Response>}}};
+const settings = await read<PublicSettings>(client.settings.public.$get(undefined, {headers: {'x-locale': locale}}));
+
+const rawOrder = (Astro.url.searchParams.get('order') ?? '').trim();
+const initialOrder = rawOrder.length <= ORDER_MAX ? rawOrder : '';
+const dict = dictionary(locale, ['returns', 'orders', 'checkout', 'common']);
+---
+
+<Storefront site={site} viewer={viewer} api={api} title={t('title')} description={t('intro')}>
+  <div class="mx-auto w-full max-w-page">
+    <Breadcrumb className={cn('pt-6', GUTTER)} items={[{label: t('home'), href: homeLink(locale)}, {label: t('title')}]} />
+    <ReturnsLookup
+      client:load
+      dict={dict}
+      locale={locale}
+      returnReasons={Array.isArray(settings?.returnReasons) ? settings.returnReasons : []}
+      initialOrder={initialOrder}
+    />
+    <ReturnSteps t={t} />
+    <ReturnsPolicy t={t} tp={tp} locale={locale} />
+  </div>
+</Storefront>

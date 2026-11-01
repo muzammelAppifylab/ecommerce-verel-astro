@@ -8,7 +8,9 @@
     "button": "Buscar",
     "note": "Tu número de pedido empieza por VRL- y está en tu correo de confirmación",
     "enterNumber": "Introduce el número de pedido de tu correo de confirmación",
-    "notFound": "No encontramos ese número de pedido"
+    "notFound": "No encontramos ese número de pedido",
+    "pending": "Buscando…",
+    "emailLabel": "Correo usado en el pedido"
   },
   "steps": {
     "label": "Cómo funcionan las devoluciones",
@@ -82,6 +84,9 @@
     "quantity": "Cantidad",
     "reason": "Motivo",
     "chooseReason": "Elige un motivo",
-    "reasonPlaceholder": "Demasiado ancho de hombros"
+    "reasonPlaceholder": "Demasiado ancho de hombros",
+    "emailHint": "Lo comprobamos con el pedido antes de registrar la devolución.",
+    "emailNeeded": "Introduce el correo que usaste para este pedido",
+    "submitting": "Enviando solicitud…"
   }
 }
