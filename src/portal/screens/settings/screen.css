@@ -1,0 +1,490 @@
+/*
+ * Store settings (WP-23): the settings forms, save bar and previews. Bundled by App.astro
+ * (every `src/portal/screens/**\/screen.css`). Tokens only (src/styles/global.css), light + dark.
+ * Port of VAREL pages/admin/settings/* and pages/admin/shipping/* styles.
+ */
+
+/* ── Shell ─────────────────────────────────────────────────────────────── */
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+.settings-fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.settings-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.settings-save-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+.settings-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--warning);
+}
+.settings-embedded-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.settings-embedded-head > p {
+  margin: 0;
+  max-width: 60ch;
+}
+
+/* Sticky save bar, shown while the draft has changes. */
+.settings-savebar-spacer {
+  height: 0.25rem;
+}
+.settings-savebar {
+  position: sticky;
+  bottom: 1rem;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-inline: auto;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border: 1px solid var(--line-strong);
+  background: var(--card);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius);
+  max-width: 100%;
+}
+.settings-savebar-count {
+  flex: 1;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+.settings-savebar-hint {
+  color: var(--muted);
+  font-weight: 400;
+}
+@media (max-width: 640px) {
+  .settings-savebar-hint {
+    display: none;
+  }
+}
+
+/* ── Groups and rows ───────────────────────────────────────────────────── */
+.settings-group {
+  scroll-margin-top: 5rem;
+}
+.settings-group-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.settings-group-body > .field {
+  margin: 0;
+}
+.settings-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.settings-narrow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem;
+  max-width: 32rem;
+}
+.settings-inline {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+.settings-grow {
+  display: flex;
+  width: 100%;
+}
+.settings-grow > input,
+.settings-grow > .settings-input {
+  flex: 1;
+  min-width: 0;
+}
+.settings-label {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.settings-toggle + .settings-toggle {
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+.settings-unit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+}
+.settings-mono {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+.settings-num {
+  font-variant-numeric: tabular-nums;
+}
+.settings-empty-line {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+.settings-input {
+  min-height: 2.25rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+}
+.settings-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.settings-input[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+/* ── General: announcement preview, logo ───────────────────────────────── */
+.settings-announcement,
+.settings-announcement-empty {
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.settings-announcement {
+  background: var(--ink);
+  color: var(--bg);
+}
+.settings-announcement-empty {
+  border: 1px dashed var(--line-strong);
+  color: var(--muted);
+}
+.settings-logo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+.settings-logo-box,
+.settings-image-thumb {
+  display: grid;
+  place-items: center;
+  flex: none;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--subtle);
+  font-size: 0.75rem;
+}
+.settings-logo-box {
+  width: 10rem;
+  height: 5rem;
+  padding: 0.5rem;
+}
+.settings-logo-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.settings-logo-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+/* ── Checkout: terms preview ───────────────────────────────────────────── */
+.settings-terms-preview {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--line);
+  background: var(--subtle);
+  font-size: 0.8125rem;
+}
+.settings-terms-box {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.125rem;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+}
+
+/* ── Inventory: return reasons ─────────────────────────────────────────── */
+.settings-reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.settings-reason {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.settings-reason > .settings-input,
+.settings-reason > input {
+  flex: 1;
+  min-width: 0;
+}
+.settings-reason-index {
+  flex: none;
+  width: 1.5rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+/* ── Payments: owner secrets, webhook events ───────────────────────────── */
+.settings-secrets {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--line);
+}
+.settings-secret {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.625rem 0.875rem;
+}
+.settings-secret + .settings-secret {
+  border-top: 1px solid var(--line);
+}
+.settings-secret-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+/* ── Chips (countries, webhook events) ─────────────────────────────────── */
+.settings-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.settings-chip,
+.settings-code-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 1.75rem;
+  padding: 0 0.625rem;
+  border: 1px solid var(--line);
+  background: var(--subtle);
+  font-size: 0.8125rem;
+}
+.settings-code-chip {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+.settings-chip-remove {
+  display: inline-grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-inline-end: -0.25rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+}
+.settings-chip-remove:hover {
+  color: var(--ink);
+}
+.settings-chip-remove:focus-visible {
+  outline: 2px solid var(--accent);
+}
+.settings-chip-remove:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.settings-chips-add {
+  width: 100%;
+  max-width: 28rem;
+}
+.settings-chips-add > .settings-input {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Tax: country rates, worked example ────────────────────────────────── */
+.settings-rates {
+  border: 1px solid var(--line);
+}
+.settings-example {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 28rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  background: var(--subtle);
+}
+.settings-example-rows,
+.settings-example-total {
+  margin: 0;
+}
+.settings-example-rows > div,
+.settings-example-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.8125rem;
+}
+.settings-example-rows dt,
+.settings-example-rows dd,
+.settings-example-total dt,
+.settings-example-total dd {
+  margin: 0;
+}
+.settings-example-rows dt {
+  color: var(--muted);
+}
+.settings-example-total {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--line-strong);
+  font-weight: 700;
+}
+
+/* ── Shipping ──────────────────────────────────────────────────────────── */
+.settings-threshold {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.settings-threshold-value {
+  font-weight: 700;
+}
+.settings-zone-countries {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.settings-zone-empty {
+  margin: 0;
+  padding: 1rem;
+  font-size: 0.8125rem;
+}
+
+/* ── SEO: image field, link preview ────────────────────────────────────── */
+.settings-image-field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+.settings-image-thumb {
+  width: 6rem;
+  height: 3.15rem;
+}
+.settings-image-thumb img,
+.settings-share-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.settings-share {
+  max-width: 32rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+.settings-share-media {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1200 / 630;
+  background: var(--subtle);
+}
+.settings-share-wordmark {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 0.2em;
+}
+.settings-share-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--line);
+}
+.settings-share-text p {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.settings-share-host {
+  color: var(--muted);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+}
+.settings-share-title {
+  font-weight: 700;
+  white-space: nowrap;
+}
+.settings-share-desc {
+  display: -webkit-box;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.settings-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125rem;
+}
