@@ -1,0 +1,10 @@
+{
+  "home": "Hem",
+  "notFound": "Sidan hittades inte",
+  "loadError": "Sidan kunde inte laddas. Kontrollera din anslutning och försök igen.",
+  "tryAgain": "Försök igen",
+  "lastUpdated": "Senast uppdaterad {{date}}",
+  "sections": "Avsnitt",
+  "onThisPage": "På den här sidan",
+  "loading": "Laddar sidan"
+}

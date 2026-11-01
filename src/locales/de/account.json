@@ -1,0 +1,186 @@
+{
+  "title": "Konto",
+  "crumbs": {
+    "home": "Startseite",
+    "account": "Konto"
+  },
+  "loadError": "Wir konnten dein Konto nicht laden",
+  "tryAgain": "Erneut versuchen",
+  "since": "Dabei seit {{date}}",
+  "signOut": "Abmelden",
+  "signingOut": "Wird abgemeldet…",
+  "allOrders": "Alle Bestellungen",
+  "noOrders": {
+    "title": "Noch keine Bestellungen",
+    "description": "Sobald du bestellst, erscheint die Bestellung hier – mit Sendungsverfolgung, sobald sie versendet ist.",
+    "action": "Alle Produkte"
+  },
+  "items_one": "{{count}} Artikel",
+  "items_other": "{{count}} Artikel",
+  "download": "Herunterladen",
+  "noDownloads": "Digitale Teile, die du kaufst, kannst du hier herunterladen.",
+  "nav": {
+    "label": "Konto",
+    "overview": "Überblick",
+    "orders": "Bestellungen",
+    "wishlist": "Merkliste",
+    "details": "Persönliche Daten",
+    "addresses": "Adressen",
+    "downloads": "Downloads",
+    "privacy": "Datenschutz"
+  },
+  "addresses": {
+    "title": "Gespeicherte Adressen",
+    "add": "Adresse hinzufügen",
+    "empty": "Noch keine gespeicherten Adressen. Füge eine hinzu, um schneller zu bestellen.",
+    "address": "Adresse",
+    "default": "Standard",
+    "edit": "Bearbeiten",
+    "editAria": "{{label}} bearbeiten",
+    "makeDefault": "Als Standard festlegen",
+    "makeDefaultAria": "{{label}} als Standard festlegen",
+    "remove": "Entfernen",
+    "removeAria": "{{label}} entfernen",
+    "addressLower": "Adresse",
+    "removeTitle": "Adresse entfernen",
+    "removing": "Wird entfernt…",
+    "saving": "Wird gespeichert…",
+    "makeDefaultBody": "Wir verwenden diese Adresse an der Kasse zuerst: {{address}}.",
+    "description": "Gespeichert für einen schnelleren Bestellabschluss. Deine Standardadresse wird zuerst eingetragen."
+  },
+  "dialog": {
+    "edit": "Adresse bearbeiten",
+    "add": "Adresse hinzufügen",
+    "cancel": "Abbrechen",
+    "saving": "Wird gespeichert…",
+    "save": "Adresse speichern",
+    "label": "Bezeichnung",
+    "labelPlaceholder": "Zuhause, Studio…",
+    "fullName": "Vollständiger Name",
+    "line1": "Adresse",
+    "line2": "Wohnung, Etage (optional)",
+    "zip": "Postleitzahl",
+    "city": "Ort",
+    "country": "Land",
+    "phone": "Telefon",
+    "primary": "Als Standardadresse verwenden",
+    "errors": {
+      "name": "Gib den Namen für die Lieferung ein",
+      "line1": "Gib eine Straße und Hausnummer ein",
+      "zip": "Gib eine Postleitzahl ein",
+      "city": "Gib einen Ort ein",
+      "country": "Wähle ein Land"
+    }
+  },
+  "confirm": {
+    "cancel": "Abbrechen"
+  },
+  "profile": {
+    "title": "Profil",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "saving": "Wird gespeichert…",
+    "saved": "Gespeichert",
+    "save": "Änderungen speichern",
+    "errors": {
+      "firstName": "Gib deinen Vornamen ein",
+      "lastName": "Gib deinen Nachnamen ein",
+      "email": "Gib eine gültige E-Mail-Adresse ein"
+    },
+    "description": "Wird für deine Bestellungen, Belege und Lieferinfos verwendet."
+  },
+  "privacy": {
+    "title": "Datenschutz",
+    "data": {
+      "title": "Deine Daten",
+      "body": "Lade alles herunter, was wir über dich speichern: Profil, Adressen, Bestellungen, Bewertungen, Merkliste und Newsletter-Status, als JSON-Datei.",
+      "downloading": "Deine Daten werden heruntergeladen",
+      "preparing": "Wird vorbereitet…",
+      "action": "Daten herunterladen"
+    },
+    "cookies": {
+      "title": "Cookies",
+      "body": "Entscheide, ob wir deine Besuche zählen dürfen. Notwendige Cookies halten Warenkorb und Anmeldung am Laufen.",
+      "action": "Cookie-Einstellungen"
+    },
+    "delete": {
+      "title": "Konto löschen",
+      "body": "Schließt dein Konto und löscht Profil, Adressen und Merkliste. Bestellungen bleiben für die Buchhaltung erhalten, ohne deine Kontaktdaten. Das lässt sich nicht rückgängig machen.",
+      "action": "Konto löschen",
+      "description": "Bestätige mit deinem Passwort, um dein Konto zu löschen",
+      "cancel": "Abbrechen",
+      "deleting": "Wird gelöscht…",
+      "confirm": "Mein Konto löschen",
+      "warning": "Wir schicken dir eine Bestätigung per E-Mail und melden dich dann ab. Deine Bestellungen bleiben für die Buchhaltung erhalten, deine E-Mail-Adresse wird ausgeblendet. Das lässt sich nicht rückgängig machen.",
+      "password": "Passwort",
+      "enterPassword": "Gib dein Passwort ein",
+      "deleted": "Dein Konto wurde gelöscht"
+    },
+    "description": "Lade deine Daten herunter, wähle Cookies oder schließe dein Konto."
+  },
+  "greeting": "Hallo, {{name}}",
+  "latest": {
+    "label": "Letzte Bestellung",
+    "meta": "Bestellt am {{date}} · {{items}} · {{total}}",
+    "progress": "Bestellstatus",
+    "view": "Bestellung ansehen",
+    "track": "Mit {{carrier}} verfolgen",
+    "return": "Rücksendung starten",
+    "canCancel": "Du kannst diese Bestellung noch stornieren, bis sie verpackt ist."
+  },
+  "summary": {
+    "title": "Dein Konto",
+    "defaultAddress": "Standard: {{address}}",
+    "noAddress": "Noch keine gespeicherten Adressen",
+    "newsletter": "Newsletter",
+    "subscribed": "Abonniert",
+    "notSubscribed": "Nicht abonniert",
+    "saved_one": "{{count}} gemerktes Teil",
+    "saved_other": "{{count}} gemerkte Teile",
+    "noSaved": "Noch nichts gemerkt",
+    "files_one": "{{count}} Datei zum Herunterladen bereit",
+    "files_other": "{{count}} Dateien zum Herunterladen bereit",
+    "password": "Passwort",
+    "passwordHint": "Passwort ändern"
+  },
+  "earlier": "Frühere Bestellungen",
+  "help": {
+    "title": "Brauchst du Hilfe?",
+    "body": "Das Studio antwortet innerhalb eines Werktags.",
+    "contact": "Studio kontaktieren",
+    "returns": "Rücksendung starten",
+    "terms": "Verkaufsbedingungen"
+  },
+  "details": {
+    "description": "Dein Name und deine Kontaktdaten, Passwort und Newsletter."
+  },
+  "downloadsDescription": "Digitale Teile aus deinen bezahlten Bestellungen, jederzeit erneut herunterladbar.",
+  "password": {
+    "title": "Passwort",
+    "description": "Ändere das Passwort, mit dem du dich anmeldest.",
+    "current": "Aktuelles Passwort",
+    "new": "Neues Passwort",
+    "confirm": "Neues Passwort bestätigen",
+    "rule": "Mindestens 8 Zeichen.",
+    "show": "Passwörter anzeigen",
+    "save": "Passwort ändern",
+    "saving": "Wird geändert…",
+    "changed": "Dein Passwort wurde geändert",
+    "forgot": "Passwort vergessen?",
+    "errors": {
+      "current": "Gib dein aktuelles Passwort ein",
+      "length": "Verwende mindestens 8 Zeichen",
+      "match": "Die Passwörter stimmen nicht überein"
+    }
+  },
+  "preferences": {
+    "title": "Kommunikation",
+    "description": "Wähle, was wir dir schicken dürfen. E-Mails zu Bestellung und Lieferung kommen immer an.",
+    "newsletter": "Newsletter",
+    "newsletterBody": "Neue Kollektionen, Journal-Geschichten und Studio-Events, etwa einmal im Monat.",
+    "on": "Du hast den Newsletter abonniert",
+    "off": "Du hast den Newsletter abbestellt"
+  }
+}

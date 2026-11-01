@@ -1,0 +1,21 @@
+{
+  "addToBag": "Lägg i varukorgen",
+  "remove": "Ta bort",
+  "save": "Spara",
+  "cancel": "Avbryt",
+  "continue": "Fortsätt",
+  "close": "Stäng",
+  "back": "Tillbaka",
+  "loading": "Laddar",
+  "tryAgain": "Försök igen",
+  "error": "Något gick fel. Försök igen.",
+  "free": "Gratis",
+  "soldOut": "Slutsåld",
+  "quantity": "Antal",
+  "size": "Storlek",
+  "colour": "Färg",
+  "search": "Sök",
+  "signIn": "Logga in",
+  "viewAll": "Visa alla",
+  "apply": "Använd"
+}

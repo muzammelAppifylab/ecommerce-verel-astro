@@ -1,0 +1,10 @@
+{
+  "home": "Home",
+  "notFound": "Page not found",
+  "loadError": "This page did not load. Check your connection and try again.",
+  "tryAgain": "Try again",
+  "lastUpdated": "Last updated {{date}}",
+  "sections": "Sections",
+  "onThisPage": "On this page",
+  "loading": "Loading page"
+}

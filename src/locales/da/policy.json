@@ -1,0 +1,53 @@
+{
+  "home": "Forside",
+  "sections": "Afsnit",
+  "onThisPage": "På denne side",
+  "lastUpdated": "Sidst opdateret {{date}}",
+  "contactStudio": "Kontakt studiet",
+  "related": {
+    "terms": "Handelsbetingelser",
+    "privacy": "Privatlivspolitik",
+    "returns": "Returnering og refusion"
+  },
+  "terms": {
+    "title": "Handelsbetingelser",
+    "company": "VAREL ApS, CVR 00 00 00 00",
+    "lead": "Disse betingelser gælder for køb på varel.studio. Når du afgiver en ordre, accepterer du dem. Intet her begrænser de rettigheder, du har som forbruger efter dansk ret og EU-retten.",
+    "orders": {
+      "title": "Ordrer",
+      "p1": "En ordre er et tilbud om køb. Aftalen indgås, når vi sender ordrebekræftelsen pr. e-mail. Vi kan afvise en ordre, hvis en vare er udsolgt, hvis prisen var angivet forkert, eller hvis vi ikke kan sende til din adresse.",
+      "p2": "Lagerstatus vises pr. variant. Hvis en størrelse står som udsolgt, kan den ikke fås i den farve, før den er genopfyldt."
+    },
+    "prices": {
+      "title": "Priser og moms",
+      "p1": "Priserne vises i amerikanske dollars ekskl. moms og afgifter. Moms eller salgsafgift beregnes ved kassen ud fra dit leveringsland og vises, før du betaler. Ordrer uden for EU kan blive pålagt importafgift ved ankomst, som du selv betaler.",
+      "p2": "Nogle rabatkoder har et minimumskøb, en slutdato eller en grænse pr. kunde. Hvis en kode ikke kan bruges, får du at vide hvorfor ved kassen. Der gælder én kode pr. ordre, og koder kan ikke kombineres."
+    },
+    "shipping": {
+      "title": "Levering",
+      "p1": "Vi sender til hele verden fra København. Fragtpriserne afhænger af din zone og den leveringsmetode, du vælger, og vises ved kassen. Standardlevering er gratis i Danmark og EU, og alle ordrer over $150 sendes gratis, uanset hvor de skal hen. Afhentning i studiet på Nørrebro er gratis, torsdag til lørdag.",
+      "p2": "Leveringstider er anslåede. Risikoen overgår til dig ved levering."
+    },
+    "digital": {
+      "title": "Digitale produkter",
+      "p1": "Digitale varer sendes ikke fysisk. Et downloadlink følger med din ordrebekræftelse og ligger også på din konto. Downloads er til personlig brug og må ikke videresælges eller videredistribueres. Når du downloader, accepterer du, at den 14-dages fortrydelsesret ikke længere gælder."
+    },
+    "cancellation": {
+      "title": "Fortrydelsesret",
+      "p1": "Efter EU-retten har du 14 dage fra levering til at fortryde dit køb, og vi forlænger det til 30 dage for ubrugte varer med mærkerne på. De fulde vilkår, herunder hvordan refusioner udbetales, står på returneringssiden.",
+      "link": "Returnering og refusion"
+    },
+    "defects": {
+      "title": "Fejl og reparationer",
+      "p1": "Du har to års reklamationsret på fabrikationsfejl. Derudover reparerer vores studie i København enhver VAREL-vare til kostpris. Naturlig falmning, fnuller og patina er materialernes egenskaber, ikke fejl."
+    },
+    "accounts": {
+      "title": "Konti",
+      "p1": "Hold din adgangskode for dig selv, og giv os besked, hvis du tror, at andre kender den. Du kan til enhver tid lukke din konto; ordreoplysninger opbevarer vi i fem år, som bogføringsloven kræver."
+    },
+    "law": {
+      "title": "Lovvalg og tvister",
+      "p1": "Dansk ret finder anvendelse. Skriv først til studiet; de fleste sager løses med én e-mail. Ellers kan du indbringe sagen for Forbrugerklagenævnet eller EU's online klageportal."
+    }
+  }
+}

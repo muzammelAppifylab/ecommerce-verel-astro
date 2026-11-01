@@ -1,0 +1,107 @@
+{
+  "pieces_one": "{{count}} plagg",
+  "pieces_other": "{{count}} plagg",
+  "crumbs": {
+    "home": "Startsida",
+    "shop": "Butik"
+  },
+  "sort": {
+    "label": "Sortera",
+    "aria": "Sortera produkter",
+    "featured": "Utvalda",
+    "newest": "Nyaste",
+    "price-asc": "Pris · lägst först",
+    "price-desc": "Pris · högst först",
+    "name": "Namn · A till Ö"
+  },
+  "filters": {
+    "label": "Filter",
+    "title": "Filtrera",
+    "titleCount": "Filtrera ({{count}})",
+    "clear": "Rensa",
+    "description": "Avgränsa produkterna efter kategori, färg, storlek, material, märke och pris.",
+    "close": "Stäng filter",
+    "showResults": "Visa resultat",
+    "show_one": "Visa {{count}} plagg",
+    "show_other": "Visa {{count}} plagg",
+    "price": "Pris",
+    "maxPrice": "Högsta pris",
+    "upTo": "Upp till {{price}}",
+    "active": "Aktiva filter",
+    "remove": "Ta bort filtret {{label}}"
+  },
+  "results": {
+    "errorTitle": "Kollektionen laddades inte",
+    "errorBody": "Kontrollera anslutningen och försök igen.",
+    "tryAgain": "Försök igen",
+    "noMatchTitle": "Inget matchar filtren",
+    "noMatchBody": "Ta bort ett filter, eller bläddra i hela kollektionen.",
+    "clearFilters": "Rensa filter"
+  },
+  "shop": {
+    "title": "Alla produkter",
+    "meta": "Alla VAREL-plagg: kläder, skor, väskor och accessoarer i naturfibrer, i små serier.",
+    "heading": "Alla produkter",
+    "intro": "Allt som finns i studion just nu. Naturfibrer, små serier, fyra färger per säsong."
+  },
+  "category": {
+    "eyebrow": "Kollektion · Hösten 2026",
+    "departments": "Avdelningar",
+    "all": "Visa allt",
+    "heroAlt": "{{name}}-kollektionen, editorial i naturligt dagsljus",
+    "detailAlt": "Detalj från {{name}}-kollektionen",
+    "notFoundTitle": "Vi hittar inte den kollektionen",
+    "notFoundBody": "Den kan ha flyttats. Bläddra bland allt som finns i studion just nu.",
+    "allProducts": "Alla produkter",
+    "emptyTitle": "Kategorin är tom",
+    "emptyBody": "Plaggen kommer hit när säsongen landar. Bläddra bland allt annat så länge.",
+    "aboutEyebrow": "Om kollektionen",
+    "aboutTitle": "{{name}}, i fyra färger",
+    "aboutBody": "Varje plagg i kollektionen är graderat på riktiga kroppar och skuret i samma fyra färger, så allt här fungerar med allt annat. Storlekarna går från XS till XL, med denim och skor i numeriska storlekar.",
+    "journal": "Läs journalen",
+    "copy": {
+      "women": "Klänningar, skjortor, stickat och ytterplagg skurna för en hel garderob snarare än en enda säsong.",
+      "men": "Skjortor, trikå och stickat i naturfibrer, generöst skurna och gjorda för att återkomma.",
+      "shoes": "Vegetabiliskt garvat läder på smala sulor. Kan sulas om och mjuknar med användning.",
+      "bags": "Strukturerat läder och vaxad canvas, i storlekar för en dag på stan och en helg bort.",
+      "accessories": "Stål, läder och glas. De små detaljerna som gör en outfit färdig.",
+      "lifestyle": "Föremål och trycksaker för att hålla en garderob i gott skick."
+    },
+    "meta": {
+      "women": "Damkläder från VAREL: klänningar, skjortor, stickat, byxor, denim och ytterplagg i naturfibrer."
+    }
+  },
+  "search": {
+    "title": "Sök",
+    "placeholder": "Sök produkter, kategorier, journal",
+    "prompt": "Skriv för att söka i sortimentet och journalen.",
+    "searching": "Söker efter ”{{term}}”",
+    "unavailable": "Sökningen är inte tillgänglig just nu. Försök igen.",
+    "results_one": "{{count}} resultat för ”{{term}}”",
+    "results_other": "{{count}} resultat för ”{{term}}”",
+    "suggested": "Förslag",
+    "suggestions": {
+      "wool": "Ull",
+      "knitwear": "Stickat",
+      "outerwear": "Ytterplagg",
+      "leather": "Läder",
+      "stone": "Sten",
+      "digital": "Digitalt"
+    },
+    "resultType": "Resultattyp",
+    "tabs": {
+      "all": "Allt",
+      "products": "Produkter",
+      "categories": "Kategorier",
+      "journal": "Journal"
+    },
+    "noResults": "Inga resultat för ”{{term}}”",
+    "noResultsBody": "Kontrollera stavningen, prova ett material eller en kategori, eller bläddra bland allt som finns i studion just nu.",
+    "allProducts": "Alla produkter",
+    "tabEmpty_one": "Inget under den här fliken. De andra flikarna har {{count}} resultat för ”{{term}}”.",
+    "tabEmpty_other": "Inget under den här fliken. De andra flikarna har {{count}} resultat för ”{{term}}”.",
+    "productsCount": "Produkter ({{count}})",
+    "categoriesCount": "Kategorier ({{count}})",
+    "journalCount": "Journal ({{count}})"
+  }
+}

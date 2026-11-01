@@ -1,0 +1,93 @@
+{
+  "page": {
+    "title": "Produkt",
+    "notFoundTitle": "Sidan hittades inte",
+    "home": "Startsida"
+  },
+  "tile": {
+    "addToBag": "Lägg i varukorgen",
+    "addedToBag": "Tillagd i varukorgen",
+    "soldOut": "Slutsåld",
+    "download": "Ladda ned",
+    "notifyMe": "Visa detaljer",
+    "added": "Tillagd",
+    "quickAdd": "Snabbköp",
+    "soldOutDetails": "{{name}} är slutsåld. Visa detaljer",
+    "addNameToBag": "Lägg {{name}} i varukorgen",
+    "addToWishlist": "Lägg till i önskelistan",
+    "removeFromWishlist": "Ta bort från önskelistan",
+    "addNameToWishlist": "Lägg till {{name}} i önskelistan",
+    "removeNameFromWishlist": "Ta bort {{name}} från önskelistan",
+    "rated": "Betyg {{avg}} av 5",
+    "promotionInBag": "{{label}} i varukorgen",
+    "bagWord": "varukorg"
+  },
+  "stock": {
+    "inStock": "I lager",
+    "lowLeft_one": "Bara {{count}} kvar",
+    "lowLeft_other": "Bara {{count}} kvar",
+    "instantDownload": "Direkt nedladdning",
+    "soldOutSize": "Slutsåld i den här storleken",
+    "backorder": "Tillverkas på beställning · skickas inom 2–3 veckor",
+    "digitalNoShipping": "Digital · ingen frakt"
+  },
+  "buy": {
+    "buyDownload": "Köp och ladda ned",
+    "added": "{{name}} har lagts i varukorgen",
+    "viewBag": "Visa varukorg",
+    "exclVat": "Exkl. moms",
+    "colour": "Färg",
+    "colourValue": "Färg — {{value}}",
+    "optionValue": "{{name}} — {{value}}",
+    "size": "Storlek",
+    "sizeValue": "Storlek — {{value}}",
+    "sizeSoldOut": "{{size}}, slutsåld",
+    "sizeGuide": "Storleksguide",
+    "sku": "Art.nr {{sku}}",
+    "digitalProduct": "Digital produkt",
+    "physicalProduct": "Fysisk produkt",
+    "noShipping": "Ingen frakt — levereras som nedladdning",
+    "ships": "Skickas inom 1–2 vardagar från Köpenhamn",
+    "returns": "Trettio dagars returrätt på oanvända plagg"
+  },
+  "accordion": {
+    "details": "Detaljer",
+    "material": "Material och tillverkning",
+    "materialBody": "{{material}}. Tillverkat i Europa i små serier hos namngivna partner. {{care}}",
+    "digitalCare": "Levereras som nedladdning — inget skickas.",
+    "shipping": "Frakt",
+    "shippingDigital": "Digital leverans. En nedladdningslänk kommer med ditt bekräftelsemejl och finns kvar på ditt konto.",
+    "shippingBody": "Standardfrakt är gratis inom Danmark och EU, och alla beställningar över $150 skickas fraktfritt. Express och upphämtning i studion på Nørrebro väljer du i kassan.",
+    "returns": "Returer",
+    "returnsBody": "Trettio dagars returrätt på oanvända plagg med etiketter kvar. Digitala produkter återbetalas inte efter nedladdning."
+  },
+  "gallery": {
+    "images": "Bilder av {{name}}",
+    "view": "{{name}} — vy {{n}}",
+    "choose": "Välj en vy",
+    "viewImage": "Visa bild {{n}}"
+  },
+  "states": {
+    "loading": "Laddar produkt",
+    "notFoundTitle": "Den här sidan finns inte",
+    "notFoundBody": "Länken kan vara gammal, eller så har ett plagg sålt slut och lämnat sortimentet. Sök efter det, eller börja i kollektionen.",
+    "allProducts": "Alla produkter",
+    "search": "Sök",
+    "errorTitle": "Plagget kunde inte laddas",
+    "errorBody": "Kontrollera anslutningen och försök igen. Din varukorg finns kvar som den var.",
+    "tryAgain": "Försök igen"
+  },
+  "related": {
+    "title": "Passar bra med"
+  },
+  "sizeGuide": {
+    "title": "Storleksguide",
+    "description": "Kroppsmått i centimeter",
+    "body": "Kroppsmått i centimeter. Våra plagg är skurna med god rörelsevidd; om du är mellan två storlekar, välj den mindre.",
+    "size": "Storlek",
+    "chest": "Bröst",
+    "waist": "Midja",
+    "hip": "Höft",
+    "fallback": "Plagget finns i {{sizes}}. Skriv till studion för exakta mått."
+  }
+}

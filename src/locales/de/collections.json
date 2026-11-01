@@ -1,0 +1,38 @@
+{
+  "pieces_one": "{{count}} Stück",
+  "pieces_other": "{{count}} Stück",
+  "imageAlt": "{{title}} — VAREL Kollektion",
+  "card": {
+    "cta": "Zur Auswahl"
+  },
+  "crumbs": {
+    "home": "Startseite",
+    "collections": "Kollektionen"
+  },
+  "allCollections": "Alle Kollektionen",
+  "allProducts": "Alle Produkte",
+  "tryAgain": "Erneut versuchen",
+  "errorBody": "Prüfe deine Verbindung und versuche es erneut.",
+  "index": {
+    "title": "Kollektionen",
+    "meta": "Zusammenstellungen aus dem VAREL Studio: Stücke, die zusammen getragen werden wollen, für eine Saison, eine Reise oder eine Art, sich zu kleiden.",
+    "intro": "Zusammenstellungen aus dem Studio. Stücke, die zusammen getragen werden wollen, für eine Saison, eine Reise oder eine Art, sich zu kleiden.",
+    "count_one": "{{count}} Kollektion",
+    "count_other": "{{count}} Kollektionen",
+    "errorTitle": "Die Kollektionen konnten nicht geladen werden",
+    "emptyTitle": "Im Moment keine Kollektionen",
+    "emptyBody": "Neue Zusammenstellungen sind unterwegs. Sieh dir alles an, was gerade im Studio ist."
+  },
+  "page": {
+    "title": "Kollektion",
+    "eyebrow": "Kollektion",
+    "notFoundTitle": "Seite nicht gefunden",
+    "notFoundHeading": "Diese Kollektion finden wir nicht",
+    "notFoundBody": "Vielleicht ist sie beendet oder umgezogen. Sieh dir die aktuellen Kollektionen an oder alles im Studio.",
+    "errorTitle": "Diese Kollektion konnte nicht geladen werden",
+    "piecesLabel": "Stücke dieser Kollektion",
+    "emptyTitle": "Gerade nichts in dieser Kollektion",
+    "emptyBody": "Die Stücke sind ausverkauft. Sieh dir alles an, was gerade im Studio ist.",
+    "more": "Weitere Kollektionen"
+  }
+}

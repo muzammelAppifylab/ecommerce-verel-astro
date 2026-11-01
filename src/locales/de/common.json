@@ -1,0 +1,21 @@
+{
+  "addToBag": "In den Warenkorb",
+  "remove": "Entfernen",
+  "save": "Speichern",
+  "cancel": "Abbrechen",
+  "continue": "Weiter",
+  "close": "Schließen",
+  "back": "Zurück",
+  "loading": "Wird geladen",
+  "tryAgain": "Erneut versuchen",
+  "error": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
+  "free": "Kostenlos",
+  "soldOut": "Ausverkauft",
+  "quantity": "Menge",
+  "size": "Größe",
+  "colour": "Farbe",
+  "search": "Suche",
+  "signIn": "Anmelden",
+  "viewAll": "Alle ansehen",
+  "apply": "Anwenden"
+}

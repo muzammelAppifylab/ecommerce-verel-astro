@@ -1,0 +1,27 @@
+{
+  "title": "Favoritos",
+  "crumbs": {
+    "home": "Inicio",
+    "account": "Cuenta",
+    "wishlist": "Favoritos"
+  },
+  "saved_one": "{{count}} prenda guardada",
+  "saved_other": "{{count}} prendas guardadas",
+  "saved_many": "{{count}} prendas guardadas",
+  "nothingSaved": "Aún no has guardado nada",
+  "addAll": "Añadir todo lo disponible",
+  "added": "Añadido a la cesta",
+  "clear": "Vaciar la lista",
+  "loadError": "No hemos podido cargar tus favoritos.",
+  "tryAgain": "Reintentar",
+  "empty": {
+    "title": "Tu lista de favoritos está vacía.",
+    "description": "Guarda las prendas que te interesan y te esperarán aquí.",
+    "action": "Ver la colección"
+  },
+  "removeItem": "Eliminar {{name}} de favoritos",
+  "notifyMe": "Agotado",
+  "addToBag": "Añadir a la cesta",
+  "suggestions": "También podrías considerar",
+  "allProducts": "Todos los productos"
+}

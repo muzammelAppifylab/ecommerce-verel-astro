@@ -1,0 +1,26 @@
+{
+  "title": "Ønskeliste",
+  "crumbs": {
+    "home": "Forside",
+    "account": "Konto",
+    "wishlist": "Ønskeliste"
+  },
+  "saved_one": "{{count}} styk gemt",
+  "saved_other": "{{count}} styk gemt",
+  "nothingSaved": "Intet gemt endnu",
+  "addAll": "Læg alle på lager i kurven",
+  "added": "Lagt i kurven",
+  "clear": "Ryd listen",
+  "loadError": "Vi kunne ikke hente din ønskeliste.",
+  "tryAgain": "Prøv igen",
+  "empty": {
+    "title": "Din ønskeliste er tom.",
+    "description": "Gem de styk, du overvejer, så venter de her.",
+    "action": "Se kollektionen"
+  },
+  "removeItem": "Fjern {{name}} fra ønskelisten",
+  "notifyMe": "Udsolgt",
+  "addToBag": "Læg i kurven",
+  "suggestions": "Du kunne også overveje",
+  "allProducts": "Alle produkter"
+}

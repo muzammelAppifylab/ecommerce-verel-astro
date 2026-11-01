@@ -1,0 +1,63 @@
+{
+  "title": "À propos",
+  "hero": {
+    "eyebrow": "L’atelier",
+    "title": "Moins, mais mieux.",
+    "body": "VAREL est une marque indépendante installée dans un atelier à Nørrebro, Copenhague. Nous créons des vêtements du quotidien, des chaussures, des sacs et des accessoires en fibres naturelles, en petites séries, avec quelques partenaires au Portugal et en Italie.",
+    "alt": "Intérieur de l’atelier à la lumière du jour, plâtre et bois"
+  },
+  "story": {
+    "title": "Pourquoi nous avons commencé",
+    "p1": "Nous avions passé des années dans de grandes maisons de mode, à voir les collections doubler de taille et vivre deux fois moins longtemps. Les pièces que nous portions vraiment étaient les plus simples, gardées des années et réparées deux fois.",
+    "p2": "VAREL sort donc peu de pièces chaque saison et garde celles qui méritent leur place. Rien n’est conçu pour être remplacé l’année suivante. Si un vêtement s’use à une couture, nous préférons le réparer plutôt que de vous en vendre un autre."
+  },
+  "principles": {
+    "form": {
+      "term": "Forme",
+      "text": "Des lignes nettes, des coupes généreuses, rien de décoratif. Gradées sur de vrais corps, pas sur un seul mannequin cabine."
+    },
+    "texture": {
+      "term": "Matière",
+      "text": "Laine de Biella, coton et lin du Portugal, cuir tanné végétal de Toscane."
+    },
+    "time": {
+      "term": "Temps",
+      "text": "Quatre coloris par saison, reconduits. Tout ce qui vient d’une saison passée s’accorde encore avec celle-ci."
+    },
+    "repair": {
+      "term": "Réparation",
+      "text": "Notre atelier de réparation à Copenhague répare environ quatre cents vêtements par an. Les réparations sont gratuites les deux premières années."
+    }
+  },
+  "figures": {
+    "founded": {
+      "figure": "2019",
+      "caption": "Première collection, onze pièces, une filature"
+    },
+    "workshops": {
+      "figure": "6",
+      "caption": "Ateliers partenaires au Portugal et en Italie"
+    },
+    "fibres": {
+      "figure": "92 %",
+      "caption": "Fibres naturelles ou recyclées dans tout le catalogue"
+    },
+    "repairs": {
+      "figure": "400",
+      "caption": "Vêtements réparés chaque année à Copenhague"
+    }
+  },
+  "made": {
+    "alt": "Atelier de filature et ses machines à la lumière du jour",
+    "eyebrow": "Où tout est fabriqué",
+    "title": "Six ateliers, nommés",
+    "body": "Maille et jersey à Porto. Laine tissée à Biella et coupée à Guimarães. Maroquinerie en Toscane. Nous rendons visite à chaque partenaire au moins deux fois par an, et nous publions leurs noms.",
+    "link": "Comment nous choisissons une filature"
+  },
+  "visit": {
+    "title": "Passez à l’atelier, ou écrivez-nous",
+    "body": "L’atelier de Nørrebro est ouvert du jeudi au samedi pour les essayages, les réparations et le retrait des commandes. Pour tout le reste, un e-mail suffit.",
+    "contact": "Contact",
+    "shop": "Découvrir la collection"
+  }
+}

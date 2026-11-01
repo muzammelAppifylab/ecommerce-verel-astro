@@ -1,0 +1,161 @@
+{
+  "title": "Paiement",
+  "steps": {
+    "label": "Étapes de commande",
+    "information": "Informations",
+    "shipping": "Livraison",
+    "payment": "Paiement"
+  },
+  "loadError": "Nous n’avons pas pu charger votre panier.",
+  "tryAgain": "Réessayer",
+  "contact": "Contact",
+  "email": "E-mail",
+  "phone": "Téléphone",
+  "phoneOptional": "Téléphone (facultatif)",
+  "shippingAddress": "Adresse de livraison",
+  "savedAddress": "Adresse enregistrée",
+  "chooseSaved": "Choisir une adresse enregistrée",
+  "shippingMethod": "Mode de livraison",
+  "shippingMethodZone": "Mode de livraison — {{zone}}",
+  "digitalOnly": "Votre panier ne contient que des produits numériques. Rien n’est expédié — un lien de téléchargement accompagne votre confirmation.",
+  "loadingMethods": "Chargement des modes de livraison",
+  "free": "Offert",
+  "payment": "Paiement",
+  "loadingSecure": "Chargement du paiement sécurisé",
+  "loadingOptions": "Chargement des moyens de paiement",
+  "paymentMethod": "Moyen de paiement",
+  "methods": {
+    "card": "Carte"
+  },
+  "card": {
+    "name": "Nom sur la carte",
+    "number": "Numéro de carte",
+    "expiry": "Expiration",
+    "cvc": "CVC"
+  },
+  "billingSame": "L’adresse de facturation est identique à l’adresse de livraison",
+  "billingAddress": "Adresse de facturation",
+  "note": {
+    "title": "Note de commande",
+    "placeholder": "Instructions de livraison, message cadeau, tout ce que nous devrions savoir"
+  },
+  "removeCode": "Retirer le code",
+  "pay": "Payer {{total}}",
+  "placeOrder": "Passer la commande",
+  "methodDigital": "numérique",
+  "errors": {
+    "email": "Saisissez une adresse e-mail valide",
+    "phone": "Saisissez un numéro de téléphone pour la livraison",
+    "method": "Choisissez un mode de livraison",
+    "noteLength": "Limitez votre note à {{max}} caractères",
+    "terms": "Acceptez les conditions pour continuer",
+    "payByCard": "Payez par carte pour finaliser cette commande.",
+    "paymentLoading": "Le formulaire de paiement est encore en cours de chargement. Réessayez dans un instant",
+    "paymentGone": "Le formulaire de paiement n’est plus disponible. Réessayez",
+    "checkPayment": "Vérifiez vos informations de paiement",
+    "paymentFailed": "Votre paiement n’a pas abouti. Réessayez ou utilisez un autre moyen",
+    "paymentLoadDetail": "Le formulaire de paiement n’a pas pu se charger : {{message}}",
+    "paymentLoad": "Le formulaire de paiement n’a pas pu se charger. Actualisez la page pour réessayer",
+    "cardName": "Saisissez le nom figurant sur la carte",
+    "cardNumber": "Saisissez votre numéro de carte",
+    "cardCheck": "Vérifiez le numéro de carte",
+    "expiry": "Saisissez la date d’expiration",
+    "expiryPast": "Utilisez une carte non expirée (MM/AA)",
+    "cvc": "Saisissez le code de sécurité à 3 ou 4 chiffres",
+    "name": "Saisissez le nom complet",
+    "country": "Choisissez un pays où nous livrons",
+    "line1": "Saisissez l’adresse",
+    "city": "Saisissez la ville",
+    "summary_one": "{{count}} champ est à corriger",
+    "summary_other": "{{count}} champs sont à corriger",
+    "line1Letters": "Saisissez le nom de la rue en plus du numéro",
+    "line1Number": "Ajoutez le numéro de rue",
+    "zipFormat": "Vérifiez le format, par exemple {{example}}",
+    "zipRequired": {
+      "zip": "Saisissez le code ZIP",
+      "postal": "Saisissez le code postal",
+      "postcode": "Saisissez le code postal",
+      "eircode": "Saisissez l’Eircode"
+    },
+    "region": {
+      "state": "Choisissez un État",
+      "province": "Choisissez une province",
+      "county": "Choisissez un comté",
+      "stateTerritory": "Choisissez un État ou territoire",
+      "prefecture": "Choisissez une préfecture"
+    },
+    "summary_many": "{{count}} champs sont à corriger"
+  },
+  "address": {
+    "fullName": "Nom complet",
+    "country": "Pays",
+    "line1": "Numéro et rue",
+    "city": "Ville",
+    "loadingCountries": "Chargement des pays",
+    "line2": "Appartement, étage, bâtiment (facultatif)",
+    "optional": "{{label}} (facultatif)",
+    "choose": "Choisir",
+    "zipLabel": {
+      "zip": "Code ZIP",
+      "postal": "Code postal",
+      "postcode": "Code postal",
+      "eircode": "Eircode"
+    },
+    "region": {
+      "state": "État",
+      "province": "Province",
+      "county": "Comté",
+      "stateTerritory": "État/territoire",
+      "prefecture": "Préfecture"
+    }
+  },
+  "signIn": {
+    "title": "Connectez-vous pour commander",
+    "body": "Les commandes se passent depuis un compte VAREL. Connectez-vous ou créez un compte en une minute, votre panier vous suit.",
+    "signIn": "Se connecter",
+    "create": "Créer un compte",
+    "back": "Retour au panier"
+  },
+  "summary": {
+    "title": "Récapitulatif de commande",
+    "show": "Afficher le récapitulatif",
+    "hide": "Masquer le récapitulatif",
+    "note_one": "{{tax}} calculée selon votre pays de livraison lors de la commande. {{count}} jour pour retourner les pièces non portées. Les produits numériques ne sont pas remboursables une fois téléchargés.",
+    "note_other": "{{tax}} calculée selon votre pays de livraison lors de la commande. {{count}} jours pour retourner les pièces non portées. Les produits numériques ne sont pas remboursables une fois téléchargés.",
+    "note_many": "{{tax}} calculée selon votre pays de livraison lors de la commande. {{count}} jours pour retourner les pièces non portées. Les produits numériques ne sont pas remboursables une fois téléchargés."
+  },
+  "qty": "Qté {{qty}}",
+  "discount": {
+    "label": "Code de réduction",
+    "apply": "Appliquer",
+    "enter": "Saisissez un code de réduction",
+    "applied": "{{code}} appliqué.",
+    "appliedReplaces": "{{code}} appliqué. Il remplace {{previous}}.",
+    "saved": "{{code}} enregistré dans votre panier.",
+    "savedReplaces": "{{code}} enregistré dans votre panier. Il remplace {{previous}}.",
+    "statusApplied": "{{code}} appliqué",
+    "statusSaved": "{{code}} enregistré · pas encore appliqué",
+    "fallback": "Réduction",
+    "remove": "Retirer",
+    "removeAria": "Retirer le code {{code}}",
+    "lineFree_one": "{{count}} offert · {{amount}}",
+    "lineFree_other": "{{count}} offerts · {{amount}}",
+    "lineFree_many": "{{count}} offerts · {{amount}}",
+    "toggle": "Vous avez un code de réduction ?"
+  },
+  "totals": {
+    "subtotal": "Sous-total",
+    "shipping": "Livraison",
+    "shippingWith": "Livraison · {{method}}",
+    "taxRate": "{{name}} ({{rate}} %)",
+    "includes": "Dont {{tax}}",
+    "total": "Total",
+    "freeWith": "Offerte · {{name}}",
+    "was": "Avant ",
+    "now": "Maintenant ",
+    "youSave": "Vous économisez {{amount}}"
+  },
+  "signInPrompt": "Vous avez un compte ?",
+  "signInLink": "Connectez-vous pour payer plus vite",
+  "trust": "Paiement sécurisé et chiffré · {{count}} jours pour retourner les pièces non portées"
+}

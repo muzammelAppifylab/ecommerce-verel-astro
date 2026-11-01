@@ -1,0 +1,31 @@
+{
+  "title": "Tu cesta",
+  "crumbs": {
+    "home": "Inicio",
+    "bag": "Cesta"
+  },
+  "count_one": "{{count}} artículo",
+  "count_other": "{{count}} artículos",
+  "count_many": "{{count}} artículos",
+  "loadError": "No hemos podido cargar tu cesta.",
+  "tryAgain": "Reintentar",
+  "empty": {
+    "title": "Tu cesta está vacía.",
+    "description": "Aún no hay nada. La selección de otoño es un buen punto de partida."
+  },
+  "continueShopping": "Seguir comprando",
+  "columns": {
+    "item": "Artículo",
+    "quantity": "Cantidad",
+    "total": "Total"
+  },
+  "toFree": "Te faltan {{amount}} para el envío gratuito",
+  "freeApplied": "Envío gratuito aplicado",
+  "related": "Combina bien con",
+  "summaryLabel": "Resumen del pedido",
+  "summary": "Resumen",
+  "checkout": "Finalizar compra",
+  "taxNote": "{{tax}} calculado según tu país de envío al finalizar la compra. El envío se elige al finalizar la compra.",
+  "skuEach": "Ref. {{sku}} · {{price}} por unidad",
+  "remove": "Eliminar {{name}}"
+}

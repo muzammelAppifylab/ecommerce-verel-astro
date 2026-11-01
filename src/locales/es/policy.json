@@ -1,0 +1,53 @@
+{
+  "home": "Inicio",
+  "sections": "Secciones",
+  "onThisPage": "En esta página",
+  "lastUpdated": "Última actualización: {{date}}",
+  "contactStudio": "Contactar con el estudio",
+  "related": {
+    "terms": "Términos y condiciones",
+    "privacy": "Política de privacidad",
+    "returns": "Devoluciones y reembolsos"
+  },
+  "terms": {
+    "title": "Términos y condiciones",
+    "company": "VAREL ApS, CVR 00 00 00 00",
+    "lead": "Estas condiciones se aplican a las compras realizadas en varel.studio. Al hacer un pedido, las aceptas. Nada de lo aquí dispuesto limita los derechos que tienes como consumidor conforme a la legislación danesa y de la UE.",
+    "orders": {
+      "title": "Pedidos",
+      "p1": "Un pedido es una oferta de compra. El contrato se formaliza cuando enviamos el correo de confirmación. Podemos rechazar un pedido si una pieza está agotada, si el precio se publicó por error o si no podemos enviar a tu dirección.",
+      "p2": "Las existencias se muestran por variante. Cuando una talla aparece como agotada, no está disponible en ese color hasta que se reponga."
+    },
+    "prices": {
+      "title": "Precios e impuestos",
+      "p1": "Los precios se muestran en dólares estadounidenses, sin impuestos. El IVA o el impuesto sobre las ventas se calcula al finalizar la compra según tu país de envío y se muestra antes de pagar. Los pedidos fuera de la UE pueden estar sujetos a aranceles de importación a su llegada, que corren de tu cuenta.",
+      "p2": "Algunos códigos de descuento tienen un gasto mínimo, una fecha de fin o un límite por cliente. Si un código no se puede usar, te lo explicamos al finalizar la compra. Se aplica un código por pedido y los códigos no son acumulables."
+    },
+    "shipping": {
+      "title": "Envíos",
+      "p1": "Enviamos a todo el mundo desde Copenhague. Las tarifas dependen de tu zona y del método que elijas, y se muestran al finalizar la compra. El envío estándar es gratuito en Dinamarca y la UE, y todos los pedidos superiores a $150 se envían gratis, vayan donde vayan. La recogida en el estudio de Nørrebro es gratuita, de jueves a sábado.",
+      "p2": "Los plazos de entrega son estimaciones. El riesgo se transmite a ti en el momento de la entrega."
+    },
+    "digital": {
+      "title": "Productos digitales",
+      "p1": "Los artículos digitales no implican ningún envío. Recibirás un enlace de descarga con tu confirmación, que también estará disponible en tu cuenta. Las descargas son para uso personal y no pueden revenderse ni redistribuirse. Al descargar, aceptas que el derecho de desistimiento de catorce días deja de aplicarse."
+    },
+    "cancellation": {
+      "title": "Desistimiento",
+      "p1": "Según la legislación de la UE, dispones de catorce días desde la entrega para desistir, y nosotros lo ampliamos a treinta días para piezas sin usar y con las etiquetas puestas. Las condiciones completas, incluido cómo se realizan los reembolsos, están en la página de devoluciones.",
+      "link": "Devoluciones y reembolsos"
+    },
+    "defects": {
+      "title": "Defectos y reparaciones",
+      "p1": "Dispones de una garantía legal de dos años frente a defectos de fabricación. Pasado ese plazo, nuestro estudio de Copenhague repara cualquier pieza de VAREL a precio de coste. La decoloración natural, las bolitas y la pátina son características de los materiales, no defectos."
+    },
+    "accounts": {
+      "title": "Cuentas",
+      "p1": "No compartas tu contraseña y avísanos si crees que otra persona la conoce. Puedes cerrar tu cuenta en cualquier momento; conservamos los registros de pedidos durante cinco años, tal como exige la normativa contable."
+    },
+    "law": {
+      "title": "Legislación y conflictos",
+      "p1": "Se aplica la legislación danesa. Escribe primero al estudio; la mayoría de las cuestiones se resuelven con un solo correo. Si no es así, puedes acudir a la Junta Danesa de Reclamaciones de Consumo (Forbrugerklagenævnet) o a la plataforma de resolución de litigios en línea de la UE."
+    }
+  }
+}

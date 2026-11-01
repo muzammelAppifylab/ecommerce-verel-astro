@@ -1,0 +1,10 @@
+{
+  "home": "Accueil",
+  "notFound": "Page introuvable",
+  "loadError": "Cette page n’a pas pu être chargée. Vérifiez votre connexion et réessayez.",
+  "tryAgain": "Réessayer",
+  "lastUpdated": "Dernière mise à jour le {{date}}",
+  "sections": "Sections",
+  "onThisPage": "Sur cette page",
+  "loading": "Chargement de la page"
+}

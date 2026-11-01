@@ -1,0 +1,95 @@
+{
+  "announcement": {
+    "fallback": "Free shipping on orders over $150"
+  },
+  "skipLink": "Skip to content",
+  "header": {
+    "departments": "Departments",
+    "accountAndBag": "Account and bag",
+    "openMenu": "Open menu",
+    "search": "Search",
+    "account": "Account",
+    "wishlist": "Wishlist ({{count}})",
+    "bag": "Bag ({{count}})",
+    "bagShort": "Bag ({{count}})",
+    "openBag_one": "Open bag, {{count}} items",
+    "openBag_other": "Open bag, {{count}} items"
+  },
+  "mobileMenu": {
+    "title": "Menu",
+    "description": "Site navigation",
+    "allProducts": "All products",
+    "signIn": "Sign in"
+  },
+  "menu": {
+    "labels": {
+      "women": "Women",
+      "men": "Men",
+      "shoes": "Shoes",
+      "bags": "Bags",
+      "journal": "Journal",
+      "about": "About",
+      "contact": "Contact",
+      "allProducts": "All products",
+      "bag": "Bag",
+      "signIn": "Sign in",
+      "orders": "Orders",
+      "returns": "Returns",
+      "menu": "Menu",
+      "shop": "Shop",
+      "account": "Account"
+    }
+  },
+  "footer": {
+    "newsletterTitle": "A letter from the studio, twice a month",
+    "newsletterBody": "New pieces, restocks and notes from the studio. Nothing else.",
+    "studio": "Studio",
+    "addressLine1": "112 Studio, Nørrebro",
+    "addressLine2": "0000 Copenhagen, Denmark",
+    "newTab": "(opens in a new tab)",
+    "copyright": "© {{year}} VAREL. Designed in Copenhagen, made in Europe. Less, but better.",
+    "vat": "VAT {{number}}",
+    "terms": "Terms & conditions",
+    "privacy": "Privacy policy"
+  },
+  "bag": {
+    "title": "Your bag ({{count}})",
+    "description": "Items in your bag",
+    "emptyTitle": "Your bag is empty.",
+    "emptyBody": "Nothing in it yet. The autumn edit is a good place to start.",
+    "continueShopping": "Continue shopping",
+    "freeShippingWith": "Free shipping · {{name}}",
+    "toFree": "{{amount}} away from free shipping",
+    "freeApplied": "Free shipping applied",
+    "digital": "Digital",
+    "remove": "Remove",
+    "removeItem": "Remove {{name}}",
+    "codeSaved": "{{code}} saved · not applied yet",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "checkout": "Checkout",
+    "viewBag": "View bag",
+    "taxesNote": "Shipping and taxes calculated at checkout."
+  },
+  "checkout": {
+    "backToBag": "← Back to bag",
+    "secure": "Secure checkout"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "heading": "Something went wrong.",
+    "body": "This page did not load. Try again, or start from the collection.",
+    "tryAgain": "Try again",
+    "shop": "Shop the collection"
+  },
+  "ui": {
+    "breadcrumb": "Breadcrumb",
+    "decrease": "Decrease",
+    "increase": "Increase",
+    "decreaseOf": "Decrease quantity of {{name}}",
+    "increaseOf": "Increase quantity of {{name}}",
+    "removeTag": "Remove {{name}}",
+    "home": "VAREL home",
+    "photoCredit": "Photo by {{name}} on Unsplash"
+  }
+}

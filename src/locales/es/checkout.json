@@ -1,0 +1,161 @@
+{
+  "title": "Finalizar compra",
+  "steps": {
+    "label": "Pasos de la compra",
+    "information": "Datos",
+    "shipping": "Envío",
+    "payment": "Pago"
+  },
+  "loadError": "No hemos podido cargar tu cesta.",
+  "tryAgain": "Reintentar",
+  "contact": "Contacto",
+  "email": "Correo electrónico",
+  "phone": "Teléfono",
+  "phoneOptional": "Teléfono (opcional)",
+  "shippingAddress": "Dirección de envío",
+  "savedAddress": "Dirección guardada",
+  "chooseSaved": "Elige una dirección guardada",
+  "shippingMethod": "Método de envío",
+  "shippingMethodZone": "Método de envío — {{zone}}",
+  "digitalOnly": "Tu cesta solo contiene productos digitales. No se envía nada: recibirás un enlace de descarga con tu confirmación.",
+  "loadingMethods": "Cargando métodos de envío",
+  "free": "Gratis",
+  "payment": "Pago",
+  "loadingSecure": "Cargando pago seguro",
+  "loadingOptions": "Cargando opciones de pago",
+  "paymentMethod": "Método de pago",
+  "methods": {
+    "card": "Tarjeta"
+  },
+  "card": {
+    "name": "Nombre en la tarjeta",
+    "number": "Número de tarjeta",
+    "expiry": "Caducidad",
+    "cvc": "CVC"
+  },
+  "billingSame": "La dirección de facturación es la misma que la de envío",
+  "billingAddress": "Dirección de facturación",
+  "note": {
+    "title": "Nota del pedido",
+    "placeholder": "Instrucciones de entrega, un mensaje de regalo, cualquier cosa que debamos saber"
+  },
+  "removeCode": "Quitar código",
+  "pay": "Pagar {{total}}",
+  "placeOrder": "Realizar pedido",
+  "methodDigital": "digital",
+  "errors": {
+    "email": "Introduce un correo electrónico válido",
+    "phone": "Introduce un teléfono para la entrega",
+    "method": "Elige un método de envío",
+    "noteLength": "Mantén tu nota por debajo de {{max}} caracteres",
+    "terms": "Acepta las condiciones para continuar",
+    "payByCard": "Paga con tarjeta para completar este pedido.",
+    "paymentLoading": "El formulario de pago aún se está cargando. Inténtalo de nuevo en un momento",
+    "paymentGone": "El formulario de pago ya no está disponible. Inténtalo de nuevo",
+    "checkPayment": "Revisa tus datos de pago",
+    "paymentFailed": "Tu pago no se ha completado. Inténtalo de nuevo o usa otro método",
+    "paymentLoadDetail": "No se ha podido cargar el formulario de pago: {{message}}",
+    "paymentLoad": "No se ha podido cargar el formulario de pago. Recarga la página para intentarlo de nuevo",
+    "cardName": "Introduce el nombre de la tarjeta",
+    "cardNumber": "Introduce el número de tu tarjeta",
+    "cardCheck": "Revisa el número de tarjeta",
+    "expiry": "Introduce la fecha de caducidad",
+    "expiryPast": "Usa una tarjeta que no haya caducado (MM/AA)",
+    "cvc": "Introduce el código de seguridad de 3 o 4 dígitos",
+    "name": "Introduce el nombre completo",
+    "country": "Elige un país al que enviamos",
+    "line1": "Introduce la dirección",
+    "city": "Introduce la ciudad",
+    "summary_one": "{{count}} campo necesita revisión",
+    "summary_other": "{{count}} campos necesitan revisión",
+    "line1Letters": "Introduce el nombre de la calle además del número",
+    "line1Number": "Añade el número de la calle",
+    "zipFormat": "Revisa el formato, por ejemplo {{example}}",
+    "zipRequired": {
+      "zip": "Introduce el código ZIP",
+      "postal": "Introduce el código postal",
+      "postcode": "Introduce el código postal",
+      "eircode": "Introduce el Eircode"
+    },
+    "region": {
+      "state": "Elige un estado",
+      "province": "Elige una provincia",
+      "county": "Elige un condado",
+      "stateTerritory": "Elige un estado o territorio",
+      "prefecture": "Elige una prefectura"
+    },
+    "summary_many": "{{count}} campos necesitan revisión"
+  },
+  "address": {
+    "fullName": "Nombre completo",
+    "country": "País",
+    "line1": "Calle y número",
+    "city": "Ciudad",
+    "loadingCountries": "Cargando países",
+    "line2": "Piso, puerta, etc. (opcional)",
+    "optional": "{{label}} (opcional)",
+    "choose": "Elegir",
+    "zipLabel": {
+      "zip": "Código ZIP",
+      "postal": "Código postal",
+      "postcode": "Código postal",
+      "eircode": "Eircode"
+    },
+    "region": {
+      "state": "Estado",
+      "province": "Provincia",
+      "county": "Condado",
+      "stateTerritory": "Estado/territorio",
+      "prefecture": "Prefectura"
+    }
+  },
+  "signIn": {
+    "title": "Inicia sesión para finalizar la compra",
+    "body": "Los pedidos se realizan desde una cuenta VAREL. Inicia sesión o crea una cuenta en un minuto, y tu cesta irá contigo.",
+    "signIn": "Iniciar sesión",
+    "create": "Crear una cuenta",
+    "back": "Volver a tu cesta"
+  },
+  "summary": {
+    "title": "Resumen del pedido",
+    "show": "Mostrar resumen del pedido",
+    "hide": "Ocultar resumen del pedido",
+    "note_one": "{{tax}} calculado según tu país de envío al finalizar la compra. {{count}} día para devolver prendas sin usar. Los productos digitales no son reembolsables una vez descargados.",
+    "note_other": "{{tax}} calculado según tu país de envío al finalizar la compra. {{count}} días para devolver prendas sin usar. Los productos digitales no son reembolsables una vez descargados.",
+    "note_many": "{{tax}} calculado según tu país de envío al finalizar la compra. {{count}} días para devolver prendas sin usar. Los productos digitales no son reembolsables una vez descargados."
+  },
+  "qty": "Cant. {{qty}}",
+  "discount": {
+    "label": "Código de descuento",
+    "apply": "Aplicar",
+    "enter": "Introduce un código de descuento",
+    "applied": "{{code}} aplicado.",
+    "appliedReplaces": "{{code}} aplicado. Sustituye a {{previous}}.",
+    "saved": "{{code}} guardado en tu cesta.",
+    "savedReplaces": "{{code}} guardado en tu cesta. Sustituye a {{previous}}.",
+    "statusApplied": "{{code}} aplicado",
+    "statusSaved": "{{code}} guardado · aún no aplicado",
+    "fallback": "Descuento",
+    "remove": "Quitar",
+    "removeAria": "Quitar el código {{code}}",
+    "lineFree_one": "{{count}} gratis · {{amount}}",
+    "lineFree_other": "{{count}} gratis · {{amount}}",
+    "lineFree_many": "{{count}} gratis · {{amount}}",
+    "toggle": "¿Tienes un código de descuento?"
+  },
+  "totals": {
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "shippingWith": "Envío · {{method}}",
+    "taxRate": "{{name}} ({{rate}} %)",
+    "includes": "Incluye {{tax}}",
+    "total": "Total",
+    "freeWith": "Gratis · {{name}}",
+    "was": "Antes ",
+    "now": "Ahora ",
+    "youSave": "Ahorras {{amount}}"
+  },
+  "signInPrompt": "¿Tienes cuenta?",
+  "signInLink": "Inicia sesión para pagar más rápido",
+  "trust": "Pago seguro y cifrado · {{count}} días de devolución para prendas sin usar"
+}

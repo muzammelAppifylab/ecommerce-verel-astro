@@ -1,0 +1,186 @@
+{
+  "title": "Account",
+  "crumbs": {
+    "home": "Home",
+    "account": "Account"
+  },
+  "loadError": "We could not load your account",
+  "tryAgain": "Try again",
+  "since": "Customer since {{date}}",
+  "signOut": "Sign out",
+  "signingOut": "Signing out…",
+  "allOrders": "All orders",
+  "noOrders": {
+    "title": "No orders yet",
+    "description": "When you place an order it will appear here, with tracking as soon as it ships.",
+    "action": "All products"
+  },
+  "items_one": "{{count}} item",
+  "items_other": "{{count}} items",
+  "download": "Download",
+  "noDownloads": "Digital pieces you buy will be ready to download here.",
+  "nav": {
+    "label": "Account",
+    "overview": "Overview",
+    "orders": "Orders",
+    "wishlist": "Wishlist",
+    "details": "Personal details",
+    "addresses": "Addresses",
+    "downloads": "Downloads",
+    "privacy": "Privacy"
+  },
+  "addresses": {
+    "title": "Saved addresses",
+    "add": "Add address",
+    "empty": "No saved addresses yet. Add one to check out faster.",
+    "address": "Address",
+    "default": "Default",
+    "edit": "Edit",
+    "editAria": "Edit {{label}}",
+    "makeDefault": "Make default",
+    "makeDefaultAria": "Make {{label}} the default",
+    "remove": "Remove",
+    "removeAria": "Remove {{label}}",
+    "addressLower": "address",
+    "removeTitle": "Remove address",
+    "removing": "Removing…",
+    "saving": "Saving…",
+    "makeDefaultBody": "We will use this address first at checkout: {{address}}.",
+    "description": "Saved for a faster checkout. Your default address is filled in first."
+  },
+  "dialog": {
+    "edit": "Edit address",
+    "add": "Add address",
+    "cancel": "Cancel",
+    "saving": "Saving…",
+    "save": "Save address",
+    "label": "Label",
+    "labelPlaceholder": "Home, Studio…",
+    "fullName": "Full name",
+    "line1": "Address",
+    "line2": "Apartment, floor (optional)",
+    "zip": "Postcode",
+    "city": "City",
+    "country": "Country",
+    "phone": "Phone",
+    "primary": "Use as default address",
+    "errors": {
+      "name": "Enter the name for delivery",
+      "line1": "Enter a street address",
+      "zip": "Enter a postcode",
+      "city": "Enter a city",
+      "country": "Choose a country"
+    }
+  },
+  "confirm": {
+    "cancel": "Cancel"
+  },
+  "profile": {
+    "title": "Profile",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "saving": "Saving…",
+    "saved": "Saved",
+    "save": "Save changes",
+    "errors": {
+      "firstName": "Enter your first name",
+      "lastName": "Enter your last name",
+      "email": "Enter a valid email address"
+    },
+    "description": "Used on your orders, receipts and delivery updates."
+  },
+  "privacy": {
+    "title": "Privacy",
+    "data": {
+      "title": "Your data",
+      "body": "Download everything we hold about you: profile, addresses, orders, reviews, wishlist and newsletter status, as a JSON file.",
+      "downloading": "Your data is downloading",
+      "preparing": "Preparing…",
+      "action": "Download data"
+    },
+    "cookies": {
+      "title": "Cookies",
+      "body": "Choose whether we may count your visits. Necessary cookies keep your bag and sign-in working.",
+      "action": "Cookie settings"
+    },
+    "delete": {
+      "title": "Delete account",
+      "body": "Closes your account and erases your profile, addresses and wishlist. Orders stay in our books for accounting, without your contact details. This cannot be undone.",
+      "action": "Delete account",
+      "description": "Confirm with your password to delete your account",
+      "cancel": "Cancel",
+      "deleting": "Deleting…",
+      "confirm": "Delete my account",
+      "warning": "We will email you a confirmation, then sign you out. Your orders stay on record for accounting with your email hidden. This cannot be undone.",
+      "password": "Password",
+      "enterPassword": "Enter your password",
+      "deleted": "Your account has been deleted"
+    },
+    "description": "Download your data, choose cookies, or close your account."
+  },
+  "greeting": "Hello, {{name}}",
+  "latest": {
+    "label": "Latest order",
+    "meta": "Placed {{date}} · {{items}} · {{total}}",
+    "progress": "Order progress",
+    "view": "View order",
+    "track": "Track with {{carrier}}",
+    "return": "Start a return",
+    "canCancel": "You can still cancel this order until it is packed."
+  },
+  "summary": {
+    "title": "Your account",
+    "defaultAddress": "Default: {{address}}",
+    "noAddress": "No saved addresses yet",
+    "newsletter": "Newsletter",
+    "subscribed": "Subscribed",
+    "notSubscribed": "Not subscribed",
+    "saved_one": "{{count}} saved piece",
+    "saved_other": "{{count}} saved pieces",
+    "noSaved": "Nothing saved yet",
+    "files_one": "{{count}} file ready to download",
+    "files_other": "{{count}} files ready to download",
+    "password": "Password",
+    "passwordHint": "Change your password"
+  },
+  "earlier": "Earlier orders",
+  "help": {
+    "title": "Need help?",
+    "body": "The studio answers within one business day.",
+    "contact": "Contact the studio",
+    "returns": "Start a return",
+    "terms": "Terms of sale"
+  },
+  "details": {
+    "description": "Your name and contact details, password and newsletter."
+  },
+  "downloadsDescription": "Digital pieces from your paid orders, ready to download again at any time.",
+  "password": {
+    "title": "Password",
+    "description": "Change the password you sign in with.",
+    "current": "Current password",
+    "new": "New password",
+    "confirm": "Confirm new password",
+    "rule": "At least 8 characters.",
+    "show": "Show passwords",
+    "save": "Change password",
+    "saving": "Changing…",
+    "changed": "Your password has been changed",
+    "forgot": "Forgot your password?",
+    "errors": {
+      "current": "Enter your current password",
+      "length": "Use at least 8 characters",
+      "match": "The passwords do not match"
+    }
+  },
+  "preferences": {
+    "title": "Communication",
+    "description": "Choose what we may send you. Order and delivery emails always arrive.",
+    "newsletter": "Newsletter",
+    "newsletterBody": "New collections, journal stories and studio events, about once a month.",
+    "on": "You are subscribed to the newsletter",
+    "off": "You are unsubscribed from the newsletter"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "home": "Forside",
+  "title": "Returnering og refusion",
+  "intro": "30 dage til at returnere ubrugte varer med mærkerne på. Returnering inden for Danmark og EU er gratis; andre steder betaler du selv returportoen.",
+  "lookup": {
+    "label": "Start en returnering",
+    "placeholder": "Ordrenummer",
+    "button": "Slå op",
+    "note": "Dit ordrenummer begynder med VRL- og står i din ordrebekræftelse",
+    "enterNumber": "Indtast ordrenummeret fra din ordrebekræftelse",
+    "notFound": "Vi kan ikke finde det ordrenummer"
+  },
+  "steps": {
+    "label": "Sådan fungerer returnering",
+    "step": "Trin {{n}}",
+    "s1Title": "Slå den op",
+    "s1Body": "Indtast dit ordrenummer, eller åbn ordren fra din konto.",
+    "s2Title": "Vælg varerne",
+    "s2Body": "Vælg, hvad der skal retur, og fortæl os hvorfor med én linje.",
+    "s3Title": "Send den",
+    "s3Body": "Udskriv den forudbetalte label. Returnering i EU er gratis; andre steder betaler du selv portoen.",
+    "s4Title": "Få pengene retur",
+    "s4Body": "Tre hverdage efter at pakken er modtaget, tilbage til din oprindelige betalingsmetode."
+  },
+  "window": {
+    "title": "Fristen",
+    "p1": "30 dage fra levering. EU-retten giver dig 14; vi forlænger den. Udsalgsvarer markeret som endeligt salg er den eneste undtagelse og kan ikke returneres, medmindre de er defekte."
+  },
+  "condition": {
+    "title": "Stand",
+    "p1": "Ubrugt, uvasket, med mærkerne på og i den originale emballage. Prøv tøjet, som du ville gøre i en butik. Fodtøj bør prøves indendørs — såler med tegn på brug kan ikke modtages."
+  },
+  "refunds": {
+    "title": "Refusion",
+    "methodLabel": "Metode",
+    "method": "Tilbage til det kort eller den wallet, du betalte med. Vi kan ikke refundere andre steder hen.",
+    "timingLabel": "Tidspunkt",
+    "timing": "Inden for tre hverdage efter at pakken er modtaget, derefter din banks egen behandlingstid.",
+    "shippingLabel": "Betalt fragt",
+    "shipping": "Refunderes ikke, medmindre et styk var defekt ved levering, eller vi sendte det forkerte.",
+    "discountsLabel": "Rabatter",
+    "discounts": "Ved en delvis returnering genberegnes rabatten på de varer, du beholder."
+  },
+  "exchanges": {
+    "title": "Ombytning",
+    "p1": "Det letteste er at returnere og bestille igen, da lagerbeholdningen ændrer sig. Hvis den størrelse, du ønsker, er på lager, så skriv med ordrenummeret, så holder vi den til dig i syv dage, mens din returnering er undervejs."
+  },
+  "digital": {
+    "title": "Digitale produkter",
+    "p1": "Kan ikke refunderes, når de er downloadet, da der ikke er noget at sende tilbage. Hvis en fil ikke kan åbnes, så skriv til os, så retter vi den eller refunderer den."
+  },
+  "faults": {
+    "title": "Fejl og reparationer",
+    "p1": "To år på fabrikationsfejl og gratis reparation i den periode. Efter to år reparerer studiet i København stadig enhver VAREL-vare til kostpris. Send først et foto, så fortæller vi, hvad der skal til.",
+    "findOrder": "Find en ordre"
+  },
+  "writeStudio": "Skriv til studiet",
+  "related": {
+    "terms": "Handelsbetingelser",
+    "privacy": "Privatlivspolitik"
+  },
+  "request": {
+    "order": "Ordre {{number}}",
+    "booked": "Din returnering er registreret",
+    "choose": "Vælg, hvad der skal retur",
+    "notYet": "Denne ordre kan ikke returneres endnu",
+    "lookupAnother": "Slå en anden ordre op",
+    "requested_one": "Returnering anmodet for én vare. Den forudbetalte label og vejledningen er på vej til {{email}}.",
+    "requested_other": "Returnering anmodet for {{count}} varer. Den forudbetalte label og vejledningen er på vej til {{email}}.",
+    "packCarrier": "Pak varerne i deres originale emballage, sæt labelen på, og aflever pakken på et vilkårligt {{carrier}}-indleveringssted. Refusionen går tilbage til din oprindelige betalingsmetode inden for tre hverdage efter at pakken er modtaget.",
+    "pack": "Pak varerne i deres originale emballage, sæt labelen på, og aflever pakken på et vilkårligt indleveringssted. Refusionen går tilbage til din oprindelige betalingsmetode inden for tre hverdage efter at pakken er modtaget.",
+    "reference": "Returneringsreference {{id}}",
+    "notEligibleReason": "Denne ordre kan ikke returneres.",
+    "notEligible": "{{reason}} Hvis noget ankom beskadiget eller defekt, så skriv til studiet, så finder vi en løsning.",
+    "allDigital": "Alt i denne ordre er digitalt. Digitale produkter kan ikke refunderes, når de er downloadet — hvis en fil ikke kan åbnes, så skriv til studiet, så retter vi den eller refunderer den.",
+    "estimatedRefund": "Forventet refusion",
+    "submit": "Anmod om returnering",
+    "chooseOne": "Vælg mindst én vare at returnere",
+    "whyOneLine": "Fortæl os hvorfor med én linje",
+    "qty": "Antal {{qty}}",
+    "quantity": "Antal",
+    "reason": "Årsag",
+    "chooseReason": "Vælg en årsag",
+    "reasonPlaceholder": "For stor over skuldrene"
+  }
+}

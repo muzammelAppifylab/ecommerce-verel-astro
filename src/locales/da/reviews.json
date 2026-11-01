@@ -1,0 +1,66 @@
+{
+  "title": "Anmeldelser",
+  "loadError": "Vi kunne ikke indlæse anmeldelserne.",
+  "tryAgain": "Prøv igen",
+  "write": "Skriv en anmeldelse",
+  "eligibility": {
+    "purchase": "Anmeldelser skrives af kunder, der har købt dette styk.",
+    "reviewed": "Tak, du har anmeldt dette styk."
+  },
+  "empty": {
+    "title": "Ingen anmeldelser endnu",
+    "body": "Går du med {{name}}? Fortæl andre, hvordan den sidder, føles og holder."
+  },
+  "count_one": "{{count}} anmeldelse",
+  "count_other": "{{count}} anmeldelser",
+  "sort": {
+    "label": "Sortér anmeldelser",
+    "newest": "Nyeste",
+    "highest": "Højest bedømt",
+    "lowest": "Lavest bedømt"
+  },
+  "pages": {
+    "label": "Sider med anmeldelser",
+    "previous": "Forrige",
+    "next": "Næste",
+    "status": "Side {{page}} af {{pages}}"
+  },
+  "summary": {
+    "first": "Vær den første til at anmelde dette styk.",
+    "rated": "Bedømt {{avg}} ud af 5",
+    "basedOn_one": "Baseret på {{count}} anmeldelse",
+    "basedOn_other": "Baseret på {{count}} anmeldelser"
+  },
+  "stars_one": "{{count}} stjerne",
+  "stars_other": "{{count}} stjerner",
+  "item": {
+    "outOf": "{{rating}} ud af 5",
+    "verified": "Verificeret køb",
+    "reply": "Svar fra VAREL"
+  },
+  "rating": {
+    "label": "Din bedømmelse",
+    "1": "Dårlig",
+    "2": "Nogenlunde",
+    "3": "God",
+    "4": "Meget god",
+    "5": "Fremragende"
+  },
+  "form": {
+    "error": "Din anmeldelse blev ikke sendt. Tjek din forbindelse, og prøv igen.",
+    "chooseRating": "Vælg en bedømmelse",
+    "thanks": "Tak for din anmeldelse",
+    "live": "Den er nu synlig på siden.",
+    "pending": "Vi læser alle anmeldelser, før de bliver synlige. Den kommer som regel inden for en dag eller to.",
+    "close": "Luk",
+    "closeForm": "Luk anmeldelsesformularen",
+    "blocked": "Anmeldelser er åbne for kunder, der har købt dette styk. <signIn>Log ind</signIn> for at skrive en.",
+    "title": "Overskrift",
+    "titlePlaceholder": "Sammenfat med få ord",
+    "body": "Din anmeldelse",
+    "bodyHint": "Pasform, stof, hvordan den holder. Mindst en sætning eller to.",
+    "postingAs": "Skriver som {{name}}",
+    "submit": "Send anmeldelse",
+    "checked": "Anmeldelser gennemgås, før de vises"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Your bag",
+  "crumbs": { "home": "Home", "bag": "Bag" },
+  "count_one": "{{count}} item",
+  "count_other": "{{count}} items",
+  "loadError": "We could not load your bag.",
+  "tryAgain": "Try again",
+  "empty": {
+    "title": "Your bag is empty.",
+    "description": "Nothing in it yet. The autumn edit is a good place to start."
+  },
+  "continueShopping": "Continue shopping",
+  "columns": { "item": "Item", "quantity": "Quantity", "total": "Total" },
+  "toFree": "{{amount}} away from free shipping",
+  "freeApplied": "Free shipping applied",
+  "related": "Wears well with",
+  "summaryLabel": "Order summary",
+  "summary": "Summary",
+  "checkout": "Checkout",
+  "taxNote": "{{tax}} is calculated from your shipping country at checkout. Shipping is chosen at checkout.",
+  "skuEach": "SKU {{sku}} · {{price}} each",
+  "remove": "Remove {{name}}"
+}

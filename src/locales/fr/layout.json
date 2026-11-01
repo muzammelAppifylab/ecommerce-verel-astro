@@ -1,0 +1,96 @@
+{
+  "announcement": {
+    "fallback": "Livraison offerte dès $150 d’achat"
+  },
+  "skipLink": "Aller au contenu",
+  "header": {
+    "departments": "Rayons",
+    "accountAndBag": "Compte et panier",
+    "openMenu": "Ouvrir le menu",
+    "search": "Recherche",
+    "account": "Compte",
+    "wishlist": "Favoris ({{count}})",
+    "bag": "Panier ({{count}})",
+    "bagShort": "Panier ({{count}})",
+    "openBag_one": "Ouvrir le panier, {{count}} article",
+    "openBag_other": "Ouvrir le panier, {{count}} articles",
+    "openBag_many": "Ouvrir le panier, {{count}} articles"
+  },
+  "mobileMenu": {
+    "title": "Menu",
+    "description": "Navigation du site",
+    "allProducts": "Tous les produits",
+    "signIn": "Se connecter"
+  },
+  "menu": {
+    "labels": {
+      "women": "Femme",
+      "men": "Homme",
+      "shoes": "Chaussures",
+      "bags": "Sacs",
+      "journal": "Journal",
+      "about": "À propos",
+      "contact": "Contact",
+      "allProducts": "Tous les produits",
+      "bag": "Panier",
+      "signIn": "Se connecter",
+      "orders": "Commandes",
+      "returns": "Retours",
+      "menu": "Menu",
+      "shop": "Boutique",
+      "account": "Compte"
+    }
+  },
+  "footer": {
+    "newsletterTitle": "Une lettre de l’atelier, deux fois par mois",
+    "newsletterBody": "Nouvelles pièces, réassorts et notes de l’atelier. Rien d’autre.",
+    "studio": "Atelier",
+    "addressLine1": "112 Studio, Nørrebro",
+    "addressLine2": "0000 Copenhague, Danemark",
+    "newTab": "(s’ouvre dans un nouvel onglet)",
+    "copyright": "© {{year}} VAREL. Conçu à Copenhague, fabriqué en Europe. Moins, mais mieux.",
+    "vat": "TVA {{number}}",
+    "terms": "Conditions générales",
+    "privacy": "Politique de confidentialité"
+  },
+  "bag": {
+    "title": "Votre panier ({{count}})",
+    "description": "Articles de votre panier",
+    "emptyTitle": "Votre panier est vide.",
+    "emptyBody": "Rien pour l’instant. La sélection d’automne est un bon point de départ.",
+    "continueShopping": "Continuer mes achats",
+    "freeShippingWith": "Livraison offerte · {{name}}",
+    "toFree": "Plus que {{amount}} pour la livraison offerte",
+    "freeApplied": "Livraison offerte appliquée",
+    "digital": "Numérique",
+    "remove": "Retirer",
+    "removeItem": "Retirer {{name}}",
+    "codeSaved": "{{code}} enregistré · pas encore appliqué",
+    "subtotal": "Sous-total",
+    "shipping": "Livraison",
+    "checkout": "Commander",
+    "viewBag": "Voir le panier",
+    "taxesNote": "Livraison et taxes calculées lors du paiement."
+  },
+  "checkout": {
+    "backToBag": "← Retour au panier",
+    "secure": "Paiement sécurisé"
+  },
+  "error": {
+    "title": "Un problème est survenu",
+    "heading": "Un problème est survenu.",
+    "body": "Cette page ne s’est pas chargée. Réessayez, ou repartez de la collection.",
+    "tryAgain": "Réessayer",
+    "shop": "Découvrir la collection"
+  },
+  "ui": {
+    "breadcrumb": "Fil d’Ariane",
+    "decrease": "Diminuer",
+    "increase": "Augmenter",
+    "decreaseOf": "Diminuer la quantité de {{name}}",
+    "increaseOf": "Augmenter la quantité de {{name}}",
+    "removeTag": "Retirer {{name}}",
+    "home": "Accueil VAREL",
+    "photoCredit": "Photo de {{name}} sur Unsplash"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "title": "Siden blev ikke fundet",
+  "heading": "Denne side findes ikke",
+  "body": "Linket kan være gammelt, eller et styk kan være udsolgt og taget ud af sortimentet. Søg efter det, eller start i kollektionen.",
+  "searchPlaceholder": "Søg i butikken",
+  "search": "Søg",
+  "allProducts": "Alle produkter",
+  "home": "Forside",
+  "popular": "Populære sider",
+  "quick": {
+    "women": "Kvinder",
+    "men": "Mænd",
+    "journal": "Journal",
+    "contact": "Kontakt"
+  },
+  "alt": "Tomt hjørne af studiet i dagslys",
+  "picks": "I studiet lige nu"
+}

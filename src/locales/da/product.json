@@ -1,0 +1,93 @@
+{
+  "page": {
+    "title": "Produkt",
+    "notFoundTitle": "Siden blev ikke fundet",
+    "home": "Forside"
+  },
+  "tile": {
+    "addToBag": "Læg i kurv",
+    "addedToBag": "Lagt i kurven",
+    "soldOut": "Udsolgt",
+    "download": "Download",
+    "notifyMe": "Se detaljer",
+    "added": "Tilføjet",
+    "quickAdd": "Læg i kurv",
+    "soldOutDetails": "{{name}} er udsolgt. Se detaljer",
+    "addNameToBag": "Læg {{name}} i kurven",
+    "addToWishlist": "Føj til ønskeliste",
+    "removeFromWishlist": "Fjern fra ønskeliste",
+    "addNameToWishlist": "Føj {{name}} til ønskelisten",
+    "removeNameFromWishlist": "Fjern {{name}} fra ønskelisten",
+    "rated": "Bedømt {{avg}} ud af 5",
+    "promotionInBag": "{{label}} i kurven",
+    "bagWord": "kurv"
+  },
+  "stock": {
+    "inStock": "På lager",
+    "lowLeft_one": "Kun {{count}} tilbage",
+    "lowLeft_other": "Kun {{count}} tilbage",
+    "instantDownload": "Download med det samme",
+    "soldOutSize": "Udsolgt i denne størrelse",
+    "backorder": "Laves på bestilling · sendes om 2–3 uger",
+    "digitalNoShipping": "Digital · ingen fragt"
+  },
+  "buy": {
+    "buyDownload": "Køb og download",
+    "added": "{{name}} er lagt i kurven",
+    "viewBag": "Se kurv",
+    "exclVat": "Ekskl. moms",
+    "colour": "Farve",
+    "colourValue": "Farve — {{value}}",
+    "optionValue": "{{name}} — {{value}}",
+    "size": "Størrelse",
+    "sizeValue": "Størrelse — {{value}}",
+    "sizeSoldOut": "{{size}}, udsolgt",
+    "sizeGuide": "Størrelsesguide",
+    "sku": "Varenr. {{sku}}",
+    "digitalProduct": "Digitalt produkt",
+    "physicalProduct": "Fysisk produkt",
+    "noShipping": "Ingen fragt — leveres som download",
+    "ships": "Sendes inden for 1–2 hverdage fra København",
+    "returns": "Tredive dages returret på ubrugte styk"
+  },
+  "accordion": {
+    "details": "Detaljer",
+    "material": "Materiale og fremstilling",
+    "materialBody": "{{material}}. Lavet i Europa i små serier hos navngivne partnere. {{care}}",
+    "digitalCare": "Leveres som download — intet sendes.",
+    "shipping": "Fragt",
+    "shippingDigital": "Digital levering. Et downloadlink kommer med din ordrebekræftelse og bliver liggende på din konto.",
+    "shippingBody": "Standardfragt er gratis i Danmark og EU, og alle ordrer over $150 sendes gratis. Ekspres og afhentning i studiet på Nørrebro kan vælges ved kassen.",
+    "returns": "Returnering",
+    "returnsBody": "Tredive dages returret på ubrugte styk med mærker på. Digitale produkter refunderes ikke, når de er downloadet."
+  },
+  "gallery": {
+    "images": "Billeder af {{name}}",
+    "view": "{{name}} — visning {{n}}",
+    "choose": "Vælg en visning",
+    "viewImage": "Se billede {{n}}"
+  },
+  "states": {
+    "loading": "Indlæser produkt",
+    "notFoundTitle": "Denne side findes ikke",
+    "notFoundBody": "Linket kan være gammelt, eller et styk kan være udsolgt og taget ud af sortimentet. Søg efter det, eller start i kollektionen.",
+    "allProducts": "Alle produkter",
+    "search": "Søg",
+    "errorTitle": "Dette styk kunne ikke indlæses",
+    "errorBody": "Tjek din forbindelse, og prøv igen. Din kurv er gemt, som den var.",
+    "tryAgain": "Prøv igen"
+  },
+  "related": {
+    "title": "Passer godt til"
+  },
+  "sizeGuide": {
+    "title": "Størrelsesguide",
+    "description": "Kropsmål i centimeter",
+    "body": "Kropsmål i centimeter. Vores styk er skåret med god plads; hvis du er mellem to størrelser, så vælg den mindste.",
+    "size": "Størrelse",
+    "chest": "Bryst",
+    "waist": "Talje",
+    "hip": "Hofte",
+    "fallback": "Dette styk fås i {{sizes}}. Skriv til studiet for præcise mål."
+  }
+}

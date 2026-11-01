@@ -1,0 +1,30 @@
+{
+  "title": "Din varukorg",
+  "crumbs": {
+    "home": "Hem",
+    "bag": "Varukorg"
+  },
+  "count_one": "{{count}} vara",
+  "count_other": "{{count}} varor",
+  "loadError": "Vi kunde inte hämta din varukorg.",
+  "tryAgain": "Försök igen",
+  "empty": {
+    "title": "Din varukorg är tom.",
+    "description": "Här finns inget ännu. Höstens urval är ett bra ställe att börja."
+  },
+  "continueShopping": "Fortsätt handla",
+  "columns": {
+    "item": "Vara",
+    "quantity": "Antal",
+    "total": "Totalt"
+  },
+  "toFree": "{{amount}} kvar till fri frakt",
+  "freeApplied": "Fri frakt tillämpad",
+  "related": "Passar fint med",
+  "summaryLabel": "Ordersammanfattning",
+  "summary": "Sammanfattning",
+  "checkout": "Till kassan",
+  "taxNote": "{{tax}} beräknas utifrån ditt leveransland i kassan. Frakt väljs i kassan.",
+  "skuEach": "Art.nr {{sku}} · {{price}} st",
+  "remove": "Ta bort {{name}}"
+}

@@ -1,0 +1,63 @@
+{
+  "title": "Nosotros",
+  "hero": {
+    "eyebrow": "Sobre el estudio",
+    "title": "Menos, pero mejor.",
+    "body": "VAREL es una marca independiente con estudio en Nørrebro, Copenhague. Hacemos ropa de diario, calzado, bolsos y accesorios en fibras naturales, en series cortas, con unos pocos socios en Portugal e Italia.",
+    "alt": "Interior del estudio con luz natural, yeso y madera"
+  },
+  "story": {
+    "title": "Por qué empezamos",
+    "p1": "Pasamos años trabajando en grandes casas de moda, viendo cómo las colecciones duplicaban su tamaño y reducían su vida a la mitad. Las piezas que de verdad llevábamos eran las más sencillas, guardadas durante años y reparadas dos veces.",
+    "p2": "Por eso VAREL lanza pocas piezas cada temporada y conserva las que se ganan su sitio. Nada está pensado para sustituirse al año siguiente. Si una prenda se desgasta en una costura, preferimos arreglarla a venderte otra."
+  },
+  "principles": {
+    "form": {
+      "term": "Forma",
+      "text": "Líneas limpias, cortes amplios, nada decorativo. Escalado sobre cuerpos reales, no sobre una sola modelo de prueba."
+    },
+    "texture": {
+      "term": "Textura",
+      "text": "Lana de Biella, algodón y lino de Portugal, piel de curtido vegetal de la Toscana."
+    },
+    "time": {
+      "term": "Tiempo",
+      "text": "Cuatro colores por temporada, que se repiten. Todo lo de temporadas anteriores sigue combinando con esta."
+    },
+    "repair": {
+      "term": "Reparación",
+      "text": "Nuestro taller de reparación en Copenhague arregla unas cuatrocientas prendas al año. Las reparaciones son gratuitas durante los dos primeros años."
+    }
+  },
+  "figures": {
+    "founded": {
+      "figure": "2019",
+      "caption": "Primera colección, once piezas, una hilatura"
+    },
+    "workshops": {
+      "figure": "6",
+      "caption": "Talleres asociados en Portugal e Italia"
+    },
+    "fibres": {
+      "figure": "92 %",
+      "caption": "Fibras naturales o recicladas en todo el catálogo"
+    },
+    "repairs": {
+      "figure": "400",
+      "caption": "Prendas reparadas cada año en Copenhague"
+    }
+  },
+  "made": {
+    "alt": "Taller de hilatura con maquinaria a la luz del día",
+    "eyebrow": "Dónde se hace todo",
+    "title": "Seis talleres, con nombre",
+    "body": "Punto y punto jersey en Oporto. Lana tejida en Biella y cortada en Guimarães. Marroquinería en la Toscana. Visitamos a cada socio al menos dos veces al año y publicamos quiénes son.",
+    "link": "Lee cómo elegimos una hilatura"
+  },
+  "visit": {
+    "title": "Visita el estudio o escríbenos",
+    "body": "El estudio de Nørrebro abre de jueves a sábado para pruebas, reparaciones y recogidas. Para todo lo demás, basta un correo.",
+    "contact": "Contacto",
+    "shop": "Ver la colección"
+  }
+}

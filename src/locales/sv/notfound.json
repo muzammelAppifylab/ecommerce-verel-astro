@@ -1,0 +1,18 @@
+{
+  "title": "Sidan hittades inte",
+  "heading": "Den här sidan finns inte",
+  "body": "Länken kan vara gammal, eller så har ett plagg sålt slut och lämnat sortimentet. Sök efter det, eller börja i kollektionen.",
+  "searchPlaceholder": "Sök i butiken",
+  "search": "Sök",
+  "allProducts": "Alla produkter",
+  "home": "Startsida",
+  "popular": "Populära sidor",
+  "quick": {
+    "women": "Dam",
+    "men": "Herr",
+    "journal": "Journal",
+    "contact": "Kontakt"
+  },
+  "alt": "Tomt hörn av studion i dagsljus",
+  "picks": "I studion just nu"
+}

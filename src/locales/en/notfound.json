@@ -1,0 +1,18 @@
+{
+  "title": "Page not found",
+  "heading": "This page is not here",
+  "body": "The link may be old, or a piece may have sold through and left the catalogue. Search for it, or start from the collection.",
+  "searchPlaceholder": "Search the store",
+  "search": "Search",
+  "allProducts": "All products",
+  "home": "Home",
+  "popular": "Popular pages",
+  "quick": {
+    "women": "Women",
+    "men": "Men",
+    "journal": "Journal",
+    "contact": "Contact"
+  },
+  "alt": "Empty studio corner in daylight",
+  "picks": "In the studio now"
+}

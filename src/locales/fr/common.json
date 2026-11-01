@@ -1,0 +1,21 @@
+{
+  "addToBag": "Ajouter au panier",
+  "remove": "Retirer",
+  "save": "Enregistrer",
+  "cancel": "Annuler",
+  "continue": "Continuer",
+  "close": "Fermer",
+  "back": "Retour",
+  "loading": "Chargement",
+  "tryAgain": "Réessayer",
+  "error": "Une erreur est survenue. Veuillez réessayer.",
+  "free": "Offert",
+  "soldOut": "Épuisé",
+  "quantity": "Quantité",
+  "size": "Taille",
+  "colour": "Couleur",
+  "search": "Rechercher",
+  "signIn": "Se connecter",
+  "viewAll": "Tout voir",
+  "apply": "Appliquer"
+}

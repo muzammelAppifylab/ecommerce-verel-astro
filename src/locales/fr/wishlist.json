@@ -1,0 +1,27 @@
+{
+  "title": "Favoris",
+  "crumbs": {
+    "home": "Accueil",
+    "account": "Compte",
+    "wishlist": "Favoris"
+  },
+  "saved_one": "{{count}} pièce enregistrée",
+  "saved_other": "{{count}} pièces enregistrées",
+  "saved_many": "{{count}} pièces enregistrées",
+  "nothingSaved": "Rien d’enregistré pour l’instant",
+  "addAll": "Ajouter tout ce qui est en stock",
+  "added": "Ajouté au panier",
+  "clear": "Vider la liste",
+  "loadError": "Nous n’avons pas pu charger vos favoris.",
+  "tryAgain": "Réessayer",
+  "empty": {
+    "title": "Vos favoris sont vides.",
+    "description": "Enregistrez les pièces qui vous intéressent, elles vous attendront ici.",
+    "action": "Découvrir la collection"
+  },
+  "removeItem": "Retirer {{name}} des favoris",
+  "notifyMe": "Épuisé",
+  "addToBag": "Ajouter au panier",
+  "suggestions": "Vous aimerez peut-être aussi",
+  "allProducts": "Tous les produits"
+}

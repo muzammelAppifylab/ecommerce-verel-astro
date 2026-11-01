@@ -1,0 +1,26 @@
+{
+  "title": "Merkliste",
+  "crumbs": {
+    "home": "Startseite",
+    "account": "Konto",
+    "wishlist": "Merkliste"
+  },
+  "saved_one": "{{count}} Teil gemerkt",
+  "saved_other": "{{count}} Teile gemerkt",
+  "nothingSaved": "Noch nichts gemerkt",
+  "addAll": "Alle verfügbaren hinzufügen",
+  "added": "Im Warenkorb",
+  "clear": "Liste leeren",
+  "loadError": "Wir konnten deine Merkliste nicht laden.",
+  "tryAgain": "Erneut versuchen",
+  "empty": {
+    "title": "Deine Merkliste ist leer.",
+    "description": "Merke dir Teile, die du in Betracht ziehst – sie warten hier auf dich.",
+    "action": "Kollektion entdecken"
+  },
+  "removeItem": "{{name}} von der Merkliste entfernen",
+  "notifyMe": "Ausverkauft",
+  "addToBag": "In den Warenkorb",
+  "suggestions": "Das könnte dir auch gefallen",
+  "allProducts": "Alle Produkte"
+}

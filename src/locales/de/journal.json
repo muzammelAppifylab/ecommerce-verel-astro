@@ -1,0 +1,60 @@
+{
+  "home": "Startseite",
+  "title": "Journal",
+  "metaDescription": "Notizen aus dem VAREL-Studio über Materialien, Styling, Pflege und Reisen.",
+  "intro": "Notizen aus dem Studio über Materialien, Herstellung, Pflege und Tragen. Veröffentlicht, wenn es etwas zu sagen gibt.",
+  "tryAgain": "Erneut versuchen",
+  "loadErrorDescription": "Bei uns ist etwas schiefgelaufen. Versuche es gleich noch einmal.",
+  "allEntries": "Alle Beiträge",
+  "categoriesLabel": "Journal-Kategorien",
+  "readPiece": "Beitrag lesen",
+  "index": {
+    "errorTitle": "Das Journal konnte nicht geladen werden",
+    "emptyTitle": "Noch nichts hier",
+    "emptyDescription": "Der erste Beitrag wird noch geschrieben."
+  },
+  "newsletter": {
+    "title": "Leise Neuigkeiten, zweimal im Monat",
+    "body": "Neue Stücke, Nachlieferungen und hin und wieder eine Notiz aus dem Studio. Kein Rabattlärm.",
+    "note": "Wir geben deine Adresse niemals weiter.",
+    "success": "Danke. Die nächste Notiz kommt in dein Postfach."
+  },
+  "category": {
+    "pageTitle": "{{name}} — Journal",
+    "eyebrow": "Journal-Kategorie",
+    "entries_one": "{{count}} Beitrag",
+    "entries_other": "{{count}} Beiträge",
+    "errorTitle": "Diese Kategorie konnte nicht geladen werden",
+    "emptyTitle": "Noch nichts hier",
+    "emptyDescription": "Diese Kategorie wartet noch auf ihren ersten Beitrag."
+  },
+  "categoryBlurb": {
+    "materials": "Woher Fasern kommen, wie sie gesponnen und gewebt werden und was passiert, wenn sie sich abnutzen.",
+    "styling": "Wie die Stücke zusammenspielen und wie wenige du tatsächlich brauchst.",
+    "care": "Waschen, Trocknen, Aufbewahren und Ausbessern, damit ein Kleidungsstück ein Jahrzehnt hält.",
+    "travel": "Leicht reisen mit einer Garderobe, die sich immer wieder kombinieren lässt."
+  },
+  "authorRole": {
+    "studioDirector": "Studioleiterin"
+  },
+  "post": {
+    "pageTitle": "{{title}} — Journal",
+    "notFoundTitle": "Wir finden diesen Beitrag nicht",
+    "notFoundDescription": "Vielleicht wurde er verschoben, oder der Link ist unvollständig. Alles, was wir veröffentlicht haben, findest du im Journal.",
+    "errorTitle": "Dieser Beitrag konnte nicht geladen werden",
+    "linkCopied": "Link kopiert",
+    "share": "Teilen",
+    "print": "Drucken",
+    "contents": "Inhalt",
+    "keepReading": "Weiterlesen"
+  },
+  "newsletterForm": {
+    "note": "Wir geben deine Adresse niemals weiter.",
+    "success": "Danke. Der nächste Brief kommt in dein Postfach.",
+    "invalidEmail": "Gib eine gültige E-Mail-Adresse ein.",
+    "emailLabel": "E-Mail-Adresse",
+    "subscribe": "Abonnieren",
+    "sending": "Wird gesendet",
+    "subscribed": "Abonniert"
+  }
+}

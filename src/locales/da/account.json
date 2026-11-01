@@ -1,0 +1,186 @@
+{
+  "title": "Konto",
+  "crumbs": {
+    "home": "Forside",
+    "account": "Konto"
+  },
+  "loadError": "Vi kunne ikke hente din konto",
+  "tryAgain": "Prøv igen",
+  "since": "Kunde siden {{date}}",
+  "signOut": "Log ud",
+  "signingOut": "Logger ud…",
+  "allOrders": "Alle ordrer",
+  "noOrders": {
+    "title": "Ingen ordrer endnu",
+    "description": "Når du afgiver en ordre, vises den her med sporing, så snart den er sendt.",
+    "action": "Alle produkter"
+  },
+  "items_one": "{{count}} vare",
+  "items_other": "{{count}} varer",
+  "download": "Download",
+  "noDownloads": "Digitale ting, du køber, kan downloades her.",
+  "nav": {
+    "label": "Konto",
+    "overview": "Overblik",
+    "orders": "Ordrer",
+    "wishlist": "Ønskeliste",
+    "details": "Personlige oplysninger",
+    "addresses": "Adresser",
+    "downloads": "Downloads",
+    "privacy": "Privatliv"
+  },
+  "addresses": {
+    "title": "Gemte adresser",
+    "add": "Tilføj adresse",
+    "empty": "Ingen gemte adresser endnu. Tilføj en for at komme hurtigere gennem kassen.",
+    "address": "Adresse",
+    "default": "Standard",
+    "edit": "Rediger",
+    "editAria": "Rediger {{label}}",
+    "makeDefault": "Gør til standard",
+    "makeDefaultAria": "Gør {{label}} til standard",
+    "remove": "Fjern",
+    "removeAria": "Fjern {{label}}",
+    "addressLower": "adresse",
+    "removeTitle": "Fjern adresse",
+    "removing": "Fjerner…",
+    "saving": "Gemmer…",
+    "makeDefaultBody": "Vi bruger denne adresse først i kassen: {{address}}.",
+    "description": "Gemt for en hurtigere tur gennem kassen. Din standardadresse udfyldes først."
+  },
+  "dialog": {
+    "edit": "Rediger adresse",
+    "add": "Tilføj adresse",
+    "cancel": "Annuller",
+    "saving": "Gemmer…",
+    "save": "Gem adresse",
+    "label": "Navn",
+    "labelPlaceholder": "Hjem, studie…",
+    "fullName": "Fulde navn",
+    "line1": "Adresse",
+    "line2": "Lejlighed, etage (valgfrit)",
+    "zip": "Postnummer",
+    "city": "By",
+    "country": "Land",
+    "phone": "Telefon",
+    "primary": "Brug som standardadresse",
+    "errors": {
+      "name": "Indtast navnet til levering",
+      "line1": "Indtast en adresse",
+      "zip": "Indtast et postnummer",
+      "city": "Indtast en by",
+      "country": "Vælg et land"
+    }
+  },
+  "confirm": {
+    "cancel": "Annuller"
+  },
+  "profile": {
+    "title": "Profil",
+    "firstName": "Fornavn",
+    "lastName": "Efternavn",
+    "email": "E-mail",
+    "phone": "Telefon",
+    "saving": "Gemmer…",
+    "saved": "Gemt",
+    "save": "Gem ændringer",
+    "errors": {
+      "firstName": "Indtast dit fornavn",
+      "lastName": "Indtast dit efternavn",
+      "email": "Indtast en gyldig e-mailadresse"
+    },
+    "description": "Bruges på dine ordrer, kvitteringer og leveringsopdateringer."
+  },
+  "privacy": {
+    "title": "Privatliv",
+    "data": {
+      "title": "Dine data",
+      "body": "Download alt, vi har om dig: profil, adresser, ordrer, anmeldelser, ønskeliste og nyhedsbrevsstatus, som en JSON-fil.",
+      "downloading": "Dine data downloades",
+      "preparing": "Forbereder…",
+      "action": "Download data"
+    },
+    "cookies": {
+      "title": "Cookies",
+      "body": "Vælg, om vi må tælle dine besøg. Nødvendige cookies holder din kurv og dit login i gang.",
+      "action": "Cookieindstillinger"
+    },
+    "delete": {
+      "title": "Slet konto",
+      "body": "Lukker din konto og sletter din profil, dine adresser og din ønskeliste. Ordrer bliver i vores regnskab uden dine kontaktoplysninger. Det kan ikke fortrydes.",
+      "action": "Slet konto",
+      "description": "Bekræft med din adgangskode for at slette din konto",
+      "cancel": "Annuller",
+      "deleting": "Sletter…",
+      "confirm": "Slet min konto",
+      "warning": "Vi sender dig en bekræftelse på e-mail og logger dig derefter ud. Dine ordrer gemmes til regnskabet med din e-mail skjult. Det kan ikke fortrydes.",
+      "password": "Adgangskode",
+      "enterPassword": "Indtast din adgangskode",
+      "deleted": "Din konto er slettet"
+    },
+    "description": "Download dine data, vælg cookies eller luk din konto."
+  },
+  "greeting": "Hej, {{name}}",
+  "latest": {
+    "label": "Seneste ordre",
+    "meta": "Afgivet {{date}} · {{items}} · {{total}}",
+    "progress": "Ordrestatus",
+    "view": "Se ordre",
+    "track": "Spor med {{carrier}}",
+    "return": "Start en returnering",
+    "canCancel": "Du kan stadig annullere ordren, indtil den er pakket."
+  },
+  "summary": {
+    "title": "Din konto",
+    "defaultAddress": "Standard: {{address}}",
+    "noAddress": "Ingen gemte adresser endnu",
+    "newsletter": "Nyhedsbrev",
+    "subscribed": "Tilmeldt",
+    "notSubscribed": "Ikke tilmeldt",
+    "saved_one": "{{count}} gemt vare",
+    "saved_other": "{{count}} gemte varer",
+    "noSaved": "Intet gemt endnu",
+    "files_one": "{{count}} fil klar til download",
+    "files_other": "{{count}} filer klar til download",
+    "password": "Adgangskode",
+    "passwordHint": "Skift din adgangskode"
+  },
+  "earlier": "Tidligere ordrer",
+  "help": {
+    "title": "Brug for hjælp?",
+    "body": "Studiet svarer inden for én hverdag.",
+    "contact": "Kontakt studiet",
+    "returns": "Start en returnering",
+    "terms": "Handelsbetingelser"
+  },
+  "details": {
+    "description": "Dit navn og dine kontaktoplysninger, adgangskode og nyhedsbrev."
+  },
+  "downloadsDescription": "Digitale ting fra dine betalte ordrer, klar til at blive downloadet igen når som helst.",
+  "password": {
+    "title": "Adgangskode",
+    "description": "Skift den adgangskode, du logger ind med.",
+    "current": "Nuværende adgangskode",
+    "new": "Ny adgangskode",
+    "confirm": "Bekræft ny adgangskode",
+    "rule": "Mindst 8 tegn.",
+    "show": "Vis adgangskoder",
+    "save": "Skift adgangskode",
+    "saving": "Skifter…",
+    "changed": "Din adgangskode er ændret",
+    "forgot": "Glemt din adgangskode?",
+    "errors": {
+      "current": "Indtast din nuværende adgangskode",
+      "length": "Brug mindst 8 tegn",
+      "match": "Adgangskoderne er ikke ens"
+    }
+  },
+  "preferences": {
+    "title": "Kommunikation",
+    "description": "Vælg, hvad vi må sende dig. E-mails om ordrer og levering kommer altid.",
+    "newsletter": "Nyhedsbrev",
+    "newsletterBody": "Nye kollektioner, historier fra journalen og arrangementer i studiet, cirka en gang om måneden.",
+    "on": "Du er tilmeldt nyhedsbrevet",
+    "off": "Du er afmeldt nyhedsbrevet"
+  }
+}

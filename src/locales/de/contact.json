@@ -1,0 +1,44 @@
+{
+  "home": "Startseite",
+  "title": "Kontakt",
+  "intro": "Wir antworten innerhalb eines Werktags, meist schneller. Wenn es um eine bestehende Bestellung geht, gib bitte die Bestellnummer an.",
+  "subjects": {
+    "order": "Eine bestehende Bestellung",
+    "sizing": "Größe und Passform",
+    "repair": "Reparaturen",
+    "return": "Rücksendungen und Erstattungen",
+    "stockist": "Händler und Großhandel",
+    "press": "Presse"
+  },
+  "write": {
+    "hint": "Wähle ein Thema, und deine E-Mail-App öffnet sich mit ausgefülltem Betreff.",
+    "direct": "Oder schreib dem Studio direkt an"
+  },
+  "studio": {
+    "label": "Über das Studio",
+    "photoAlt": "Das VAREL-Studio in Nørrebro",
+    "photoCredit": "Foto von همَّام auf Unsplash",
+    "studio": "Studio",
+    "addressLine1": "112 Studio, Nørrebro",
+    "addressLine2": "0000 Kopenhagen, Dänemark",
+    "hours": "Öffnungszeiten",
+    "days": "Donnerstag bis Samstag",
+    "time": "11:00–18:00 Uhr",
+    "email": "E-Mail",
+    "phone": "Telefon"
+  },
+  "faq": {
+    "title": "Bevor du schreibst",
+    "whereQ": "Wo ist meine Bestellung?",
+    "whereA": "Die Sendungsverfolgung findest du in deinem Konto unter Bestellungen und in der Versand-E-Mail.",
+    "sizeQ": "Kann ich eine Größe ändern?",
+    "sizeA": "Ja, solange die Bestellung noch nicht verpackt ist. Schreib uns mit der Bestellnummer, dann tauschen wir sie.",
+    "repairQ": "Repariert ihr auch ältere Stücke?",
+    "repairA": "Ja. In den ersten zwei Jahren sind Reparaturen kostenlos, danach berechnen wir nur die Selbstkosten.",
+    "wholesaleQ": "Verkauft ihr an Händler?",
+    "wholesaleA": "An eine kleine Zahl von Händlern. Schreib uns mit deinem Geschäft und deiner Stadt.",
+    "returns": "Rücksendungen",
+    "track": "Bestellung verfolgen",
+    "terms": "AGB"
+  }
+}

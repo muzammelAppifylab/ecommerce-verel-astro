@@ -1,0 +1,158 @@
+{
+  "title": "Kassa",
+  "steps": {
+    "label": "Steg i kassan",
+    "information": "Uppgifter",
+    "shipping": "Leverans",
+    "payment": "Betalning"
+  },
+  "loadError": "Vi kunde inte hämta din varukorg.",
+  "tryAgain": "Försök igen",
+  "contact": "Kontakt",
+  "email": "E-post",
+  "phone": "Telefon",
+  "phoneOptional": "Telefon (valfritt)",
+  "shippingAddress": "Leveransadress",
+  "savedAddress": "Sparad adress",
+  "chooseSaved": "Välj en sparad adress",
+  "shippingMethod": "Leveranssätt",
+  "shippingMethodZone": "Leveranssätt — {{zone}}",
+  "digitalOnly": "Din varukorg innehåller bara digitala produkter. Inget skickas — en nedladdningslänk kommer med din bekräftelse.",
+  "loadingMethods": "Hämtar leveranssätt",
+  "free": "Gratis",
+  "payment": "Betalning",
+  "loadingSecure": "Laddar säker betalning",
+  "loadingOptions": "Laddar betalningsalternativ",
+  "paymentMethod": "Betalningssätt",
+  "methods": {
+    "card": "Kort"
+  },
+  "card": {
+    "name": "Namn på kortet",
+    "number": "Kortnummer",
+    "expiry": "Utgångsdatum",
+    "cvc": "CVC"
+  },
+  "billingSame": "Faktureringsadressen är samma som leveransadressen",
+  "billingAddress": "Faktureringsadress",
+  "note": {
+    "title": "Meddelande till ordern",
+    "placeholder": "Leveransinstruktioner, en gåvohälsning, allt vi bör veta"
+  },
+  "removeCode": "Ta bort kod",
+  "pay": "Betala {{total}}",
+  "placeOrder": "Lägg order",
+  "methodDigital": "digital",
+  "errors": {
+    "email": "Ange en giltig e-postadress",
+    "phone": "Ange ett telefonnummer för leveransen",
+    "method": "Välj ett leveranssätt",
+    "noteLength": "Håll meddelandet under {{max}} tecken",
+    "terms": "Godkänn villkoren för att fortsätta",
+    "payByCard": "Betala med kort för att slutföra ordern.",
+    "paymentLoading": "Betalningsformuläret laddas fortfarande. Försök igen om en stund",
+    "paymentGone": "Betalningsformuläret är inte längre tillgängligt. Försök igen",
+    "checkPayment": "Kontrollera dina betalningsuppgifter",
+    "paymentFailed": "Din betalning gick inte igenom. Försök igen eller använd ett annat sätt",
+    "paymentLoadDetail": "Betalningsformuläret kunde inte laddas: {{message}}",
+    "paymentLoad": "Betalningsformuläret kunde inte laddas. Ladda om sidan för att försöka igen",
+    "cardName": "Ange namnet på kortet",
+    "cardNumber": "Ange ditt kortnummer",
+    "cardCheck": "Kontrollera kortnumret",
+    "expiry": "Ange utgångsdatumet",
+    "expiryPast": "Använd ett kort som inte har gått ut (MM/ÅÅ)",
+    "cvc": "Ange den 3- eller 4-siffriga säkerhetskoden",
+    "name": "Ange fullständigt namn",
+    "country": "Välj ett land vi levererar till",
+    "line1": "Ange gatuadressen",
+    "city": "Ange orten",
+    "summary_one": "{{count}} fält behöver rättas",
+    "summary_other": "{{count}} fält behöver rättas",
+    "line1Letters": "Ange gatunamnet och numret",
+    "line1Number": "Lägg till gatunumret",
+    "zipFormat": "Kontrollera formatet, t.ex. {{example}}",
+    "zipRequired": {
+      "zip": "Ange ZIP-koden",
+      "postal": "Ange postnumret",
+      "postcode": "Ange postnumret",
+      "eircode": "Ange Eircode"
+    },
+    "region": {
+      "state": "Välj en delstat",
+      "province": "Välj en provins",
+      "county": "Välj ett county",
+      "stateTerritory": "Välj en delstat eller ett territorium",
+      "prefecture": "Välj en prefektur"
+    }
+  },
+  "address": {
+    "fullName": "Fullständigt namn",
+    "country": "Land",
+    "line1": "Gatuadress och nummer",
+    "city": "Ort",
+    "loadingCountries": "Hämtar länder",
+    "line2": "Lägenhet, våning, c/o (valfritt)",
+    "optional": "{{label}} (valfritt)",
+    "choose": "Välj",
+    "zipLabel": {
+      "zip": "ZIP-kod",
+      "postal": "Postnummer",
+      "postcode": "Postnummer",
+      "eircode": "Eircode"
+    },
+    "region": {
+      "state": "Delstat",
+      "province": "Provins",
+      "county": "County",
+      "stateTerritory": "Delstat/territorium",
+      "prefecture": "Prefektur"
+    }
+  },
+  "signIn": {
+    "title": "Logga in för att gå till kassan",
+    "body": "Ordrar läggs från ett VAREL-konto. Logga in eller skapa ett konto på en minut, så följer din varukorg med.",
+    "signIn": "Logga in",
+    "create": "Skapa ett konto",
+    "back": "Tillbaka till varukorgen"
+  },
+  "summary": {
+    "title": "Ordersammanfattning",
+    "show": "Visa ordersammanfattning",
+    "hide": "Dölj ordersammanfattning",
+    "note_one": "{{tax}} beräknas utifrån ditt leveransland i kassan. {{count}} dag att returnera oanvända plagg. Digitala produkter återbetalas inte när de har laddats ner.",
+    "note_other": "{{tax}} beräknas utifrån ditt leveransland i kassan. {{count}} dagar att returnera oanvända plagg. Digitala produkter återbetalas inte när de har laddats ner."
+  },
+  "qty": "Antal {{qty}}",
+  "discount": {
+    "label": "Rabattkod",
+    "apply": "Använd",
+    "enter": "Ange en rabattkod",
+    "applied": "{{code}} har använts.",
+    "appliedReplaces": "{{code}} har använts. Den ersätter {{previous}}.",
+    "saved": "{{code}} har sparats i din varukorg.",
+    "savedReplaces": "{{code}} har sparats i din varukorg. Den ersätter {{previous}}.",
+    "statusApplied": "{{code}} används",
+    "statusSaved": "{{code}} sparad · används inte ännu",
+    "fallback": "Rabatt",
+    "remove": "Ta bort",
+    "removeAria": "Ta bort koden {{code}}",
+    "lineFree_one": "{{count}} gratis · {{amount}}",
+    "lineFree_other": "{{count}} gratis · {{amount}}",
+    "toggle": "Har du en rabattkod?"
+  },
+  "totals": {
+    "subtotal": "Delsumma",
+    "shipping": "Frakt",
+    "shippingWith": "Frakt · {{method}}",
+    "taxRate": "{{name}} ({{rate}} %)",
+    "includes": "Inkl. {{tax}}",
+    "total": "Totalt",
+    "freeWith": "Gratis · {{name}}",
+    "was": "Före ",
+    "now": "Nu ",
+    "youSave": "Du sparar {{amount}}"
+  },
+  "signInPrompt": "Har du ett konto?",
+  "signInLink": "Logga in för snabbare kassa",
+  "trust": "Säker, krypterad betalning · {{count}} dagars retur på oanvända plagg"
+}

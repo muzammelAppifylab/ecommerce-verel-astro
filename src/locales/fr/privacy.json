@@ -1,0 +1,63 @@
+{
+  "title": "Politique de confidentialité",
+  "lead": "VAREL ApS est le responsable du traitement des données de cette boutique. Nous collectons le strict nécessaire pour vous vendre des vêtements et les garder portables, et nous ne vendons vos données à personne.",
+  "collect": {
+    "title": "Ce que nous collectons",
+    "p1": "Lorsque vous commandez, nous collectons votre nom, votre e-mail, votre numéro de téléphone, vos adresses de livraison et de facturation, ainsi que le contenu de votre commande. Les données de carte bancaire sont transmises directement à notre prestataire de paiement et n’atteignent jamais nos serveurs.",
+    "p2": "Si vous créez un compte, nous conservons également vos adresses enregistrées, vos favoris, votre historique de commandes et les éventuels téléchargements numériques liés à vos achats. Si vous vous abonnez à la note du studio, nous conservons votre adresse e-mail jusqu’à votre désinscription."
+  },
+  "use": {
+    "title": "Comment nous les utilisons",
+    "p1": "Pour encaisser le paiement, expédier votre commande, traiter les retours et les réparations, calculer les taxes de votre pays, répondre à vos e-mails et vous envoyer la note du studio si vous l’avez demandée. Nous utilisons des statistiques agrégées et non identifiantes pour comprendre quelles pages sont consultées."
+  },
+  "share": {
+    "title": "Avec qui nous les partageons",
+    "paymentsLabel": "Paiements",
+    "payments": "Traitement des cartes et contrôles antifraude. Ils voient le paiement, pas votre garde-robe.",
+    "carriersLabel": "Transporteurs",
+    "carriers": "Nom, adresse et numéro de téléphone, pour que le colis puisse être livré.",
+    "emailLabel": "E-mail",
+    "email": "Confirmations de commande et note du studio, envoyées par notre prestataire d’e-mail.",
+    "neverLabel": "Jamais",
+    "never": "Régies publicitaires, courtiers en données ou quiconque paie pour une liste."
+  },
+  "cookies": {
+    "title": "Cookies",
+    "p1": "Les cookies nécessaires conservent votre panier et votre session. Les cookies de mesure d’audience sont facultatifs et désactivés tant que vous ne les acceptez pas. Vous pouvez modifier votre choix à tout moment via Paramètres des cookies, en bas de chaque page."
+  },
+  "rights": {
+    "title": "Vos droits",
+    "p1": "En vertu du RGPD, vous pouvez demander une copie de vos données, leur rectification ou leur suppression, vous opposer à leur traitement ou demander leur transfert ailleurs. Écrivez au studio et nous vous répondrons sous trente jours, gratuitement."
+  },
+  "retention": {
+    "title": "Durée de conservation",
+    "p1": "Les données de commande pendant cinq ans, comme l’exige la législation comptable danoise. Les données de compte jusqu’à la fermeture du compte. Les données de newsletter jusqu’à votre désinscription. Les e-mails d’assistance pendant deux ans."
+  },
+  "contact": {
+    "title": "Contact",
+    "p1": "VAREL ApS, 112 Studio, Nørrebro, 0000 Copenhague, Danemark. Écrivez à care@varel.studio pour toute question concernant vos données. Vous pouvez également déposer une réclamation auprès de l’autorité danoise de protection des données (Datatilsynet)."
+  },
+  "banner": {
+    "label": "Consentement aux cookies",
+    "title": "Cookies",
+    "body": "Nous utilisons des cookies nécessaires au fonctionnement de votre panier, de vos favoris et de votre connexion. Avec votre accord, nous comptons aussi les visites pour savoir quoi créer ensuite.",
+    "privacyLink": "Politique de confidentialité",
+    "acceptAll": "Tout accepter",
+    "necessaryOnly": "Nécessaires uniquement",
+    "settings": "Paramètres"
+  },
+  "dialog": {
+    "title": "Paramètres des cookies",
+    "description": "Choisissez les cookies que VAREL peut utiliser",
+    "save": "Enregistrer mes choix",
+    "acceptAll": "Tout accepter",
+    "intro": "Les cookies nécessaires sont toujours actifs. Tout le reste attend votre accord, et vous pouvez changer d’avis ici à tout moment.",
+    "necessaryTitle": "Nécessaires",
+    "necessaryBody": "Font fonctionner votre panier, vos favoris, le paiement et la connexion. Ils ne peuvent pas être désactivés.",
+    "necessarySwitch": "Cookies nécessaires, toujours actifs",
+    "analyticsTitle": "Mesure d’audience",
+    "analyticsBody": "Comptent les vues de pages et de produits pour comprendre ce que les gens recherchent. Aucune publicité, jamais partagés ni vendus.",
+    "analyticsSwitch": "Cookies de mesure d’audience"
+  },
+  "settingsLink": "Paramètres des cookies"
+}

@@ -1,0 +1,21 @@
+{
+  "addToBag": "Læg i kurven",
+  "remove": "Fjern",
+  "save": "Gem",
+  "cancel": "Annuller",
+  "continue": "Fortsæt",
+  "close": "Luk",
+  "back": "Tilbage",
+  "loading": "Indlæser",
+  "tryAgain": "Prøv igen",
+  "error": "Noget gik galt. Prøv igen.",
+  "free": "Gratis",
+  "soldOut": "Udsolgt",
+  "quantity": "Antal",
+  "size": "Størrelse",
+  "colour": "Farve",
+  "search": "Søg",
+  "signIn": "Log ind",
+  "viewAll": "Se alle",
+  "apply": "Anvend"
+}

@@ -1,0 +1,53 @@
+{
+  "home": "Accueil",
+  "sections": "Sections",
+  "onThisPage": "Sur cette page",
+  "lastUpdated": "Dernière mise à jour le {{date}}",
+  "contactStudio": "Contacter le studio",
+  "related": {
+    "terms": "Conditions générales",
+    "privacy": "Politique de confidentialité",
+    "returns": "Retours et remboursements"
+  },
+  "terms": {
+    "title": "Conditions générales",
+    "company": "VAREL ApS, CVR 00 00 00 00",
+    "lead": "Ces conditions s’appliquent aux achats effectués sur varel.studio. Passer une commande vaut acceptation de celles-ci. Rien ici ne limite les droits dont vous disposez en tant que consommateur en vertu du droit danois et du droit de l’UE.",
+    "orders": {
+      "title": "Commandes",
+      "p1": "Une commande est une offre d’achat. Le contrat est conclu lorsque nous envoyons l’e-mail de confirmation. Nous pouvons refuser une commande si une pièce est en rupture de stock, si le prix affiché était erroné ou si nous ne pouvons pas livrer à votre adresse.",
+      "p2": "Le stock est indiqué par variante. Lorsqu’une taille apparaît comme épuisée, elle n’est pas disponible dans ce coloris jusqu’au réassort."
+    },
+    "prices": {
+      "title": "Prix et taxes",
+      "p1": "Les prix sont affichés en dollars américains, hors taxes. La TVA ou la taxe sur les ventes est calculée lors du paiement en fonction de votre pays de livraison et affichée avant que vous ne payiez. Les commandes hors UE peuvent être soumises à des droits d’importation à l’arrivée, à votre charge.",
+      "p2": "Certains codes de réduction ont un montant minimum, une date de fin ou une limite par client. Si un code ne peut pas être utilisé, la page de paiement vous dit pourquoi. Un seul code s’applique par commande et les codes ne sont pas cumulables."
+    },
+    "shipping": {
+      "title": "Livraison",
+      "p1": "Nous expédions dans le monde entier depuis Copenhague. Les tarifs dépendent de votre zone et du mode choisi, et sont affichés lors du paiement. La livraison standard est offerte au Danemark et dans l’UE, et toute commande dès $150 est livrée gratuitement, quelle que soit la destination. Le retrait au studio de Nørrebro est gratuit, du jeudi au samedi.",
+      "p2": "Les délais de livraison sont donnés à titre indicatif. Les risques vous sont transférés à la livraison."
+    },
+    "digital": {
+      "title": "Produits numériques",
+      "p1": "Les articles numériques ne font l’objet d’aucun envoi. Un lien de téléchargement accompagne votre confirmation et reste disponible dans votre compte. Les téléchargements sont réservés à un usage personnel et ne peuvent être revendus ni redistribués. En téléchargeant, vous acceptez que le droit de rétractation de quatorze jours ne s’applique plus."
+    },
+    "cancellation": {
+      "title": "Rétractation",
+      "p1": "Le droit de l’UE vous accorde quatorze jours à compter de la livraison pour vous rétracter, et nous portons ce délai à trente jours pour les pièces non portées avec leurs étiquettes. Les conditions complètes, y compris les modalités de remboursement, figurent sur la page des retours.",
+      "link": "Retours et remboursements"
+    },
+    "defects": {
+      "title": "Défauts et réparations",
+      "p1": "Vous bénéficiez d’une garantie légale de deux ans sur les défauts de fabrication. Au-delà, notre studio de Copenhague répare toute pièce VAREL à prix coûtant. La décoloration naturelle, le boulochage et la patine sont des caractéristiques des matières, non des défauts."
+    },
+    "accounts": {
+      "title": "Comptes",
+      "p1": "Gardez votre mot de passe pour vous et prévenez-nous si vous pensez que quelqu’un d’autre le connaît. Vous pouvez fermer votre compte à tout moment ; nous conservons les données de commande pendant cinq ans, comme l’exige la législation comptable."
+    },
+    "law": {
+      "title": "Droit applicable et litiges",
+      "p1": "Le droit danois s’applique. Écrivez d’abord au studio ; la plupart des questions se règlent en un e-mail. À défaut, vous pouvez saisir la commission danoise des réclamations des consommateurs (Forbrugerklagenævnet) ou la plateforme européenne de règlement en ligne des litiges."
+    }
+  }
+}

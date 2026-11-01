@@ -1,0 +1,63 @@
+{
+  "title": "Política de privacidad",
+  "lead": "VAREL ApS es el responsable del tratamiento de los datos de esta tienda. Recogemos lo mínimo necesario para venderte ropa y mantenerla en uso, y no vendemos tus datos a nadie.",
+  "collect": {
+    "title": "Qué datos recogemos",
+    "p1": "Cuando haces un pedido, recogemos tu nombre, tu correo electrónico, tu número de teléfono, tus direcciones de envío y facturación y el contenido de tu pedido. Los datos de la tarjeta de pago van directamente a nuestro proveedor de pagos y nunca llegan a nuestros servidores.",
+    "p2": "Si creas una cuenta, también guardamos tus direcciones, tus favoritos, tu historial de pedidos y las descargas digitales asociadas a tus compras. Si te suscribes a la nota del estudio, guardamos tu correo electrónico hasta que canceles la suscripción."
+  },
+  "use": {
+    "title": "Cómo los usamos",
+    "p1": "Para cobrar el pago, enviar tu pedido, gestionar devoluciones y reparaciones, calcular los impuestos de tu país, responder a tus correos y enviarte la nota del estudio si la has solicitado. Usamos estadísticas agregadas y no identificativas para saber qué páginas se visitan."
+  },
+  "share": {
+    "title": "Con quién los compartimos",
+    "paymentsLabel": "Pagos",
+    "payments": "Procesamiento de tarjetas y controles antifraude. Ven el pago, no tu armario.",
+    "carriersLabel": "Transportistas",
+    "carriers": "Nombre, dirección y número de teléfono, para poder entregar el paquete.",
+    "emailLabel": "Correo electrónico",
+    "email": "Confirmaciones de pedido y la nota del estudio, enviadas a través de nuestro proveedor de correo.",
+    "neverLabel": "Nunca",
+    "never": "Redes publicitarias, intermediarios de datos ni nadie que pague por una lista."
+  },
+  "cookies": {
+    "title": "Cookies",
+    "p1": "Las cookies necesarias mantienen tu cesta y tu sesión. Las cookies analíticas son opcionales y están desactivadas hasta que las aceptes. Puedes cambiar tu elección en cualquier momento en Configuración de cookies, al pie de cada página."
+  },
+  "rights": {
+    "title": "Tus derechos",
+    "p1": "Según el RGPD, puedes solicitar una copia de tus datos, pedirnos que los rectifiquemos o que los eliminemos, oponerte a su tratamiento o pedirnos que los traslademos a otro lugar. Escribe al estudio y te responderemos en un plazo de treinta días, sin coste."
+  },
+  "retention": {
+    "title": "Cuánto tiempo los conservamos",
+    "p1": "Los registros de pedidos, cinco años, tal como exige la normativa contable danesa. Los datos de la cuenta, hasta que la cierres. Los datos del boletín, hasta que canceles la suscripción. Los correos de atención al cliente, dos años."
+  },
+  "contact": {
+    "title": "Contacto",
+    "p1": "VAREL ApS, 112 Studio, Nørrebro, 0000 Copenhague, Dinamarca. Escribe a care@varel.studio para cualquier cuestión sobre tus datos. También puedes presentar una reclamación ante la Agencia Danesa de Protección de Datos (Datatilsynet)."
+  },
+  "banner": {
+    "label": "Consentimiento de cookies",
+    "title": "Cookies",
+    "body": "Usamos cookies necesarias para que funcionen tu cesta, tus favoritos y el inicio de sesión. Con tu permiso, también contamos las visitas para saber qué hacer a continuación.",
+    "privacyLink": "Política de privacidad",
+    "acceptAll": "Aceptar todas",
+    "necessaryOnly": "Solo necesarias",
+    "settings": "Configuración"
+  },
+  "dialog": {
+    "title": "Configuración de cookies",
+    "description": "Elige qué cookies puede usar VAREL",
+    "save": "Guardar selección",
+    "acceptAll": "Aceptar todas",
+    "intro": "Las cookies necesarias están siempre activas. Todo lo demás espera tu permiso, y puedes cambiar de opinión aquí en cualquier momento.",
+    "necessaryTitle": "Necesarias",
+    "necessaryBody": "Hacen que funcionen tu cesta, tus favoritos, el pago y el inicio de sesión. No se pueden desactivar.",
+    "necessarySwitch": "Cookies necesarias, siempre activas",
+    "analyticsTitle": "Analíticas",
+    "analyticsBody": "Cuentan las visitas a páginas y productos para saber qué busca la gente. Sin publicidad, nunca se comparten ni se venden.",
+    "analyticsSwitch": "Cookies analíticas"
+  },
+  "settingsLink": "Configuración de cookies"
+}

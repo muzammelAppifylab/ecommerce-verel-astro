@@ -1,0 +1,189 @@
+{
+  "title": "Compte",
+  "crumbs": {
+    "home": "Accueil",
+    "account": "Compte"
+  },
+  "loadError": "Nous n’avons pas pu charger votre compte",
+  "tryAgain": "Réessayer",
+  "since": "Client depuis {{date}}",
+  "signOut": "Se déconnecter",
+  "signingOut": "Déconnexion…",
+  "allOrders": "Toutes les commandes",
+  "noOrders": {
+    "title": "Aucune commande pour l’instant",
+    "description": "Vos commandes apparaîtront ici, avec le suivi dès leur expédition.",
+    "action": "Tous les produits"
+  },
+  "items_one": "{{count}} article",
+  "items_many": "{{count}} articles",
+  "items_other": "{{count}} articles",
+  "download": "Télécharger",
+  "noDownloads": "Les pièces numériques que vous achetez seront disponibles ici.",
+  "nav": {
+    "label": "Compte",
+    "overview": "Aperçu",
+    "orders": "Commandes",
+    "wishlist": "Favoris",
+    "details": "Informations personnelles",
+    "addresses": "Adresses",
+    "downloads": "Téléchargements",
+    "privacy": "Confidentialité"
+  },
+  "addresses": {
+    "title": "Adresses enregistrées",
+    "add": "Ajouter une adresse",
+    "empty": "Aucune adresse enregistrée pour l’instant. Ajoutez-en une pour commander plus vite.",
+    "address": "Adresse",
+    "default": "Par défaut",
+    "edit": "Modifier",
+    "editAria": "Modifier {{label}}",
+    "makeDefault": "Définir par défaut",
+    "makeDefaultAria": "Définir {{label}} par défaut",
+    "remove": "Supprimer",
+    "removeAria": "Supprimer {{label}}",
+    "addressLower": "l’adresse",
+    "removeTitle": "Supprimer l’adresse",
+    "removing": "Suppression…",
+    "saving": "Enregistrement…",
+    "makeDefaultBody": "Nous utiliserons d’abord cette adresse lors de la commande : {{address}}.",
+    "description": "Enregistrées pour commander plus vite. Votre adresse par défaut est remplie en premier."
+  },
+  "dialog": {
+    "edit": "Modifier l’adresse",
+    "add": "Ajouter une adresse",
+    "cancel": "Annuler",
+    "saving": "Enregistrement…",
+    "save": "Enregistrer l’adresse",
+    "label": "Libellé",
+    "labelPlaceholder": "Domicile, studio…",
+    "fullName": "Nom complet",
+    "line1": "Adresse",
+    "line2": "Appartement, étage (facultatif)",
+    "zip": "Code postal",
+    "city": "Ville",
+    "country": "Pays",
+    "phone": "Téléphone",
+    "primary": "Utiliser comme adresse par défaut",
+    "errors": {
+      "name": "Saisissez le nom pour la livraison",
+      "line1": "Saisissez une adresse",
+      "zip": "Saisissez un code postal",
+      "city": "Saisissez une ville",
+      "country": "Choisissez un pays"
+    }
+  },
+  "confirm": {
+    "cancel": "Annuler"
+  },
+  "profile": {
+    "title": "Profil",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "saving": "Enregistrement…",
+    "saved": "Enregistré",
+    "save": "Enregistrer",
+    "errors": {
+      "firstName": "Saisissez votre prénom",
+      "lastName": "Saisissez votre nom",
+      "email": "Saisissez une adresse e-mail valide"
+    },
+    "description": "Utilisé pour vos commandes, reçus et informations de livraison."
+  },
+  "privacy": {
+    "title": "Confidentialité",
+    "data": {
+      "title": "Vos données",
+      "body": "Téléchargez tout ce que nous conservons à votre sujet : profil, adresses, commandes, avis, favoris et statut newsletter, dans un fichier JSON.",
+      "downloading": "Vos données sont en cours de téléchargement",
+      "preparing": "Préparation…",
+      "action": "Télécharger mes données"
+    },
+    "cookies": {
+      "title": "Cookies",
+      "body": "Choisissez si nous pouvons compter vos visites. Les cookies nécessaires font fonctionner votre panier et votre connexion.",
+      "action": "Paramètres des cookies"
+    },
+    "delete": {
+      "title": "Supprimer le compte",
+      "body": "Ferme votre compte et efface votre profil, vos adresses et vos favoris. Les commandes restent dans notre comptabilité, sans vos coordonnées. Cette action est irréversible.",
+      "action": "Supprimer le compte",
+      "description": "Confirmez avec votre mot de passe pour supprimer votre compte",
+      "cancel": "Annuler",
+      "deleting": "Suppression…",
+      "confirm": "Supprimer mon compte",
+      "warning": "Nous vous enverrons une confirmation par e-mail, puis vous serez déconnecté. Vos commandes restent archivées pour la comptabilité, sans votre e-mail. Cette action est irréversible.",
+      "password": "Mot de passe",
+      "enterPassword": "Saisissez votre mot de passe",
+      "deleted": "Votre compte a été supprimé"
+    },
+    "description": "Téléchargez vos données, choisissez vos cookies ou fermez votre compte."
+  },
+  "greeting": "Bonjour, {{name}}",
+  "latest": {
+    "label": "Dernière commande",
+    "meta": "Passée le {{date}} · {{items}} · {{total}}",
+    "progress": "Suivi de la commande",
+    "view": "Voir la commande",
+    "track": "Suivre avec {{carrier}}",
+    "return": "Demander un retour",
+    "canCancel": "Vous pouvez encore annuler cette commande tant qu’elle n’est pas emballée."
+  },
+  "summary": {
+    "title": "Votre compte",
+    "defaultAddress": "Par défaut : {{address}}",
+    "noAddress": "Aucune adresse enregistrée pour l’instant",
+    "newsletter": "Newsletter",
+    "subscribed": "Abonné",
+    "notSubscribed": "Non abonné",
+    "saved_one": "{{count}} pièce enregistrée",
+    "saved_many": "{{count}} pièces enregistrées",
+    "saved_other": "{{count}} pièces enregistrées",
+    "noSaved": "Rien d’enregistré pour l’instant",
+    "files_one": "{{count}} fichier prêt à télécharger",
+    "files_many": "{{count}} fichiers prêts à télécharger",
+    "files_other": "{{count}} fichiers prêts à télécharger",
+    "password": "Mot de passe",
+    "passwordHint": "Modifier votre mot de passe"
+  },
+  "earlier": "Commandes précédentes",
+  "help": {
+    "title": "Besoin d’aide ?",
+    "body": "Le studio répond sous un jour ouvré.",
+    "contact": "Contacter le studio",
+    "returns": "Demander un retour",
+    "terms": "Conditions de vente"
+  },
+  "details": {
+    "description": "Votre nom et vos coordonnées, votre mot de passe et la newsletter."
+  },
+  "downloadsDescription": "Les pièces numériques de vos commandes payées, à télécharger de nouveau à tout moment.",
+  "password": {
+    "title": "Mot de passe",
+    "description": "Modifiez le mot de passe que vous utilisez pour vous connecter.",
+    "current": "Mot de passe actuel",
+    "new": "Nouveau mot de passe",
+    "confirm": "Confirmer le nouveau mot de passe",
+    "rule": "8 caractères minimum.",
+    "show": "Afficher les mots de passe",
+    "save": "Modifier le mot de passe",
+    "saving": "Modification…",
+    "changed": "Votre mot de passe a été modifié",
+    "forgot": "Mot de passe oublié ?",
+    "errors": {
+      "current": "Saisissez votre mot de passe actuel",
+      "length": "Utilisez au moins 8 caractères",
+      "match": "Les mots de passe ne correspondent pas"
+    }
+  },
+  "preferences": {
+    "title": "Communication",
+    "description": "Choisissez ce que nous pouvons vous envoyer. Les e-mails de commande et de livraison arrivent toujours.",
+    "newsletter": "Newsletter",
+    "newsletterBody": "Nouvelles collections, histoires du journal et événements du studio, environ une fois par mois.",
+    "on": "Vous êtes abonné à la newsletter",
+    "off": "Vous êtes désabonné de la newsletter"
+  }
+}

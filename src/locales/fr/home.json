@@ -1,0 +1,146 @@
+{
+  "shopCollection": "Découvrir la collection",
+  "pieces_one": "{{count}} pièce",
+  "pieces_other": "{{count}} pièces",
+  "pieces_many": "{{count}} pièces",
+  "hero": {
+    "eyebrow": "Automne 2026",
+    "title": "Essentiels modernes.\nPensés en profondeur.",
+    "body": "Des pièces du quotidien en matières naturelles, produites en petites séries et faites pour durer bien au-delà de la saison.",
+    "primaryCta": "Collection femme",
+    "secondaryCta": "Collection homme",
+    "alt": "Mailles, un manteau en laine marron et des pantalons en lin sur un portant en bois clair, dans une douce lumière du matin"
+  },
+  "categories": {
+    "title": "Par catégorie",
+    "alt": "{{name}} — VAREL"
+  },
+  "newIn": {
+    "eyebrow": "Nouveautés",
+    "title": "La saison, en sélection",
+    "sortLabel": "Trier les produits",
+    "sort": {
+      "featured": "Sélection",
+      "price-asc": "Prix — croissant",
+      "price-desc": "Prix — décroissant"
+    },
+    "filterLabel": "Filtrer les produits",
+    "filters": {
+      "all": "Tout",
+      "new": "Nouveautés",
+      "women": "Femme",
+      "men": "Homme",
+      "shoes": "Chaussures",
+      "bags": "Sacs",
+      "accessories": "Accessoires"
+    },
+    "error": "La collection n’a pas pu être chargée.",
+    "tryAgain": "Réessayer",
+    "empty": "Rien pour l’instant. Essayez un autre filtre."
+  },
+  "piece": {
+    "eyebrow": "Pièce à la une",
+    "altA": "Atelier Wool Coat — silhouette en pied en extérieur",
+    "altB": "Manteau et pantalon posés sur une chaise d’atelier",
+    "error": "Cette pièce n’a pas pu être chargée pour le moment.",
+    "body": "Laine italienne double face de notre filature de Biella, non doublée et finie à la main. Coupe longue et épaule tombante, pour se porter sur une maille sans épaisseur.",
+    "note": "Livraison offerte dès $150 · Trente jours pour retourner les pièces non portées",
+    "stock": {
+      "download": "Téléchargement immédiat",
+      "soldOut": "Épuisé dans cette taille",
+      "final_one": "Plus qu’{{word}}",
+      "final_other": "Plus que {{word}}",
+      "final_many": "Dernières pièces — plus que {{word}}",
+      "in": "En stock"
+    },
+    "words": {
+      "1": "une",
+      "2": "deux",
+      "3": "trois",
+      "4": "quatre",
+      "5": "cinq",
+      "6": "six"
+    }
+  },
+  "values": {
+    "label": "Notre façon de faire",
+    "materials": {
+      "title": "Des matières choisies",
+      "body": "Laine, lin et cuir tanné végétal, choisis pour leur tenue au fil des années, pas des saisons."
+    },
+    "lasting": {
+      "title": "Fait pour durer",
+      "body": "De petites séries avec des partenaires identifiés au Portugal et en Italie, reconduites seulement lorsqu’elles le méritent."
+    },
+    "fit": {
+      "title": "Une coupe aboutie",
+      "body": "Chaque pièce est gradée sur de vrais corps avant d’entrer dans la collection."
+    }
+  },
+  "bestPart": {
+    "eyebrow": "(Le meilleur)",
+    "rows": {
+      "outerwear": "Manteaux",
+      "knitwear": "Maille",
+      "shirting": "Chemises",
+      "denim": "Denim"
+    },
+    "body": "Des essentiels du quotidien aux manteaux pensés avec soin, chaque pièce est taillée dans des fibres naturelles et produite en petites séries. À porter cette saison, et la suivante.",
+    "alt": "Vêtements sur un portant dans un atelier en béton brut"
+  },
+  "featured": {
+    "eyebrow": "À la une",
+    "title": "Gardé près de soi cette saison",
+    "allProducts": "Tous les produits"
+  },
+  "featuredCollections": {
+    "eyebrow": "Collections",
+    "title": "Sélectionnées par l’atelier",
+    "all": "Toutes les collections"
+  },
+  "newCollections": {
+    "eyebrow": "Nouvelles collections",
+    "knit": {
+      "title": "De la maille pour les mois froids",
+      "body": "Laine d’agneau et mérinos filés à Biella, tricotés au Portugal en côtes et demi-anglaises que nous reprenons chaque saison. Coupe ample pour glisser une chemise dessous.",
+      "cta": "Découvrir la maille",
+      "altA": "Pulls en maille pliés à côté d’une pelote de laine",
+      "altB": "Bagues dorées posées sur une manche en maille crème"
+    },
+    "shirt": {
+      "title": "Des chemises, coupées une fois pour toutes",
+      "body": "Twill de coton italien sec et popeline lavée, coupe carrée et ourlet droit. Deux cols, quatre coloris, aucune variation saisonnière.",
+      "cta": "Découvrir les chemises",
+      "altA": "Détail de chemise",
+      "altB": "Éditorial chemises"
+    }
+  },
+  "collections": {
+    "eyebrow": "Porter la saison",
+    "body": "Quatre sélections de l’atelier, chacune tirée de la même courte liste de tissus que nous retrouvons chaque saison.",
+    "altA": "Veste en denim portée devant un rideau métallique",
+    "altB": "Vestes tailleur sur des cintres en cuivre",
+    "items": {
+      "essentials": {
+        "title": "Essentiels du quotidien",
+        "description": "Les pièces que nous faisons chaque saison : t-shirts épais, pantalons larges et mailles côtelées, dans les tissus auxquels nous revenons toujours."
+      },
+      "statement": {
+        "title": "Pièces fortes",
+        "description": "Une courte série de silhouettes plus amples : le manteau en laine, la surchemise, le sac week-end."
+      },
+      "classics": {
+        "title": "Les classiques",
+        "description": "Chemises, pantalons et mailles que nous gardons depuis les premières saisons, à peine modifiés."
+      },
+      "seasonal": {
+        "title": "Collections de saison",
+        "description": "Des sorties d’automne et de printemps, en petites quantités et rarement reconduites."
+      }
+    }
+  },
+  "journal": {
+    "title": "Le journal",
+    "all": "Tous les récits"
+  }
+}

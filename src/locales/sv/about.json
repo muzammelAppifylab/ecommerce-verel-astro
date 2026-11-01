@@ -1,0 +1,63 @@
+{
+  "title": "Om oss",
+  "hero": {
+    "eyebrow": "Om studion",
+    "title": "Mindre, men bättre.",
+    "body": "VAREL är ett oberoende märke med studio på Nørrebro i Köpenhamn. Vi gör vardagskläder, skor, väskor och accessoarer i naturfibrer, i små serier, tillsammans med ett fåtal partner i Portugal och Italien.",
+    "alt": "Studion i dagsljus, puts och trä"
+  },
+  "story": {
+    "title": "Varför vi började",
+    "p1": "Vi hade arbetat i åratal på större modehus och sett kollektioner bli dubbelt så stora och leva hälften så länge. Plaggen vi faktiskt bar var de enklaste, sparade i åratal och lagade två gånger.",
+    "p2": "Därför släpper VAREL ett fåtal plagg varje säsong och behåller dem som förtjänar sin plats. Inget är gjort för att ersättas nästa år. Om ett plagg går sönder i en söm lagar vi det hellre än säljer ett nytt."
+  },
+  "principles": {
+    "form": {
+      "term": "Form",
+      "text": "Rena linjer, generösa snitt, inget dekorativt. Graderat på riktiga kroppar, inte på en enda provmodell."
+    },
+    "texture": {
+      "term": "Textur",
+      "text": "Ull från Biella, bomull och linne från Portugal, vegetabiliskt garvat läder från Toscana."
+    },
+    "time": {
+      "term": "Tid",
+      "text": "Fyra färger per säsong, som återkommer. Allt från en tidigare säsong fungerar fortfarande med den här."
+    },
+    "repair": {
+      "term": "Lagning",
+      "text": "Vår lagningsstudio i Köpenhamn lagar omkring fyrahundra plagg om året. Lagningar är gratis de två första åren."
+    }
+  },
+  "figures": {
+    "founded": {
+      "figure": "2019",
+      "caption": "Första kollektionen, elva plagg, ett väveri"
+    },
+    "workshops": {
+      "figure": "6",
+      "caption": "Partnerverkstäder i Portugal och Italien"
+    },
+    "fibres": {
+      "figure": "92 %",
+      "caption": "Naturliga eller återvunna fibrer i hela sortimentet"
+    },
+    "repairs": {
+      "figure": "400",
+      "caption": "Plagg lagade varje år i Köpenhamn"
+    }
+  },
+  "made": {
+    "alt": "Väveri med maskiner i dagsljus",
+    "eyebrow": "Var allt tillverkas",
+    "title": "Sex verkstäder, med namn",
+    "body": "Stickat och trikå i Porto. Ull vävd i Biella och skuren i Guimarães. Lädervaror i Toscana. Vi besöker varje partner minst två gånger om året och berättar vilka de är.",
+    "link": "Läs hur vi väljer ett väveri"
+  },
+  "visit": {
+    "title": "Besök studion, eller skriv till oss",
+    "body": "Studion på Nørrebro har öppet torsdag till lördag för provning, lagningar och upphämtning. För allt annat går det bra med e-post.",
+    "contact": "Kontakt",
+    "shop": "Handla kollektionen"
+  }
+}

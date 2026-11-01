@@ -1,0 +1,31 @@
+{
+  "title": "Votre panier",
+  "crumbs": {
+    "home": "Accueil",
+    "bag": "Panier"
+  },
+  "count_one": "{{count}} article",
+  "count_other": "{{count}} articles",
+  "count_many": "{{count}} articles",
+  "loadError": "Nous n’avons pas pu charger votre panier.",
+  "tryAgain": "Réessayer",
+  "empty": {
+    "title": "Votre panier est vide.",
+    "description": "Rien ici pour l’instant. La sélection d’automne est un bon point de départ."
+  },
+  "continueShopping": "Continuer mes achats",
+  "columns": {
+    "item": "Article",
+    "quantity": "Quantité",
+    "total": "Total"
+  },
+  "toFree": "Plus que {{amount}} pour la livraison offerte",
+  "freeApplied": "Livraison offerte appliquée",
+  "related": "Se porte bien avec",
+  "summaryLabel": "Récapitulatif de commande",
+  "summary": "Récapitulatif",
+  "checkout": "Commander",
+  "taxNote": "{{tax}} calculée selon votre pays de livraison lors de la commande. La livraison se choisit lors de la commande.",
+  "skuEach": "Réf. {{sku}} · {{price}} l’unité",
+  "remove": "Retirer {{name}}"
+}

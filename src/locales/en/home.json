@@ -1,0 +1,144 @@
+{
+  "shopCollection": "Shop the collection",
+  "pieces_one": "{{count}} piece",
+  "pieces_other": "{{count}} pieces",
+  "hero": {
+    "eyebrow": "Autumn 2026",
+    "title": "Modern essentials.\nConsidered deeply.",
+    "body": "Everyday pieces cut from natural materials in small runs, made to be worn well past the season.",
+    "primaryCta": "Shop women",
+    "secondaryCta": "Shop men",
+    "alt": "Knitwear, a brown wool coat and linen trousers on a pale wooden rail in soft morning light"
+  },
+  "categories": {
+    "title": "Shop by category",
+    "alt": "{{name}} — VAREL"
+  },
+  "newIn": {
+    "eyebrow": "New in",
+    "title": "The season, edited",
+    "sortLabel": "Sort products",
+    "sort": {
+      "featured": "Featured",
+      "price-asc": "Price — low to high",
+      "price-desc": "Price — high to low"
+    },
+    "filterLabel": "Filter products",
+    "filters": {
+      "all": "All",
+      "new": "New in",
+      "women": "Women",
+      "men": "Men",
+      "shoes": "Shoes",
+      "bags": "Bags",
+      "accessories": "Accessories"
+    },
+    "error": "The collection could not be loaded.",
+    "tryAgain": "Try again",
+    "empty": "Nothing here yet. Try another filter."
+  },
+  "piece": {
+    "eyebrow": "Featured piece",
+    "altA": "Atelier Wool Coat — full-length look on location",
+    "altB": "Coat and trousers styled over a studio chair",
+    "error": "This piece could not be loaded right now.",
+    "body": "Double-faced Italian wool from our mill in Biella, unlined and hand-finished. Cut long through the body with a dropped shoulder, so it layers over knitwear without bulk.",
+    "note": "Free shipping over $150 · Thirty days to return unworn pieces",
+    "stock": {
+      "download": "Instant download",
+      "soldOut": "Sold out in this size",
+      "final_one": "Only {{word}} left",
+      "final_other": "Only {{word}} left",
+      "in": "In stock"
+    },
+    "words": {
+      "1": "one",
+      "2": "two",
+      "3": "three",
+      "4": "four",
+      "5": "five",
+      "6": "six"
+    }
+  },
+  "values": {
+    "label": "How we make",
+    "materials": {
+      "title": "Considered materials",
+      "body": "Wool, linen and vegetable-tanned leather chosen for how they wear over years, not seasons."
+    },
+    "lasting": {
+      "title": "Made to last",
+      "body": "Small production runs with named partners in Portugal and Italy, repeated only when they earn it."
+    },
+    "fit": {
+      "title": "Fit, resolved",
+      "body": "Every piece is graded on real bodies before it reaches the collection."
+    }
+  },
+  "bestPart": {
+    "eyebrow": "(The best part)",
+    "rows": {
+      "outerwear": "Outerwear",
+      "knitwear": "Knitwear",
+      "shirting": "Shirting",
+      "denim": "Denim"
+    },
+    "body": "From everyday essentials to considered outerwear, each piece is cut from natural fibres and made in small runs. Wear it this season and the next.",
+    "alt": "Garments on a rail in a bare concrete studio"
+  },
+  "featured": {
+    "eyebrow": "Featured",
+    "title": "Kept close this season",
+    "allProducts": "All products"
+  },
+  "featuredCollections": {
+    "eyebrow": "Collections",
+    "title": "Edited by the studio",
+    "all": "All collections"
+  },
+  "newCollections": {
+    "eyebrow": "New collections",
+    "knit": {
+      "title": "Knitwear for the cold months",
+      "body": "Lambswool and merino spun in Biella, knitted in Portugal in ribs and half-gauges we repeat each season. Cut generous through the body so a shirt sits underneath.",
+      "cta": "Shop knitwear",
+      "altA": "Folded knit sweaters stacked beside a ball of yarn",
+      "altB": "Gold rings resting on a cream knit sleeve"
+    },
+    "shirt": {
+      "title": "Shirting, cut once and kept",
+      "body": "Dry Italian cotton twill and washed poplin, boxy through the body with a squared hem. Two collars, four colourways, no seasonal variation.",
+      "cta": "Shop shirting",
+      "altA": "Shirting detail",
+      "altB": "Shirting editorial"
+    }
+  },
+  "collections": {
+    "eyebrow": "Wear the season",
+    "body": "Four edits from the studio, each built from the same short list of fabrics we return to every season.",
+    "altA": "Denim jacket worn against a ribbed metal shutter",
+    "altB": "Tailored jackets on copper hangers",
+    "items": {
+      "essentials": {
+        "title": "Everyday Essentials",
+        "description": "The pieces we make every season: heavy tees, wide trousers and rib knits, in the fabrics we keep coming back to."
+      },
+      "statement": {
+        "title": "Statement Pieces",
+        "description": "A short run of larger silhouettes: the wool coat, the overshirt, the weekender."
+      },
+      "classics": {
+        "title": "The Classics",
+        "description": "Shirts, trousers and knits we have kept in the line since the early seasons, barely changed."
+      },
+      "seasonal": {
+        "title": "Seasonal Collections",
+        "description": "Autumn and spring drops, released in small numbers and rarely repeated."
+      }
+    }
+  },
+  "journal": {
+    "title": "From the journal",
+    "all": "All stories"
+  }
+}

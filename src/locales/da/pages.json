@@ -1,0 +1,10 @@
+{
+  "home": "Forside",
+  "notFound": "Siden blev ikke fundet",
+  "loadError": "Siden kunne ikke indlæses. Tjek din forbindelse, og prøv igen.",
+  "tryAgain": "Prøv igen",
+  "lastUpdated": "Sidst opdateret {{date}}",
+  "sections": "Afsnit",
+  "onThisPage": "På denne side",
+  "loading": "Indlæser siden"
+}

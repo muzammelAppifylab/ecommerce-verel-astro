@@ -1,0 +1,107 @@
+{
+  "pieces_one": "{{count}} piece",
+  "pieces_other": "{{count}} pieces",
+  "crumbs": {
+    "home": "Home",
+    "shop": "Shop"
+  },
+  "sort": {
+    "label": "Sort",
+    "aria": "Sort products",
+    "featured": "Featured",
+    "newest": "Newest",
+    "price-asc": "Price · low to high",
+    "price-desc": "Price · high to low",
+    "name": "Name · A to Z"
+  },
+  "filters": {
+    "label": "Filters",
+    "title": "Filter",
+    "titleCount": "Filter ({{count}})",
+    "clear": "Clear",
+    "description": "Narrow the products by category, colour, size, material, brand and price.",
+    "close": "Close filters",
+    "showResults": "Show results",
+    "show_one": "Show {{count}} piece",
+    "show_other": "Show {{count}} pieces",
+    "price": "Price",
+    "maxPrice": "Maximum price",
+    "upTo": "Up to {{price}}",
+    "active": "Active filters",
+    "remove": "Remove filter {{label}}"
+  },
+  "results": {
+    "errorTitle": "The collection did not load",
+    "errorBody": "Check your connection and try again.",
+    "tryAgain": "Try again",
+    "noMatchTitle": "Nothing matches these filters",
+    "noMatchBody": "Try removing a filter, or browse the full collection.",
+    "clearFilters": "Clear filters"
+  },
+  "shop": {
+    "title": "Shop all",
+    "meta": "Every VAREL piece: clothing, footwear, bags and accessories, cut from natural fibres in small runs.",
+    "heading": "All products",
+    "intro": "Everything currently in the studio. Natural fibres, small runs, four colourways a season."
+  },
+  "category": {
+    "eyebrow": "Collection · Autumn 2026",
+    "departments": "Departments",
+    "all": "All {{lower}}",
+    "heroAlt": "{{name}} collection, editorial in natural daylight",
+    "detailAlt": "{{name}} collection detail",
+    "notFoundTitle": "We cannot find that collection",
+    "notFoundBody": "It may have moved. Browse everything currently in the studio.",
+    "allProducts": "All products",
+    "emptyTitle": "This category is empty",
+    "emptyBody": "Pieces arrive here as the season lands. Browse everything in the meantime.",
+    "aboutEyebrow": "About this collection",
+    "aboutTitle": "{{name}}, in four colourways",
+    "aboutBody": "Every piece in this collection is graded on real bodies and cut from the same four colourways, so anything here works with anything else. Sizes run XS to XL, with denim and footwear in numeric sizing.",
+    "journal": "Read the journal",
+    "copy": {
+      "women": "Dresses, shirting, knitwear and outerwear cut for a full wardrobe rather than a single season.",
+      "men": "Shirting, jersey and knitwear in natural fibres, cut generous and made to be repeated.",
+      "shoes": "Vegetable-tanned leather on slim soles. Resolable, and built to soften with wear.",
+      "bags": "Structured leather and waxed canvas, sized for a day out and a weekend away.",
+      "accessories": "Steel, leather and glass. The small pieces that finish an outfit.",
+      "lifestyle": "Objects and printed matter for keeping a wardrobe in good condition."
+    },
+    "meta": {
+      "women": "Womenswear from VAREL: dresses, shirts, knitwear, trousers, denim and outerwear in natural fibres."
+    }
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search products, categories, journal",
+    "prompt": "Type to search the catalogue and the journal.",
+    "searching": "Searching for “{{term}}”",
+    "unavailable": "Search is unavailable right now. Please try again.",
+    "results_one": "{{count}} result for “{{term}}”",
+    "results_other": "{{count}} results for “{{term}}”",
+    "suggested": "Suggested",
+    "suggestions": {
+      "wool": "Wool",
+      "knitwear": "Knitwear",
+      "outerwear": "Outerwear",
+      "leather": "Leather",
+      "stone": "Stone",
+      "digital": "Digital"
+    },
+    "resultType": "Result type",
+    "tabs": {
+      "all": "Everything",
+      "products": "Products",
+      "categories": "Categories",
+      "journal": "Journal"
+    },
+    "noResults": "No results for “{{term}}”",
+    "noResultsBody": "Check the spelling, try a material or a category, or browse everything currently in the studio.",
+    "allProducts": "All products",
+    "tabEmpty_one": "Nothing in this tab. The other tabs hold {{count}} result for “{{term}}”.",
+    "tabEmpty_other": "Nothing in this tab. The other tabs hold {{count}} results for “{{term}}”.",
+    "productsCount": "Products ({{count}})",
+    "categoriesCount": "Categories ({{count}})",
+    "journalCount": "Journal ({{count}})"
+  }
+}

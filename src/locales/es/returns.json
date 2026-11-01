@@ -1,0 +1,87 @@
+{
+  "home": "Inicio",
+  "title": "Devoluciones y reembolsos",
+  "intro": "Treinta días para devolver piezas sin usar y con las etiquetas puestas. Las devoluciones desde Dinamarca y la UE son gratuitas; en el resto del mundo, el envío de la devolución corre de tu cuenta.",
+  "lookup": {
+    "label": "Iniciar una devolución",
+    "placeholder": "Número de pedido",
+    "button": "Buscar",
+    "note": "Tu número de pedido empieza por VRL- y está en tu correo de confirmación",
+    "enterNumber": "Introduce el número de pedido de tu correo de confirmación",
+    "notFound": "No encontramos ese número de pedido"
+  },
+  "steps": {
+    "label": "Cómo funcionan las devoluciones",
+    "step": "Paso {{n}}",
+    "s1Title": "Búscalo",
+    "s1Body": "Introduce tu número de pedido o abre el pedido desde tu cuenta.",
+    "s2Title": "Elige las piezas",
+    "s2Body": "Elige qué devuelves y cuéntanos el motivo en una línea.",
+    "s3Title": "Envíalo",
+    "s3Body": "Imprime la etiqueta prepagada. Las devoluciones desde la UE son gratuitas; en el resto del mundo, el envío corre de tu cuenta.",
+    "s4Title": "Recibe el reembolso",
+    "s4Body": "Tres días laborables desde que llega el paquete, en tu método de pago original."
+  },
+  "window": {
+    "title": "El plazo",
+    "p1": "Treinta días desde la entrega. La legislación de la UE te da catorce; nosotros lo ampliamos. Las piezas de rebajas marcadas como venta final son la única excepción y no se pueden devolver salvo que sean defectuosas."
+  },
+  "condition": {
+    "title": "Estado",
+    "p1": "Sin usar, sin lavar, con las etiquetas puestas y en su embalaje original. Pruébate las prendas como lo harías en una tienda. El calzado debe probarse en interiores — no podemos aceptar suelas con señales de uso."
+  },
+  "refunds": {
+    "title": "Reembolsos",
+    "methodLabel": "Método",
+    "method": "En la tarjeta o el monedero con el que pagaste. No podemos reembolsar en otro medio.",
+    "timingLabel": "Plazo",
+    "timing": "En un plazo de tres días laborables desde que llega el paquete, más lo que tarde tu banco.",
+    "shippingLabel": "Gastos de envío",
+    "shipping": "No se reembolsan, salvo que una pieza llegara defectuosa o te enviáramos la equivocada.",
+    "discountsLabel": "Descuentos",
+    "discounts": "En una devolución parcial, el descuento se recalcula sobre las piezas que te quedas."
+  },
+  "exchanges": {
+    "title": "Cambios",
+    "p1": "Lo más sencillo es devolver y volver a pedir, ya que las existencias cambian. Si la talla que quieres está disponible, escríbenos con el número de pedido y te la reservamos siete días mientras tu devolución está en camino."
+  },
+  "digital": {
+    "title": "Productos digitales",
+    "p1": "No son reembolsables una vez descargados, ya que no hay nada que devolver. Si un archivo no se abre, escríbenos y lo solucionaremos o te devolveremos el importe."
+  },
+  "faults": {
+    "title": "Defectos y reparaciones",
+    "p1": "Dos años de garantía frente a defectos de fabricación, con reparación gratuita durante ese tiempo. Pasados dos años, el estudio de Copenhague sigue reparando cualquier pieza de VAREL a precio de coste. Envíanos primero una foto y te diremos qué necesita.",
+    "findOrder": "Buscar un pedido"
+  },
+  "writeStudio": "Escribir al estudio",
+  "related": {
+    "terms": "Términos y condiciones",
+    "privacy": "Política de privacidad"
+  },
+  "request": {
+    "order": "Pedido {{number}}",
+    "booked": "Tu devolución está registrada",
+    "choose": "Elige qué devuelves",
+    "notYet": "Este pedido aún no se puede devolver",
+    "lookupAnother": "Buscar otro pedido",
+    "requested_one": "Devolución solicitada para una pieza. La etiqueta prepagada y las instrucciones están de camino a {{email}}.",
+    "requested_many": "Devolución solicitada para {{count}} piezas. La etiqueta prepagada y las instrucciones están de camino a {{email}}.",
+    "requested_other": "Devolución solicitada para {{count}} piezas. La etiqueta prepagada y las instrucciones están de camino a {{email}}.",
+    "packCarrier": "Empaqueta las piezas en su embalaje original, pega la etiqueta y deja el paquete en cualquier punto de {{carrier}}. El reembolso se hará en tu método de pago original en un plazo de tres días laborables desde que llegue el paquete.",
+    "pack": "Empaqueta las piezas en su embalaje original, pega la etiqueta y deja el paquete en cualquier punto de entrega del transportista. El reembolso se hará en tu método de pago original en un plazo de tres días laborables desde que llegue el paquete.",
+    "reference": "Referencia de la devolución {{id}}",
+    "notEligibleReason": "Este pedido no se puede devolver.",
+    "notEligible": "{{reason}} Si algo llegó dañado o defectuoso, escribe al estudio y lo solucionaremos.",
+    "allDigital": "Todo en este pedido es digital. Los productos digitales no son reembolsables una vez descargados — si un archivo no se abre, escribe al estudio y lo solucionaremos o te devolveremos el importe.",
+    "estimatedRefund": "Reembolso estimado",
+    "submit": "Solicitar devolución",
+    "chooseOne": "Elige al menos una pieza para devolver",
+    "whyOneLine": "Cuéntanos el motivo en una línea",
+    "qty": "Cant. {{qty}}",
+    "quantity": "Cantidad",
+    "reason": "Motivo",
+    "chooseReason": "Elige un motivo",
+    "reasonPlaceholder": "Demasiado ancho de hombros"
+  }
+}

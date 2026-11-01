@@ -1,0 +1,69 @@
+{
+  "title": "Opiniones",
+  "loadError": "No hemos podido cargar las opiniones.",
+  "tryAgain": "Intentar de nuevo",
+  "write": "Escribir una opinión",
+  "eligibility": {
+    "purchase": "Las opiniones las escriben quienes han comprado esta pieza.",
+    "reviewed": "Gracias, ya has opinado sobre esta pieza."
+  },
+  "empty": {
+    "title": "Aún no hay opiniones",
+    "body": "¿Llevas {{name}}? Cuéntales a otros cómo sienta, qué tacto tiene y cuánto dura."
+  },
+  "count_one": "{{count}} opinión",
+  "count_other": "{{count}} opiniones",
+  "count_many": "{{count}} opiniones",
+  "sort": {
+    "label": "Ordenar opiniones",
+    "newest": "Más recientes",
+    "highest": "Mejor valoradas",
+    "lowest": "Peor valoradas"
+  },
+  "pages": {
+    "label": "Páginas de opiniones",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "status": "Página {{page}} de {{pages}}"
+  },
+  "summary": {
+    "first": "Sé la primera persona en opinar sobre esta pieza.",
+    "rated": "Valorado con {{avg}} de 5",
+    "basedOn_one": "Basado en {{count}} opinión",
+    "basedOn_other": "Basado en {{count}} opiniones",
+    "basedOn_many": "Basado en {{count}} opiniones"
+  },
+  "stars_one": "{{count}} estrella",
+  "stars_other": "{{count}} estrellas",
+  "stars_many": "{{count}} estrellas",
+  "item": {
+    "outOf": "{{rating}} de 5",
+    "verified": "Compra verificada",
+    "reply": "Respuesta de VAREL"
+  },
+  "rating": {
+    "label": "Tu valoración",
+    "1": "Mala",
+    "2": "Regular",
+    "3": "Buena",
+    "4": "Muy buena",
+    "5": "Excelente"
+  },
+  "form": {
+    "error": "Tu reseña no se ha enviado. Comprueba tu conexión e inténtalo de nuevo.",
+    "chooseRating": "Elige una valoración",
+    "thanks": "Gracias por tu opinión",
+    "live": "Ya está publicada en esta página.",
+    "pending": "Leemos todas las opiniones antes de publicarlas. Suele aparecer en uno o dos días.",
+    "close": "Cerrar",
+    "closeForm": "Cerrar el formulario de opinión",
+    "blocked": "Las opiniones están abiertas a quienes han comprado esta pieza. <signIn>Inicia sesión</signIn> para escribir una.",
+    "title": "Título",
+    "titlePlaceholder": "Resúmelo en pocas palabras",
+    "body": "Tu opinión",
+    "bodyHint": "Ajuste, tejido, cómo envejece. Al menos una o dos frases.",
+    "postingAs": "Publicas como {{name}}",
+    "submit": "Enviar opinión",
+    "checked": "Las opiniones se revisan antes de publicarse"
+  }
+}

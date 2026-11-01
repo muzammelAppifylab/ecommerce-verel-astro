@@ -1,0 +1,144 @@
+{
+  "shopCollection": "Se kollektionen",
+  "pieces_one": "{{count}} styk",
+  "pieces_other": "{{count}} styk",
+  "hero": {
+    "eyebrow": "Efterår 2026",
+    "title": "Moderne basisvarer.\nNøje overvejet.",
+    "body": "Hverdagsstyles skåret i naturlige materialer i små serier, lavet til at blive båret længe efter sæsonen.",
+    "primaryCta": "Shop kvinder",
+    "secondaryCta": "Shop mænd",
+    "alt": "Strik, en brun uldfrakke og hørbukser på et lyst træstativ i blødt morgenlys"
+  },
+  "categories": {
+    "title": "Shop efter kategori",
+    "alt": "{{name}} — VAREL"
+  },
+  "newIn": {
+    "eyebrow": "Nyheder",
+    "title": "Sæsonen, udvalgt",
+    "sortLabel": "Sortér produkter",
+    "sort": {
+      "featured": "Udvalgte",
+      "price-asc": "Pris — lav til høj",
+      "price-desc": "Pris — høj til lav"
+    },
+    "filterLabel": "Filtrér produkter",
+    "filters": {
+      "all": "Alle",
+      "new": "Nyheder",
+      "women": "Kvinder",
+      "men": "Mænd",
+      "shoes": "Sko",
+      "bags": "Tasker",
+      "accessories": "Tilbehør"
+    },
+    "error": "Kollektionen kunne ikke indlæses.",
+    "tryAgain": "Prøv igen",
+    "empty": "Intet her endnu. Prøv et andet filter."
+  },
+  "piece": {
+    "eyebrow": "Udvalgt styk",
+    "altA": "Atelier Wool Coat — helfigur på location",
+    "altB": "Frakke og bukser lagt over en stol i studiet",
+    "error": "Dette styk kunne ikke indlæses lige nu.",
+    "body": "Dobbeltvævet italiensk uld fra vores væveri i Biella, uden for og håndafsluttet. Lang i kroppen med sænket skulder, så den kan bæres over strik uden at fylde.",
+    "note": "Fri fragt over $150 · Tredive dages returret på ubrugte styk",
+    "stock": {
+      "download": "Download med det samme",
+      "soldOut": "Udsolgt i denne størrelse",
+      "final_one": "Kun {{word}} tilbage",
+      "final_other": "Kun {{word}} tilbage",
+      "in": "På lager"
+    },
+    "words": {
+      "1": "ét",
+      "2": "to",
+      "3": "tre",
+      "4": "fire",
+      "5": "fem",
+      "6": "seks"
+    }
+  },
+  "values": {
+    "label": "Sådan arbejder vi",
+    "materials": {
+      "title": "Gennemtænkte materialer",
+      "body": "Uld, hør og vegetabilsk garvet læder, valgt for hvordan de holder over år, ikke sæsoner."
+    },
+    "lasting": {
+      "title": "Lavet til at holde",
+      "body": "Små produktioner hos navngivne partnere i Portugal og Italien, som kun gentages, når de fortjener det."
+    },
+    "fit": {
+      "title": "Pasform, løst",
+      "body": "Hvert styk prøves på rigtige kroppe, før det kommer i kollektionen."
+    }
+  },
+  "bestPart": {
+    "eyebrow": "(Det bedste)",
+    "rows": {
+      "outerwear": "Overtøj",
+      "knitwear": "Strik",
+      "shirting": "Skjorter",
+      "denim": "Denim"
+    },
+    "body": "Fra hverdagens basisvarer til gennemtænkt overtøj er hvert styk skåret i naturfibre og lavet i små serier. Bær det denne sæson og den næste.",
+    "alt": "Tøj på et stativ i et nøgent betonstudie"
+  },
+  "featured": {
+    "eyebrow": "Udvalgt",
+    "title": "Tæt på denne sæson",
+    "allProducts": "Alle produkter"
+  },
+  "featuredCollections": {
+    "eyebrow": "Kollektioner",
+    "title": "Udvalgt af studiet",
+    "all": "Alle kollektioner"
+  },
+  "newCollections": {
+    "eyebrow": "Nye kollektioner",
+    "knit": {
+      "title": "Strik til de kolde måneder",
+      "body": "Lammeuld og merino spundet i Biella, strikket i Portugal i rib og halvpatent, som vi gentager hver sæson. Rummelig i kroppen, så en skjorte kan sidde under.",
+      "cta": "Se strik",
+      "altA": "Foldede striktrøjer stablet ved siden af et garnnøgle",
+      "altB": "Guldringe på et cremefarvet strikærme"
+    },
+    "shirt": {
+      "title": "Skjorter, skåret én gang og bevaret",
+      "body": "Tør italiensk bomuldstwill og vasket poplin, kasseformet i kroppen med lige kant forneden. To kraver, fire farver, ingen sæsonvariation.",
+      "cta": "Se skjorter",
+      "altA": "Skjortedetalje",
+      "altB": "Skjorter i editorial"
+    }
+  },
+  "collections": {
+    "eyebrow": "Bær sæsonen",
+    "body": "Fire udvalg fra studiet, hver bygget på den samme korte liste af stoffer, vi vender tilbage til hver sæson.",
+    "altA": "Denimjakke mod en riflet metalport",
+    "altB": "Skræddersyede jakker på kobberbøjler",
+    "items": {
+      "essentials": {
+        "title": "Hverdagens basis",
+        "description": "De styles, vi laver hver sæson: tunge T-shirts, vide bukser og ribstrik, i de stoffer, vi bliver ved med at vende tilbage til."
+      },
+      "statement": {
+        "title": "Statement-styles",
+        "description": "En lille serie med større silhuetter: uldfrakken, overshirten, weekendtasken."
+      },
+      "classics": {
+        "title": "Klassikerne",
+        "description": "Skjorter, bukser og strik, vi har holdt i kollektionen siden de første sæsoner, næsten uændret."
+      },
+      "seasonal": {
+        "title": "Sæsonkollektioner",
+        "description": "Efterårs- og forårslanceringer i små antal, som sjældent gentages."
+      }
+    }
+  },
+  "journal": {
+    "title": "Fra journalen",
+    "all": "Alle historier"
+  }
+}

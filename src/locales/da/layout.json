@@ -1,0 +1,95 @@
+{
+  "announcement": {
+    "fallback": "Fri fragt på ordrer over $150"
+  },
+  "skipLink": "Gå til indhold",
+  "header": {
+    "departments": "Afdelinger",
+    "accountAndBag": "Konto og kurv",
+    "openMenu": "Åbn menu",
+    "search": "Søg",
+    "account": "Konto",
+    "wishlist": "Ønskeliste ({{count}})",
+    "bag": "Kurv ({{count}})",
+    "bagShort": "Kurv ({{count}})",
+    "openBag_one": "Åbn kurv, {{count}} vare",
+    "openBag_other": "Åbn kurv, {{count}} varer"
+  },
+  "mobileMenu": {
+    "title": "Menu",
+    "description": "Navigation",
+    "allProducts": "Alle produkter",
+    "signIn": "Log ind"
+  },
+  "menu": {
+    "labels": {
+      "women": "Kvinder",
+      "men": "Mænd",
+      "shoes": "Sko",
+      "bags": "Tasker",
+      "journal": "Journal",
+      "about": "Om os",
+      "contact": "Kontakt",
+      "allProducts": "Alle produkter",
+      "bag": "Kurv",
+      "signIn": "Log ind",
+      "orders": "Ordrer",
+      "returns": "Returnering",
+      "menu": "Menu",
+      "shop": "Shop",
+      "account": "Konto"
+    }
+  },
+  "footer": {
+    "newsletterTitle": "Et brev fra studiet, to gange om måneden",
+    "newsletterBody": "Nye styles, genopfyldninger og noter fra studiet. Intet andet.",
+    "studio": "Studio",
+    "addressLine1": "112 Studio, Nørrebro",
+    "addressLine2": "0000 København, Danmark",
+    "newTab": "(åbner i en ny fane)",
+    "copyright": "© {{year}} VAREL. Designet i København, lavet i Europa. Mindre, men bedre.",
+    "vat": "CVR {{number}}",
+    "terms": "Handelsbetingelser",
+    "privacy": "Privatlivspolitik"
+  },
+  "bag": {
+    "title": "Din kurv ({{count}})",
+    "description": "Varer i din kurv",
+    "emptyTitle": "Din kurv er tom.",
+    "emptyBody": "Intet her endnu. Efterårsudvalget er et godt sted at begynde.",
+    "continueShopping": "Fortsæt med at handle",
+    "freeShippingWith": "Fri fragt · {{name}}",
+    "toFree": "{{amount}} fra fri fragt",
+    "freeApplied": "Fri fragt er tilføjet",
+    "digital": "Digital",
+    "remove": "Fjern",
+    "removeItem": "Fjern {{name}}",
+    "codeSaved": "{{code}} gemt · ikke anvendt endnu",
+    "subtotal": "Subtotal",
+    "shipping": "Fragt",
+    "checkout": "Til kassen",
+    "viewBag": "Se kurv",
+    "taxesNote": "Fragt og afgifter beregnes ved kassen."
+  },
+  "checkout": {
+    "backToBag": "← Tilbage til kurven",
+    "secure": "Sikker betaling"
+  },
+  "error": {
+    "title": "Noget gik galt",
+    "heading": "Noget gik galt.",
+    "body": "Siden kunne ikke indlæses. Prøv igen, eller start i kollektionen.",
+    "tryAgain": "Prøv igen",
+    "shop": "Se kollektionen"
+  },
+  "ui": {
+    "breadcrumb": "Brødkrumme",
+    "decrease": "Færre",
+    "increase": "Flere",
+    "decreaseOf": "Reducér antal af {{name}}",
+    "increaseOf": "Øg antal af {{name}}",
+    "removeTag": "Fjern {{name}}",
+    "home": "VAREL forside",
+    "photoCredit": "Foto: {{name}} på Unsplash"
+  }
+}

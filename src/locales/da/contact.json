@@ -1,0 +1,44 @@
+{
+  "home": "Forside",
+  "title": "Kontakt",
+  "intro": "Vi svarer inden for én hverdag, som regel hurtigere. Skriv ordrenummeret, hvis det handler om en eksisterende ordre.",
+  "subjects": {
+    "order": "En eksisterende ordre",
+    "sizing": "Størrelse og pasform",
+    "repair": "Reparationer",
+    "return": "Returnering og refusion",
+    "stockist": "Forhandlere og engros",
+    "press": "Presse"
+  },
+  "write": {
+    "hint": "Vælg et emne, så åbner dit mailprogram med emnefeltet udfyldt.",
+    "direct": "Eller skriv direkte til studiet på"
+  },
+  "studio": {
+    "label": "Om studiet",
+    "photoAlt": "VAREL-studiet på Nørrebro",
+    "photoCredit": "Foto af همَّام på Unsplash",
+    "studio": "Studie",
+    "addressLine1": "112 Studio, Nørrebro",
+    "addressLine2": "0000 København, Danmark",
+    "hours": "Åbningstider",
+    "days": "Torsdag til lørdag",
+    "time": "11.00–18.00",
+    "email": "E-mail",
+    "phone": "Telefon"
+  },
+  "faq": {
+    "title": "Før du skriver",
+    "whereQ": "Hvor er min ordre?",
+    "whereA": "Sporingen finder du på din konto under ordrehistorik og i forsendelsesmailen.",
+    "sizeQ": "Kan jeg bytte en størrelse?",
+    "sizeA": "Ja, før ordren er pakket. Skriv med ordrenummeret, så bytter vi den.",
+    "repairQ": "Reparerer I ældre styles?",
+    "repairA": "Det gør vi. Reparationer er gratis de første to år og koster derefter kun, hvad de koster os.",
+    "wholesaleQ": "Sælger I engros?",
+    "wholesaleA": "Til et lille antal forhandlere. Skriv med din butik og by.",
+    "returns": "Returnering",
+    "track": "Følg en ordre",
+    "terms": "Betingelser"
+  }
+}

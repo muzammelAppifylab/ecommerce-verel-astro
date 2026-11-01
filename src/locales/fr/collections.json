@@ -1,0 +1,40 @@
+{
+  "pieces_one": "{{count}} pièce",
+  "pieces_other": "{{count}} pièces",
+  "pieces_many": "{{count}} pièces",
+  "imageAlt": "{{title}} — collection VAREL",
+  "card": {
+    "cta": "Découvrir la sélection"
+  },
+  "crumbs": {
+    "home": "Accueil",
+    "collections": "Collections"
+  },
+  "allCollections": "Toutes les collections",
+  "allProducts": "Tous les produits",
+  "tryAgain": "Réessayer",
+  "errorBody": "Vérifiez votre connexion et réessayez.",
+  "index": {
+    "title": "Collections",
+    "meta": "Des sélections de l’atelier VAREL : des pièces choisies pour être portées ensemble, le temps d’une saison, d’un voyage ou d’une façon de s’habiller.",
+    "intro": "Des sélections de l’atelier. Des pièces choisies pour être portées ensemble, le temps d’une saison, d’un voyage ou d’une façon de s’habiller.",
+    "count_one": "{{count}} collection",
+    "count_other": "{{count}} collections",
+    "count_many": "{{count}} collections",
+    "errorTitle": "Les collections n’ont pas pu être chargées",
+    "emptyTitle": "Aucune collection pour le moment",
+    "emptyBody": "De nouvelles sélections arrivent. Parcourez tout ce qui est à l’atelier en ce moment."
+  },
+  "page": {
+    "title": "Collection",
+    "eyebrow": "Collection",
+    "notFoundTitle": "Page introuvable",
+    "notFoundHeading": "Nous ne trouvons pas cette collection",
+    "notFoundBody": "Elle est peut-être terminée ou a changé d’adresse. Parcourez les collections actuelles, ou tout l’atelier.",
+    "errorTitle": "Cette collection n’a pas pu être chargée",
+    "piecesLabel": "Pièces de cette collection",
+    "emptyTitle": "Rien dans cette collection pour le moment",
+    "emptyBody": "Les pièces sont épuisées. Parcourez tout ce qui est à l’atelier en ce moment.",
+    "more": "Autres collections"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "announcement": {
+    "fallback": "Fri frakt på beställningar över $150"
+  },
+  "skipLink": "Hoppa till innehållet",
+  "header": {
+    "departments": "Avdelningar",
+    "accountAndBag": "Konto och varukorg",
+    "openMenu": "Öppna meny",
+    "search": "Sök",
+    "account": "Konto",
+    "wishlist": "Önskelista ({{count}})",
+    "bag": "Korg ({{count}})",
+    "bagShort": "Korg ({{count}})",
+    "openBag_one": "Öppna varukorg, {{count}} vara",
+    "openBag_other": "Öppna varukorg, {{count}} varor"
+  },
+  "mobileMenu": {
+    "title": "Meny",
+    "description": "Navigering",
+    "allProducts": "Alla produkter",
+    "signIn": "Logga in"
+  },
+  "menu": {
+    "labels": {
+      "women": "Dam",
+      "men": "Herr",
+      "shoes": "Skor",
+      "bags": "Väskor",
+      "journal": "Journal",
+      "about": "Om oss",
+      "contact": "Kontakt",
+      "allProducts": "Alla produkter",
+      "bag": "Varukorg",
+      "signIn": "Logga in",
+      "orders": "Beställningar",
+      "returns": "Returer",
+      "menu": "Meny",
+      "shop": "Butik",
+      "account": "Konto"
+    }
+  },
+  "footer": {
+    "newsletterTitle": "Ett brev från studion, två gånger i månaden",
+    "newsletterBody": "Nya plagg, påfyllningar och anteckningar från studion. Inget annat.",
+    "studio": "Studio",
+    "addressLine1": "112 Studio, Nørrebro",
+    "addressLine2": "0000 Köpenhamn, Danmark",
+    "newTab": "(öppnas i en ny flik)",
+    "copyright": "© {{year}} VAREL. Formgivet i Köpenhamn, tillverkat i Europa. Mindre, men bättre.",
+    "vat": "Momsnr {{number}}",
+    "terms": "Köpvillkor",
+    "privacy": "Integritetspolicy"
+  },
+  "bag": {
+    "title": "Din varukorg ({{count}})",
+    "description": "Varor i din varukorg",
+    "emptyTitle": "Din varukorg är tom.",
+    "emptyBody": "Inget här ännu. Höstens urval är ett bra ställe att börja.",
+    "continueShopping": "Fortsätt handla",
+    "freeShippingWith": "Fri frakt · {{name}}",
+    "toFree": "{{amount}} kvar till fri frakt",
+    "freeApplied": "Fri frakt tillämpad",
+    "digital": "Digital",
+    "remove": "Ta bort",
+    "removeItem": "Ta bort {{name}}",
+    "codeSaved": "{{code}} sparad · inte tillämpad än",
+    "subtotal": "Delsumma",
+    "shipping": "Frakt",
+    "checkout": "Till kassan",
+    "viewBag": "Visa varukorg",
+    "taxesNote": "Frakt och skatter beräknas i kassan."
+  },
+  "checkout": {
+    "backToBag": "← Tillbaka till varukorgen",
+    "secure": "Säker kassa"
+  },
+  "error": {
+    "title": "Något gick fel",
+    "heading": "Något gick fel.",
+    "body": "Sidan kunde inte laddas. Försök igen, eller börja i kollektionen.",
+    "tryAgain": "Försök igen",
+    "shop": "Handla kollektionen"
+  },
+  "ui": {
+    "breadcrumb": "Brödsmulor",
+    "decrease": "Minska",
+    "increase": "Öka",
+    "decreaseOf": "Minska antal av {{name}}",
+    "increaseOf": "Öka antal av {{name}}",
+    "removeTag": "Ta bort {{name}}",
+    "home": "VAREL startsida",
+    "photoCredit": "Foto av {{name}} på Unsplash"
+  }
+}

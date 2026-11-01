@@ -1,0 +1,111 @@
+{
+  "pieces_one": "{{count}} pieza",
+  "pieces_other": "{{count}} piezas",
+  "pieces_many": "{{count}} piezas",
+  "crumbs": {
+    "home": "Inicio",
+    "shop": "Tienda"
+  },
+  "sort": {
+    "label": "Ordenar",
+    "aria": "Ordenar productos",
+    "featured": "Destacados",
+    "newest": "Novedades",
+    "price-asc": "Precio · de menor a mayor",
+    "price-desc": "Precio · de mayor a menor",
+    "name": "Nombre · de la A a la Z"
+  },
+  "filters": {
+    "label": "Filtros",
+    "title": "Filtrar",
+    "titleCount": "Filtrar ({{count}})",
+    "clear": "Borrar",
+    "description": "Filtra los productos por categoría, color, talla, material, marca y precio.",
+    "close": "Cerrar filtros",
+    "showResults": "Ver resultados",
+    "show_one": "Ver {{count}} pieza",
+    "show_other": "Ver {{count}} piezas",
+    "show_many": "Ver {{count}} piezas",
+    "price": "Precio",
+    "maxPrice": "Precio máximo",
+    "upTo": "Hasta {{price}}",
+    "active": "Filtros activos",
+    "remove": "Quitar el filtro {{label}}"
+  },
+  "results": {
+    "errorTitle": "La colección no se ha cargado",
+    "errorBody": "Comprueba tu conexión e inténtalo de nuevo.",
+    "tryAgain": "Intentar de nuevo",
+    "noMatchTitle": "Nada coincide con estos filtros",
+    "noMatchBody": "Prueba a quitar un filtro o explora toda la colección.",
+    "clearFilters": "Borrar filtros"
+  },
+  "shop": {
+    "title": "Todos los productos",
+    "meta": "Todas las piezas de VAREL: ropa, calzado, bolsos y accesorios en fibras naturales, en series cortas.",
+    "heading": "Todos los productos",
+    "intro": "Todo lo que hay ahora en el estudio. Fibras naturales, series cortas, cuatro colores por temporada."
+  },
+  "category": {
+    "eyebrow": "Colección · Otoño 2026",
+    "departments": "Secciones",
+    "all": "Ver todo",
+    "heroAlt": "Colección {{name}}, editorial con luz natural",
+    "detailAlt": "Detalle de la colección {{name}}",
+    "notFoundTitle": "No encontramos esa colección",
+    "notFoundBody": "Puede que se haya movido. Explora todo lo que hay ahora en el estudio.",
+    "allProducts": "Todos los productos",
+    "emptyTitle": "Esta categoría está vacía",
+    "emptyBody": "Las piezas llegan aquí a medida que entra la temporada. Mientras tanto, explóralo todo.",
+    "aboutEyebrow": "Sobre esta colección",
+    "aboutTitle": "{{name}}, en cuatro colores",
+    "aboutBody": "Cada pieza de esta colección se escala sobre cuerpos reales y se corta en los mismos cuatro colores, así que todo combina con todo. Tallas de la XS a la XL, con denim y calzado en tallas numéricas.",
+    "journal": "Leer el journal",
+    "copy": {
+      "women": "Vestidos, camisas, punto y abrigos pensados para todo un armario y no para una sola temporada.",
+      "men": "Camisas, punto jersey y punto en fibras naturales, de corte amplio y hechos para repetirse.",
+      "shoes": "Piel de curtido vegetal sobre suelas finas. Se pueden resolar y se suavizan con el uso.",
+      "bags": "Piel estructurada y lona encerada, a la medida de un día fuera y de un fin de semana.",
+      "accessories": "Acero, piel y cristal. Las piezas pequeñas que completan un conjunto.",
+      "lifestyle": "Objetos e impresos para mantener un armario en buen estado."
+    },
+    "meta": {
+      "women": "Moda de mujer de VAREL: vestidos, camisas, punto, pantalones, denim y abrigos en fibras naturales."
+    }
+  },
+  "search": {
+    "title": "Buscar",
+    "placeholder": "Busca productos, categorías, journal",
+    "prompt": "Escribe para buscar en el catálogo y el journal.",
+    "searching": "Buscando «{{term}}»",
+    "unavailable": "La búsqueda no está disponible ahora mismo. Inténtalo de nuevo.",
+    "results_one": "{{count}} resultado para «{{term}}»",
+    "results_other": "{{count}} resultados para «{{term}}»",
+    "results_many": "{{count}} resultados para «{{term}}»",
+    "suggested": "Sugerencias",
+    "suggestions": {
+      "wool": "Lana",
+      "knitwear": "Punto",
+      "outerwear": "Abrigos",
+      "leather": "Piel",
+      "stone": "Piedra",
+      "digital": "Digital"
+    },
+    "resultType": "Tipo de resultado",
+    "tabs": {
+      "all": "Todo",
+      "products": "Productos",
+      "categories": "Categorías",
+      "journal": "Journal"
+    },
+    "noResults": "No hay resultados para «{{term}}»",
+    "noResultsBody": "Revisa la ortografía, prueba con un material o una categoría, o explora todo lo que hay ahora en el estudio.",
+    "allProducts": "Todos los productos",
+    "tabEmpty_one": "No hay nada en esta pestaña. Las otras pestañas tienen {{count}} resultado para «{{term}}».",
+    "tabEmpty_other": "No hay nada en esta pestaña. Las otras pestañas tienen {{count}} resultados para «{{term}}».",
+    "tabEmpty_many": "No hay nada en esta pestaña. Las otras pestañas tienen {{count}} resultados para «{{term}}».",
+    "productsCount": "Productos ({{count}})",
+    "categoriesCount": "Categorías ({{count}})",
+    "journalCount": "Journal ({{count}})"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "title": "Reviews",
+  "loadError": "We could not load reviews.",
+  "tryAgain": "Try again",
+  "write": "Write a review",
+  "eligibility": {
+    "purchase": "Reviews are written by customers who bought this piece.",
+    "reviewed": "Thank you, you have reviewed this piece."
+  },
+  "empty": {
+    "title": "No reviews yet",
+    "body": "Wearing the {{name}}? Tell others how it fits, feels and lasts."
+  },
+  "count_one": "{{count}} review",
+  "count_other": "{{count}} reviews",
+  "sort": {
+    "label": "Sort reviews",
+    "newest": "Newest",
+    "highest": "Highest rated",
+    "lowest": "Lowest rated"
+  },
+  "pages": {
+    "label": "Review pages",
+    "previous": "Previous",
+    "next": "Next",
+    "status": "Page {{page}} of {{pages}}"
+  },
+  "summary": {
+    "first": "Be the first to review this piece.",
+    "rated": "Rated {{avg}} out of 5",
+    "basedOn_one": "Based on {{count}} review",
+    "basedOn_other": "Based on {{count}} reviews"
+  },
+  "stars_one": "{{count}} star",
+  "stars_other": "{{count}} stars",
+  "item": {
+    "outOf": "{{rating}} out of 5",
+    "verified": "Verified purchase",
+    "reply": "Reply from VAREL"
+  },
+  "rating": {
+    "label": "Your rating",
+    "1": "Poor",
+    "2": "Fair",
+    "3": "Good",
+    "4": "Very good",
+    "5": "Excellent"
+  },
+  "form": {
+    "error": "Your review was not sent. Check your connection and try again.",
+    "chooseRating": "Choose a rating",
+    "thanks": "Thank you for your review",
+    "live": "It is now live on this page.",
+    "pending": "We read every review before it goes live. It usually appears within a day or two.",
+    "close": "Close",
+    "closeForm": "Close the review form",
+    "blocked": "Reviews are open to customers who bought this piece. <signIn>Sign in</signIn> to write one.",
+    "title": "Title",
+    "titlePlaceholder": "Sum it up in a few words",
+    "body": "Your review",
+    "bodyHint": "Fit, fabric, how it wears. At least a sentence or two.",
+    "postingAs": "Posting as {{name}}",
+    "submit": "Submit review",
+    "checked": "Reviews are checked before they appear"
+  }
+}

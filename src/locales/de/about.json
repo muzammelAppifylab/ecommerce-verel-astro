@@ -1,0 +1,63 @@
+{
+  "title": "Über uns",
+  "hero": {
+    "eyebrow": "Über das Studio",
+    "title": "Weniger, aber besser.",
+    "body": "VAREL ist ein unabhängiges Label mit einem Studio in Nørrebro, Kopenhagen. Wir machen Alltagskleidung, Schuhe, Taschen und Accessoires aus Naturfasern, in kleinen Serien, mit wenigen Partnern in Portugal und Italien.",
+    "alt": "Studio im Tageslicht, Putz und Holz"
+  },
+  "story": {
+    "title": "Warum wir angefangen haben",
+    "p1": "Wir hatten jahrelang in großen Modehäusern gearbeitet und zugesehen, wie Kollektionen doppelt so groß wurden und halb so lange hielten. Getragen haben wir die schlichtesten Stücke, jahrelang behalten und zweimal repariert.",
+    "p2": "Deshalb bringt VAREL jede Saison nur wenige Stücke heraus und behält die, die sich ihren Platz verdienen. Nichts ist dafür gemacht, im nächsten Jahr ersetzt zu werden. Geht eine Naht auf, reparieren wir das Stück lieber, als dir ein neues zu verkaufen."
+  },
+  "principles": {
+    "form": {
+      "term": "Form",
+      "text": "Klare Linien, großzügige Schnitte, nichts Dekoratives. An echten Körpern gradiert, nicht an einem einzigen Fit-Model."
+    },
+    "texture": {
+      "term": "Textur",
+      "text": "Wolle aus Biella, Baumwolle und Leinen aus Portugal, pflanzlich gegerbtes Leder aus der Toskana."
+    },
+    "time": {
+      "term": "Zeit",
+      "text": "Vier Farben pro Saison, immer wieder. Alles aus einer früheren Saison passt weiterhin zu dieser."
+    },
+    "repair": {
+      "term": "Reparatur",
+      "text": "Unser Reparaturstudio in Kopenhagen repariert rund vierhundert Kleidungsstücke im Jahr. In den ersten zwei Jahren sind Reparaturen kostenlos."
+    }
+  },
+  "figures": {
+    "founded": {
+      "figure": "2019",
+      "caption": "Erste Kollektion, elf Stücke, eine Weberei"
+    },
+    "workshops": {
+      "figure": "6",
+      "caption": "Partnerwerkstätten in Portugal und Italien"
+    },
+    "fibres": {
+      "figure": "92 %",
+      "caption": "Natürliche oder recycelte Fasern im gesamten Sortiment"
+    },
+    "repairs": {
+      "figure": "400",
+      "caption": "Jedes Jahr in Kopenhagen reparierte Kleidungsstücke"
+    }
+  },
+  "made": {
+    "alt": "Weberei mit Maschinen im Tageslicht",
+    "eyebrow": "Wo gefertigt wird",
+    "title": "Sechs Werkstätten, beim Namen genannt",
+    "body": "Strick und Jersey in Porto. Wolle gewebt in Biella und zugeschnitten in Guimarães. Lederwaren in der Toskana. Wir besuchen jeden Partner mindestens zweimal im Jahr und sagen offen, wer sie sind.",
+    "link": "Lies, wie wir eine Weberei auswählen"
+  },
+  "visit": {
+    "title": "Besuche das Studio oder schreib uns",
+    "body": "Das Studio in Nørrebro ist donnerstags bis samstags für Anproben, Reparaturen und Abholungen geöffnet. Für alles andere genügt eine E-Mail.",
+    "contact": "Kontakt",
+    "shop": "Zur Kollektion"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "home": "Accueil",
+  "title": "Journal",
+  "metaDescription": "Notes du studio VAREL sur les matières, le style, l’entretien et le voyage.",
+  "intro": "Notes du studio sur les matières, la fabrication, l’entretien et la façon de porter. Publiées quand il y a quelque chose à dire.",
+  "tryAgain": "Réessayer",
+  "loadErrorDescription": "Un problème est survenu de notre côté. Réessayez dans un instant.",
+  "allEntries": "Tous les articles",
+  "categoriesLabel": "Catégories du journal",
+  "readPiece": "Lire l’article",
+  "index": {
+    "errorTitle": "Le journal n’a pas pu être chargé",
+    "emptyTitle": "Rien pour l’instant",
+    "emptyDescription": "Le premier article est encore en cours d’écriture."
+  },
+  "newsletter": {
+    "title": "Des nouvelles discrètes, deux fois par mois",
+    "body": "Nouvelles pièces, réassorts et, de temps en temps, une note du studio. Pas de bruit promotionnel.",
+    "note": "Nous ne partagerons jamais votre adresse.",
+    "success": "Merci. Surveillez votre boîte de réception pour la prochaine note."
+  },
+  "category": {
+    "pageTitle": "{{name}} — Journal",
+    "eyebrow": "Catégorie du journal",
+    "entries_one": "{{count}} article",
+    "entries_many": "{{count}} d’articles",
+    "entries_other": "{{count}} articles",
+    "errorTitle": "Cette catégorie n’a pas pu être chargée",
+    "emptyTitle": "Rien pour l’instant",
+    "emptyDescription": "Cette catégorie attend son premier article."
+  },
+  "categoryBlurb": {
+    "materials": "D’où viennent les fibres, comment elles sont filées et tissées, et ce qui se passe quand elles s’usent.",
+    "styling": "Comment les pièces s’accordent, et combien peu il en faut vraiment.",
+    "care": "Laver, sécher, ranger et raccommoder, pour qu’un vêtement dure dix ans.",
+    "travel": "Voyager léger avec une garde-robe qui se répète."
+  },
+  "authorRole": {
+    "studioDirector": "Directrice du studio"
+  },
+  "post": {
+    "pageTitle": "{{title}} — Journal",
+    "notFoundTitle": "Nous ne trouvons pas cet article",
+    "notFoundDescription": "Il a peut-être été déplacé, ou le lien est incomplet. Tout ce que nous avons publié se trouve dans le journal.",
+    "errorTitle": "Cet article n’a pas pu être chargé",
+    "linkCopied": "Lien copié",
+    "share": "Partager",
+    "print": "Imprimer",
+    "contents": "Sommaire",
+    "keepReading": "À lire aussi"
+  },
+  "newsletterForm": {
+    "note": "Nous ne partageons jamais votre adresse.",
+    "success": "Merci. La prochaine lettre arrivera dans votre boîte de réception.",
+    "invalidEmail": "Saisissez une adresse e-mail valide.",
+    "emailLabel": "Adresse e-mail",
+    "subscribe": "S’inscrire",
+    "sending": "Envoi",
+    "subscribed": "Inscrit"
+  }
+}

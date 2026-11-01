@@ -1,0 +1,18 @@
+{
+  "title": "Página no encontrada",
+  "heading": "Esta página no está aquí",
+  "body": "Puede que el enlace sea antiguo o que una pieza se haya agotado y ya no esté en el catálogo. Búscala o empieza por la colección.",
+  "searchPlaceholder": "Buscar en la tienda",
+  "search": "Buscar",
+  "allProducts": "Todos los productos",
+  "home": "Inicio",
+  "popular": "Páginas populares",
+  "quick": {
+    "women": "Mujer",
+    "men": "Hombre",
+    "journal": "Journal",
+    "contact": "Contacto"
+  },
+  "alt": "Rincón vacío del estudio con luz natural",
+  "picks": "Ahora en el estudio"
+}

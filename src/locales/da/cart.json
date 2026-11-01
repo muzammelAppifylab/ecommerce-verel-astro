@@ -1,0 +1,30 @@
+{
+  "title": "Din kurv",
+  "crumbs": {
+    "home": "Forside",
+    "bag": "Kurv"
+  },
+  "count_one": "{{count}} vare",
+  "count_other": "{{count}} varer",
+  "loadError": "Vi kunne ikke hente din kurv.",
+  "tryAgain": "Prøv igen",
+  "empty": {
+    "title": "Din kurv er tom.",
+    "description": "Her er intet endnu. Efterårets udvalg er et godt sted at begynde."
+  },
+  "continueShopping": "Shop videre",
+  "columns": {
+    "item": "Vare",
+    "quantity": "Antal",
+    "total": "I alt"
+  },
+  "toFree": "{{amount}} fra fri fragt",
+  "freeApplied": "Fri fragt er tilføjet",
+  "related": "Passer godt til",
+  "summaryLabel": "Ordreoversigt",
+  "summary": "Oversigt",
+  "checkout": "Til kassen",
+  "taxNote": "{{tax}} beregnes ud fra dit leveringsland i kassen. Fragt vælges i kassen.",
+  "skuEach": "Varenr. {{sku}} · {{price}} pr. stk.",
+  "remove": "Fjern {{name}}"
+}

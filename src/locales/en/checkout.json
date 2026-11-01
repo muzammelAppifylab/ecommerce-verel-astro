@@ -1,0 +1,158 @@
+{
+  "title": "Checkout",
+  "steps": {
+    "label": "Checkout steps",
+    "information": "Information",
+    "shipping": "Shipping",
+    "payment": "Payment"
+  },
+  "loadError": "We could not load your bag.",
+  "tryAgain": "Try again",
+  "contact": "Contact",
+  "email": "Email",
+  "phone": "Phone",
+  "phoneOptional": "Phone (optional)",
+  "shippingAddress": "Shipping address",
+  "savedAddress": "Saved address",
+  "chooseSaved": "Choose a saved address",
+  "shippingMethod": "Shipping method",
+  "shippingMethodZone": "Shipping method — {{zone}}",
+  "digitalOnly": "Your bag holds digital products only. Nothing ships — a download link arrives with your confirmation.",
+  "loadingMethods": "Loading shipping methods",
+  "free": "Free",
+  "payment": "Payment",
+  "loadingSecure": "Loading secure payment",
+  "loadingOptions": "Loading payment options",
+  "paymentMethod": "Payment method",
+  "methods": {
+    "card": "Card"
+  },
+  "card": {
+    "name": "Name on card",
+    "number": "Card number",
+    "expiry": "Expiry",
+    "cvc": "CVC"
+  },
+  "billingSame": "Billing address is the same as shipping",
+  "billingAddress": "Billing address",
+  "note": {
+    "title": "Order note",
+    "placeholder": "Delivery instructions, a gift message, anything we should know"
+  },
+  "removeCode": "Remove code",
+  "pay": "Pay {{total}}",
+  "placeOrder": "Place order",
+  "methodDigital": "digital",
+  "errors": {
+    "email": "Enter a valid email address",
+    "phone": "Enter a phone number for delivery",
+    "method": "Choose a shipping method",
+    "noteLength": "Keep your note under {{max}} characters",
+    "terms": "Accept the terms to continue",
+    "payByCard": "Pay by card to complete this order.",
+    "paymentLoading": "The payment form is still loading. Try again in a moment",
+    "paymentGone": "The payment form is no longer available. Try again",
+    "checkPayment": "Check your payment details",
+    "paymentFailed": "Your payment did not go through. Try again or use another method",
+    "paymentLoadDetail": "The payment form could not load: {{message}}",
+    "paymentLoad": "The payment form could not load. Refresh the page to try again",
+    "cardName": "Enter the name on the card",
+    "cardNumber": "Enter your card number",
+    "cardCheck": "Check the card number",
+    "expiry": "Enter the expiry date",
+    "expiryPast": "Use a card that has not expired (MM/YY)",
+    "cvc": "Enter the 3 or 4 digit security code",
+    "name": "Enter the full name",
+    "country": "Choose a country we ship to",
+    "line1": "Enter the street address",
+    "city": "Enter the city",
+    "summary_one": "{{count}} field needs your attention",
+    "summary_other": "{{count}} fields need your attention",
+    "line1Letters": "Enter the street name as well as the number",
+    "line1Number": "Add the house or building number",
+    "zipFormat": "Check the format, for example {{example}}",
+    "zipRequired": {
+      "zip": "Enter the ZIP code",
+      "postal": "Enter the postal code",
+      "postcode": "Enter the postcode",
+      "eircode": "Enter the Eircode"
+    },
+    "region": {
+      "state": "Choose a state",
+      "province": "Choose a province",
+      "county": "Choose a county",
+      "stateTerritory": "Choose a state or territory",
+      "prefecture": "Choose a prefecture"
+    }
+  },
+  "address": {
+    "fullName": "Full name",
+    "country": "Country",
+    "line1": "Street address",
+    "city": "City",
+    "loadingCountries": "Loading countries",
+    "line2": "Apartment, suite, floor (optional)",
+    "optional": "{{label}} (optional)",
+    "choose": "Choose",
+    "zipLabel": {
+      "zip": "ZIP code",
+      "postal": "Postal code",
+      "postcode": "Postcode",
+      "eircode": "Eircode"
+    },
+    "region": {
+      "state": "State",
+      "province": "Province",
+      "county": "County",
+      "stateTerritory": "State/territory",
+      "prefecture": "Prefecture"
+    }
+  },
+  "signIn": {
+    "title": "Sign in to check out",
+    "body": "Orders are placed from a VAREL account. Sign in, or create an account in a minute, and your bag comes with you.",
+    "signIn": "Sign in",
+    "create": "Create an account",
+    "back": "Back to your bag"
+  },
+  "summary": {
+    "title": "Order summary",
+    "show": "Show order summary",
+    "hide": "Hide order summary",
+    "note_one": "{{tax}} is calculated from your shipping country at checkout. {{count}} day to return unworn pieces. Digital products are non-refundable once downloaded.",
+    "note_other": "{{tax}} is calculated from your shipping country at checkout. {{count}} days to return unworn pieces. Digital products are non-refundable once downloaded."
+  },
+  "qty": "Qty {{qty}}",
+  "discount": {
+    "label": "Discount code",
+    "apply": "Apply",
+    "enter": "Enter a discount code",
+    "applied": "{{code}} applied.",
+    "appliedReplaces": "{{code}} applied. It replaces {{previous}}.",
+    "saved": "{{code}} saved to your bag.",
+    "savedReplaces": "{{code}} saved to your bag. It replaces {{previous}}.",
+    "statusApplied": "{{code}} applied",
+    "statusSaved": "{{code}} saved · not applied yet",
+    "fallback": "Discount",
+    "remove": "Remove",
+    "removeAria": "Remove code {{code}}",
+    "lineFree_one": "{{count}} free · {{amount}}",
+    "lineFree_other": "{{count}} free · {{amount}}",
+    "toggle": "Have a discount code?"
+  },
+  "totals": {
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shippingWith": "Shipping · {{method}}",
+    "taxRate": "{{name}} ({{rate}}%)",
+    "includes": "Includes {{tax}}",
+    "total": "Total",
+    "freeWith": "Free · {{name}}",
+    "was": "Was ",
+    "now": "Now ",
+    "youSave": "You save {{amount}}"
+  },
+  "signInPrompt": "Have an account?",
+  "signInLink": "Sign in for faster checkout",
+  "trust": "Secure, encrypted payment · {{count}}-day returns on unworn pieces"
+}
