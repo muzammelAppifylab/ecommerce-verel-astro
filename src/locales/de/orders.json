@@ -104,7 +104,13 @@
     "empty": {
       "title": "Keine Bestellungen in dieser Ansicht",
       "description": "Ändere den Filter oder beginne mit etwas aus der Herbstauswahl."
-    }
+    },
+    "countMore_one": "{{count}}+ Bestellung",
+    "countMore_other": "{{count}}+ Bestellungen",
+    "countSinceMore_one": "{{count}}+ Bestellung seit {{since}}",
+    "countSinceMore_other": "{{count}}+ Bestellungen seit {{since}}",
+    "more": "Weitere Bestellungen anzeigen",
+    "loadingMore": "Bestellungen werden geladen…"
   },
   "card": {
     "order": "Bestellung",
@@ -168,7 +174,8 @@
     },
     "paidWith": "Bezahlt mit {{card}}",
     "refunded": "Diese Bestellung wurde erstattet.",
-    "footer": "Danke für Ihren Einkauf bei {{store}}. Fragen zu dieser Rechnung? Schreiben Sie an {{email}} und nennen Sie die Rechnungsnummer."
+    "footer": "Danke für Ihren Einkauf bei {{store}}. Fragen zu dieser Rechnung? Schreiben Sie an {{email}} und nennen Sie die Rechnungsnummer.",
+    "documentTitle": "{{store}} Rechnung {{number}}"
   },
   "cancel": {
     "button": "Bestellung stornieren",

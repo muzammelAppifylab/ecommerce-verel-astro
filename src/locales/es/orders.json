@@ -106,7 +106,13 @@
     "empty": {
       "title": "No hay pedidos en esta vista",
       "description": "Cambia el filtro o empieza con algo de la selección de otoño."
-    }
+    },
+    "countMore_one": "{{count}}+ pedido",
+    "countMore_other": "{{count}}+ pedidos",
+    "countSinceMore_one": "{{count}}+ pedido desde {{since}}",
+    "countSinceMore_other": "{{count}}+ pedidos desde {{since}}",
+    "more": "Mostrar más pedidos",
+    "loadingMore": "Cargando pedidos…"
   },
   "card": {
     "order": "Pedido",
@@ -170,7 +176,8 @@
     },
     "paidWith": "Pagado con {{card}}",
     "refunded": "Este pedido se ha reembolsado.",
-    "footer": "Gracias por comprar en {{store}}. ¿Dudas sobre esta factura? Escribe a {{email}} indicando el número de factura."
+    "footer": "Gracias por comprar en {{store}}. ¿Dudas sobre esta factura? Escribe a {{email}} indicando el número de factura.",
+    "documentTitle": "Factura {{store}} {{number}}"
   },
   "cancel": {
     "button": "Cancelar pedido",

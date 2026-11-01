@@ -8,7 +8,9 @@
     "button": "Suchen",
     "note": "Deine Bestellnummer beginnt mit VRL- und steht in deiner Bestätigungs-E-Mail",
     "enterNumber": "Gib die Bestellnummer aus deiner Bestätigungs-E-Mail ein",
-    "notFound": "Wir finden diese Bestellnummer nicht"
+    "notFound": "Wir finden diese Bestellnummer nicht",
+    "pending": "Wird gesucht…",
+    "emailLabel": "E-Mail-Adresse der Bestellung"
   },
   "steps": {
     "label": "So funktionieren Rücksendungen",
@@ -81,6 +83,9 @@
     "quantity": "Menge",
     "reason": "Grund",
     "chooseReason": "Grund auswählen",
-    "reasonPlaceholder": "An den Schultern zu weit"
+    "reasonPlaceholder": "An den Schultern zu weit",
+    "emailHint": "Wir gleichen sie mit der Bestellung ab, bevor wir die Rücksendung buchen.",
+    "emailNeeded": "Gib die E-Mail-Adresse ein, die du für diese Bestellung verwendet hast",
+    "submitting": "Wird angefragt…"
   }
 }

@@ -106,7 +106,13 @@
     "empty": {
       "title": "Aucune commande dans cette vue",
       "description": "Changez de filtre, ou commencez par une pièce de la sélection d’automne."
-    }
+    },
+    "countMore_one": "{{count}}+ commande",
+    "countMore_other": "{{count}}+ commandes",
+    "countSinceMore_one": "{{count}}+ commande depuis {{since}}",
+    "countSinceMore_other": "{{count}}+ commandes depuis {{since}}",
+    "more": "Afficher plus de commandes",
+    "loadingMore": "Chargement des commandes…"
   },
   "card": {
     "order": "Commande",
@@ -170,7 +176,8 @@
     },
     "paidWith": "Payé avec {{card}}",
     "refunded": "Cette commande a été remboursée.",
-    "footer": "Merci pour votre achat chez {{store}}. Une question sur cette facture ? Écrivez à {{email}} en indiquant le numéro de facture."
+    "footer": "Merci pour votre achat chez {{store}}. Une question sur cette facture ? Écrivez à {{email}} en indiquant le numéro de facture.",
+    "documentTitle": "Facture {{store}} {{number}}"
   },
   "cancel": {
     "button": "Annuler la commande",

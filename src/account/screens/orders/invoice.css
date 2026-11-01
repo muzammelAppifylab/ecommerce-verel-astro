@@ -1,0 +1,18 @@
+/* Printing an order (VAREL src/index.css "invoice print"): while the invoice is mounted, print only it, on A4. */
+@media print {
+  body:has(> #invoice-print) > :not(#invoice-print) {
+    display: none !important;
+  }
+  body:has(> #invoice-print) {
+    background: #fff !important;
+  }
+  #invoice-print {
+    display: block !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @page {
+    size: A4;
+    margin: 16mm 16mm 18mm;
+  }
+}
