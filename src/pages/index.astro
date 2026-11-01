@@ -1,147 +1,126 @@
 ---
 /**
- * The home page: PRERENDERED (built once, served as a static file, no server
- * work per visit) and made of sections. Words in `HOME`, `src/content/site.ts`;
- * styles in `src/styles/home.css` (every rule under `.home`).
+ * The home page (port of VAREL src/pages/Home.tsx, the editorial home). SERVER-RENDERED: its data lives in the
+ * Site Database and is edited live (hero, featured products, collections, posts), and `/da/` etc. reach it by
+ * a rewrite (src/middleware.ts), which a prerendered page cannot take.
  *
- * What changes often is filled in by the browser after load, from the Site API:
- *   - the visitor (`<Base isStatic>`): signed-in users see "Open your dashboard"
- *     (`data-user-only`), guests "Create an account" (`data-guest-only`)
- * The template blog and job-board sections went with the Markdown blog and the job board
- * (docs/migration/PLAN.md D12); WP-01 replaces this page with the VAREL home.
+ * Every read goes through the in-process Site API, all at once; each one may fail (`null`) and the page still
+ * renders: the hero falls back to the designed copy, sections without data are left out, New in loads in the
+ * browser, the featured piece shows VAREL's fallback copy.
+ *
+ * Sections (VAREL order): hero (full bleed) · shop by category · new in · featured piece · values ·
+ * the best part · featured edit (products + collections) · new collections · collections accordion · journal.
+ * Server-only sections ship no JS; the five interactive ones are `client:visible` islands, each handed only
+ * the word catalogs it renders.
  */
-import '../styles/home.css';
+import {BestPart} from '@/components/home/BestPart';
+import {CollectionsAccordion} from '@/components/home/CollectionsAccordion';
+import {FeaturedCollections} from '@/components/home/FeaturedCollections';
+import FeaturedPiece from '@/components/home/FeaturedPiece.astro';
+import {FeaturedRow} from '@/components/home/FeaturedRow';
+import {heroDefaults, resolveHero} from '@/components/home/hero';
+import {HomeHero} from '@/components/home/HomeHero';
+import {HomeValues} from '@/components/home/HomeValues';
+import {JournalTeaser} from '@/components/home/JournalTeaser';
+import {NewCollections} from '@/components/home/NewCollections';
+import {NewInSection} from '@/components/home/NewInSection';
+import {FEATURED_SLUG, featuredCollectionsOf, NEW_IN_LIMIT} from '@/components/home/sections';
+import {ShopByCategory} from '@/components/home/ShopByCategory';
+import {dictsFor, serverText} from '@/components/layout/dictionaries';
+import {DEFAULT_LOCALE} from '@/components/varel/href';
+import Storefront from '@/layouts/Storefront.astro';
+import type {Department, Product, ProductListResponse} from '@/lib/types/catalog';
+import type {CollectionSummary} from '@/lib/types/collections';
+import type {Post} from '@/lib/types/content';
+import type {PublicSettings} from '@/lib/types/settings';
+import {read} from '@/server/backend';
+import {serverT} from '@/server/lib/i18n/messages';
+import {pageContext} from '@/server/page';
 
-import HeroVisual from '../components/home/HeroVisual.astro';
-import Icon, {type IconName} from '../components/home/Icon.astro';
-import {HOME, withName} from '../content/site';
-import Base from '../layouts/Base.astro';
-import {staticContext} from '../server/page';
+export const prerender = false;
 
-export const prerender = true;
+const locale = (Astro.locals as {locale?: string}).locale ?? DEFAULT_LOCALE;
+const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
 
-const {site, viewer} = await staticContext(Astro.request);
-const name = site?.name ?? 'My site';
+/* The Site API client, loosely typed: the catalog, product, collection and journal routes belong to other
+   packages and their query validators define the typed shape; the paths and queries here are their contract. */
+type Get = {$get: (args?: unknown, init?: {headers?: Record<string, string>}) => Promise<Response>};
+const client = api as unknown as {
+  settings: {public: Get};
+  taxonomy: Get;
+  products: Get & {':slug': Get};
+  collections: Get;
+  posts: Get;
+};
+const init = {headers: {'x-locale': locale}};
+const [settings, departments, newIn, featured, piece, collections, posts] = await Promise.all([
+  read<PublicSettings>(client.settings.public.$get(undefined, init)),
+  read<Department[]>(client.taxonomy.$get(undefined, init)),
+  read<ProductListResponse>(client.products.$get({query: {sort: 'featured', limit: String(NEW_IN_LIMIT)}}, init)),
+  read<ProductListResponse>(client.products.$get({query: {featured: 'true', limit: '8'}}, init)),
+  read<Product>(client.products[':slug'].$get({param: {slug: FEATURED_SLUG}}, init)),
+  read<CollectionSummary[]>(client.collections.$get({query: {featured: 'true'}}, init)),
+  read<Post[]>(client.posts.$get(undefined, init)),
+]);
 
-// The headline, split around the highlighted words (`HOME.hero.highlight`).
-const {title, highlight} = HOME.hero;
-const at = highlight ? title.indexOf(highlight) : -1;
-const headline =
-  at < 0
-    ? {before: title, mark: '', after: ''}
-    : {before: title.slice(0, at), mark: highlight, after: title.slice(at + highlight.length)};
+const currency = settings?.currency || 'USD';
+const homeText = serverText(locale);
+const home = (key: string) => homeText('home', key);
+const hero = resolveHero(settings?.homeHero, heroDefaults(home));
+
+/* Words: server-only sections get whole namespaces (nothing is shipped); islands only what they render. */
+const ssrDicts = dictsFor(locale, {home: true, collections: ['imageAlt', 'pieces_one', 'pieces_other', 'card']});
+const pieces = ['pieces_zero', 'pieces_one', 'pieces_two', 'pieces_few', 'pieces_many', 'pieces_other'];
+const newInDicts = dictsFor(locale, {home: [...pieces, 'newIn'], product: ['tile']});
+const featuredDicts = dictsFor(locale, {home: ['featured'], product: ['tile']});
+const pieceDicts = dictsFor(locale, {home: ['piece'], product: ['tile', 'buy']});
+const bestPartDicts = dictsFor(locale, {home: ['bestPart', 'shopCollection'], catalog: pieces});
+const accordionDicts = dictsFor(locale, {home: ['collections', 'shopCollection']});
+
+const departmentList = Array.isArray(departments) ? departments : null;
+const newInInitial = newIn && Array.isArray(newIn.items) ? newIn : null;
+const featuredItems = featured && Array.isArray(featured.items) ? featured.items : [];
+const collectionList = Array.isArray(collections) ? collections : [];
+const showCollections = featuredCollectionsOf(collectionList).items.length > 0;
+const postList = Array.isArray(posts) ? posts : [];
+
+/* SEO (VAREL useSeo() + html.ts storeSeo): the admin's SEO title/description, else the designed defaults.
+   Base appends the site name to `title`, so the designed default title is the site name alone. */
+const description = settings?.seoDescription?.trim() || serverT(locale, 'seo.defaultDescription');
+const seoTitle = settings?.seoTitle?.trim() || undefined;
+const og = settings?.ogImage?.trim() || null;
+const ogImage =
+  og && /^https:\/\/images\.unsplash\.com\//.test(og) && !og.includes('?')
+    ? `${og}?auto=format&fit=crop&w=1200&h=630&q=80`
+    : og;
 ---
 
-<Base site={site} viewer={viewer} isStatic>
-  <main id="main" tabindex="-1" class="home">
-    <section class="home-hero">
-      <div class="wrap home-hero-grid">
-        <div class="home-hero-copy">
-          <p class="home-eyebrow" data-brand-text={HOME.hero.eyebrow}>{withName(HOME.hero.eyebrow, name)}</p>
-          <h1>
-            {headline.before}{headline.mark && <mark>{headline.mark}</mark>}{headline.after}
-          </h1>
-          <p class="home-lede">{HOME.hero.body}</p>
-          <div class="home-actions" data-guest-only>
-            <a class="button home-button-lg" href="/account/register/" data-astro-prefetch>
-              {HOME.hero.guest.primary}
-              <Icon name="arrow-right" size={18} />
-            </a>
-            <a class="button ghost home-button-lg" href="#how">{HOME.hero.guest.secondary}</a>
-          </div>
-          <div class="home-actions" data-user-only hidden>
-            <a class="button home-button-lg" href="/dashboard">
-              {HOME.hero.user.primary}
-              <Icon name="arrow-right" size={18} />
-            </a>
-            <a class="button ghost home-button-lg" href="/journal/">{HOME.hero.user.secondary}</a>
-          </div>
-          <p class="home-note" data-guest-only>{HOME.hero.note}</p>
-        </div>
-        <div class="home-hero-visual">
-          <HeroVisual name={name} />
-        </div>
-      </div>
-    </section>
-
-    <section class="home-section" aria-labelledby="features-title">
-      <div class="wrap">
-        <div class="home-head">
-          <p class="home-eyebrow">{HOME.features.eyebrow}</p>
-          <h2 id="features-title">{HOME.features.title}</h2>
-          <p class="home-sub">{HOME.features.body}</p>
-        </div>
-        <ul class="home-features">
-          {
-            HOME.features.items.map(feature => (
-              <li class="home-feature">
-                <span class="home-icon-tile">
-                  <Icon name={feature.icon as IconName} />
-                </span>
-                <h3>{feature.title}</h3>
-                <p>{feature.body}</p>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </section>
-
-    <section class="home-section home-band" id="how" aria-labelledby="how-title">
-      <div class="wrap">
-        <div class="home-head">
-          <p class="home-eyebrow">{HOME.how.eyebrow}</p>
-          <h2 id="how-title">{HOME.how.title}</h2>
-        </div>
-        <ol class="home-steps">
-          {
-            HOME.how.steps.map((step, i) => (
-              <li class="home-step">
-                <span class="home-step-num">{String(i + 1).padStart(2, '0')}</span>
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
-
-    <section class="home-section" aria-labelledby="faq-title">
-      <div class="wrap home-faq-grid">
-        <div class="home-head">
-          <p class="home-eyebrow">{HOME.faq.eyebrow}</p>
-          <h2 id="faq-title">{HOME.faq.title}</h2>
-        </div>
-        <div class="home-faq">
-          {
-            HOME.faq.items.map(item => (
-              <details>
-                <summary>
-                  {item.q}
-                  <Icon name="plus" size={20} class="home-faq-icon" />
-                </summary>
-                <p>{item.a}</p>
-              </details>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section class="home-section home-section-last" data-guest-only aria-labelledby="cta-title">
-      <div class="wrap">
-        <div class="home-cta">
-          <div>
-            <h2 id="cta-title" data-brand-text={HOME.cta.title}>{withName(HOME.cta.title, name)}</h2>
-            <p>{HOME.cta.body}</p>
-          </div>
-          <div class="home-cta-actions">
-            <a class="button home-button-lg home-cta-primary" href="/account/register/" data-astro-prefetch>{HOME.cta.primary}</a>
-            <a class="button home-button-lg home-cta-ghost" href="/account/login/" data-astro-prefetch>{HOME.cta.secondary}</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-</Base>
+<Storefront site={site} viewer={viewer} api={api} title={seoTitle} description={description} image={ogImage}>
+  <HomeHero hero={hero} locale={locale} dicts={ssrDicts} />
+  <div class="mx-auto max-w-page">
+    {
+      departmentList && departmentList.length > 0 && (
+        <ShopByCategory departments={departmentList} locale={locale} dicts={ssrDicts} />
+      )
+    }
+    <NewInSection client:visible initial={newInInitial} locale={locale} dicts={newInDicts} currency={currency} />
+    <FeaturedPiece product={piece} locale={locale} dicts={pieceDicts} currency={currency} />
+    <HomeValues locale={locale} dicts={ssrDicts} />
+    <BestPart client:visible departments={departmentList} locale={locale} dicts={bestPartDicts} />
+    {
+      (featuredItems.length > 0 || showCollections) && (
+        <section
+          aria-label={home('featured.eyebrow')}
+          class="flex flex-col gap-16 px-6 py-16 md:gap-24 md:px-12 md:py-24">
+          {featuredItems.length > 0 && (
+            <FeaturedRow client:visible items={featuredItems} locale={locale} dicts={featuredDicts} currency={currency} />
+          )}
+          {showCollections && <FeaturedCollections collections={collectionList} locale={locale} dicts={ssrDicts} />}
+        </section>
+      )
+    }
+    <NewCollections locale={locale} dicts={ssrDicts} />
+    <CollectionsAccordion client:visible locale={locale} dicts={accordionDicts} />
+    {postList.length > 0 && <JournalTeaser posts={postList} locale={locale} dicts={ssrDicts} />}
+  </div>
+</Storefront>
