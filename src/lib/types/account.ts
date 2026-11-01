@@ -94,3 +94,10 @@ export interface CustomerExport {
   messages: Record<string, unknown>[]
   totals: { orders: number; spent: number }
 }
+
+/** POST /site-api/account/onboarding: after the first sign-in (WP-15). */
+export interface OnboardingResult {
+  profileCreated: boolean
+  subscribed: boolean
+  merged: boolean
+}

@@ -1,5 +1,6 @@
 import {Hono} from 'hono';
 
+import type {SitemapEntry} from '../../lib/types/common';
 import {notImplemented} from '../lib/http';
 
 /**
@@ -8,6 +9,7 @@ import {notImplemented} from '../lib/http';
  * (src/lib/types/*), errors as `{error, message, fields?}` (src/server/lib/http.ts).
  *
  *   GET    /site-api/taxonomy                          Department[] with categories and published product counts (src/lib/types/catalog.ts)
+ *   GET    /site-api/taxonomy/sitemap                  SitemapResponse: /shop/, /shop/<dept>/, /shop/<dept>/<cat>/ (VAREL html.ts sitemap)
  *   GET    /site-api/products                          ProductListResponse ?dept&category&q&color&size&material&brand&maxPrice&tag&sort&limit&featured
  *
  * Wave 0 stub: every route answers 501 `not_implemented` (sitemap/feed routes answer `{items: []}`).
@@ -18,7 +20,8 @@ import {notImplemented} from '../lib/http';
  */
 /** Mounted at `/site-api/taxonomy` (src/server/app.ts). */
 export const taxonomyRoutes = new Hono()
-  .get('/', notImplemented);
+  .get('/', notImplemented)
+  .get('/sitemap', c => c.json({items: [] as SitemapEntry[]}));
 
 /** Mounted at `/site-api/products` (src/server/app.ts). */
 export const catalogRoutes = new Hono()

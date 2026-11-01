@@ -3,6 +3,7 @@ import {validator} from 'hono/validator';
 import {z} from 'zod';
 
 import type {Problem} from '../../lib/types/common';
+import {localizeFields, localizeMessage} from './contracts';
 
 /**
  * Zod schemas as Hono validators (port of VAREL worker/middleware/validate.ts, PLAN.md §2).
@@ -85,7 +86,13 @@ type Validated<Target extends string, In, Out> = MiddlewareHandler<
 const check = <S extends z.ZodType>(schema: S) =>
   (value: unknown, c: Parameters<Parameters<typeof validator>[1]>[1]) => {
     const result = schema.safeParse(value ?? {});
-    if (!result.success) return c.json(invalidInput(zodFields(result.error)), 422);
+    if (!result.success) {
+      // In the request language, like the errors `app.onError` answers (English unchanged).
+      const locale = (c.var as {locale?: string}).locale ?? c.req.header('x-locale');
+      const fields = zodFields(result.error);
+      if (!locale || locale === 'en') return c.json(invalidInput(fields), 422);
+      return c.json(invalidInput(localizeFields(locale, fields) ?? fields, localizeMessage(locale, 'Check the highlighted fields')), 422);
+    }
     return result.data;
   };
 
@@ -144,3 +151,26 @@ export const pageQuery = {
   cursor: z.string().trim().max(512).optional(),
   pageSize: z.coerce.number().int().min(1).max(100).optional(),
 };
+
+/**
+ * A record id from a URL param or query: F1 made most ids `Int` (departments, categories, posts,
+ * orders, discounts, …) while the wire carries them as strings. Accepts `"42"`, gives `42`; anything
+ * else (not digits, 0, beyond int4) is a 422 before any lookup.
+ *
+ *   .get('/:id', params(z.object({id: intId()})), withDb, async c => { const {id} = c.req.valid('param'); … })
+ */
+export const intId = (message = 'Use a valid id') =>
+  z
+    .string({error: message})
+    .trim()
+    .regex(/^[1-9][0-9]{0,9}$/, message)
+    .transform(Number)
+    .refine(n => n <= 2_147_483_647, message);
+
+/** A `BigInt` id (activity logs, analytics events): serialized as a string on the wire. */
+export const bigIntId = (message = 'Use a valid id') =>
+  z
+    .string({error: message})
+    .trim()
+    .regex(/^[1-9][0-9]{0,18}$/, message)
+    .transform(v => BigInt(v));

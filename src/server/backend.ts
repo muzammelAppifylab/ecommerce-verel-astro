@@ -10,7 +10,7 @@ import {app, type AppType} from './app';
  * the pages, the portal and any other client.
  *
  *   const api = backend(Astro.request);
- *   const page = await read<JobsPage>(api.jobs.$get({query: {search: '', type: '', remote: '', before: ''}}));
+ *   const product = await read<Product>(api.products[':slug'].$get({param: {slug}}));
  *
  * The visitor's own credentials (their `cookie` header) are passed through, so
  * `withViewer` sees the same visitor the page does. Never `fetch()` this

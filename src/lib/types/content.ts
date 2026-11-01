@@ -28,6 +28,8 @@ export interface PostDetail extends Post {
   related: Post[]
   seoTitle?: string | null
   seoDescription?: string | null
+  /** ISO; last edit (article:modified_time, sitemap lastmod) */
+  updatedAt?: string
 }
 
 export interface PostCategory {

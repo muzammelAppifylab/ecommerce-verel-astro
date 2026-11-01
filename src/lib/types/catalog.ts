@@ -42,6 +42,9 @@ export interface Product {
   /** Department and category names in the request language (display, breadcrumbs) */
   deptLabel?: string
   categoryLabel?: string
+  /** Department and category slugs as stored (breadcrumb links; WP-03) */
+  deptSlug?: string
+  categorySlug?: string
   type: ProductType
   price: number
   compareAt: number | null
@@ -85,12 +88,25 @@ export interface Facet {
   labels?: Record<string, string>
 }
 
+/** Facet value counts over a base listing: `{color: {Stone: 3}, category: {Shirts: 2}}` (0 allowed). */
+export type FacetCounts = Partial<Record<Facet['key'], Record<string, number>>>
+
+/** The route-scope listing (no facet filters, no `q`) the filter panel reads (`?base=dept|category`, WP-02). */
+export interface ListingBase {
+  facets: Facet[]
+  priceMax: number
+  total: number
+  counts: FacetCounts
+}
+
 /** GET /site-api/products. The catalog is small and capped (`limit` ≤ 100), so `total` stays as in VAREL. */
 export interface ProductListResponse {
   items: Product[]
   facets: Facet[]
   total: number
   priceMax: number
+  /** Only with `?base=dept|category` */
+  base?: ListingBase
 }
 
 export interface Department {
@@ -119,6 +135,8 @@ export interface ProductQuery {
   limit?: number
   /** Home "featured" row (docs/PHASE2-3.md §7) */
   featured?: boolean
+  /** Also return the route-scope base listing (`ListingBase`) */
+  base?: 'dept' | 'category'
 }
 
 /** GET /site-api/search?q= */
@@ -126,6 +144,15 @@ export interface SearchResponse {
   query: string
   products: Product[]
   /** dept / category: English names (link values); deptLabel / categoryLabel: request language (display) */
-  categories: { dept: string; category: string; count: number; deptLabel?: string; categoryLabel?: string }[]
+  categories: {
+    dept: string
+    category: string
+    count: number
+    deptLabel?: string
+    categoryLabel?: string
+    /** Stored slugs (links), when the route selected them; else slugify(dept / category) */
+    deptSlug?: string
+    categorySlug?: string
+  }[]
   posts: Post[]
 }

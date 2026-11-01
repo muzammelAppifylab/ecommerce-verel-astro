@@ -59,6 +59,9 @@ export interface AdminPage {
   updatedAt: string
 }
 
+/** A row of the pages list (`GET /manage/pages`): the page without its body. */
+export type AdminPageRow = Omit<AdminPage, 'body'>
+
 export interface AdminPageInput {
   slug?: string
   title: string
@@ -81,6 +84,6 @@ export interface AdminMenu {
 
 /** PUT /site-api/manage/menus/:key */
 export interface AdminMenuInput {
-  title?: string
+  title: string
   items: MenuItem[]
 }

@@ -17,6 +17,7 @@ import type {EventType} from '../../lib/types/events';
  *   activityLog       WP-26                   middleware on /site-api/manage: logs each successful write
  *   localize          F4 base, WP-25 extends  content translations for storefront rows
  *   localizeMessage   F4 (i18n/messages.ts)   error messages in the request language
+ *   queueEntityTranslation WP-25             after an admin save: queue the record's machine translations
  *   trackEvent        WP-16 (analytics)       one storefront analytics event from server code
  *
  * Every function here NEVER throws for its side effect (an email, a log line, an event must not
@@ -160,6 +161,22 @@ export function localizeFields(
 ): Record<string, string> | undefined {
   return fields;
 }
+
+/**
+ * After an admin save (VAREL `lib/i18n/hooks.ts`): read the record's source fields back and queue
+ * their machine translations for every enabled locale (products also queue their colour names as
+ * `option`, posts their category as `post_category`). The work runs as a background job, so the
+ * write never waits on a provider; the hourly `translations-backfill` job catches anything missed.
+ * Never throws. Entities: product, department, category, collection, post, page, menu, discount, setting.
+ *
+ * WP-25 implements. Stub: does nothing (the backfill job covers it once WP-25 lands).
+ */
+export async function queueEntityTranslation(
+  _db: Db,
+  _entity: string,
+  _id: string | number | null | undefined,
+  _opts: {requestUrl?: string} = {}
+): Promise<void> {}
 
 // ─── Analytics (WP-16) ────────────────────────────────────────────────────────
 

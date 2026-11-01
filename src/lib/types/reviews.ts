@@ -28,6 +28,8 @@ export interface ReviewsResponse {
   total: number
   page: number
   pageSize: number
+  /** Keyset cursor for the next page (`?cursor=`); null at the end. `page` stays for VAREL callers. */
+  nextCursor: string | null
   settings: { enabled: boolean; requireApproval: boolean; verifiedOnly: boolean }
 }
 
@@ -41,6 +43,8 @@ export interface ReviewInput {
 export interface ReviewEligibility {
   canReview: boolean
   reason: 'ok' | 'closed' | 'signin' | 'purchase' | 'reviewed'
+  /** "Mira H.": how the signed-in viewer's review will be signed; null for a guest */
+  postingAs?: string | null
 }
 
 export interface ReviewSubmitResponse {
