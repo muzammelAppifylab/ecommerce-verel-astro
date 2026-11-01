@@ -28,9 +28,9 @@ describe.skipIf(!DATABASE_URL)('store admin areas (integration, real Postgres)',
   });
 
   it('staff reach their areas but not store settings writes', async () => {
-    // Past the guard: a stub answers 501 until its package fills it; orders (WP-19) and settings (WP-23) are filled.
+    // Past the guard: orders (WP-19), products (WP-17) and settings (WP-23) are filled.
     expect((await staff.get('/site-api/manage/orders')).status).toBe(200);
-    expect((await staff.get('/site-api/manage/products')).status).toBe(501);
+    expect((await staff.get('/site-api/manage/products')).status).toBe(200);
     expect((await staff.get('/site-api/manage/settings')).status).toBe(200);
     expect((await staff.request('PATCH', '/site-api/manage/settings', {})).status).toBe(403);
     expect((await owner.request('PATCH', '/site-api/manage/settings', {})).status).toBe(200);

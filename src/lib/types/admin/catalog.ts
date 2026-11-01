@@ -68,7 +68,7 @@ export interface AdminProduct extends AdminProductRow {
   images: AdminImage[]
   variants: AdminVariant[]
   createdAt: string
-  orderCount: number // orders containing this product (delete becomes archive when > 0)
+  orderCount: number // orders containing this product (delete becomes archive when > 0); capped: 101 means "100+"
   // Phase 2/3
   allowBackorder: boolean // sell past zero stock ("Made to order · ships in 2–3 weeks")
   featured: boolean // home page "featured" row
@@ -148,6 +148,8 @@ export interface UploadResult {
   url: string
   contentType: string
   size: number
+  /** Same as `id` (the complete route answers both) */
+  fileId?: string
 }
 
 export interface AdminCategory {
