@@ -1,19 +1,9 @@
-import {ScreenPlaceholder} from '../../ui';
-
 /**
- * pages screens — STUB from F5 (the screen registry). WP-07 owns this folder and
- * replaces these bodies with the port of VAREL `src/pages/admin/pages/*`, keeping the
- * export names (src/portal/routes.tsx imports them lazily). Split into files as
- * needed and re-export them here; the screen's CSS goes in `./screen.css`
- * (src/layouts/App.astro bundles every screen.css under src/portal/screens).
+ * Pages screens (WP-07): the port of VAREL `src/pages/admin/pages/*`. src/portal/routes.tsx lazy-loads
+ * these export names; the screen's CSS is `./screen.css` (bundled by src/layouts/App.astro).
+ *
+ *   /dashboard/pages       PagesList   the editable pages (privacy, terms, /pages/<slug>/)
+ *   /dashboard/pages/$id   PageEditor  title, visibility, words, SEO, live preview
  */
-
-/** `/dashboard/pages`. */
-export function PagesList() {
-  return <ScreenPlaceholder title="Pages" description="The words on the store's own pages: privacy, terms and the rest. New pages are designed and built in code." />;
-}
-
-/** `/dashboard/pages/$id`. */
-export function PageEditor() {
-  return <ScreenPlaceholder title="Page" description="The page's title, words and SEO." />;
-}
+export {PagesList} from './PagesList';
+export {PageEditor} from './PageEditor';
