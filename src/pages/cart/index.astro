@@ -1,0 +1,43 @@
+---
+/**
+ * `/cart/` (and `/da/cart/` … through the locale rewrite): the bag page (WP-09, port of VAREL src/pages/Cart.tsx).
+ * Rendered on request with the visitor's bag, read in-process (`GET /site-api/cart`, read-only: nothing is created
+ * for a visitor without a bag), plus the related pieces of the first line. The island takes over in the browser.
+ * Private (`pageContext` marks it `private, no-store`) and never indexed. A failed bag read answers 503 and the
+ * island shows its error state with "Try again".
+ */
+import CartPage, {type RelatedProduct} from '@/components/cart/CartPage';
+import {dictsFor, serverText} from '@/components/layout/dictionaries';
+import {DEFAULT_LOCALE} from '@/components/varel/href';
+import Storefront from '@/layouts/Storefront.astro';
+import type {Cart} from '@/lib/types/cart';
+import {read} from '@/server/backend';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const locale = (Astro.locals as {locale?: string}).locale ?? DEFAULT_LOCALE;
+const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
+const cart = await read<Cart>(api.cart.$get());
+const first = cart?.lines[0]?.productId;
+// WP-03's route (its validator may not exist yet: called loosely typed). Any error or 501 → no related list.
+const relatedOf = api.products[':slug'].related.$get as unknown as (args: {
+  param: {slug: string};
+  query: {limit: string};
+}) => Promise<Response>;
+const related = first ? await read<RelatedProduct[]>(relatedOf({param: {slug: first}, query: {limit: '3'}})) : null;
+if (!cart) Astro.response.status = 503;
+
+const dicts = dictsFor(locale, {cart: true, checkout: true, product: ['stock'], layout: ['ui', 'bag'], common: true});
+const title = serverText(locale)('cart', 'title');
+---
+
+<Storefront site={site} viewer={viewer} api={api} title={title} noindex>
+  <CartPage
+    client:load
+    initialCart={cart}
+    initialRelated={Array.isArray(related) ? related.slice(0, 3) : null}
+    dicts={dicts}
+    locale={locale}
+  />
+</Storefront>

@@ -20,6 +20,7 @@ import {
   viewerUserId,
   type CartRow,
 } from '../lib/cart';
+import type {Prisma} from '../../generated/prisma/client';
 import type {Db, DbClient} from '../lib/db';
 import {KEEPS_CODE} from '../lib/discounts';
 import {HttpError, notFound} from '../lib/errors';
@@ -211,7 +212,7 @@ const sourceSelect = {
   email: true,
   discountCode: true,
   lines: {
-    orderBy: [{createdAt: 'asc'}, {id: 'asc'}],
+    orderBy: [{createdAt: 'asc'}, {id: 'asc'}] as Prisma.CartLineOrderByWithRelationInput[],
     take: 100,
     select: {
       productId: true,
@@ -221,7 +222,7 @@ const sourceSelect = {
       variant: {select: {inventory: true}},
     },
   },
-} as const;
+} satisfies Prisma.CartSelect;
 
 /** Put a line into a bag without doubling it: the larger of the two quantities, within stock. */
 async function mergeLine(db: Db, cartId: number, l: SourceLine): Promise<void> {
