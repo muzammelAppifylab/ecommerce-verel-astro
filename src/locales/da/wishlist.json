@@ -10,7 +10,9 @@
   "nothingSaved": "Intet gemt endnu",
   "addAll": "Læg alle på lager i kurven",
   "added": "Lagt i kurven",
+  "adding": "Tilføjer…",
   "clear": "Ryd listen",
+  "clearing": "Rydder…",
   "loadError": "Vi kunne ikke hente din ønskeliste.",
   "tryAgain": "Prøv igen",
   "empty": {

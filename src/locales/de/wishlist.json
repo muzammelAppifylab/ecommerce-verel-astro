@@ -10,7 +10,9 @@
   "nothingSaved": "Noch nichts gemerkt",
   "addAll": "Alle verfügbaren hinzufügen",
   "added": "Im Warenkorb",
+  "adding": "Wird hinzugefügt…",
   "clear": "Liste leeren",
+  "clearing": "Wird geleert…",
   "loadError": "Wir konnten deine Merkliste nicht laden.",
   "tryAgain": "Erneut versuchen",
   "empty": {
