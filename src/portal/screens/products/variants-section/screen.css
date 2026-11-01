@@ -1,0 +1,713 @@
+/* VariantsSection (WP-18), used inside the product editor (WP-17). Lives in its own folder so
+   src/layouts/App.astro bundles it with every other screen.css; scoped under .variants-section. */
+
+.variants-section {
+  font-size: 13px;
+}
+
+.variants-section .swatch {
+  flex: none;
+  color: var(--ink);
+  vertical-align: -1px;
+}
+
+.variants-section .vs-input {
+  width: 100%;
+  height: 2rem;
+  min-width: 0;
+  padding: 0 0.5rem;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+}
+
+.variants-section .vs-input:hover:not(:disabled) {
+  border-color: var(--line-strong);
+}
+
+.variants-section .vs-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--ink);
+}
+
+.variants-section .vs-input[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+.variants-section .vs-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.variants-section .vs-num {
+  font-variant-numeric: tabular-nums;
+}
+
+.variants-section .vs-sku {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 12px;
+}
+
+.variants-section .vs-sku::placeholder {
+  color: var(--subtle);
+}
+
+.variants-section .vs-grow {
+  flex: 1;
+}
+
+.variants-section .vs-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.variants-section .vs-link:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.variants-section .vs-danger-text {
+  color: var(--danger);
+}
+
+.variants-section .vs-warn {
+  color: var(--warning);
+  font-size: 11.5px;
+}
+
+/* Options list */
+.variants-section .vs-options {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.variants-section .vs-option {
+  display: flex;
+  align-items: stretch;
+}
+
+.variants-section .vs-option + .vs-option,
+.variants-section .vs-option + .vs-editor,
+.variants-section .vs-editor + .vs-option {
+  border-top: 1px solid var(--line);
+}
+
+.variants-section .vs-move {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0.5rem;
+}
+
+.variants-section .vs-move-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--subtle);
+  cursor: pointer;
+}
+
+.variants-section .vs-move-button:hover:not(:disabled) {
+  color: var(--ink);
+}
+
+.variants-section .vs-move-button:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.variants-section .vs-option-edit {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem 1rem 0.5rem;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.variants-section .vs-option-edit:hover:not(:disabled) {
+  background: var(--hover);
+}
+
+.variants-section .vs-option-edit:disabled {
+  cursor: default;
+}
+
+.variants-section .vs-option-text {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.variants-section .vs-option-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 13.5px;
+  color: var(--ink);
+}
+
+.variants-section .vs-option-pencil {
+  margin-top: 2px;
+  color: var(--subtle);
+}
+
+.variants-section .vs-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.variants-section .vs-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  height: 1.75rem;
+  padding: 0 0.625rem;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 12.5px;
+}
+
+.variants-section .vs-add {
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.variants-section .vs-add .menu-trigger,
+.variants-section .vs-add > button {
+  width: auto;
+}
+
+.variants-section .vs-add-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 13px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.variants-section .vs-add[data-boxed] .vs-add-trigger {
+  padding: 0 0.25rem;
+}
+
+.variants-section .vs-none {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  font-size: 12.5px;
+}
+
+.variants-section .vs-error {
+  margin: 0;
+  padding: 0 1.25rem 0.75rem;
+  color: var(--danger);
+  font-size: 12px;
+}
+
+/* Option editor */
+.variants-section .vs-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: color-mix(in srgb, var(--surface) 40%, var(--card));
+}
+
+.variants-section .vs-editor-head,
+.variants-section .vs-editor-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.variants-section .vs-label {
+  font-size: 12.5px;
+  color: var(--ink);
+}
+
+.variants-section .vs-values {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.variants-section .vs-values ol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.variants-section .vs-values li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.variants-section .vs-values .vs-move {
+  padding-left: 0;
+}
+
+.variants-section .vs-colour {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+
+.variants-section .vs-colour:hover {
+  border-color: var(--line-strong);
+}
+
+.variants-section .vs-colour:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.variants-section .vs-colour input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.variants-section .vs-add-value {
+  position: relative;
+}
+
+.variants-section .vs-add-value input {
+  width: 100%;
+  height: 2.25rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+}
+
+.variants-section .vs-add-value input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--ink);
+}
+
+.variants-section .vs-suggest {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  z-index: 20;
+  margin-top: 0.25rem;
+  padding: 0.25rem;
+  border: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+}
+
+.variants-section .vs-suggest button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 2rem;
+  padding: 0 0.5rem;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.variants-section .vs-suggest button:hover,
+.variants-section .vs-suggest button:focus-visible {
+  background: var(--hover);
+}
+
+.variants-section .vs-suggest button[data-divided] {
+  border-top: 1px solid var(--line);
+}
+
+.variants-section .vs-hint {
+  margin: -0.5rem 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.variants-section .vs-picks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 12px;
+}
+
+.variants-section .vs-pick {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  height: 1.75rem;
+  padding: 0 0.5rem;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.variants-section .vs-pick[data-dashed] {
+  border-style: dashed;
+  border-color: var(--line-strong);
+  color: var(--muted);
+}
+
+.variants-section .vs-pick:hover:not(:disabled) {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.variants-section .vs-pick:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Table */
+.variants-section .vs-table-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 3rem;
+  padding: 0.5rem 1.25rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.variants-section .vs-group-by {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.variants-section .vs-group-by .select {
+  width: 8rem;
+}
+
+.variants-section .vs-scroll {
+  overflow-x: auto;
+}
+
+.variants-section .vs-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.variants-section .vs-table th {
+  padding: 0.625rem 0.75rem 0.625rem 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+  text-align: left;
+}
+
+.variants-section .vs-table td {
+  padding: 0.5rem 0.75rem 0.5rem 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.variants-section .vs-table th:first-child,
+.variants-section .vs-table td:first-child {
+  width: 2.5rem;
+  padding-left: 1.25rem;
+}
+
+.variants-section .vs-table td:first-child .row-check {
+  margin-top: 0.5rem;
+}
+
+.variants-section .vs-col-price {
+  width: 8.5rem;
+}
+
+.variants-section .vs-col-stock {
+  width: 7rem;
+}
+
+.variants-section .vs-col-sku {
+  width: 12.5rem;
+}
+
+.variants-section .vs-col-remove {
+  width: 3rem;
+  text-align: right;
+}
+
+.variants-section .vs-row[data-picked] td {
+  background: var(--hover);
+}
+
+.variants-section .vs-nested {
+  padding-left: 1.5rem !important;
+}
+
+.variants-section .vs-row-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2rem;
+  color: var(--ink);
+}
+
+.variants-section .vs-row-error {
+  margin: 0;
+  color: var(--danger);
+  font-size: 11.5px;
+}
+
+.variants-section .vs-group td {
+  background: color-mix(in srgb, var(--surface) 50%, var(--card));
+  vertical-align: middle;
+}
+
+.variants-section .vs-group td:first-child .row-check {
+  margin-top: 0;
+}
+
+.variants-section .vs-group-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--subtle);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.variants-section .vs-group-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  font-size: 12px;
+}
+
+.variants-section .vs-group-label {
+  color: var(--ink);
+  font-size: 13.5px;
+}
+
+.variants-section .vs-sum {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.variants-section .vs-money {
+  position: relative;
+  display: block;
+}
+
+.variants-section .vs-money .money-input input {
+  height: 2rem;
+  font-size: 13px;
+}
+
+.variants-section .vs-money .money-input input::placeholder {
+  color: var(--muted);
+}
+
+.variants-section .vs-money[data-own] .money-input input {
+  padding-right: 1.75rem;
+  border-color: var(--line-strong);
+}
+
+.variants-section .vs-reset {
+  position: absolute;
+  top: 50%;
+  right: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--subtle);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.variants-section .vs-reset:hover {
+  color: var(--ink);
+}
+
+.variants-section .vs-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.variants-section .vs-total {
+  font-variant-numeric: tabular-nums;
+}
+
+.variants-section .vs-total strong {
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.variants-section .vs-foot-end {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Bulk edits on picked rows */
+.variants-section .vs-bulk {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.variants-section .vs-bulk-count {
+  margin-right: 0.5rem;
+  color: var(--ink);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.variants-section .vs-bulk-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  height: 2rem;
+  padding: 0 0.625rem;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.variants-section .vs-bulk-trigger:hover:not(:disabled) {
+  border-color: var(--line-strong);
+}
+
+.variants-section .vs-bulk-trigger[data-open] {
+  border-color: var(--ink);
+}
+
+.variants-section .vs-bulk-trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.vs-popover {
+  display: grid;
+  gap: 0.5rem;
+  width: 15rem;
+  padding: 0.625rem;
+}
+
+.vs-popover .vs-popover-row {
+  display: flex;
+  gap: 0.375rem;
+}
+
+.vs-popover .vs-popover-row > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.vs-popover .money-input input {
+  height: 2rem;
+}
+
+.variants-section .vs-add .menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.variants-section .vs-add .menu-trigger:hover .vs-add-trigger {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.variants-section .vs-add[data-boxed] .menu-trigger {
+  padding: 0 0.75rem;
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+
+.variants-section .vs-add[data-boxed] .menu-trigger:hover {
+  border-color: var(--line-strong);
+}
+
+.variants-section .vs-add[data-boxed] .menu-trigger:hover .vs-add-trigger {
+  text-decoration: none;
+}
+
+.variants-section .vs-add .menu-trigger {
+  min-height: 2rem;
+  border-radius: 0;
+}
