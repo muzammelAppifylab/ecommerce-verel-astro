@@ -36,7 +36,7 @@ import {json, multiValue, pageQuery, query} from '../../lib/validate';
  * VAREL `/api/admin/orders…` is `/site-api/manage/orders…` here.
  *
  *   GET    /site-api/manage/orders                     CursorPage<AdminOrderRow> ?q&payment&fulfillment&from&to&sort&cursor&pageSize
- *   GET    /site-api/manage/orders/export.csv          CSV, same filters (VAREL /orders.csv), streamed, ≤ 4,000 rows
+ *   GET    /site-api/manage/orders/export.csv          CSV, same filters (VAREL /orders.csv), keyset-paged, ≤ 4,000 rows
  *   GET    /site-api/manage/orders/:number             AdminOrder
  *   PATCH  /site-api/manage/orders/:number             AdminOrderUpdate → AdminOrder
  *   POST   /site-api/manage/orders/:number/refund      RefundInput → AdminOrder; 409 already_refunded / not_paid
@@ -801,30 +801,19 @@ export const ordersAdmin = new Hono<Env>()
     const column = SORT_COLUMN[sort.field];
     const orderBy = orderByOf(column, sort.dir) as Prisma.ShopOrderOrderByWithRelationInput[];
     const toCursor = cursorOf(sort.field);
-    const encoder = new TextEncoder();
+    // Keyset pages of 100 read inside the request (the database client belongs to it), at most 40 of
+    // them: 4,000 orders, a ~1–2 MB body. Only the CSV lines are kept, never the rows.
+    const lines = [ORDERS_CSV_HEADER.map(csvCell).join(',')];
     let after: Prisma.ShopOrderWhereInput = {};
-    let pages = 0;
-    // One keyset page of 100 per pull, so memory stays small and the export stops at 4,000 rows.
-    const stream = new ReadableStream<Uint8Array>({
-      start(controller) {
-        controller.enqueue(encoder.encode(ORDERS_CSV_HEADER.map(csvCell).join(',') + '\r\n'));
-      },
-      async pull(controller) {
-        try {
-          const rows = await db.shopOrder.findMany({where: {AND: [where, after]}, select: csvSelect, orderBy, take: CSV_PAGE});
-          pages++;
-          if (rows.length) controller.enqueue(encoder.encode(rows.map(orderCsvRow).join('\r\n') + '\r\n'));
-          if (rows.length < CSV_PAGE || pages >= CSV_MAX_PAGES) return controller.close();
-          const [value, id] = toCursor(rows.at(-1)!);
-          after = keysetWhere(column, sort.dir, [sort.field === 'placedAt' ? new Date(value as string) : value, id]) as Prisma.ShopOrderWhereInput;
-        } catch (e) {
-          console.error('[orders] CSV export failed', (e as Error).message);
-          controller.error(e);
-        }
-      },
-    });
+    for (let page = 0; page < CSV_MAX_PAGES; page++) {
+      const rows = await db.shopOrder.findMany({where: {AND: [where, after]}, select: csvSelect, orderBy, take: CSV_PAGE});
+      for (const row of rows) lines.push(orderCsvRow(row));
+      if (rows.length < CSV_PAGE) break;
+      const [value, id] = toCursor(rows.at(-1)!);
+      after = keysetWhere(column, sort.dir, [sort.field === 'placedAt' ? new Date(value as string) : value, id]) as Prisma.ShopOrderWhereInput;
+    }
     const today = new Date().toISOString().slice(0, 10);
-    return new Response(stream, {
+    return new Response(lines.join('\r\n') + '\r\n', {
       status: 200,
       headers: {
         'Content-Type': 'text/csv; charset=utf-8',
