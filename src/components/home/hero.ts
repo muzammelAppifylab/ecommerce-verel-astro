@@ -39,7 +39,7 @@ export const DEFAULT_HERO: ResolvedHero = {
 export function safeHref(url: string | null | undefined): boolean {
   const u = (url ?? '').trim();
   if (!u) return false;
-  if (u.startsWith('/')) return !u.startsWith('//') && !u.startsWith('/\');
+  if (u.startsWith('/')) return !u.startsWith('//') && !u.startsWith('/\\');
   return /^(https?:\/\/[^\s/]|mailto:)/i.test(u);
 }
 
