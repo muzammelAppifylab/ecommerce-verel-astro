@@ -11,7 +11,9 @@
   "nothingSaved": "Rien d’enregistré pour l’instant",
   "addAll": "Ajouter tout ce qui est en stock",
   "added": "Ajouté au panier",
+  "adding": "Ajout…",
   "clear": "Vider la liste",
+  "clearing": "Suppression…",
   "loadError": "Nous n’avons pas pu charger vos favoris.",
   "tryAgain": "Réessayer",
   "empty": {

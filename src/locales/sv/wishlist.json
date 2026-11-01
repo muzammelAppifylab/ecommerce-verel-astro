@@ -10,7 +10,9 @@
   "nothingSaved": "Inget sparat ännu",
   "addAll": "Lägg till allt i lager",
   "added": "Tillagd i varukorgen",
+  "adding": "Lägger till…",
   "clear": "Töm listan",
+  "clearing": "Rensar…",
   "loadError": "Vi kunde inte hämta din önskelista.",
   "tryAgain": "Försök igen",
   "empty": {

@@ -11,7 +11,9 @@
   "nothingSaved": "Aún no has guardado nada",
   "addAll": "Añadir todo lo disponible",
   "added": "Añadido a la cesta",
+  "adding": "Añadiendo…",
   "clear": "Vaciar la lista",
+  "clearing": "Vaciando…",
   "loadError": "No hemos podido cargar tus favoritos.",
   "tryAgain": "Reintentar",
   "empty": {

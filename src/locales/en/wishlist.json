@@ -1,12 +1,18 @@
 {
   "title": "Wishlist",
-  "crumbs": { "home": "Home", "account": "Account", "wishlist": "Wishlist" },
+  "crumbs": {
+    "home": "Home",
+    "account": "Account",
+    "wishlist": "Wishlist"
+  },
   "saved_one": "{{count}} piece saved",
   "saved_other": "{{count}} pieces saved",
   "nothingSaved": "Nothing saved yet",
   "addAll": "Add all in stock",
   "added": "Added to bag",
+  "adding": "Adding…",
   "clear": "Clear list",
+  "clearing": "Clearing…",
   "loadError": "We could not load your wishlist.",
   "tryAgain": "Try again",
   "empty": {

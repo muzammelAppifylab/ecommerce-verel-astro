@@ -1,0 +1,72 @@
+---
+/**
+ * /wishlist/ (and /<locale>/wishlist/ through the locale rewrite): the visitor's saved pieces (VAREL
+ * src/pages/Wishlist.tsx). Server-rendered per visitor (private, no-store, noindex; not in the sitemap).
+ * The list is read here in-process (the guest's `visitor_id` cookie travels with the request); the island
+ * (src/components/wishlist/WishlistPage.tsx) renders it and owns the actions. A failed read answers 503 with
+ * the error state and "Try again"; it is never a 404.
+ */
+import {dictsFor} from '@/components/layout/dictionaries';
+import type {WishlistResponse} from '@/components/wishlist/api';
+import type {SuggestionCandidate} from '@/components/wishlist/Suggestions';
+import WishlistPage from '@/components/wishlist/WishlistPage';
+import {DEFAULT_LOCALE} from '@/components/varel/href';
+import Storefront from '@/layouts/Storefront.astro';
+import {t} from '@/lib/i18n/server';
+import type {ProductListResponse} from '@/lib/types/catalog';
+import {read} from '@/server/backend';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const locale = (Astro.locals as {locale?: string}).locale ?? DEFAULT_LOCALE;
+const ctx = await pageContext(Astro.request, Astro.response);
+const {api, site, viewer} = ctx;
+
+/** The list, or the server's message when the read failed. */
+async function readWishlist(): Promise<{data: WishlistResponse | null; message: string | null}> {
+  try {
+    const res = await api.wishlist.$get();
+    if (res.ok) return {data: (await res.json()) as WishlistResponse, message: null};
+    const body = (await res.json().catch(() => null)) as {message?: string} | null;
+    return {data: null, message: body?.message ?? null};
+  } catch {
+    return {data: null, message: null};
+  }
+}
+
+// Suggestions: the first products of the default listing (WP-02's GET /site-api/products?limit=12).
+const listProducts = api.products.$get as unknown as (args: {query: Record<string, string>}) => Promise<Response>;
+const [wishlist, listing] = await Promise.all([
+  readWishlist(),
+  read<ProductListResponse>(listProducts({query: {limit: '12'}})),
+]);
+
+if (!wishlist.data) Astro.response.status = 503;
+
+const candidates: SuggestionCandidate[] = (listing?.items ?? []).slice(0, 12).map(p => ({
+  id: p.id,
+  name: p.name,
+  image: p.image ?? null,
+  alt: p.alt,
+  price: p.price,
+}));
+
+const dicts = dictsFor(locale, {
+  wishlist: true,
+  product: ['tile'],
+  common: ['free', 'error', 'loading'],
+  layout: ['ui'],
+});
+---
+
+<Storefront site={site} viewer={viewer} api={api} title={t(locale, 'wishlist', 'title')} noindex>
+  <WishlistPage
+    client:load
+    locale={locale}
+    dicts={dicts}
+    initial={wishlist.data}
+    errorText={wishlist.message}
+    candidates={candidates}
+  />
+</Storefront>
