@@ -69,7 +69,8 @@
       "line1": "Ange en gatuadress",
       "zip": "Ange ett postnummer",
       "city": "Ange en ort",
-      "country": "Välj ett land"
+      "country": "Välj ett land",
+      "tooLong": "Håll det under {{max}} tecken"
     }
   },
   "confirm": {
@@ -87,9 +88,14 @@
     "errors": {
       "firstName": "Ange ditt förnamn",
       "lastName": "Ange ditt efternamn",
-      "email": "Ange en giltig e-postadress"
+      "email": "Ange en giltig e-postadress",
+      "firstNameLong": "Håll förnamnet under 80 tecken",
+      "lastNameLong": "Håll efternamnet under 80 tecken",
+      "phoneLong": "Håll telefonnumret under 40 tecken"
     },
-    "description": "Används på dina ordrar, kvitton och leveransbesked."
+    "description": "Används på dina ordrar, kvitton och leveransbesked.",
+    "emailHint": "För att byta e-post skickar vi en länk till den nya adressen.",
+    "changeEmail": "Byt e-post"
   },
   "privacy": {
     "title": "Integritet",
@@ -116,7 +122,11 @@
       "warning": "Vi mejlar dig en bekräftelse och loggar sedan ut dig. Dina ordrar sparas för bokföringen med din e-post dold. Det går inte att ångra.",
       "password": "Lösenord",
       "enterPassword": "Ange ditt lösenord",
-      "deleted": "Ditt konto har raderats"
+      "deleted": "Ditt konto har raderats",
+      "confirmLabel": "Skriv DELETE för att bekräfta",
+      "errors": {
+        "confirm": "Skriv DELETE med versaler för att bekräfta"
+      }
     },
     "description": "Ladda ner dina uppgifter, välj cookies eller stäng ditt konto."
   },
@@ -163,7 +173,7 @@
     "current": "Nuvarande lösenord",
     "new": "Nytt lösenord",
     "confirm": "Bekräfta nytt lösenord",
-    "rule": "Minst 8 tecken.",
+    "rule": "Minst 10 tecken.",
     "show": "Visa lösenord",
     "save": "Byt lösenord",
     "saving": "Byter…",
@@ -171,9 +181,15 @@
     "forgot": "Glömt lösenordet?",
     "errors": {
       "current": "Ange ditt nuvarande lösenord",
-      "length": "Använd minst 8 tecken",
-      "match": "Lösenorden matchar inte"
-    }
+      "length": "Använd minst 10 tecken",
+      "match": "Lösenorden matchar inte",
+      "tooLong": "Använd högst 128 tecken",
+      "email": "Använd inte din e-postadress i lösenordet"
+    },
+    "showOne": "Visa lösenord",
+    "hideOne": "Dölj lösenord",
+    "noPassword": "Du loggar in med en kod som vi mejlar dig. Be om en länk för att skapa ett lösenord.",
+    "setLink": "Skapa ett lösenord"
   },
   "preferences": {
     "title": "Kommunikation",
@@ -182,5 +198,25 @@
     "newsletterBody": "Nya kollektioner, berättelser från journalen och evenemang i studion, ungefär en gång i månaden.",
     "on": "Du prenumererar på nyhetsbrevet",
     "off": "Du har avslutat prenumerationen på nyhetsbrevet"
-  }
+  },
+  "email": {
+    "title": "Byt e-post",
+    "new": "Ny e-post",
+    "password": "Nuvarande lösenord",
+    "send": "Skicka länk",
+    "sending": "Skickar…",
+    "errors": {
+      "email": "Ange en giltig e-postadress",
+      "password": "Ange ditt nuvarande lösenord",
+      "same": "Det är redan din e-postadress"
+    }
+  },
+  "downloading": "Förbereder nedladdning…",
+  "downloadError": "Filen är inte tillgänglig just nu. Kontakta studion.",
+  "ordersMore": "99+",
+  "notFound": {
+    "title": "Sidan finns inte",
+    "action": "Tillbaka till ditt konto"
+  },
+  "ordersComingSoon": "Dina beställningar är på väg till den här sidan. Se den senaste i översikten."
 }

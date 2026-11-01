@@ -69,7 +69,8 @@
       "line1": "Enter a street address",
       "zip": "Enter a postcode",
       "city": "Enter a city",
-      "country": "Choose a country"
+      "country": "Choose a country",
+      "tooLong": "Keep this under {{max}} characters"
     }
   },
   "confirm": {
@@ -87,9 +88,14 @@
     "errors": {
       "firstName": "Enter your first name",
       "lastName": "Enter your last name",
-      "email": "Enter a valid email address"
+      "email": "Enter a valid email address",
+      "firstNameLong": "Keep your first name under 80 characters",
+      "lastNameLong": "Keep your last name under 80 characters",
+      "phoneLong": "Keep the phone number under 40 characters"
     },
-    "description": "Used on your orders, receipts and delivery updates."
+    "description": "Used on your orders, receipts and delivery updates.",
+    "emailHint": "To change your email, we send a link to the new address.",
+    "changeEmail": "Change email"
   },
   "privacy": {
     "title": "Privacy",
@@ -116,7 +122,11 @@
       "warning": "We will email you a confirmation, then sign you out. Your orders stay on record for accounting with your email hidden. This cannot be undone.",
       "password": "Password",
       "enterPassword": "Enter your password",
-      "deleted": "Your account has been deleted"
+      "deleted": "Your account has been deleted",
+      "confirmLabel": "Type DELETE to confirm",
+      "errors": {
+        "confirm": "Type DELETE in capitals to confirm"
+      }
     },
     "description": "Download your data, choose cookies, or close your account."
   },
@@ -163,7 +173,7 @@
     "current": "Current password",
     "new": "New password",
     "confirm": "Confirm new password",
-    "rule": "At least 8 characters.",
+    "rule": "At least 10 characters.",
     "show": "Show passwords",
     "save": "Change password",
     "saving": "Changing…",
@@ -171,9 +181,15 @@
     "forgot": "Forgot your password?",
     "errors": {
       "current": "Enter your current password",
-      "length": "Use at least 8 characters",
-      "match": "The passwords do not match"
-    }
+      "length": "Use at least 10 characters",
+      "match": "The passwords do not match",
+      "tooLong": "Use at most 128 characters",
+      "email": "Do not use your email address in your password"
+    },
+    "showOne": "Show password",
+    "hideOne": "Hide password",
+    "noPassword": "You sign in with a code we email you. To add a password, ask for a link to set one.",
+    "setLink": "Set a password"
   },
   "preferences": {
     "title": "Communication",
@@ -182,5 +198,25 @@
     "newsletterBody": "New collections, journal stories and studio events, about once a month.",
     "on": "You are subscribed to the newsletter",
     "off": "You are unsubscribed from the newsletter"
-  }
+  },
+  "email": {
+    "title": "Change email",
+    "new": "New email",
+    "password": "Current password",
+    "send": "Send link",
+    "sending": "Sending…",
+    "errors": {
+      "email": "Enter a valid email address",
+      "password": "Enter your current password",
+      "same": "That is already your email address"
+    }
+  },
+  "downloading": "Preparing download…",
+  "downloadError": "This file is not available right now. Contact the studio.",
+  "ordersMore": "99+",
+  "notFound": {
+    "title": "This page does not exist",
+    "action": "Back to your account"
+  },
+  "ordersComingSoon": "Your orders are on their way to this page. See the latest one in the overview."
 }

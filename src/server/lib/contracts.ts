@@ -75,20 +75,27 @@ export interface RefundableOrder {
  * order and `reason` (a retried admin action never refunds twice). Returns the cents given back.
  * Throws an `HttpError` (502 `payment_provider_error`) when the provider refuses.
  *
- * WP-11 implements. Stub: the simulated provider always succeeds, nothing is recorded.
+ * `reason` is the idempotency discriminator (Stripe key `refund-<order id>-<reason>`): `order`
+ * (admin full refund), `return-<returnId>` (return refund), `cancel` (customer cancel). Don't hold
+ * a long database transaction around it: Stripe may take ~20 s with its one retry.
+ *
+ * WP-11: `refundOrderPayment` in src/server/lib/payments/lifecycle.ts (imported lazily: it
+ * imports this module for `sendTemplate`).
  */
-export async function refundOrder(_db: Db, _order: RefundableOrder, amountCents: number, _reason: string): Promise<number> {
-  return Number.isSafeInteger(amountCents) && amountCents > 0 ? amountCents : 0;
+export async function refundOrder(db: Db, order: RefundableOrder, amountCents: number, reason: string): Promise<number> {
+  const {refundOrderPayment} = await import('./payments/lifecycle');
+  return refundOrderPayment(db, order, amountCents, `refund-${order.id}-${reason}`);
 }
 
 /**
  * Put an order's reserved stock back (physical lines with tracked inventory). Safe to call inside
  * a transaction. Returns the units restocked (VAREL `restockOrder`).
  *
- * WP-11 implements. Stub: restocks nothing.
+ * WP-11: `restockOrder` in src/server/lib/payments/lifecycle.ts.
  */
-export async function restockOrder(_db: Db, _orderId: number | string): Promise<number> {
-  return 0;
+export async function restockOrder(db: Db, orderId: number | string): Promise<number> {
+  const {restockOrder: restock} = await import('./payments/lifecycle');
+  return restock(db, orderId);
 }
 
 // ─── Activity log (WP-26) ─────────────────────────────────────────────────────

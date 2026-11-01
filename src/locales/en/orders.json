@@ -104,7 +104,13 @@
     "empty": {
       "title": "No orders in this view",
       "description": "Change the filter, or start with something from the autumn edit."
-    }
+    },
+    "countMore_one": "{{count}}+ order",
+    "countMore_other": "{{count}}+ orders",
+    "countSinceMore_one": "{{count}}+ order since {{since}}",
+    "countSinceMore_other": "{{count}}+ orders since {{since}}",
+    "more": "Show more orders",
+    "loadingMore": "Loading orders…"
   },
   "card": {
     "order": "Order",
@@ -168,7 +174,8 @@
     },
     "paidWith": "Paid with {{card}}",
     "refunded": "This order has been refunded.",
-    "footer": "Thank you for shopping with {{store}}. Questions about this invoice? Write to {{email}} and quote the invoice number."
+    "footer": "Thank you for shopping with {{store}}. Questions about this invoice? Write to {{email}} and quote the invoice number.",
+    "documentTitle": "{{store}} invoice {{number}}"
   },
   "cancel": {
     "button": "Cancel order",

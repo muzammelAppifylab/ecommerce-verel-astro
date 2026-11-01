@@ -8,7 +8,9 @@
     "button": "Slå op",
     "note": "Dit ordrenummer begynder med VRL- og står i din ordrebekræftelse",
     "enterNumber": "Indtast ordrenummeret fra din ordrebekræftelse",
-    "notFound": "Vi kan ikke finde det ordrenummer"
+    "notFound": "Vi kan ikke finde det ordrenummer",
+    "pending": "Slår op…",
+    "emailLabel": "E-mail brugt til ordren"
   },
   "steps": {
     "label": "Sådan fungerer returnering",
@@ -81,6 +83,9 @@
     "quantity": "Antal",
     "reason": "Årsag",
     "chooseReason": "Vælg en årsag",
-    "reasonPlaceholder": "For stor over skuldrene"
+    "reasonPlaceholder": "For stor over skuldrene",
+    "emailHint": "Vi matcher den med ordren, før returneringen bookes.",
+    "emailNeeded": "Indtast den e-mail, du brugte til ordren",
+    "submitting": "Sender anmodning…"
   }
 }

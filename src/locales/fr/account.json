@@ -70,7 +70,8 @@
       "line1": "Saisissez une adresse",
       "zip": "Saisissez un code postal",
       "city": "Saisissez une ville",
-      "country": "Choisissez un pays"
+      "country": "Choisissez un pays",
+      "tooLong": "Gardez ce champ sous {{max}} caractères"
     }
   },
   "confirm": {
@@ -88,9 +89,14 @@
     "errors": {
       "firstName": "Saisissez votre prénom",
       "lastName": "Saisissez votre nom",
-      "email": "Saisissez une adresse e-mail valide"
+      "email": "Saisissez une adresse e-mail valide",
+      "firstNameLong": "Gardez votre prénom sous 80 caractères",
+      "lastNameLong": "Gardez votre nom sous 80 caractères",
+      "phoneLong": "Gardez le numéro de téléphone sous 40 caractères"
     },
-    "description": "Utilisé pour vos commandes, reçus et informations de livraison."
+    "description": "Utilisé pour vos commandes, reçus et informations de livraison.",
+    "emailHint": "Pour changer d’e-mail, nous envoyons un lien à la nouvelle adresse.",
+    "changeEmail": "Changer d’e-mail"
   },
   "privacy": {
     "title": "Confidentialité",
@@ -117,7 +123,11 @@
       "warning": "Nous vous enverrons une confirmation par e-mail, puis vous serez déconnecté. Vos commandes restent archivées pour la comptabilité, sans votre e-mail. Cette action est irréversible.",
       "password": "Mot de passe",
       "enterPassword": "Saisissez votre mot de passe",
-      "deleted": "Votre compte a été supprimé"
+      "deleted": "Votre compte a été supprimé",
+      "confirmLabel": "Saisissez DELETE pour confirmer",
+      "errors": {
+        "confirm": "Saisissez DELETE en majuscules pour confirmer"
+      }
     },
     "description": "Téléchargez vos données, choisissez vos cookies ou fermez votre compte."
   },
@@ -166,7 +176,7 @@
     "current": "Mot de passe actuel",
     "new": "Nouveau mot de passe",
     "confirm": "Confirmer le nouveau mot de passe",
-    "rule": "8 caractères minimum.",
+    "rule": "Au moins 10 caractères.",
     "show": "Afficher les mots de passe",
     "save": "Modifier le mot de passe",
     "saving": "Modification…",
@@ -174,9 +184,15 @@
     "forgot": "Mot de passe oublié ?",
     "errors": {
       "current": "Saisissez votre mot de passe actuel",
-      "length": "Utilisez au moins 8 caractères",
-      "match": "Les mots de passe ne correspondent pas"
-    }
+      "length": "Utilisez au moins 10 caractères",
+      "match": "Les mots de passe ne correspondent pas",
+      "tooLong": "Utilisez au plus 128 caractères",
+      "email": "N’utilisez pas votre adresse e-mail dans votre mot de passe"
+    },
+    "showOne": "Afficher le mot de passe",
+    "hideOne": "Masquer le mot de passe",
+    "noPassword": "Vous vous connectez avec un code envoyé par e-mail. Pour ajouter un mot de passe, demandez un lien.",
+    "setLink": "Définir un mot de passe"
   },
   "preferences": {
     "title": "Communication",
@@ -185,5 +201,25 @@
     "newsletterBody": "Nouvelles collections, histoires du journal et événements du studio, environ une fois par mois.",
     "on": "Vous êtes abonné à la newsletter",
     "off": "Vous êtes désabonné de la newsletter"
-  }
+  },
+  "email": {
+    "title": "Changer d’e-mail",
+    "new": "Nouvel e-mail",
+    "password": "Mot de passe actuel",
+    "send": "Envoyer le lien",
+    "sending": "Envoi…",
+    "errors": {
+      "email": "Saisissez une adresse e-mail valide",
+      "password": "Saisissez votre mot de passe actuel",
+      "same": "C’est déjà votre adresse e-mail"
+    }
+  },
+  "downloading": "Préparation du téléchargement…",
+  "downloadError": "Ce fichier n’est pas disponible pour le moment. Contactez le studio.",
+  "ordersMore": "99+",
+  "notFound": {
+    "title": "Cette page n’existe pas",
+    "action": "Retour à votre compte"
+  },
+  "ordersComingSoon": "Vos commandes arrivent bientôt sur cette page. Voyez la dernière dans l’aperçu."
 }

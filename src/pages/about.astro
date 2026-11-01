@@ -1,32 +1,27 @@
 ---
-import BrandMark from '../components/BrandMark.astro';
-import {ABOUT, withName} from '../content/site';
-import Base from '../layouts/Base.astro';
-import {staticContext} from '../server/page';
+/**
+ * /about/ — the brand story (VAREL `src/pages/About.tsx`). Rendered on request (not prerendered) so the
+ * language prefixes (`/da/about/`) reach it (PLAN.md D7); it reads nothing of its own but the store's
+ * SEO description. Server HTML only (no island).
+ */
+import {AboutView} from '@/components/pages/AboutView';
+import {clip} from '@/components/pages/policy';
+import {dictsFor} from '@/components/layout/dictionaries';
+import Storefront from '@/layouts/Storefront.astro';
+import {t} from '@/lib/i18n/server';
+import type {PublicSettings} from '@/lib/types/settings';
+import {read} from '@/server/backend';
+import {pageContext} from '@/server/page';
 
-// Static: built once, served as a file. The header fills the visitor in, in the browser.
-export const prerender = true;
+export const prerender = false;
 
-const {site, viewer} = await staticContext(Astro.request);
-const name = site?.name ?? 'My site';
+const locale = Astro.locals.locale ?? 'en';
+const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
+const settings = await read<Partial<PublicSettings>>(api.settings.public.$get());
+const description = (settings as {seoDescription?: string} | null)?.seoDescription?.trim() || clip(t(locale, 'about', 'hero.body'));
+const dicts = dictsFor(locale, {about: true, layout: ['ui']});
 ---
 
-<Base site={site} viewer={viewer} isStatic title="About" description={withName(ABOUT.lede, name)}>
-  <main id="main" tabindex="-1" class="wrap narrow section">
-    <BrandMark site={site} size={56} />
-    <h1 data-brand-text={ABOUT.title}>{withName(ABOUT.title, name)}</h1>
-    <p class="lede">{withName(ABOUT.lede, name)}</p>
-    {
-      ABOUT.sections.map(section => (
-        <section class="about-section">
-          <h2>{section.heading}</h2>
-          <p>{withName(section.body, name)}</p>
-        </section>
-      ))
-    }
-    <div class="actions">
-      <a class="button" href="/account/register/?next=%2Fabout%2F" data-astro-prefetch data-guest-only>Create an account</a>
-      <a class="button ghost" href="/journal/">Read the journal</a>
-    </div>
-  </main>
-</Base>
+<Storefront api={api} site={site} viewer={viewer} title={t(locale, 'about', 'title')} description={description}>
+  <AboutView locale={locale} dicts={dicts} />
+</Storefront>

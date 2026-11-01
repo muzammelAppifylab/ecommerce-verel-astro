@@ -8,6 +8,7 @@ import {
   encodeCursor,
   keysetPage,
   keysetWhere,
+  notImplemented,
   orderByOf,
   pageSizeOf,
   parseSort,
@@ -16,7 +17,6 @@ import {
   wireCode,
 } from '../src/server/lib/http';
 import {intId, json, multiValue, params, parse, query} from '../src/server/lib/validate';
-import {cartRoutes} from '../src/server/routes/cart';
 
 /** F3 contracts: the error shape, keyset helpers, validators and the Wave 0 route stubs. */
 describe('error shape', () => {
@@ -111,7 +111,8 @@ describe('validators', () => {
 
 describe('Wave 0 route stubs', () => {
   it('answer 501 not_implemented until their package fills them', async () => {
-    const res = await cartRoutes.request('/');
+    // The stub handler itself (WP-09 filled /cart; every slot is filled by its package in Wave 1).
+    const res = await new Hono().get('/', notImplemented).request('/');
     expect(res.status).toBe(501);
     expect(await res.json()).toMatchObject({error: 'not_implemented'});
   });

@@ -1,0 +1,27 @@
+---
+/**
+ * /contact/ — email topics, studio details and FAQ (VAREL `src/pages/Contact.tsx`). The studio's email,
+ * phone and address come from the store settings (`GET /site-api/settings/public`), with VAREL's
+ * fallbacks when they are empty or the read fails. Server HTML only (no island).
+ */
+import {ContactView} from '@/components/pages/ContactView';
+import {clip, studioContact} from '@/components/pages/policy';
+import {dictsFor} from '@/components/layout/dictionaries';
+import Storefront from '@/layouts/Storefront.astro';
+import {t} from '@/lib/i18n/server';
+import type {PublicSettings} from '@/lib/types/settings';
+import {read} from '@/server/backend';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const locale = Astro.locals.locale ?? 'en';
+const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
+const settings = await read<Partial<PublicSettings>>(api.settings.public.$get());
+const contact = studioContact(settings);
+const dicts = dictsFor(locale, {contact: true, layout: ['ui']});
+---
+
+<Storefront api={api} site={site} viewer={viewer} title={t(locale, 'contact', 'title')} description={clip(t(locale, 'contact', 'intro'))}>
+  <ContactView locale={locale} dicts={dicts} contact={contact} />
+</Storefront>
