@@ -49,6 +49,9 @@ interface Props extends Omit<BaseProps, 'chrome' | 'locale' | 'alternates' | 'do
 
 const {api, hideFooter = false, rawTitle = false, ...base} = Astro.props;
 const locale = (Astro.locals as {locale?: string}).locale ?? DEFAULT_LOCALE;
+// The page language for `money()` BEFORE the first await: Astro renders the page's islands while this frontmatter
+// waits on the settings, and they would otherwise format prices in the previous request's language.
+setMoneyContext(null, locale);
 const {settings, menus} = await readChromeData(api ?? backend(Astro.request), locale);
 const chrome = buildChrome({
   settings,
