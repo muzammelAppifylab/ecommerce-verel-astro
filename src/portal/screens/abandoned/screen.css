@@ -1,0 +1,258 @@
+/* Abandoned bags (/dashboard/abandoned, WP-24). Kit tokens only (src/styles/global.css). */
+
+.screen-abandoned .ab-run {
+  display: grid;
+  justify-items: end;
+  gap: 0.25rem;
+  max-width: 22rem;
+}
+
+.screen-abandoned .ab-run-hint {
+  text-align: end;
+}
+
+.screen-abandoned .ab-muted {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.screen-abandoned .ab-num {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.screen-abandoned .ab-nowrap {
+  white-space: nowrap;
+}
+
+/* Reminder settings */
+.screen-abandoned .ab-settings {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2.5rem;
+}
+
+.screen-abandoned .ab-hours {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.screen-abandoned .ab-hours-label {
+  color: var(--subtle);
+  font-size: 0.875rem;
+}
+
+.screen-abandoned .ab-settings-note {
+  margin: 0 0 0 auto;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* Summary tiles that filter */
+.screen-abandoned .ab-tile {
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.screen-abandoned .ab-tile[data-active] {
+  border-color: var(--ink);
+}
+
+.screen-abandoned .ab-tile .stat-label,
+.screen-abandoned .ab-tile .stat-value,
+.screen-abandoned .ab-tile .stat-hint {
+  display: block;
+}
+
+.screen-abandoned .ab-tile .stat-hint {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Toolbar */
+.screen-abandoned .ab-toolbar .search-input {
+  flex: 1 1 18rem;
+  max-width: 24rem;
+}
+
+/* Table cells */
+.screen-abandoned .ab-customer {
+  display: grid;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.screen-abandoned .ab-email {
+  max-width: 15rem;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  text-align: start;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.screen-abandoned .ab-email:hover {
+  text-decoration: underline;
+}
+
+.screen-abandoned .ab-email:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.screen-abandoned .ab-bag {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  max-width: 20rem;
+}
+
+.screen-abandoned .ab-thumbs {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.screen-abandoned .ab-thumbs .ab-thumb + .ab-thumb {
+  margin-inline-start: -0.5rem;
+}
+
+.ab-thumb {
+  width: 1.75rem;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: var(--hover);
+  box-shadow: 0 0 0 2px var(--card);
+}
+
+.ab-thumb-lg {
+  width: 2.5rem;
+  box-shadow: none;
+}
+
+.screen-abandoned .ab-bag-text {
+  display: grid;
+  min-width: 0;
+}
+
+.screen-abandoned .ab-bag-names {
+  overflow: hidden;
+  font-size: 0.85rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.screen-abandoned .ab-status {
+  display: grid;
+  justify-items: start;
+  gap: 0.25rem;
+}
+
+.screen-abandoned .ab-error {
+  display: grid;
+  justify-items: start;
+  gap: 0.75rem;
+}
+
+/* Drawer (rendered in a <dialog>, outside .screen-abandoned's box but inside it in the tree) */
+.ab-drawer-sub {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ab-drawer-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.ab-drawer-link {
+  margin-inline-start: auto;
+  color: var(--subtle);
+  font-size: 0.85rem;
+}
+
+.ab-lines {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-block: 1px solid var(--line);
+}
+
+.ab-line {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+}
+
+.ab-line + .ab-line {
+  border-top: 1px solid var(--line);
+}
+
+.ab-line-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.ab-line-name {
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 0.875rem;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ab-line-name:hover {
+  text-decoration: underline;
+}
+
+.ab-line .ab-muted,
+.ab-drawer-sub + .ab-muted {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.ab-total {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.75rem 0 1.5rem;
+  font-size: 0.9rem;
+}
+
+.ab-lines .ab-num,
+.ab-total .ab-num {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 720px) {
+  .screen-abandoned .ab-run {
+    justify-items: start;
+  }
+
+  .screen-abandoned .ab-run-hint {
+    text-align: start;
+  }
+
+  .screen-abandoned .ab-settings-note {
+    margin: 0;
+  }
+}
