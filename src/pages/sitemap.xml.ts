@@ -3,6 +3,8 @@ import type {APIRoute} from 'astro';
 import type {SitemapEntry, SitemapResponse} from '../lib/types/common';
 import {absoluteUrl, xmlEscape as escape} from '../lib/seo';
 import {backend, read} from '../server/backend';
+import {routableLocales, sitemapAlternates} from '../server/lib/i18n/alternates';
+import type {PublicSettings} from '../lib/types/settings';
 
 /**
  * `/sitemap.xml`, rendered ON REQUEST and cached for an hour (VAREL worker/routes/html.ts
@@ -16,7 +18,9 @@ import {backend, read} from '../server/backend';
  *   GET /site-api/pages/sitemap         /pages/<slug>/, /privacy/, /terms/ (routes/pages.ts, WP-07)
  *
  * Each answers `{items: [{path, updatedAt}]}` (`SitemapResponse`); an area not built yet answers
- * `{items: []}`. Language alternates (hreflang, D7) are added by WP-25 / I1.
+ * `{items: []}`. Each URL lists its language alternates (hreflang, D7: `/da/…`) when the store has two or more
+ * languages the storefront can route (WP-25; `src/server/lib/i18n/alternates.ts`); `<loc>` stays the
+ * default-language URL.
  *
  * Never listed: sign-in pages, the account app, the dashboard, the API, the error pages and the
  * per-visitor pages (bag, checkout, wishlist, search, order confirmation). A new public dynamic
@@ -40,7 +44,8 @@ const isSitePath = (path: unknown): path is string => typeof path === 'string' &
 
 export const GET: APIRoute = async ({request}) => {
   const api = backend(request);
-  const areas = await Promise.all([
+  const [settings, ...areas] = await Promise.all([
+    read<PublicSettings>(api.settings.public.$get()),
     read<SitemapResponse>(api.taxonomy.sitemap.$get()),
     read<SitemapResponse>(api.products.sitemap.$get()),
     read<SitemapResponse>(api.collections.sitemap.$get()),
@@ -55,13 +60,15 @@ export const GET: APIRoute = async ({request}) => {
     if (!known || (!known.updatedAt && entry.updatedAt)) byPath.set(entry.path, entry);
   }
   const entries = [...byPath.values()];
+  const locales = routableLocales(settings?.locales);
   const urls = entries.flatMap(({path, updatedAt}) => {
     const loc = absoluteUrl(path);
     const lastmod = typeof updatedAt === 'string' && /^\d{4}-\d{2}-\d{2}/.test(updatedAt) ? updatedAt.slice(0, 10) : null;
-    return loc ? [`  <url><loc>${escape(loc)}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}</url>`] : [];
+    const links = sitemapAlternates(path, locales, absoluteUrl).map(link => `\n    ${link}`).join('');
+    return loc ? [`  <url><loc>${escape(loc)}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}${links}${links ? '\n  ' : ''}</url>`] : [];
   });
-  const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}${urls.length ? '\n' : ''}</urlset>\n`;
-  const complete = areas.every(Boolean);
+  const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}${urls.length ? '\n' : ''}</urlset>\n`;
+  const complete = !!settings && areas.every(Boolean);
   return new Response(body, {
     headers: {
       'Content-Type': 'application/xml; charset=utf-8',

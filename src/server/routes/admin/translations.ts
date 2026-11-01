@@ -175,12 +175,22 @@ export const translationsAdmin = new Hono<Env>()
       {status: p.status, q: p.q}
     ).sort(compareCells(cfg));
     const page = afterCursor(cells, decodeCellCursor(p.cursor), cfg).slice(0, size + 1);
-    const body: TranslationList = keysetPage(
-      page.map((cell): TranslationRow & {key: ReturnType<typeof cellKey>} => ({...cell, key: cellKey(cell, cfg)})),
-      size,
-      row => row.key
+    const body = keysetPage(page, size, cell => cellKey(cell, cfg));
+    const items = body.items.map(
+      (cell): TranslationRow => ({
+        entity: cell.entity,
+        entityId: cell.entityId,
+        label: cell.label,
+        field: cell.field,
+        locale: cell.locale,
+        sourceValue: cell.sourceValue,
+        value: cell.value,
+        status: cell.status,
+        origin: cell.origin,
+        updatedAt: cell.updatedAt,
+      })
     );
-    return c.json({...body, items: body.items.map(({key: _key, ...row}) => row)} satisfies TranslationList);
+    return c.json({items, nextCursor: body.nextCursor} satisfies TranslationList);
   })
   .get('/status', withDb, async c => {
     const db = c.var.db;
