@@ -7,14 +7,14 @@ import {useQuery, useQueryClient} from '@tanstack/react-query';
 import {Link, Navigate, useBlocker, useNavigate, useParams} from '@tanstack/react-router';
 import {useEffect, useId, useRef, useState} from 'react';
 
-import {PAGE_SLUG, isBuiltInPage, storefrontPagePath} from '../../../components/pages/policy';
+import {isBuiltInPage, storefrontPagePath} from '../../../components/pages/policy';
 import {slugify} from '../../../lib/format';
 import type {AdminPage, AdminPageInput} from '../../../lib/types/admin/content';
 import {ApiError} from '../../api';
 import {deletePage, pageQuery, pagesKeys, updatePage} from '../../queries/pages';
 import {Button, Card, Field, Icon, LoadingBlock, Notice, PageHeader, SegmentedControl, SeoPanel, StatusBadge, useConfirm, useToast} from '../../ui';
 import {BlockEditor} from './BlockEditor';
-import {blockFromPost, blockToPost, emptyBlock, type EditorBlock, type FieldErrors} from './blocks';
+import {blockFromPost, blockToPost, emptyBlock, type EditorBlock, type FieldErrors, validatePage} from './blocks';
 import {dateTime} from './format';
 import {PagePreview} from './PagePreview';
 
@@ -49,23 +49,6 @@ const toInput = (f: PageForm): AdminPageInput => ({
   seoTitle: f.seoTitle.trim() || null,
   seoDescription: f.seoDescription.trim() || null,
 });
-
-/** Client rules, mirroring the server's (routes/admin/pages.ts). */
-export function validatePage(input: AdminPageInput): FieldErrors {
-  const e: FieldErrors = {};
-  if (!input.title) e.title = 'Give the page a title.';
-  else if (input.title.length > 160) e.title = 'Keep the title under 160 characters.';
-  if (!input.slug || !PAGE_SLUG.test(input.slug)) e.slug = 'Use lowercase letters, numbers and hyphens.';
-  if (!input.body.length) e.body = 'Add at least one block.';
-  input.body.forEach((b, i) => {
-    if ((b.type === 'p' || b.type === 'h2' || b.type === 'quote') && !b.text) e[`body.${i}.text`] = 'Write the text or remove the block.';
-    if (b.type === 'list' && !b.items.length) e[`body.${i}.items`] = 'Add at least one list item.';
-    if (b.type === 'image' && !b.image.src) e[`body.${i}.image.src`] = 'Upload an image or paste its URL.';
-  });
-  if (input.seoTitle && input.seoTitle.length > 70) e.seoTitle = 'Keep the SEO title under 70 characters.';
-  if (input.seoDescription && input.seoDescription.length > 200) e.seoDescription = 'Keep the SEO description under 200 characters.';
-  return e;
-}
 
 export function PageEditor() {
   const {id} = useParams({from: '/pages/$id'});

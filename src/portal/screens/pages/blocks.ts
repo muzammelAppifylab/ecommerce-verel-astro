@@ -2,6 +2,8 @@
  * Editor blocks for CMS page bodies (PostBlock[]): VAREL `src/pages/admin/journal/form.ts` (the block half),
  * kept in this folder so the Pages editor does not wait on the journal package (WP-06).
  */
+import {PAGE_SLUG} from '../../../components/pages/policy';
+import type {AdminPageInput} from '../../../lib/types/admin/content';
 import type {PostBlock} from '../../../lib/types/content';
 
 /** Editor block: a PostBlock with flat, always-present fields plus a stable key for React. */
@@ -67,4 +69,21 @@ export function blockError(errors: FieldErrors, i: number): string | undefined {
   const prefix = `body.${i}`;
   for (const [k, v] of Object.entries(errors)) if (k === prefix || k.startsWith(`${prefix}.`)) return v;
   return undefined;
+}
+
+/** Client rules, mirroring the server's (routes/admin/pages.ts). */
+export function validatePage(input: AdminPageInput): FieldErrors {
+  const e: FieldErrors = {};
+  if (!input.title) e.title = 'Give the page a title.';
+  else if (input.title.length > 160) e.title = 'Keep the title under 160 characters.';
+  if (!input.slug || !PAGE_SLUG.test(input.slug)) e.slug = 'Use lowercase letters, numbers and hyphens.';
+  if (!input.body.length) e.body = 'Add at least one block.';
+  input.body.forEach((b, i) => {
+    if ((b.type === 'p' || b.type === 'h2' || b.type === 'quote') && !b.text) e[`body.${i}.text`] = 'Write the text or remove the block.';
+    if (b.type === 'list' && !b.items.length) e[`body.${i}.items`] = 'Add at least one list item.';
+    if (b.type === 'image' && !b.image.src) e[`body.${i}.image.src`] = 'Upload an image or paste its URL.';
+  });
+  if (input.seoTitle && input.seoTitle.length > 70) e.seoTitle = 'Keep the SEO title under 70 characters.';
+  if (input.seoDescription && input.seoDescription.length > 200) e.seoDescription = 'Keep the SEO description under 200 characters.';
+  return e;
 }
