@@ -78,6 +78,8 @@ Astro.response.headers.set('Cache-Control', 'no-store');
     };
     if (!token) {
       verify.hidden = true;
+      // The resend form is then the page's only content: no gap above it beyond the title's own.
+      resend.classList.remove('mt-9');
       offerResend();
     }
 

@@ -2,9 +2,10 @@
 /**
  * Sign in (VAREL `src/pages/Login.tsx` look and copy, the template's sign-in flow).
  *
- * The usual way is a 6-digit code emailed to the account (`/site-api/auth/code`, then
- * `/code/verify`): no password needed, and the site's admin signs in this way. "Use a password
- * instead" posts to `/site-api/auth/login` for an account that set one. `?next=<path>` is where to
+ * As in VAREL, the page opens on email + password (`/site-api/auth/login`). "Email me a code
+ * instead" sends a 6-digit code (`/site-api/auth/code`, then `/code/verify`): no password needed,
+ * and the site's admin signs in this way, so the code form comes first when `next` is the
+ * dashboard, after the dashboard's one-click link (`?notice=owner-link`) and with `?method=code`. `?next=<path>` is where to
  * go afterwards (same-site paths only, never back to a sign-in page; default `/account/`). With
  * two-step sign-in on, the first step answers a challenge and the authenticator step
  * (`/site-api/auth/login/two-factor`) finishes it; `?mfa=<challenge>` opens that step directly (a
@@ -21,7 +22,7 @@ import AuthCopy from '../../components/auth/AuthCopy.astro';
 import AuthField from '../../components/auth/AuthField.astro';
 import AuthRich from '../../components/auth/AuthRich.astro';
 import {legalLinks, pathIn, tFor} from '../../components/auth/auth-server';
-import {INTRO, OUTLINE_BLOCK, QUIET_LINK, SUBMIT, TITLE_46, UNDERLINE_LINK} from '../../components/auth/classes';
+import {INTRO, METHOD_TOGGLE, OUTLINE_BLOCK, QUIET_LINK, SUBMIT, TITLE_46, UNDERLINE_LINK} from '../../components/auth/classes';
 import {AUTH_IMAGES} from '../../components/layout/auth-images';
 import AuthShell from '../../layouts/AuthShell.astro';
 import {staticContext} from '../../server/page';
@@ -33,6 +34,13 @@ const locale = Astro.locals.locale ?? 'en';
 const t = tFor(locale, 'auth');
 const href = pathIn(locale);
 const reveal = {show: t('reveal.show'), showLabel: t('reveal.showLabel')};
+// VAREL opens on email + password. The emailed code comes first only for the dashboard (its owner
+// has no password), after the dashboard's one-click link, and when asked for (`?method=code`).
+const query = Astro.url.searchParams;
+const codeFirst =
+  query.get('method') === 'code' ||
+  query.get('notice') === 'owner-link' ||
+  /^\/(dashboard|portal)(\/|\?|$)/.test(query.get('next') ?? '');
 Astro.response.headers.set('Cache-Control', 'public, max-age=300');
 ---
 
@@ -43,15 +51,31 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=300');
     <p class={INTRO}>{t('login.intro')}</p>
     <p class="notice notice-error mb-7" id="login-notice" role="alert" hidden></p>
 
-    <!-- 1. The usual way: a code by email (no password needed). -->
-    <form id="email-form" class="flex flex-col gap-7" novalidate>
+    <!-- 1. VAREL's form: email and password (the default for customers). -->
+    <form id="login-form" class="flex flex-col gap-7" novalidate hidden={codeFirst}>
+      <AuthField id="login-password-email" name="email" type="email" label={t('email')} autocomplete="username" inputmode="email" maxlength={254} />
+      <AuthField id="login-password" name="password" label={t('password')} autocomplete="current-password" reveal={reveal} />
+      <p class="notice" data-form-status hidden></p>
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <button class={METHOD_TOGGLE} type="button" id="use-code">{t('login.useCode')}</button>
+        <a href={href('/account/forgot/')} class={UNDERLINE_LINK}>{t('login.forgot')}</a>
+      </div>
+      <button class={SUBMIT} type="submit">{t('signIn')}</button>
+    </form>
+
+    <!-- 2. Or a 6-digit code by email (no password needed; the site's admin signs in this way). -->
+    <form id="email-form" class="flex flex-col gap-7" novalidate hidden={!codeFirst}>
       <p class="m-0 text-body-sm leading-body text-text-secondary" id="email-lead">{t('login.codeIntro')}</p>
       <AuthField id="login-email" name="email" type="email" label={t('email')} autocomplete="username" inputmode="email" maxlength={254} />
       <p class="notice" data-form-status hidden></p>
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <button class={METHOD_TOGGLE} type="button" id="use-password">{t('login.usePassword')}</button>
+        <a href={href('/account/forgot/')} class={UNDERLINE_LINK}>{t('login.forgot')}</a>
+      </div>
       <button class={SUBMIT} type="submit">{t('login.sendCode')}</button>
     </form>
 
-    <!-- 2. The emailed code. -->
+    <!-- 3. The emailed code. -->
     <form id="email-code-form" class="flex flex-col gap-7" novalidate hidden>
       <p class="m-0 text-body-sm leading-body text-text-secondary" id="email-code-lead" aria-live="polite"></p>
       <AuthField id="email-code" name="code" label={t('login.codeLabel')} autocomplete="one-time-code" inputmode="numeric" maxlength={7} spellcheck={false} />
@@ -63,14 +87,6 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=300');
       </p>
     </form>
 
-    <!-- Or a password, for an account that set one. -->
-    <form id="login-form" class="flex flex-col gap-7" novalidate hidden>
-      <AuthField id="login-password-email" name="email" type="email" label={t('email')} autocomplete="username" inputmode="email" maxlength={254} />
-      <AuthField id="login-password" name="password" label={t('password')} autocomplete="current-password" reveal={reveal} />
-      <p class="notice" data-form-status hidden></p>
-      <button class={SUBMIT} type="submit">{t('signIn')}</button>
-    </form>
-
     <!-- Two-step sign-in: the authenticator code, after a password, an emailed code or one click. -->
     <form id="code-form" class="flex flex-col gap-7" novalidate hidden>
       <p class="m-0 text-body-sm leading-body text-text-secondary">{t('twoFactor.intro')}</p>
@@ -78,12 +94,6 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=300');
       <p class="notice" data-form-status hidden></p>
       <button class={SUBMIT} type="submit">{t('twoFactor.submit')}</button>
     </form>
-
-    <div id="login-links" class="mt-7 flex flex-wrap items-center justify-between gap-4">
-      <button class={UNDERLINE_LINK} type="button" id="use-password">{t('login.usePassword')}</button>
-      <button class={UNDERLINE_LINK} type="button" id="use-code" hidden>{t('login.useCode')}</button>
-      <a href={href('/account/forgot/')} class={UNDERLINE_LINK}>{t('login.forgot')}</a>
-    </div>
 
     <div id="login-more" class="flex flex-col">
       <div class="my-8 flex items-center gap-4" aria-hidden="true">
@@ -138,9 +148,6 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=300');
     function show(form: HTMLFormElement, title: string, focus: string) {
       for (const f of forms) f.hidden = f !== form;
       $('login-title').textContent = title;
-      $('use-password').hidden = form !== emailForm;
-      $('use-code').hidden = form !== loginForm;
-      $('login-links').hidden = form === codeForm || form === emailCodeForm;
       $('login-more').hidden = form === codeForm || form === emailCodeForm;
       $<HTMLInputElement>(focus).focus();
     }
@@ -207,7 +214,7 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=300');
     $('code-other-email').addEventListener('click', () => show(emailForm, t('signIn'), 'login-email'));
     $('use-password').addEventListener('click', () => {
       $<HTMLInputElement>('login-password-email').value = $<HTMLInputElement>('login-email').value;
-      show(loginForm, t('login.passwordTitle'), 'login-password-email');
+      show(loginForm, t('signIn'), 'login-password-email');
     });
     $('use-code').addEventListener('click', () => {
       $<HTMLInputElement>('login-email').value = $<HTMLInputElement>('login-password-email').value;

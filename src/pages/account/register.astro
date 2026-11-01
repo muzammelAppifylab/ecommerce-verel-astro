@@ -60,7 +60,10 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=300');
         autocomplete="new-password"
         maxlength={128}
         describedby="register-password-checks"
-        reveal={reveal}>
+        reveal={reveal}
+      />
+      <!-- VAREL PasswordStrength (`-mt-4`) under the field and its error, then the live rules. -->
+      <div class="-mt-4 flex flex-col gap-2">
         <div class="auth-strength flex flex-col gap-2" id="register-strength" data-level="0">
           <div class="flex items-center gap-3">
             <span class="relative block h-0.5 flex-1 overflow-hidden bg-ink-200" aria-hidden="true">
@@ -71,7 +74,7 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=300');
           <span class="text-label-md text-text-muted">{t('strength.hint')}</span>
         </div>
         <ul class="pw-checks" id="register-password-checks"><li>{t('checks.length', {min: 10})}</li></ul>
-      </AuthField>
+      </div>
 
       <label class={CHECK_LABEL}>
         <input type="checkbox" name="terms" id="register-terms" class={CHECK_INPUT} />
@@ -88,7 +91,7 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=300');
     </form>
 
     <span class="mt-7 text-body-sm text-text-secondary" id="register-have-account">
-      {t('signup.haveAccount')}
+      {t('signup.haveAccount')}{' '}
       <a href={href('/account/login/')} data-keep-next class="border-b border-strong pb-0.5 text-text-primary">{t('signIn')}</a>
     </span>
   </div>

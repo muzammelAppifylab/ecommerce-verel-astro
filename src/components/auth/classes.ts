@@ -27,3 +27,6 @@ export const CHECK_LABEL = 'flex cursor-pointer items-start gap-3 text-body-sm l
 export const CHECK_INPUT = 'm-0 mt-[3px] size-3.5 shrink-0 accent-ink-900'
 /** Inline links inside copy (terms, privacy) */
 export const TEXT_LINK = 'border-b border-current text-text-primary'
+/** "Email me a code instead" / "Use a password instead": sits where VAREL's "Keep me signed in" line was (14px, secondary). */
+export const METHOD_TOGGLE =
+  'cursor-pointer border-0 border-b border-hairline bg-transparent p-0 pb-0.5 font-sans text-body-sm text-text-secondary transition-hover hover:border-strong hover:text-text-primary'
