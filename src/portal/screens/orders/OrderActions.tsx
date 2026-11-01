@@ -9,7 +9,8 @@ import type {AdminOrderRow, FulfillmentStatus} from '../../../lib/types/admin/sa
 import {useBulkUpdateOrders} from '../../queries/orders';
 import {BulkAction, BulkBar, type IconName, Menu, type MenuItem, useToast} from '../../ui';
 import {RefundDialog} from './RefundDialog';
-import {ConfirmModal, csvText, errorText, money, pluralize, saveBlob} from './ui';
+import {csvText, selectedCsvRows} from './csv';
+import {ConfirmModal, errorText, money, pluralize, saveBlob} from './ui';
 
 export type Move = 'Processing' | 'Shipped' | 'Delivered';
 
@@ -204,10 +205,3 @@ export function OrdersBulkBar({
   );
 }
 
-/** Client-side CSV of the selected rows (the server export covers whole filtered lists). */
-export function selectedCsvRows(rows: AdminOrderRow[]): (string | number)[][] {
-  return [
-    ['Order', 'Placed', 'Customer', 'Email', 'Payment', 'Fulfilment', 'Items', 'Total'],
-    ...rows.map(o => [o.number, o.placedAt, o.customerName, o.email, o.payment, o.fulfillment, o.count, o.total.toFixed(2)]),
-  ];
-}

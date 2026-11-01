@@ -74,14 +74,7 @@ export const errorText = (error: unknown) => (error instanceof Error ? error.mes
 
 /* ---------- CSV (client side, selected rows) ---------- */
 
-/** A CSV cell, quoted when needed and guarded against spreadsheet formulas (as the server's `csvCell`). */
-export function csvCell(v: string | number | null | undefined): string {
-  let s = v === null || v === undefined ? '' : String(v);
-  if (/^[=+\-@\t\r]/.test(s)) s = `'${s}`;
-  return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-}
-
-export const csvText = (rows: (string | number | null | undefined)[][]) => rows.map(r => r.map(csvCell).join(',')).join('\r\n') + '\r\n';
+export {csvCell, csvText} from './csv';
 
 /** Saves a blob as a file through a temporary link. */
 export function saveBlob(blob: Blob, filename: string) {
