@@ -100,6 +100,10 @@ export function CategoryOrder() {
             Try again
           </Button>
         </div>
+      ) : departments.isSuccess && !options.length ? (
+        <div className="merch-list">
+          <p className="merch-products-empty">No categories yet. Add departments and categories first.</p>
+        </div>
       ) : order.isPending || !category ? (
         <RowSkeletons rows={4} />
       ) : items.length === 0 ? (
