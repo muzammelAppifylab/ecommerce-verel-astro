@@ -1,0 +1,87 @@
+{
+  "home": "Accueil",
+  "title": "Retours et remboursements",
+  "intro": "Trente jours pour retourner les pièces non portées avec leurs étiquettes. Les retours depuis le Danemark et l’UE sont gratuits ; ailleurs, les frais de retour sont à votre charge.",
+  "lookup": {
+    "label": "Commencer un retour",
+    "placeholder": "Numéro de commande",
+    "button": "Rechercher",
+    "note": "Votre numéro de commande commence par VRL- et figure dans votre e-mail de confirmation",
+    "enterNumber": "Saisissez le numéro de commande figurant dans votre e-mail de confirmation",
+    "notFound": "Nous ne trouvons pas ce numéro de commande"
+  },
+  "steps": {
+    "label": "Comment fonctionnent les retours",
+    "step": "Étape {{n}}",
+    "s1Title": "Retrouvez la commande",
+    "s1Body": "Saisissez votre numéro de commande ou ouvrez la commande depuis votre compte.",
+    "s2Title": "Choisissez les pièces",
+    "s2Body": "Sélectionnez ce que vous renvoyez et dites-nous pourquoi en une ligne.",
+    "s3Title": "Expédiez-la",
+    "s3Body": "Imprimez l’étiquette prépayée. Les retours depuis l’UE sont gratuits ; ailleurs, l’affranchissement est à votre charge.",
+    "s4Title": "Soyez remboursé",
+    "s4Body": "Trois jours ouvrés après réception du colis, sur votre moyen de paiement d’origine."
+  },
+  "window": {
+    "title": "Le délai",
+    "p1": "Trente jours à compter de la livraison. Le droit de l’UE vous en accorde quatorze ; nous allons au-delà. Les pièces soldées marquées comme vente finale sont la seule exception et ne peuvent être retournées qu’en cas de défaut."
+  },
+  "condition": {
+    "title": "État",
+    "p1": "Non portées, non lavées, avec leurs étiquettes, dans leur emballage d’origine. Essayez les pièces comme vous le feriez en boutique. Les chaussures doivent être essayées à l’intérieur — les semelles présentant des traces d’usure ne peuvent être acceptées."
+  },
+  "refunds": {
+    "title": "Remboursements",
+    "methodLabel": "Moyen",
+    "method": "Sur la carte ou le portefeuille électronique utilisé pour payer. Nous ne pouvons pas rembourser ailleurs.",
+    "timingLabel": "Délai",
+    "timing": "Sous trois jours ouvrés après réception du colis, puis le délai propre à votre banque.",
+    "shippingLabel": "Frais de livraison",
+    "shipping": "Non remboursés, sauf si une pièce est arrivée défectueuse ou si nous nous sommes trompés d’article.",
+    "discountsLabel": "Réductions",
+    "discounts": "Un retour partiel entraîne un nouveau calcul de la réduction sur les pièces que vous conservez."
+  },
+  "exchanges": {
+    "title": "Échanges",
+    "p1": "Le plus simple est de retourner la pièce et de commander à nouveau, car le stock évolue. Si la taille souhaitée est disponible, écrivez-nous avec le numéro de commande et nous la réserverons sept jours, le temps que votre retour nous parvienne."
+  },
+  "digital": {
+    "title": "Produits numériques",
+    "p1": "Non remboursables une fois téléchargés, puisqu’il n’y a rien à renvoyer. Si un fichier ne s’ouvre pas, écrivez-nous et nous le corrigerons ou le rembourserons."
+  },
+  "faults": {
+    "title": "Défauts et réparations",
+    "p1": "Deux ans de garantie sur les défauts de fabrication, avec réparation gratuite pendant cette période. Au-delà de deux ans, le studio de Copenhague répare toujours toute pièce VAREL, à prix coûtant. Envoyez-nous d’abord une photo et nous vous dirons ce qu’il faut faire.",
+    "findOrder": "Trouver une commande"
+  },
+  "writeStudio": "Écrire au studio",
+  "related": {
+    "terms": "Conditions générales",
+    "privacy": "Politique de confidentialité"
+  },
+  "request": {
+    "order": "Commande {{number}}",
+    "booked": "Votre retour est enregistré",
+    "choose": "Choisissez ce que vous renvoyez",
+    "notYet": "Cette commande ne peut pas encore être retournée",
+    "lookupAnother": "Rechercher une autre commande",
+    "requested_one": "Retour demandé pour une pièce. L’étiquette prépayée et les instructions sont en route vers {{email}}.",
+    "requested_many": "Retour demandé pour {{count}} pièces. L’étiquette prépayée et les instructions sont en route vers {{email}}.",
+    "requested_other": "Retour demandé pour {{count}} pièces. L’étiquette prépayée et les instructions sont en route vers {{email}}.",
+    "packCarrier": "Emballez les pièces dans leur emballage d’origine, collez l’étiquette et déposez le colis dans n’importe quel point {{carrier}}. Le remboursement est effectué sur votre moyen de paiement d’origine sous trois jours ouvrés après réception du colis.",
+    "pack": "Emballez les pièces dans leur emballage d’origine, collez l’étiquette et déposez le colis dans n’importe quel point relais du transporteur. Le remboursement est effectué sur votre moyen de paiement d’origine sous trois jours ouvrés après réception du colis.",
+    "reference": "Référence du retour {{id}}",
+    "notEligibleReason": "Cette commande ne peut pas être retournée.",
+    "notEligible": "{{reason}} Si un article est arrivé endommagé ou défectueux, écrivez au studio et nous trouverons une solution.",
+    "allDigital": "Tout dans cette commande est numérique. Les produits numériques ne sont pas remboursables une fois téléchargés — si un fichier ne s’ouvre pas, écrivez au studio et nous le corrigerons ou le rembourserons.",
+    "estimatedRefund": "Remboursement estimé",
+    "submit": "Demander le retour",
+    "chooseOne": "Choisissez au moins une pièce à retourner",
+    "whyOneLine": "Dites-nous pourquoi en une ligne",
+    "qty": "Qté {{qty}}",
+    "quantity": "Quantité",
+    "reason": "Motif",
+    "chooseReason": "Choisissez un motif",
+    "reasonPlaceholder": "Trop large aux épaules"
+  }
+}

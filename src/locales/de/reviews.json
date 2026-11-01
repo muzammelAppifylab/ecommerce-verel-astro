@@ -1,0 +1,66 @@
+{
+  "title": "Bewertungen",
+  "loadError": "Die Bewertungen konnten nicht geladen werden.",
+  "tryAgain": "Erneut versuchen",
+  "write": "Bewertung schreiben",
+  "eligibility": {
+    "purchase": "Bewertungen schreiben Kundinnen und Kunden, die dieses Stück gekauft haben.",
+    "reviewed": "Danke, du hast dieses Stück bereits bewertet."
+  },
+  "empty": {
+    "title": "Noch keine Bewertungen",
+    "body": "Du trägst {{name}}? Erzähl anderen, wie es sitzt, sich anfühlt und hält."
+  },
+  "count_one": "{{count}} Bewertung",
+  "count_other": "{{count}} Bewertungen",
+  "sort": {
+    "label": "Bewertungen sortieren",
+    "newest": "Neueste",
+    "highest": "Beste Bewertung",
+    "lowest": "Schlechteste Bewertung"
+  },
+  "pages": {
+    "label": "Bewertungsseiten",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "status": "Seite {{page}} von {{pages}}"
+  },
+  "summary": {
+    "first": "Bewerte dieses Stück als Erste oder Erster.",
+    "rated": "Bewertet mit {{avg}} von 5",
+    "basedOn_one": "Basierend auf {{count}} Bewertung",
+    "basedOn_other": "Basierend auf {{count}} Bewertungen"
+  },
+  "stars_one": "{{count}} Stern",
+  "stars_other": "{{count}} Sterne",
+  "item": {
+    "outOf": "{{rating}} von 5",
+    "verified": "Verifizierter Kauf",
+    "reply": "Antwort von VAREL"
+  },
+  "rating": {
+    "label": "Deine Bewertung",
+    "1": "Schlecht",
+    "2": "Mittelmäßig",
+    "3": "Gut",
+    "4": "Sehr gut",
+    "5": "Ausgezeichnet"
+  },
+  "form": {
+    "error": "Deine Bewertung wurde nicht gesendet. Prüfe deine Verbindung und versuche es noch einmal.",
+    "chooseRating": "Wähle eine Bewertung",
+    "thanks": "Danke für deine Bewertung",
+    "live": "Sie ist jetzt auf dieser Seite sichtbar.",
+    "pending": "Wir lesen jede Bewertung, bevor sie erscheint. Meist ist sie innerhalb von ein, zwei Tagen sichtbar.",
+    "close": "Schließen",
+    "closeForm": "Bewertungsformular schließen",
+    "blocked": "Bewertungen können alle schreiben, die dieses Stück gekauft haben. <signIn>Melde dich an</signIn>, um eine zu verfassen.",
+    "title": "Titel",
+    "titlePlaceholder": "In wenigen Worten zusammengefasst",
+    "body": "Deine Bewertung",
+    "bodyHint": "Passform, Stoff, wie es sich trägt. Mindestens ein, zwei Sätze.",
+    "postingAs": "Veröffentlicht als {{name}}",
+    "submit": "Bewertung senden",
+    "checked": "Bewertungen werden vor der Veröffentlichung geprüft"
+  }
+}

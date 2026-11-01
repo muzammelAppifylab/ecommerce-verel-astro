@@ -1,0 +1,144 @@
+{
+  "shopCollection": "Handla kollektionen",
+  "pieces_one": "{{count}} plagg",
+  "pieces_other": "{{count}} plagg",
+  "hero": {
+    "eyebrow": "Hösten 2026",
+    "title": "Moderna basplagg.\nNoga genomtänkta.",
+    "body": "Vardagsplagg i naturmaterial, tillverkade i små serier och gjorda för att bäras långt efter säsongen.",
+    "primaryCta": "Handla dam",
+    "secondaryCta": "Handla herr",
+    "alt": "Stickat, en brun ullkappa och linnebyxor på en ljus klädstång av trä i mjukt morgonljus"
+  },
+  "categories": {
+    "title": "Handla efter kategori",
+    "alt": "{{name}} — VAREL"
+  },
+  "newIn": {
+    "eyebrow": "Nyheter",
+    "title": "Säsongen, i urval",
+    "sortLabel": "Sortera produkter",
+    "sort": {
+      "featured": "Utvalda",
+      "price-asc": "Pris — lägst först",
+      "price-desc": "Pris — högst först"
+    },
+    "filterLabel": "Filtrera produkter",
+    "filters": {
+      "all": "Alla",
+      "new": "Nyheter",
+      "women": "Dam",
+      "men": "Herr",
+      "shoes": "Skor",
+      "bags": "Väskor",
+      "accessories": "Accessoarer"
+    },
+    "error": "Kollektionen kunde inte laddas.",
+    "tryAgain": "Försök igen",
+    "empty": "Inget här ännu. Prova ett annat filter."
+  },
+  "piece": {
+    "eyebrow": "Utvalt plagg",
+    "altA": "Atelier Wool Coat — helfigur på plats",
+    "altB": "Kappa och byxor över en stol i studion",
+    "error": "Plagget kunde inte laddas just nu.",
+    "body": "Dubbelvävd italiensk ull från vårt väveri i Biella, ofodrad och handavslutad. Lång i kroppen med fälld axel, så att den kan bäras över stickat utan att bli klumpig.",
+    "note": "Fri frakt över $150 · Trettio dagars returrätt på oanvända plagg",
+    "stock": {
+      "download": "Direkt nedladdning",
+      "soldOut": "Slutsåld i den här storleken",
+      "final_one": "Bara {{word}} kvar",
+      "final_other": "Bara {{word}} kvar",
+      "in": "I lager"
+    },
+    "words": {
+      "1": "ett",
+      "2": "två",
+      "3": "tre",
+      "4": "fyra",
+      "5": "fem",
+      "6": "sex"
+    }
+  },
+  "values": {
+    "label": "Så arbetar vi",
+    "materials": {
+      "title": "Genomtänkta material",
+      "body": "Ull, linne och vegetabiliskt garvat läder, valda för hur de håller över år, inte säsonger."
+    },
+    "lasting": {
+      "title": "Gjort för att hålla",
+      "body": "Små serier hos namngivna partner i Portugal och Italien, som bara upprepas när de förtjänar det."
+    },
+    "fit": {
+      "title": "Passform, löst",
+      "body": "Varje plagg graderas på riktiga kroppar innan det når kollektionen."
+    }
+  },
+  "bestPart": {
+    "eyebrow": "(Det bästa)",
+    "rows": {
+      "outerwear": "Ytterplagg",
+      "knitwear": "Stickat",
+      "shirting": "Skjortor",
+      "denim": "Denim"
+    },
+    "body": "Från vardagens basplagg till genomtänkta ytterplagg är varje plagg skuret i naturfibrer och tillverkat i små serier. Bär det den här säsongen och nästa.",
+    "alt": "Kläder på en stång i en kal betongstudio"
+  },
+  "featured": {
+    "eyebrow": "Utvalt",
+    "title": "Nära till hands den här säsongen",
+    "allProducts": "Alla produkter"
+  },
+  "featuredCollections": {
+    "eyebrow": "Kollektioner",
+    "title": "Utvalda av studion",
+    "all": "Alla kollektioner"
+  },
+  "newCollections": {
+    "eyebrow": "Nya kollektioner",
+    "knit": {
+      "title": "Stickat för de kalla månaderna",
+      "body": "Lammull och merino spunnet i Biella, stickat i Portugal i resår och halvpatent som vi upprepar varje säsong. Rymlig i kroppen så att en skjorta får plats under.",
+      "cta": "Handla stickat",
+      "altA": "Vikta stickade tröjor bredvid ett garnnystan",
+      "altB": "Guldringar på en krämvit stickad ärm"
+    },
+    "shirt": {
+      "title": "Skjortor, skurna en gång och behållna",
+      "body": "Torr italiensk bomullstwill och tvättad poplin, boxig i kroppen med rak fåll. Två kragar, fyra färger, ingen säsongsvariation.",
+      "cta": "Handla skjortor",
+      "altA": "Skjortdetalj",
+      "altB": "Skjortor i editorial"
+    }
+  },
+  "collections": {
+    "eyebrow": "Bär säsongen",
+    "body": "Fyra urval från studion, vart och ett byggt på samma korta lista tyger som vi återvänder till varje säsong.",
+    "altA": "Jeansjacka mot en räfflad metallport",
+    "altB": "Skräddade kavajer på kopparhängare",
+    "items": {
+      "essentials": {
+        "title": "Vardagens basplagg",
+        "description": "Plaggen vi gör varje säsong: tunga t-shirts, vida byxor och ribbstickat, i de tyger vi alltid återvänder till."
+      },
+      "statement": {
+        "title": "Statementplagg",
+        "description": "En kort serie större silhuetter: ullkappan, overshirten, weekendbagen."
+      },
+      "classics": {
+        "title": "Klassikerna",
+        "description": "Skjortor, byxor och stickat som funnits i kollektionen sedan de första säsongerna, nästan oförändrade."
+      },
+      "seasonal": {
+        "title": "Säsongskollektioner",
+        "description": "Höst- och vårsläpp i små upplagor som sällan upprepas."
+      }
+    }
+  },
+  "journal": {
+    "title": "Från journalen",
+    "all": "Alla berättelser"
+  }
+}

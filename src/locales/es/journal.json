@@ -1,0 +1,61 @@
+{
+  "home": "Inicio",
+  "title": "Diario",
+  "metaDescription": "Notas del estudio VAREL sobre materiales, estilo, cuidado y viajes.",
+  "intro": "Notas del estudio sobre materiales, confección, cuidado y uso. Se publican cuando hay algo que valga la pena contar.",
+  "tryAgain": "Reintentar",
+  "loadErrorDescription": "Algo ha fallado por nuestra parte. Inténtalo de nuevo en un momento.",
+  "allEntries": "Todas las entradas",
+  "categoriesLabel": "Categorías del diario",
+  "readPiece": "Leer el artículo",
+  "index": {
+    "errorTitle": "El diario no se ha podido cargar",
+    "emptyTitle": "Todavía no hay nada",
+    "emptyDescription": "La primera entrada aún se está escribiendo."
+  },
+  "newsletter": {
+    "title": "Novedades tranquilas, dos veces al mes",
+    "body": "Piezas nuevas, reposiciones y alguna nota ocasional del estudio. Sin ruido de descuentos.",
+    "note": "Nunca compartiremos tu dirección.",
+    "success": "Gracias. Busca la próxima nota en tu bandeja de entrada."
+  },
+  "category": {
+    "pageTitle": "{{name}} — Diario",
+    "eyebrow": "Categoría del diario",
+    "entries_one": "{{count}} entrada",
+    "entries_many": "{{count}} de entradas",
+    "entries_other": "{{count}} entradas",
+    "errorTitle": "Esta categoría no se ha podido cargar",
+    "emptyTitle": "Todavía no hay nada",
+    "emptyDescription": "Esta categoría espera su primera entrada."
+  },
+  "categoryBlurb": {
+    "materials": "De dónde vienen las fibras, cómo se hilan y se tejen, y qué ocurre cuando se desgastan.",
+    "styling": "Cómo combinan las piezas entre sí y qué pocas necesitas en realidad.",
+    "care": "Lavar, secar, guardar y remendar, para que una prenda dure una década.",
+    "travel": "Viajar ligero con un armario que se repite."
+  },
+  "authorRole": {
+    "studioDirector": "Directora del estudio"
+  },
+  "post": {
+    "pageTitle": "{{title}} — Diario",
+    "notFoundTitle": "No encontramos esa entrada",
+    "notFoundDescription": "Puede que se haya movido o que el enlace esté incompleto. Todo lo que hemos publicado está en el diario.",
+    "errorTitle": "Esta entrada no se ha podido cargar",
+    "linkCopied": "Enlace copiado",
+    "share": "Compartir",
+    "print": "Imprimir",
+    "contents": "Contenido",
+    "keepReading": "Sigue leyendo"
+  },
+  "newsletterForm": {
+    "note": "Nunca compartimos tu dirección.",
+    "success": "Gracias. La próxima carta llegará a tu bandeja de entrada.",
+    "invalidEmail": "Introduce un correo electrónico válido.",
+    "emailLabel": "Correo electrónico",
+    "subscribe": "Suscribirse",
+    "sending": "Enviando",
+    "subscribed": "Suscrito"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "pieces_one": "{{count}} plagg",
+  "pieces_other": "{{count}} plagg",
+  "imageAlt": "{{title}} — VAREL-kollektion",
+  "card": {
+    "cta": "Handla urvalet"
+  },
+  "crumbs": {
+    "home": "Startsida",
+    "collections": "Kollektioner"
+  },
+  "allCollections": "Alla kollektioner",
+  "allProducts": "Alla produkter",
+  "tryAgain": "Försök igen",
+  "errorBody": "Kontrollera anslutningen och försök igen.",
+  "index": {
+    "title": "Kollektioner",
+    "meta": "Urval från VAREL-studion: plagg valda för att bäras tillsammans, för en säsong, en resa eller ett sätt att klä sig.",
+    "intro": "Urval från studion. Plagg valda för att bäras tillsammans, för en säsong, en resa eller ett sätt att klä sig.",
+    "count_one": "{{count}} kollektion",
+    "count_other": "{{count}} kollektioner",
+    "errorTitle": "Kollektionerna kunde inte laddas",
+    "emptyTitle": "Inga kollektioner just nu",
+    "emptyBody": "Nya urval är på väg. Bläddra bland allt som finns i studion just nu."
+  },
+  "page": {
+    "title": "Kollektion",
+    "eyebrow": "Kollektion",
+    "notFoundTitle": "Sidan hittades inte",
+    "notFoundHeading": "Vi hittar inte den kollektionen",
+    "notFoundBody": "Den kan ha avslutats eller flyttats. Bläddra bland de aktuella kollektionerna, eller allt i studion.",
+    "errorTitle": "Kollektionen kunde inte laddas",
+    "piecesLabel": "Plagg i kollektionen",
+    "emptyTitle": "Inget i kollektionen just nu",
+    "emptyBody": "Plaggen har sålt slut. Bläddra bland allt som finns i studion just nu.",
+    "more": "Fler kollektioner"
+  }
+}

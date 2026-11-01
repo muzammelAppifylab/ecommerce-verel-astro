@@ -1,0 +1,44 @@
+{
+  "home": "Accueil",
+  "title": "Contact",
+  "intro": "Nous répondons sous un jour ouvré, souvent plus tôt. Pour toute question sur une commande existante, indiquez le numéro de commande.",
+  "subjects": {
+    "order": "Une commande existante",
+    "sizing": "Tailles et coupe",
+    "repair": "Réparations",
+    "return": "Retours et remboursements",
+    "stockist": "Revendeurs et vente en gros",
+    "press": "Presse"
+  },
+  "write": {
+    "hint": "Choisissez un sujet : votre messagerie s’ouvre avec l’objet déjà rempli.",
+    "direct": "Ou écrivez directement au studio à"
+  },
+  "studio": {
+    "label": "Le studio",
+    "photoAlt": "Le studio VAREL à Nørrebro",
+    "photoCredit": "Photo de همَّام sur Unsplash",
+    "studio": "Studio",
+    "addressLine1": "112 Studio, Nørrebro",
+    "addressLine2": "0000 Copenhague, Danemark",
+    "hours": "Horaires d’ouverture",
+    "days": "Du jeudi au samedi",
+    "time": "11 h – 18 h",
+    "email": "E-mail",
+    "phone": "Téléphone"
+  },
+  "faq": {
+    "title": "Avant de nous écrire",
+    "whereQ": "Où est ma commande ?",
+    "whereA": "Le suivi se trouve dans votre compte, dans l’historique des commandes, ainsi que dans l’e-mail d’expédition.",
+    "sizeQ": "Puis-je changer de taille ?",
+    "sizeA": "Oui, avant que la commande ne soit préparée. Écrivez-nous avec le numéro de commande et nous ferons l’échange.",
+    "repairQ": "Réparez-vous les pièces plus anciennes ?",
+    "repairA": "Oui. Les réparations sont gratuites les deux premières années, puis facturées à prix coûtant.",
+    "wholesaleQ": "Vendez-vous en gros ?",
+    "wholesaleA": "À un petit nombre de revendeurs. Écrivez-nous en indiquant votre boutique et votre ville.",
+    "returns": "Retours",
+    "track": "Suivre une commande",
+    "terms": "Conditions"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "page": {
+    "title": "Producto",
+    "notFoundTitle": "Página no encontrada",
+    "home": "Inicio"
+  },
+  "tile": {
+    "addToBag": "Añadir a la cesta",
+    "addedToBag": "Añadido a la cesta",
+    "soldOut": "Agotado",
+    "download": "Descargar",
+    "notifyMe": "Ver detalles",
+    "added": "Añadido",
+    "quickAdd": "Añadir",
+    "soldOutDetails": "{{name}} está agotado. Ver detalles",
+    "addNameToBag": "Añadir {{name}} a la cesta",
+    "addToWishlist": "Añadir a favoritos",
+    "removeFromWishlist": "Quitar de favoritos",
+    "addNameToWishlist": "Añadir {{name}} a favoritos",
+    "removeNameFromWishlist": "Quitar {{name}} de favoritos",
+    "rated": "Valorado con {{avg}} de 5",
+    "promotionInBag": "{{label}} en tu cesta",
+    "bagWord": "cesta"
+  },
+  "stock": {
+    "inStock": "En stock",
+    "lowLeft_one": "Solo queda {{count}}",
+    "lowLeft_other": "Solo quedan {{count}}",
+    "lowLeft_many": "Pocas unidades — quedan {{count}}",
+    "instantDownload": "Descarga inmediata",
+    "soldOutSize": "Agotado en esta talla",
+    "backorder": "Hecho por encargo · se envía en 2–3 semanas",
+    "digitalNoShipping": "Digital · sin envío"
+  },
+  "buy": {
+    "buyDownload": "Comprar y descargar",
+    "added": "{{name}} añadido a la cesta",
+    "viewBag": "Ver cesta",
+    "exclVat": "IVA no incluido",
+    "colour": "Color",
+    "colourValue": "Color — {{value}}",
+    "optionValue": "{{name}} — {{value}}",
+    "size": "Talla",
+    "sizeValue": "Talla — {{value}}",
+    "sizeSoldOut": "{{size}}, agotada",
+    "sizeGuide": "Guía de tallas",
+    "sku": "Ref. {{sku}}",
+    "digitalProduct": "Producto digital",
+    "physicalProduct": "Producto físico",
+    "noShipping": "Sin envío — se entrega como descarga",
+    "ships": "Se envía en 1–2 días laborables desde Copenhague",
+    "returns": "Treinta días para devolver piezas sin usar"
+  },
+  "accordion": {
+    "details": "Detalles",
+    "material": "Material y confección",
+    "materialBody": "{{material}}. Hecho en Europa en series cortas con socios conocidos. {{care}}",
+    "digitalCare": "Se entrega como descarga — no se envía nada.",
+    "shipping": "Envío",
+    "shippingDigital": "Entrega digital. Recibirás un enlace de descarga con el correo de confirmación y quedará guardado en tu cuenta.",
+    "shippingBody": "El envío estándar es gratuito en Dinamarca y la UE, y todos los pedidos superiores a $150 se envían gratis. Puedes elegir envío exprés o recogida en el estudio de Nørrebro al finalizar la compra.",
+    "returns": "Devoluciones",
+    "returnsBody": "Treinta días para devolver piezas sin usar con las etiquetas. Los productos digitales no se reembolsan una vez descargados."
+  },
+  "gallery": {
+    "images": "Imágenes de {{name}}",
+    "view": "{{name}} — vista {{n}}",
+    "choose": "Elige una vista",
+    "viewImage": "Ver imagen {{n}}"
+  },
+  "states": {
+    "loading": "Cargando producto",
+    "notFoundTitle": "Esta página no está aquí",
+    "notFoundBody": "Puede que el enlace sea antiguo o que una pieza se haya agotado y ya no esté en el catálogo. Búscala o empieza por la colección.",
+    "allProducts": "Todos los productos",
+    "search": "Buscar",
+    "errorTitle": "No se ha podido cargar esta pieza",
+    "errorBody": "Comprueba tu conexión e inténtalo de nuevo. Tu cesta se mantiene como estaba.",
+    "tryAgain": "Intentar de nuevo"
+  },
+  "related": {
+    "title": "Combina bien con"
+  },
+  "sizeGuide": {
+    "title": "Guía de tallas",
+    "description": "Medidas corporales en centímetros",
+    "body": "Medidas corporales en centímetros. Nuestras piezas tienen holgura; si estás entre dos tallas, elige la más pequeña.",
+    "size": "Talla",
+    "chest": "Pecho",
+    "waist": "Cintura",
+    "hip": "Cadera",
+    "fallback": "Esta pieza está disponible en {{sizes}}. Escribe al estudio para conocer las medidas exactas."
+  }
+}

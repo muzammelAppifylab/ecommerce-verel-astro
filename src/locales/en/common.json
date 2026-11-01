@@ -1,0 +1,21 @@
+{
+  "addToBag": "Add to bag",
+  "remove": "Remove",
+  "save": "Save",
+  "cancel": "Cancel",
+  "continue": "Continue",
+  "close": "Close",
+  "back": "Back",
+  "loading": "Loading",
+  "tryAgain": "Try again",
+  "error": "Something went wrong. Please try again.",
+  "free": "Free",
+  "soldOut": "Sold out",
+  "quantity": "Quantity",
+  "size": "Size",
+  "colour": "Colour",
+  "search": "Search",
+  "signIn": "Sign in",
+  "viewAll": "View all",
+  "apply": "Apply"
+}

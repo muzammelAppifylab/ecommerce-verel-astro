@@ -1,0 +1,44 @@
+{
+  "home": "Home",
+  "title": "Contact",
+  "intro": "We answer within one business day, usually sooner. For anything about an existing order, include the order number.",
+  "subjects": {
+    "order": "An existing order",
+    "sizing": "Sizing and fit",
+    "repair": "Repairs",
+    "return": "Returns and refunds",
+    "stockist": "Stockists and wholesale",
+    "press": "Press"
+  },
+  "write": {
+    "hint": "Choose a topic and your email app opens with the subject filled in.",
+    "direct": "Or write to the studio directly at"
+  },
+  "studio": {
+    "label": "Studio details",
+    "photoAlt": "The VAREL studio in Nørrebro",
+    "photoCredit": "Photo by همَّام on Unsplash",
+    "studio": "Studio",
+    "addressLine1": "112 Studio, Nørrebro",
+    "addressLine2": "0000 Copenhagen, Denmark",
+    "hours": "Opening hours",
+    "days": "Thursday to Saturday",
+    "time": "11:00–18:00",
+    "email": "Email",
+    "phone": "Phone"
+  },
+  "faq": {
+    "title": "Before you write",
+    "whereQ": "Where is my order?",
+    "whereA": "Tracking sits in your account under order history, and in the shipping email.",
+    "sizeQ": "Can I change a size?",
+    "sizeA": "Yes, before the order is packed. Write with the order number and we will swap it.",
+    "repairQ": "Do you repair older pieces?",
+    "repairA": "We do. Repairs are free in the first two years, then charged at cost.",
+    "wholesaleQ": "Do you sell wholesale?",
+    "wholesaleA": "A small number of stockists. Write with your shop and city.",
+    "returns": "Returns",
+    "track": "Track an order",
+    "terms": "Terms"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "pieces_one": "{{count}} styk",
+  "pieces_other": "{{count}} styk",
+  "crumbs": {
+    "home": "Forside",
+    "shop": "Shop"
+  },
+  "sort": {
+    "label": "Sortér",
+    "aria": "Sortér produkter",
+    "featured": "Udvalgte",
+    "newest": "Nyeste",
+    "price-asc": "Pris · lav til høj",
+    "price-desc": "Pris · høj til lav",
+    "name": "Navn · A til Å"
+  },
+  "filters": {
+    "label": "Filtre",
+    "title": "Filtrér",
+    "titleCount": "Filtrér ({{count}})",
+    "clear": "Ryd",
+    "description": "Afgræns produkterne efter kategori, farve, størrelse, materiale, mærke og pris.",
+    "close": "Luk filtre",
+    "showResults": "Vis resultater",
+    "show_one": "Vis {{count}} styk",
+    "show_other": "Vis {{count}} styk",
+    "price": "Pris",
+    "maxPrice": "Maksimal pris",
+    "upTo": "Op til {{price}}",
+    "active": "Aktive filtre",
+    "remove": "Fjern filteret {{label}}"
+  },
+  "results": {
+    "errorTitle": "Kollektionen blev ikke indlæst",
+    "errorBody": "Tjek din forbindelse, og prøv igen.",
+    "tryAgain": "Prøv igen",
+    "noMatchTitle": "Intet matcher disse filtre",
+    "noMatchBody": "Prøv at fjerne et filter, eller se hele kollektionen.",
+    "clearFilters": "Ryd filtre"
+  },
+  "shop": {
+    "title": "Alle produkter",
+    "meta": "Alle VAREL-styk: tøj, sko, tasker og tilbehør, skåret i naturfibre i små serier.",
+    "heading": "Alle produkter",
+    "intro": "Alt, hvad der er i studiet lige nu. Naturfibre, små serier, fire farver pr. sæson."
+  },
+  "category": {
+    "eyebrow": "Kollektion · Efterår 2026",
+    "departments": "Afdelinger",
+    "all": "Se alt",
+    "heroAlt": "{{name}}-kollektionen, editorial i naturligt dagslys",
+    "detailAlt": "Detalje fra {{name}}-kollektionen",
+    "notFoundTitle": "Vi kan ikke finde den kollektion",
+    "notFoundBody": "Den kan være flyttet. Se alt, hvad der er i studiet lige nu.",
+    "allProducts": "Alle produkter",
+    "emptyTitle": "Denne kategori er tom",
+    "emptyBody": "Styk kommer hertil, efterhånden som sæsonen lander. Se alt det andet imens.",
+    "aboutEyebrow": "Om kollektionen",
+    "aboutTitle": "{{name}}, i fire farver",
+    "aboutBody": "Hvert styk i kollektionen er gradueret på rigtige kroppe og skåret i de samme fire farver, så alt her passer sammen med alt andet. Størrelserne går fra XS til XL, med denim og sko i numeriske størrelser.",
+    "journal": "Læs journalen",
+    "copy": {
+      "women": "Kjoler, skjorter, strik og overtøj skåret til en hel garderobe frem for en enkelt sæson.",
+      "men": "Skjorter, jersey og strik i naturfibre, rummeligt skåret og lavet til at blive gentaget.",
+      "shoes": "Vegetabilsk garvet læder på slanke såler. Kan forsåles og bliver blødere med tiden.",
+      "bags": "Struktureret læder og vokset canvas i størrelser til en dag i byen og en weekend væk.",
+      "accessories": "Stål, læder og glas. De små ting, der gør et sæt færdigt.",
+      "lifestyle": "Genstande og tryksager til at holde en garderobe i god stand."
+    },
+    "meta": {
+      "women": "Dametøj fra VAREL: kjoler, skjorter, strik, bukser, denim og overtøj i naturfibre."
+    }
+  },
+  "search": {
+    "title": "Søg",
+    "placeholder": "Søg i produkter, kategorier, journal",
+    "prompt": "Skriv for at søge i sortimentet og journalen.",
+    "searching": "Søger efter »{{term}}«",
+    "unavailable": "Søgning er ikke tilgængelig lige nu. Prøv igen.",
+    "results_one": "{{count}} resultat for »{{term}}«",
+    "results_other": "{{count}} resultater for »{{term}}«",
+    "suggested": "Forslag",
+    "suggestions": {
+      "wool": "Uld",
+      "knitwear": "Strik",
+      "outerwear": "Overtøj",
+      "leather": "Læder",
+      "stone": "Sten",
+      "digital": "Digital"
+    },
+    "resultType": "Resultattype",
+    "tabs": {
+      "all": "Alt",
+      "products": "Produkter",
+      "categories": "Kategorier",
+      "journal": "Journal"
+    },
+    "noResults": "Ingen resultater for »{{term}}«",
+    "noResultsBody": "Tjek stavningen, prøv et materiale eller en kategori, eller se alt, hvad der er i studiet lige nu.",
+    "allProducts": "Alle produkter",
+    "tabEmpty_one": "Intet under denne fane. De andre faner har {{count}} resultat for »{{term}}«.",
+    "tabEmpty_other": "Intet under denne fane. De andre faner har {{count}} resultater for »{{term}}«.",
+    "productsCount": "Produkter ({{count}})",
+    "categoriesCount": "Kategorier ({{count}})",
+    "journalCount": "Journal ({{count}})"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "pieces_one": "{{count}} styk",
+  "pieces_other": "{{count}} styk",
+  "imageAlt": "{{title}} — VAREL-kollektion",
+  "card": {
+    "cta": "Se udvalget"
+  },
+  "crumbs": {
+    "home": "Forside",
+    "collections": "Kollektioner"
+  },
+  "allCollections": "Alle kollektioner",
+  "allProducts": "Alle produkter",
+  "tryAgain": "Prøv igen",
+  "errorBody": "Tjek din forbindelse, og prøv igen.",
+  "index": {
+    "title": "Kollektioner",
+    "meta": "Udvalg fra VAREL-studiet: styk valgt til at blive båret sammen, til en sæson, en rejse eller en måde at klæde sig på.",
+    "intro": "Udvalg fra studiet. Styk valgt til at blive båret sammen, til en sæson, en rejse eller en måde at klæde sig på.",
+    "count_one": "{{count}} kollektion",
+    "count_other": "{{count}} kollektioner",
+    "errorTitle": "Kollektionerne kunne ikke indlæses",
+    "emptyTitle": "Ingen kollektioner lige nu",
+    "emptyBody": "Nye udvalg er på vej. Se alt, hvad der er i studiet lige nu."
+  },
+  "page": {
+    "title": "Kollektion",
+    "eyebrow": "Kollektion",
+    "notFoundTitle": "Siden blev ikke fundet",
+    "notFoundHeading": "Vi kan ikke finde den kollektion",
+    "notFoundBody": "Den kan være slut eller flyttet. Se de aktuelle kollektioner, eller alt i studiet.",
+    "errorTitle": "Kollektionen kunne ikke indlæses",
+    "piecesLabel": "Styk i kollektionen",
+    "emptyTitle": "Intet i kollektionen lige nu",
+    "emptyBody": "Stykkerne er udsolgt. Se alt, hvad der er i studiet lige nu.",
+    "more": "Flere kollektioner"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "announcement": {
+    "fallback": "Kostenloser Versand ab $150 Bestellwert"
+  },
+  "skipLink": "Zum Inhalt springen",
+  "header": {
+    "departments": "Kategorien",
+    "accountAndBag": "Konto und Warenkorb",
+    "openMenu": "Menü öffnen",
+    "search": "Suche",
+    "account": "Konto",
+    "wishlist": "Merkliste ({{count}})",
+    "bag": "Warenkorb ({{count}})",
+    "bagShort": "Korb ({{count}})",
+    "openBag_one": "Warenkorb öffnen, {{count}} Artikel",
+    "openBag_other": "Warenkorb öffnen, {{count}} Artikel"
+  },
+  "mobileMenu": {
+    "title": "Menü",
+    "description": "Navigation",
+    "allProducts": "Alle Produkte",
+    "signIn": "Anmelden"
+  },
+  "menu": {
+    "labels": {
+      "women": "Damen",
+      "men": "Herren",
+      "shoes": "Schuhe",
+      "bags": "Taschen",
+      "journal": "Journal",
+      "about": "Über uns",
+      "contact": "Kontakt",
+      "allProducts": "Alle Produkte",
+      "bag": "Warenkorb",
+      "signIn": "Anmelden",
+      "orders": "Bestellungen",
+      "returns": "Rücksendungen",
+      "menu": "Menü",
+      "shop": "Shop",
+      "account": "Konto"
+    }
+  },
+  "footer": {
+    "newsletterTitle": "Ein Brief aus dem Studio, zweimal im Monat",
+    "newsletterBody": "Neue Stücke, Nachlieferungen und Notizen aus dem Studio. Sonst nichts.",
+    "studio": "Studio",
+    "addressLine1": "112 Studio, Nørrebro",
+    "addressLine2": "0000 Kopenhagen, Dänemark",
+    "newTab": "(öffnet in einem neuen Tab)",
+    "copyright": "© {{year}} VAREL. Entworfen in Kopenhagen, gefertigt in Europa. Weniger, aber besser.",
+    "vat": "USt-IdNr. {{number}}",
+    "terms": "AGB",
+    "privacy": "Datenschutz"
+  },
+  "bag": {
+    "title": "Dein Warenkorb ({{count}})",
+    "description": "Artikel in deinem Warenkorb",
+    "emptyTitle": "Dein Warenkorb ist leer.",
+    "emptyBody": "Noch nichts hier. Die Herbstauswahl ist ein guter Anfang.",
+    "continueShopping": "Weiter einkaufen",
+    "freeShippingWith": "Kostenloser Versand · {{name}}",
+    "toFree": "Noch {{amount}} bis zum kostenlosen Versand",
+    "freeApplied": "Kostenloser Versand angewendet",
+    "digital": "Digital",
+    "remove": "Entfernen",
+    "removeItem": "{{name}} entfernen",
+    "codeSaved": "{{code}} gespeichert · noch nicht angewendet",
+    "subtotal": "Zwischensumme",
+    "shipping": "Versand",
+    "checkout": "Zur Kasse",
+    "viewBag": "Warenkorb ansehen",
+    "taxesNote": "Versand und Steuern werden an der Kasse berechnet."
+  },
+  "checkout": {
+    "backToBag": "← Zurück zum Warenkorb",
+    "secure": "Sichere Kasse"
+  },
+  "error": {
+    "title": "Etwas ist schiefgelaufen",
+    "heading": "Etwas ist schiefgelaufen.",
+    "body": "Diese Seite wurde nicht geladen. Versuche es erneut oder beginne bei der Kollektion.",
+    "tryAgain": "Erneut versuchen",
+    "shop": "Zur Kollektion"
+  },
+  "ui": {
+    "breadcrumb": "Brotkrümelnavigation",
+    "decrease": "Weniger",
+    "increase": "Mehr",
+    "decreaseOf": "Menge von {{name}} verringern",
+    "increaseOf": "Menge von {{name}} erhöhen",
+    "removeTag": "{{name}} entfernen",
+    "home": "VAREL Startseite",
+    "photoCredit": "Foto von {{name}} auf Unsplash"
+  }
+}

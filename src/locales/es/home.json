@@ -1,0 +1,146 @@
+{
+  "shopCollection": "Ver la colección",
+  "pieces_one": "{{count}} pieza",
+  "pieces_other": "{{count}} piezas",
+  "pieces_many": "{{count}} piezas",
+  "hero": {
+    "eyebrow": "Otoño 2026",
+    "title": "Básicos modernos.\nPensados a fondo.",
+    "body": "Piezas de diario en materiales naturales, producidas en series cortas y hechas para llevarse mucho más allá de la temporada.",
+    "primaryCta": "Ver mujer",
+    "secondaryCta": "Ver hombre",
+    "alt": "Punto, un abrigo de lana marrón y pantalones de lino en un perchero de madera clara con luz suave de mañana"
+  },
+  "categories": {
+    "title": "Comprar por categoría",
+    "alt": "{{name}} — VAREL"
+  },
+  "newIn": {
+    "eyebrow": "Novedades",
+    "title": "La temporada, seleccionada",
+    "sortLabel": "Ordenar productos",
+    "sort": {
+      "featured": "Destacados",
+      "price-asc": "Precio — de menor a mayor",
+      "price-desc": "Precio — de mayor a menor"
+    },
+    "filterLabel": "Filtrar productos",
+    "filters": {
+      "all": "Todo",
+      "new": "Novedades",
+      "women": "Mujer",
+      "men": "Hombre",
+      "shoes": "Zapatos",
+      "bags": "Bolsos",
+      "accessories": "Accesorios"
+    },
+    "error": "No se ha podido cargar la colección.",
+    "tryAgain": "Intentar de nuevo",
+    "empty": "Aún no hay nada. Prueba con otro filtro."
+  },
+  "piece": {
+    "eyebrow": "Pieza destacada",
+    "altA": "Atelier Wool Coat — look de cuerpo entero en exteriores",
+    "altB": "Abrigo y pantalón sobre una silla del estudio",
+    "error": "No se ha podido cargar esta pieza en este momento.",
+    "body": "Lana italiana de doble faz de nuestra hilatura en Biella, sin forro y acabada a mano. Largo de cuerpo y con hombro caído, para llevarlo sobre punto sin abultar.",
+    "note": "Envío gratuito a partir de $150 · Treinta días para devolver piezas sin usar",
+    "stock": {
+      "download": "Descarga inmediata",
+      "soldOut": "Agotado en esta talla",
+      "final_one": "Solo queda {{word}}",
+      "final_other": "Solo quedan {{word}}",
+      "final_many": "Últimas piezas — quedan {{word}}",
+      "in": "En stock"
+    },
+    "words": {
+      "1": "una",
+      "2": "dos",
+      "3": "tres",
+      "4": "cuatro",
+      "5": "cinco",
+      "6": "seis"
+    }
+  },
+  "values": {
+    "label": "Cómo trabajamos",
+    "materials": {
+      "title": "Materiales escogidos",
+      "body": "Lana, lino y piel de curtido vegetal, elegidos por cómo envejecen con los años, no con las temporadas."
+    },
+    "lasting": {
+      "title": "Hecho para durar",
+      "body": "Series cortas con socios conocidos en Portugal e Italia, que solo se repiten cuando se lo ganan."
+    },
+    "fit": {
+      "title": "El ajuste, resuelto",
+      "body": "Cada pieza se escala sobre cuerpos reales antes de llegar a la colección."
+    }
+  },
+  "bestPart": {
+    "eyebrow": "(Lo mejor)",
+    "rows": {
+      "outerwear": "Abrigos",
+      "knitwear": "Punto",
+      "shirting": "Camisas",
+      "denim": "Denim"
+    },
+    "body": "De los básicos de diario a los abrigos más pensados, cada pieza se corta en fibras naturales y se produce en series cortas. Llévala esta temporada y la siguiente.",
+    "alt": "Prendas en un burro en un estudio de hormigón desnudo"
+  },
+  "featured": {
+    "eyebrow": "Destacado",
+    "title": "Siempre cerca esta temporada",
+    "allProducts": "Todos los productos"
+  },
+  "featuredCollections": {
+    "eyebrow": "Colecciones",
+    "title": "Seleccionadas por el estudio",
+    "all": "Todas las colecciones"
+  },
+  "newCollections": {
+    "eyebrow": "Nuevas colecciones",
+    "knit": {
+      "title": "Punto para los meses fríos",
+      "body": "Lana de cordero y merino hiladas en Biella, tejidas en Portugal en canalé y medio inglés que repetimos cada temporada. Amplias de cuerpo para llevar una camisa debajo.",
+      "cta": "Ver punto",
+      "altA": "Jerséis de punto doblados junto a un ovillo de lana",
+      "altB": "Anillos dorados sobre una manga de punto color crema"
+    },
+    "shirt": {
+      "title": "Camisas, cortadas una vez y para siempre",
+      "body": "Sarga de algodón italiano seca y popelín lavado, de corte recto con bajo cuadrado. Dos cuellos, cuatro colores, sin variaciones de temporada.",
+      "cta": "Ver camisas",
+      "altA": "Detalle de camisa",
+      "altB": "Editorial de camisas"
+    }
+  },
+  "collections": {
+    "eyebrow": "Viste la temporada",
+    "body": "Cuatro selecciones del estudio, cada una hecha con la misma lista breve de tejidos a los que volvemos cada temporada.",
+    "altA": "Chaqueta vaquera frente a una persiana metálica",
+    "altB": "Chaquetas de sastrería en perchas de cobre",
+    "items": {
+      "essentials": {
+        "title": "Básicos de diario",
+        "description": "Las piezas que hacemos cada temporada: camisetas gruesas, pantalones anchos y punto de canalé, en los tejidos a los que siempre volvemos."
+      },
+      "statement": {
+        "title": "Piezas protagonistas",
+        "description": "Una serie corta de siluetas más amplias: el abrigo de lana, la sobrecamisa, la bolsa de fin de semana."
+      },
+      "classics": {
+        "title": "Los clásicos",
+        "description": "Camisas, pantalones y punto que mantenemos desde las primeras temporadas, casi sin cambios."
+      },
+      "seasonal": {
+        "title": "Colecciones de temporada",
+        "description": "Lanzamientos de otoño y primavera, en pocas unidades y que rara vez se repiten."
+      }
+    }
+  },
+  "journal": {
+    "title": "Del diario",
+    "all": "Todas las historias"
+  }
+}

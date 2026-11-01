@@ -1,0 +1,26 @@
+{
+  "title": "Önskelista",
+  "crumbs": {
+    "home": "Hem",
+    "account": "Konto",
+    "wishlist": "Önskelista"
+  },
+  "saved_one": "{{count}} plagg sparat",
+  "saved_other": "{{count}} plagg sparade",
+  "nothingSaved": "Inget sparat ännu",
+  "addAll": "Lägg till allt i lager",
+  "added": "Tillagd i varukorgen",
+  "clear": "Töm listan",
+  "loadError": "Vi kunde inte hämta din önskelista.",
+  "tryAgain": "Försök igen",
+  "empty": {
+    "title": "Din önskelista är tom.",
+    "description": "Spara plagg du funderar på, så väntar de här.",
+    "action": "Utforska kollektionen"
+  },
+  "removeItem": "Ta bort {{name}} från önskelistan",
+  "notifyMe": "Slutsåld",
+  "addToBag": "Lägg i varukorgen",
+  "suggestions": "Du kanske också gillar",
+  "allProducts": "Alla produkter"
+}

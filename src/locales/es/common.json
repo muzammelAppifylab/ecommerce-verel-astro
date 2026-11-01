@@ -1,0 +1,21 @@
+{
+  "addToBag": "Añadir a la cesta",
+  "remove": "Eliminar",
+  "save": "Guardar",
+  "cancel": "Cancelar",
+  "continue": "Continuar",
+  "close": "Cerrar",
+  "back": "Volver",
+  "loading": "Cargando",
+  "tryAgain": "Reintentar",
+  "error": "Algo ha salido mal. Inténtalo de nuevo.",
+  "free": "Gratis",
+  "soldOut": "Agotado",
+  "quantity": "Cantidad",
+  "size": "Talla",
+  "colour": "Color",
+  "search": "Buscar",
+  "signIn": "Iniciar sesión",
+  "viewAll": "Ver todo",
+  "apply": "Aplicar"
+}

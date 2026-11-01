@@ -1,0 +1,66 @@
+{
+  "title": "Recensioner",
+  "loadError": "Vi kunde inte ladda recensionerna.",
+  "tryAgain": "Försök igen",
+  "write": "Skriv en recension",
+  "eligibility": {
+    "purchase": "Recensioner skrivs av kunder som har köpt den här varan.",
+    "reviewed": "Tack, du har redan recenserat den här varan."
+  },
+  "empty": {
+    "title": "Inga recensioner än",
+    "body": "Bär du {{name}}? Berätta för andra hur plagget sitter, känns och håller."
+  },
+  "count_one": "{{count}} recension",
+  "count_other": "{{count}} recensioner",
+  "sort": {
+    "label": "Sortera recensioner",
+    "newest": "Nyaste",
+    "highest": "Högst betyg",
+    "lowest": "Lägst betyg"
+  },
+  "pages": {
+    "label": "Sidor med recensioner",
+    "previous": "Föregående",
+    "next": "Nästa",
+    "status": "Sida {{page}} av {{pages}}"
+  },
+  "summary": {
+    "first": "Bli först med att recensera plagget.",
+    "rated": "Betyg {{avg}} av 5",
+    "basedOn_one": "Baserat på {{count}} recension",
+    "basedOn_other": "Baserat på {{count}} recensioner"
+  },
+  "stars_one": "{{count}} stjärna",
+  "stars_other": "{{count}} stjärnor",
+  "item": {
+    "outOf": "{{rating}} av 5",
+    "verified": "Verifierat köp",
+    "reply": "Svar från VAREL"
+  },
+  "rating": {
+    "label": "Ditt betyg",
+    "1": "Dålig",
+    "2": "Godtagbar",
+    "3": "Bra",
+    "4": "Mycket bra",
+    "5": "Utmärkt"
+  },
+  "form": {
+    "error": "Din recension skickades inte. Kontrollera din anslutning och försök igen.",
+    "chooseRating": "Välj ett betyg",
+    "thanks": "Tack för din recension",
+    "live": "Den visas nu på sidan.",
+    "pending": "Vi läser varje recension innan den publiceras. Den brukar synas inom en eller två dagar.",
+    "close": "Stäng",
+    "closeForm": "Stäng recensionsformuläret",
+    "blocked": "Recensioner är öppna för kunder som har köpt plagget. <signIn>Logga in</signIn> för att skriva en.",
+    "title": "Rubrik",
+    "titlePlaceholder": "Sammanfatta med några ord",
+    "body": "Din recension",
+    "bodyHint": "Passform, tyg, hur det håller. Minst en mening eller två.",
+    "postingAs": "Publiceras som {{name}}",
+    "submit": "Skicka recension",
+    "checked": "Recensioner granskas innan de visas"
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "title": "Cuenta",
+  "crumbs": {
+    "home": "Inicio",
+    "account": "Cuenta"
+  },
+  "loadError": "No hemos podido cargar tu cuenta",
+  "tryAgain": "Reintentar",
+  "since": "Cliente desde {{date}}",
+  "signOut": "Cerrar sesión",
+  "signingOut": "Cerrando sesión…",
+  "allOrders": "Todos los pedidos",
+  "noOrders": {
+    "title": "Aún no hay pedidos",
+    "description": "Cuando hagas un pedido, aparecerá aquí, con seguimiento en cuanto se envíe.",
+    "action": "Todos los productos"
+  },
+  "items_one": "{{count}} artículo",
+  "items_many": "{{count}} artículos",
+  "items_other": "{{count}} artículos",
+  "download": "Descargar",
+  "noDownloads": "Las piezas digitales que compres estarán aquí para descargar.",
+  "nav": {
+    "label": "Cuenta",
+    "overview": "Resumen",
+    "orders": "Pedidos",
+    "wishlist": "Favoritos",
+    "details": "Datos personales",
+    "addresses": "Direcciones",
+    "downloads": "Descargas",
+    "privacy": "Privacidad"
+  },
+  "addresses": {
+    "title": "Direcciones guardadas",
+    "add": "Añadir dirección",
+    "empty": "Aún no hay direcciones guardadas. Añade una para comprar más rápido.",
+    "address": "Dirección",
+    "default": "Predeterminada",
+    "edit": "Editar",
+    "editAria": "Editar {{label}}",
+    "makeDefault": "Establecer como predeterminada",
+    "makeDefaultAria": "Establecer {{label}} como predeterminada",
+    "remove": "Eliminar",
+    "removeAria": "Eliminar {{label}}",
+    "addressLower": "dirección",
+    "removeTitle": "Eliminar dirección",
+    "removing": "Eliminando…",
+    "saving": "Guardando…",
+    "makeDefaultBody": "Usaremos esta dirección primero al finalizar la compra: {{address}}.",
+    "description": "Guardadas para finalizar la compra más rápido. Tu dirección predeterminada se rellena primero."
+  },
+  "dialog": {
+    "edit": "Editar dirección",
+    "add": "Añadir dirección",
+    "cancel": "Cancelar",
+    "saving": "Guardando…",
+    "save": "Guardar dirección",
+    "label": "Etiqueta",
+    "labelPlaceholder": "Casa, estudio…",
+    "fullName": "Nombre completo",
+    "line1": "Dirección",
+    "line2": "Piso, puerta (opcional)",
+    "zip": "Código postal",
+    "city": "Ciudad",
+    "country": "País",
+    "phone": "Teléfono",
+    "primary": "Usar como dirección predeterminada",
+    "errors": {
+      "name": "Introduce el nombre para la entrega",
+      "line1": "Introduce una dirección",
+      "zip": "Introduce un código postal",
+      "city": "Introduce una ciudad",
+      "country": "Elige un país"
+    }
+  },
+  "confirm": {
+    "cancel": "Cancelar"
+  },
+  "profile": {
+    "title": "Perfil",
+    "firstName": "Nombre",
+    "lastName": "Apellidos",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "saving": "Guardando…",
+    "saved": "Guardado",
+    "save": "Guardar cambios",
+    "errors": {
+      "firstName": "Introduce tu nombre",
+      "lastName": "Introduce tus apellidos",
+      "email": "Introduce un correo electrónico válido"
+    },
+    "description": "Se usa en tus pedidos, recibos y avisos de entrega."
+  },
+  "privacy": {
+    "title": "Privacidad",
+    "data": {
+      "title": "Tus datos",
+      "body": "Descarga todo lo que guardamos sobre ti: perfil, direcciones, pedidos, reseñas, favoritos y estado del boletín, en un archivo JSON.",
+      "downloading": "Tus datos se están descargando",
+      "preparing": "Preparando…",
+      "action": "Descargar datos"
+    },
+    "cookies": {
+      "title": "Cookies",
+      "body": "Elige si podemos contar tus visitas. Las cookies necesarias mantienen tu cesta y tu sesión.",
+      "action": "Ajustes de cookies"
+    },
+    "delete": {
+      "title": "Eliminar cuenta",
+      "body": "Cierra tu cuenta y borra tu perfil, tus direcciones y tus favoritos. Los pedidos se conservan en nuestra contabilidad, sin tus datos de contacto. No se puede deshacer.",
+      "action": "Eliminar cuenta",
+      "description": "Confirma con tu contraseña para eliminar tu cuenta",
+      "cancel": "Cancelar",
+      "deleting": "Eliminando…",
+      "confirm": "Eliminar mi cuenta",
+      "warning": "Te enviaremos una confirmación por correo y cerraremos tu sesión. Tus pedidos se conservan para la contabilidad con tu correo oculto. No se puede deshacer.",
+      "password": "Contraseña",
+      "enterPassword": "Introduce tu contraseña",
+      "deleted": "Tu cuenta se ha eliminado"
+    },
+    "description": "Descarga tus datos, elige las cookies o cierra tu cuenta."
+  },
+  "greeting": "Hola, {{name}}",
+  "latest": {
+    "label": "Último pedido",
+    "meta": "Realizado el {{date}} · {{items}} · {{total}}",
+    "progress": "Estado del pedido",
+    "view": "Ver pedido",
+    "track": "Seguir con {{carrier}}",
+    "return": "Iniciar una devolución",
+    "canCancel": "Aún puedes cancelar este pedido hasta que se prepare."
+  },
+  "summary": {
+    "title": "Tu cuenta",
+    "defaultAddress": "Predeterminada: {{address}}",
+    "noAddress": "Aún no hay direcciones guardadas",
+    "newsletter": "Boletín",
+    "subscribed": "Suscrito",
+    "notSubscribed": "Sin suscripción",
+    "saved_one": "{{count}} pieza guardada",
+    "saved_many": "{{count}} piezas guardadas",
+    "saved_other": "{{count}} piezas guardadas",
+    "noSaved": "Aún no has guardado nada",
+    "files_one": "{{count}} archivo listo para descargar",
+    "files_many": "{{count}} archivos listos para descargar",
+    "files_other": "{{count}} archivos listos para descargar",
+    "password": "Contraseña",
+    "passwordHint": "Cambia tu contraseña"
+  },
+  "earlier": "Pedidos anteriores",
+  "help": {
+    "title": "¿Necesitas ayuda?",
+    "body": "El estudio responde en un día laborable.",
+    "contact": "Contactar con el estudio",
+    "returns": "Iniciar una devolución",
+    "terms": "Condiciones de venta"
+  },
+  "details": {
+    "description": "Tu nombre y datos de contacto, contraseña y boletín."
+  },
+  "downloadsDescription": "Piezas digitales de tus pedidos pagados, listas para volver a descargar cuando quieras.",
+  "password": {
+    "title": "Contraseña",
+    "description": "Cambia la contraseña con la que inicias sesión.",
+    "current": "Contraseña actual",
+    "new": "Nueva contraseña",
+    "confirm": "Confirma la nueva contraseña",
+    "rule": "Al menos 8 caracteres.",
+    "show": "Mostrar contraseñas",
+    "save": "Cambiar contraseña",
+    "saving": "Cambiando…",
+    "changed": "Tu contraseña se ha cambiado",
+    "forgot": "¿Has olvidado tu contraseña?",
+    "errors": {
+      "current": "Introduce tu contraseña actual",
+      "length": "Usa al menos 8 caracteres",
+      "match": "Las contraseñas no coinciden"
+    }
+  },
+  "preferences": {
+    "title": "Comunicaciones",
+    "description": "Elige qué podemos enviarte. Los correos de pedidos y entregas siempre llegan.",
+    "newsletter": "Boletín",
+    "newsletterBody": "Nuevas colecciones, historias del journal y eventos del estudio, más o menos una vez al mes.",
+    "on": "Estás suscrito al boletín",
+    "off": "Has cancelado la suscripción al boletín"
+  }
+}

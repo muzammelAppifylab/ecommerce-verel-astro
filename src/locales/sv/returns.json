@@ -1,0 +1,86 @@
+{
+  "home": "Hem",
+  "title": "Returer och återbetalningar",
+  "intro": "Trettio dagar på dig att returnera oanvända plagg med etiketterna kvar. Returer inom Danmark och EU är kostnadsfria; i övriga länder betalar du returfrakten.",
+  "lookup": {
+    "label": "Starta en retur",
+    "placeholder": "Ordernummer",
+    "button": "Sök",
+    "note": "Ditt ordernummer börjar med VRL- och finns i ditt bekräftelsemejl",
+    "enterNumber": "Ange ordernumret från ditt bekräftelsemejl",
+    "notFound": "Vi hittar inte det ordernumret"
+  },
+  "steps": {
+    "label": "Så fungerar returer",
+    "step": "Steg {{n}}",
+    "s1Title": "Hitta beställningen",
+    "s1Body": "Ange ditt ordernummer eller öppna beställningen från ditt konto.",
+    "s2Title": "Välj plaggen",
+    "s2Body": "Välj vad som ska tillbaka och berätta varför på en rad.",
+    "s3Title": "Skicka iväg",
+    "s3Body": "Skriv ut den förbetalda etiketten. Returer inom EU är kostnadsfria; i övriga länder betalar du frakten.",
+    "s4Title": "Få pengarna tillbaka",
+    "s4Body": "Tre arbetsdagar efter att paketet har kommit fram, tillbaka till ditt ursprungliga betalsätt."
+  },
+  "window": {
+    "title": "Returtiden",
+    "p1": "Trettio dagar från leverans. EU-rätten ger dig fjorton; vi förlänger den. Reavaror som är märkta som slutförsäljning är det enda undantaget och kan inte returneras om de inte är felaktiga."
+  },
+  "condition": {
+    "title": "Skick",
+    "p1": "Oanvända, otvättade, med etiketterna kvar och i originalförpackningen. Prova plaggen som du skulle göra i en butik. Skor bör provas inomhus — sulor som visar tecken på användning kan inte tas emot."
+  },
+  "refunds": {
+    "title": "Återbetalningar",
+    "methodLabel": "Sätt",
+    "method": "Tillbaka till kortet eller plånboken du betalade med. Vi kan inte återbetala någon annanstans.",
+    "timingLabel": "Tid",
+    "timing": "Inom tre arbetsdagar efter att paketet har kommit fram, plus din banks egen handläggningstid.",
+    "shippingLabel": "Betald frakt",
+    "shipping": "Återbetalas inte, om inte ett plagg kom fram skadat eller vi skickade fel.",
+    "discountsLabel": "Rabatter",
+    "discounts": "Vid en delretur räknas rabatten om på de plagg du behåller."
+  },
+  "exchanges": {
+    "title": "Byten",
+    "p1": "Enklast är att returnera och beställa på nytt, eftersom lagret förändras. Om storleken du vill ha finns i lager kan du skriva till oss med ordernumret, så reserverar vi den i sju dagar medan din retur är på väg."
+  },
+  "digital": {
+    "title": "Digitala produkter",
+    "p1": "Kan inte återbetalas när de har laddats ned, eftersom det inte finns något att skicka tillbaka. Om en fil inte går att öppna kan du skriva till oss, så åtgärdar vi den eller återbetalar den."
+  },
+  "faults": {
+    "title": "Fel och reparationer",
+    "p1": "Två år på tillverkningsfel, med kostnadsfri reparation under den tiden. Efter två år lagar studion i Köpenhamn fortfarande alla VAREL-plagg till självkostnadspris. Skicka först ett foto, så berättar vi vad som behövs.",
+    "findOrder": "Hitta en beställning"
+  },
+  "writeStudio": "Skriv till studion",
+  "related": {
+    "terms": "Köpvillkor",
+    "privacy": "Integritetspolicy"
+  },
+  "request": {
+    "order": "Beställning {{number}}",
+    "booked": "Din retur är registrerad",
+    "choose": "Välj vad som ska tillbaka",
+    "notYet": "Den här beställningen kan inte returneras än",
+    "lookupAnother": "Sök en annan beställning",
+    "requested_one": "Retur begärd för ett plagg. Den förbetalda etiketten och instruktionerna är på väg till {{email}}.",
+    "requested_other": "Retur begärd för {{count}} plagg. Den förbetalda etiketten och instruktionerna är på väg till {{email}}.",
+    "packCarrier": "Packa plaggen i originalförpackningen, fäst etiketten och lämna paketet på valfritt ombud för {{carrier}}. Återbetalningen görs till ditt ursprungliga betalsätt inom tre arbetsdagar efter att paketet har kommit fram.",
+    "pack": "Packa plaggen i originalförpackningen, fäst etiketten och lämna paketet på valfritt ombud. Återbetalningen görs till ditt ursprungliga betalsätt inom tre arbetsdagar efter att paketet har kommit fram.",
+    "reference": "Returreferens {{id}}",
+    "notEligibleReason": "Den här beställningen kan inte returneras.",
+    "notEligible": "{{reason}} Om något kom fram skadat eller felaktigt kan du skriva till studion, så löser vi det.",
+    "allDigital": "Allt i den här beställningen är digitalt. Digitala produkter kan inte återbetalas när de har laddats ned — om en fil inte går att öppna kan du skriva till studion, så åtgärdar vi den eller återbetalar den.",
+    "estimatedRefund": "Beräknad återbetalning",
+    "submit": "Begär retur",
+    "chooseOne": "Välj minst ett plagg att returnera",
+    "whyOneLine": "Berätta varför på en rad",
+    "qty": "Antal {{qty}}",
+    "quantity": "Antal",
+    "reason": "Orsak",
+    "chooseReason": "Välj en orsak",
+    "reasonPlaceholder": "För stor över axlarna"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "home": "Hem",
+  "title": "Journal",
+  "metaDescription": "Anteckningar från VAREL-studion om material, styling, skötsel och resor.",
+  "intro": "Anteckningar från studion om material, tillverkning, skötsel och hur plaggen bärs. Publiceras när det finns något värt att säga.",
+  "tryAgain": "Försök igen",
+  "loadErrorDescription": "Något gick fel hos oss. Försök igen om en stund.",
+  "allEntries": "Alla inlägg",
+  "categoriesLabel": "Journalkategorier",
+  "readPiece": "Läs inlägget",
+  "index": {
+    "errorTitle": "Journalen kunde inte laddas",
+    "emptyTitle": "Inget här ännu",
+    "emptyDescription": "Det första inlägget håller fortfarande på att skrivas."
+  },
+  "newsletter": {
+    "title": "Stillsamma nyheter, två gånger i månaden",
+    "body": "Nya plagg, påfyllningar och då och då en anteckning från studion. Inget rabattbrus.",
+    "note": "Vi delar aldrig din adress.",
+    "success": "Tack. Håll utkik efter nästa anteckning i din inkorg."
+  },
+  "category": {
+    "pageTitle": "{{name}} — Journal",
+    "eyebrow": "Journalkategori",
+    "entries_one": "{{count}} inlägg",
+    "entries_other": "{{count}} inlägg",
+    "errorTitle": "Kategorin kunde inte laddas",
+    "emptyTitle": "Inget här ännu",
+    "emptyDescription": "Den här kategorin väntar på sitt första inlägg."
+  },
+  "categoryBlurb": {
+    "materials": "Var fibrerna kommer ifrån, hur de spinns och vävs, och vad som händer när de slits ut.",
+    "styling": "Hur plaggen fungerar tillsammans, och hur få av dem du faktiskt behöver.",
+    "care": "Tvätta, torka, förvara och laga, så att ett plagg håller i ett decennium.",
+    "travel": "Packa lätt med en garderob som går att kombinera om och om igen."
+  },
+  "authorRole": {
+    "studioDirector": "Studiochef"
+  },
+  "post": {
+    "pageTitle": "{{title}} — Journal",
+    "notFoundTitle": "Vi hittar inte det inlägget",
+    "notFoundDescription": "Det kan ha flyttats, eller så är länken ofullständig. Allt vi har publicerat finns i journalen.",
+    "errorTitle": "Inlägget kunde inte laddas",
+    "linkCopied": "Länken kopierad",
+    "share": "Dela",
+    "print": "Skriv ut",
+    "contents": "Innehåll",
+    "keepReading": "Läs vidare"
+  },
+  "newsletterForm": {
+    "note": "Vi delar aldrig din adress.",
+    "success": "Tack. Nästa brev landar i din inkorg.",
+    "invalidEmail": "Ange en giltig e-postadress.",
+    "emailLabel": "E-postadress",
+    "subscribe": "Prenumerera",
+    "sending": "Skickar",
+    "subscribed": "Prenumererar"
+  }
+}

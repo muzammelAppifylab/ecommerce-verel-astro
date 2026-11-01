@@ -1,0 +1,69 @@
+{
+  "title": "Avis",
+  "loadError": "Nous n’avons pas pu charger les avis.",
+  "tryAgain": "Réessayer",
+  "write": "Écrire un avis",
+  "eligibility": {
+    "purchase": "Les avis sont rédigés par les clients qui ont acheté cette pièce.",
+    "reviewed": "Merci, vous avez déjà donné votre avis sur cette pièce."
+  },
+  "empty": {
+    "title": "Pas encore d’avis",
+    "body": "Vous portez {{name}} ? Dites aux autres comment la pièce taille, ce qu’on ressent et comment elle dure."
+  },
+  "count_one": "{{count}} avis",
+  "count_other": "{{count}} avis",
+  "count_many": "{{count}} avis",
+  "sort": {
+    "label": "Trier les avis",
+    "newest": "Plus récents",
+    "highest": "Mieux notés",
+    "lowest": "Moins bien notés"
+  },
+  "pages": {
+    "label": "Pages d’avis",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "status": "Page {{page}} sur {{pages}}"
+  },
+  "summary": {
+    "first": "Soyez le premier à donner votre avis sur cette pièce.",
+    "rated": "Noté {{avg}} sur 5",
+    "basedOn_one": "Sur la base de {{count}} avis",
+    "basedOn_other": "Sur la base de {{count}} avis",
+    "basedOn_many": "Sur la base de {{count}} avis"
+  },
+  "stars_one": "{{count}} étoile",
+  "stars_other": "{{count}} étoiles",
+  "stars_many": "{{count}} étoiles",
+  "item": {
+    "outOf": "{{rating}} sur 5",
+    "verified": "Achat vérifié",
+    "reply": "Réponse de VAREL"
+  },
+  "rating": {
+    "label": "Votre note",
+    "1": "Décevant",
+    "2": "Passable",
+    "3": "Bien",
+    "4": "Très bien",
+    "5": "Excellent"
+  },
+  "form": {
+    "error": "Votre avis n’a pas été envoyé. Vérifiez votre connexion et réessayez.",
+    "chooseRating": "Choisissez une note",
+    "thanks": "Merci pour votre avis",
+    "live": "Il est désormais visible sur cette page.",
+    "pending": "Nous lisons chaque avis avant sa publication. Il apparaît généralement sous un ou deux jours.",
+    "close": "Fermer",
+    "closeForm": "Fermer le formulaire d’avis",
+    "blocked": "Les avis sont réservés aux clients ayant acheté cette pièce. <signIn>Connectez-vous</signIn> pour en écrire un.",
+    "title": "Titre",
+    "titlePlaceholder": "Résumez en quelques mots",
+    "body": "Votre avis",
+    "bodyHint": "Coupe, tissu, tenue dans le temps. Au moins une ou deux phrases.",
+    "postingAs": "Publié en tant que {{name}}",
+    "submit": "Envoyer l’avis",
+    "checked": "Les avis sont vérifiés avant publication"
+  }
+}

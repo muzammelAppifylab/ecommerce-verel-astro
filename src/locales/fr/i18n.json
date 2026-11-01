@@ -1,0 +1,6 @@
+{
+  "language": "Langue",
+  "choose": "Choisir la langue",
+  "current": "Langue : {{name}}",
+  "changed": "Langue modifiée"
+}

@@ -1,0 +1,186 @@
+{
+  "title": "Konto",
+  "crumbs": {
+    "home": "Hem",
+    "account": "Konto"
+  },
+  "loadError": "Vi kunde inte hämta ditt konto",
+  "tryAgain": "Försök igen",
+  "since": "Kund sedan {{date}}",
+  "signOut": "Logga ut",
+  "signingOut": "Loggar ut…",
+  "allOrders": "Alla ordrar",
+  "noOrders": {
+    "title": "Inga ordrar ännu",
+    "description": "När du lägger en order visas den här, med spårning så snart den har skickats.",
+    "action": "Alla produkter"
+  },
+  "items_one": "{{count}} vara",
+  "items_other": "{{count}} varor",
+  "download": "Ladda ner",
+  "noDownloads": "Digitala produkter du köper kan laddas ner här.",
+  "nav": {
+    "label": "Konto",
+    "overview": "Översikt",
+    "orders": "Ordrar",
+    "wishlist": "Önskelista",
+    "details": "Personuppgifter",
+    "addresses": "Adresser",
+    "downloads": "Nedladdningar",
+    "privacy": "Integritet"
+  },
+  "addresses": {
+    "title": "Sparade adresser",
+    "add": "Lägg till adress",
+    "empty": "Inga sparade adresser ännu. Lägg till en för att gå snabbare genom kassan.",
+    "address": "Adress",
+    "default": "Standard",
+    "edit": "Redigera",
+    "editAria": "Redigera {{label}}",
+    "makeDefault": "Gör till standard",
+    "makeDefaultAria": "Gör {{label}} till standard",
+    "remove": "Ta bort",
+    "removeAria": "Ta bort {{label}}",
+    "addressLower": "adress",
+    "removeTitle": "Ta bort adress",
+    "removing": "Tar bort…",
+    "saving": "Sparar…",
+    "makeDefaultBody": "Vi använder den här adressen först i kassan: {{address}}.",
+    "description": "Sparade för en snabbare kassa. Din standardadress fylls i först."
+  },
+  "dialog": {
+    "edit": "Redigera adress",
+    "add": "Lägg till adress",
+    "cancel": "Avbryt",
+    "saving": "Sparar…",
+    "save": "Spara adress",
+    "label": "Etikett",
+    "labelPlaceholder": "Hem, studio…",
+    "fullName": "Fullständigt namn",
+    "line1": "Adress",
+    "line2": "Lägenhet, våning (valfritt)",
+    "zip": "Postnummer",
+    "city": "Ort",
+    "country": "Land",
+    "phone": "Telefon",
+    "primary": "Använd som standardadress",
+    "errors": {
+      "name": "Ange namnet för leveransen",
+      "line1": "Ange en gatuadress",
+      "zip": "Ange ett postnummer",
+      "city": "Ange en ort",
+      "country": "Välj ett land"
+    }
+  },
+  "confirm": {
+    "cancel": "Avbryt"
+  },
+  "profile": {
+    "title": "Profil",
+    "firstName": "Förnamn",
+    "lastName": "Efternamn",
+    "email": "E-post",
+    "phone": "Telefon",
+    "saving": "Sparar…",
+    "saved": "Sparat",
+    "save": "Spara ändringar",
+    "errors": {
+      "firstName": "Ange ditt förnamn",
+      "lastName": "Ange ditt efternamn",
+      "email": "Ange en giltig e-postadress"
+    },
+    "description": "Används på dina ordrar, kvitton och leveransbesked."
+  },
+  "privacy": {
+    "title": "Integritet",
+    "data": {
+      "title": "Dina uppgifter",
+      "body": "Ladda ner allt vi har om dig: profil, adresser, ordrar, recensioner, önskelista och nyhetsbrevsstatus, som en JSON-fil.",
+      "downloading": "Dina uppgifter laddas ner",
+      "preparing": "Förbereder…",
+      "action": "Ladda ner uppgifter"
+    },
+    "cookies": {
+      "title": "Cookies",
+      "body": "Välj om vi får räkna dina besök. Nödvändiga cookies håller igång din varukorg och inloggning.",
+      "action": "Cookieinställningar"
+    },
+    "delete": {
+      "title": "Radera konto",
+      "body": "Stänger ditt konto och raderar din profil, dina adresser och din önskelista. Ordrar finns kvar i vår bokföring, utan dina kontaktuppgifter. Det går inte att ångra.",
+      "action": "Radera konto",
+      "description": "Bekräfta med ditt lösenord för att radera kontot",
+      "cancel": "Avbryt",
+      "deleting": "Raderar…",
+      "confirm": "Radera mitt konto",
+      "warning": "Vi mejlar dig en bekräftelse och loggar sedan ut dig. Dina ordrar sparas för bokföringen med din e-post dold. Det går inte att ångra.",
+      "password": "Lösenord",
+      "enterPassword": "Ange ditt lösenord",
+      "deleted": "Ditt konto har raderats"
+    },
+    "description": "Ladda ner dina uppgifter, välj cookies eller stäng ditt konto."
+  },
+  "greeting": "Hej, {{name}}",
+  "latest": {
+    "label": "Senaste order",
+    "meta": "Lagd {{date}} · {{items}} · {{total}}",
+    "progress": "Orderstatus",
+    "view": "Visa order",
+    "track": "Spåra med {{carrier}}",
+    "return": "Starta en retur",
+    "canCancel": "Du kan fortfarande avbryta ordern tills den har packats."
+  },
+  "summary": {
+    "title": "Ditt konto",
+    "defaultAddress": "Standard: {{address}}",
+    "noAddress": "Inga sparade adresser ännu",
+    "newsletter": "Nyhetsbrev",
+    "subscribed": "Prenumererar",
+    "notSubscribed": "Prenumererar inte",
+    "saved_one": "{{count}} sparad produkt",
+    "saved_other": "{{count}} sparade produkter",
+    "noSaved": "Inget sparat ännu",
+    "files_one": "{{count}} fil redo att laddas ner",
+    "files_other": "{{count}} filer redo att laddas ner",
+    "password": "Lösenord",
+    "passwordHint": "Byt ditt lösenord"
+  },
+  "earlier": "Tidigare ordrar",
+  "help": {
+    "title": "Behöver du hjälp?",
+    "body": "Studion svarar inom en arbetsdag.",
+    "contact": "Kontakta studion",
+    "returns": "Starta en retur",
+    "terms": "Köpvillkor"
+  },
+  "details": {
+    "description": "Ditt namn och dina kontaktuppgifter, lösenord och nyhetsbrev."
+  },
+  "downloadsDescription": "Digitala produkter från dina betalda ordrar, redo att laddas ner igen när som helst.",
+  "password": {
+    "title": "Lösenord",
+    "description": "Byt lösenordet du loggar in med.",
+    "current": "Nuvarande lösenord",
+    "new": "Nytt lösenord",
+    "confirm": "Bekräfta nytt lösenord",
+    "rule": "Minst 8 tecken.",
+    "show": "Visa lösenord",
+    "save": "Byt lösenord",
+    "saving": "Byter…",
+    "changed": "Ditt lösenord har bytts",
+    "forgot": "Glömt lösenordet?",
+    "errors": {
+      "current": "Ange ditt nuvarande lösenord",
+      "length": "Använd minst 8 tecken",
+      "match": "Lösenorden matchar inte"
+    }
+  },
+  "preferences": {
+    "title": "Kommunikation",
+    "description": "Välj vad vi får skicka till dig. Mejl om ordrar och leveranser kommer alltid.",
+    "newsletter": "Nyhetsbrev",
+    "newsletterBody": "Nya kollektioner, berättelser från journalen och evenemang i studion, ungefär en gång i månaden.",
+    "on": "Du prenumererar på nyhetsbrevet",
+    "off": "Du har avslutat prenumerationen på nyhetsbrevet"
+  }
+}

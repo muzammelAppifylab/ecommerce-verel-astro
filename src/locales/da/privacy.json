@@ -1,0 +1,63 @@
+{
+  "title": "Privatlivspolitik",
+  "lead": "VAREL ApS er dataansvarlig for denne butik. Vi indsamler kun det nødvendige for at sælge dig tøj og holde det i brug, og vi sælger aldrig dine data til nogen.",
+  "collect": {
+    "title": "Hvad vi indsamler",
+    "p1": "Når du bestiller, indsamler vi dit navn, din e-mail, dit telefonnummer, din leverings- og faktureringsadresse samt indholdet af din ordre. Betalingskortoplysninger går direkte til vores betalingsudbyder og når aldrig vores servere.",
+    "p2": "Hvis du opretter en konto, gemmer vi også dine adresser, din ønskeliste, din ordrehistorik og eventuelle digitale downloads knyttet til dine køb. Hvis du tilmelder dig studiets nyhedsbrev, gemmer vi din e-mailadresse, indtil du afmelder dig."
+  },
+  "use": {
+    "title": "Hvordan vi bruger dem",
+    "p1": "Til at modtage betaling, sende din ordre, håndtere returneringer og reparationer, beregne moms for dit land, besvare dine e-mails og sende studiets nyhedsbrev, hvis du har bedt om det. Vi bruger samlet, ikke-identificerende statistik til at forstå, hvilke sider der bliver brugt."
+  },
+  "share": {
+    "title": "Hvem vi deler dem med",
+    "paymentsLabel": "Betaling",
+    "payments": "Kortbehandling og kontrol mod svindel. De ser betalingen, ikke din garderobe.",
+    "carriersLabel": "Fragtfirmaer",
+    "carriers": "Navn, adresse og telefonnummer, så en pakke kan leveres.",
+    "emailLabel": "E-mail",
+    "email": "Ordrebekræftelser og studiets nyhedsbrev, sendt via vores e-mailudbyder.",
+    "neverLabel": "Aldrig",
+    "never": "Annoncenetværk, datamæglere eller nogen, der betaler for en liste."
+  },
+  "cookies": {
+    "title": "Cookies",
+    "p1": "Nødvendige cookies husker din kurv og din session. Statistikcookies er valgfrie og slået fra, indtil du accepterer dem. Du kan til enhver tid ændre dit valg under Cookie-indstillinger nederst på hver side."
+  },
+  "rights": {
+    "title": "Dine rettigheder",
+    "p1": "Efter GDPR kan du bede om en kopi af dine data, bede os rette dem, bede os slette dem, gøre indsigelse mod behandlingen eller bede os flytte dem et andet sted hen. Skriv til studiet, så svarer vi inden for 30 dage, uden beregning."
+  },
+  "retention": {
+    "title": "Hvor længe vi gemmer dem",
+    "p1": "Ordreoplysninger i fem år, som bogføringsloven kræver. Kontodata, indtil du lukker kontoen. Data til nyhedsbrevet, indtil du afmelder dig. Supportmails i to år."
+  },
+  "contact": {
+    "title": "Kontakt",
+    "p1": "VAREL ApS, 112 Studio, Nørrebro, 0000 København, Danmark. Skriv til care@varel.studio om alt, der vedrører dine data. Du kan også klage til Datatilsynet."
+  },
+  "banner": {
+    "label": "Samtykke til cookies",
+    "title": "Cookies",
+    "body": "Vi bruger nødvendige cookies, så din kurv, ønskeliste og dit login virker. Med din tilladelse tæller vi også besøg for at lære, hvad vi skal lave næste gang.",
+    "privacyLink": "Privatlivspolitik",
+    "acceptAll": "Accepter alle",
+    "necessaryOnly": "Kun nødvendige",
+    "settings": "Indstillinger"
+  },
+  "dialog": {
+    "title": "Cookieindstillinger",
+    "description": "Vælg, hvilke cookies VAREL må bruge",
+    "save": "Gem valg",
+    "acceptAll": "Accepter alle",
+    "intro": "Nødvendige cookies er altid slået til. Alt andet venter på din tilladelse, og du kan til enhver tid ændre mening her.",
+    "necessaryTitle": "Nødvendige",
+    "necessaryBody": "Får din kurv, ønskeliste, kassen og dit login til at virke. De kan ikke slås fra.",
+    "necessarySwitch": "Nødvendige cookies, altid slået til",
+    "analyticsTitle": "Statistik",
+    "analyticsBody": "Tæller visninger af sider og produkter, så vi lærer, hvad folk leder efter. Ingen annoncer, aldrig delt eller solgt.",
+    "analyticsSwitch": "Statistikcookies"
+  },
+  "settingsLink": "Cookieindstillinger"
+}

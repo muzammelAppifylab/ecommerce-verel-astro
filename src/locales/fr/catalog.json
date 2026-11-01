@@ -1,0 +1,111 @@
+{
+  "pieces_one": "{{count}} pièce",
+  "pieces_other": "{{count}} pièces",
+  "pieces_many": "{{count}} pièces",
+  "crumbs": {
+    "home": "Accueil",
+    "shop": "Boutique"
+  },
+  "sort": {
+    "label": "Trier",
+    "aria": "Trier les produits",
+    "featured": "Sélection",
+    "newest": "Nouveautés",
+    "price-asc": "Prix · croissant",
+    "price-desc": "Prix · décroissant",
+    "name": "Nom · de A à Z"
+  },
+  "filters": {
+    "label": "Filtres",
+    "title": "Filtrer",
+    "titleCount": "Filtrer ({{count}})",
+    "clear": "Effacer",
+    "description": "Affinez les produits par catégorie, couleur, taille, matière, marque et prix.",
+    "close": "Fermer les filtres",
+    "showResults": "Voir les résultats",
+    "show_one": "Voir {{count}} pièce",
+    "show_other": "Voir {{count}} pièces",
+    "show_many": "Voir {{count}} pièces",
+    "price": "Prix",
+    "maxPrice": "Prix maximum",
+    "upTo": "Jusqu’à {{price}}",
+    "active": "Filtres actifs",
+    "remove": "Retirer le filtre {{label}}"
+  },
+  "results": {
+    "errorTitle": "La collection ne s’est pas chargée",
+    "errorBody": "Vérifiez votre connexion et réessayez.",
+    "tryAgain": "Réessayer",
+    "noMatchTitle": "Aucun résultat pour ces filtres",
+    "noMatchBody": "Retirez un filtre, ou parcourez toute la collection.",
+    "clearFilters": "Effacer les filtres"
+  },
+  "shop": {
+    "title": "Tous les produits",
+    "meta": "Toutes les pièces VAREL : vêtements, chaussures, sacs et accessoires en fibres naturelles, en petites séries.",
+    "heading": "Tous les produits",
+    "intro": "Tout ce qui est en ce moment à l’atelier. Fibres naturelles, petites séries, quatre coloris par saison."
+  },
+  "category": {
+    "eyebrow": "Collection · Automne 2026",
+    "departments": "Rayons",
+    "all": "Tout voir",
+    "heroAlt": "Collection {{name}}, éditorial à la lumière naturelle",
+    "detailAlt": "Détail de la collection {{name}}",
+    "notFoundTitle": "Nous ne trouvons pas cette collection",
+    "notFoundBody": "Elle a peut-être changé d’adresse. Parcourez tout ce qui est à l’atelier en ce moment.",
+    "allProducts": "Tous les produits",
+    "emptyTitle": "Cette catégorie est vide",
+    "emptyBody": "Les pièces arrivent ici au fil de la saison. En attendant, parcourez tout le reste.",
+    "aboutEyebrow": "À propos de cette collection",
+    "aboutTitle": "{{name}}, en quatre coloris",
+    "aboutBody": "Chaque pièce de cette collection est gradée sur de vrais corps et coupée dans les mêmes quatre coloris : tout s’accorde avec tout. Tailles du XS au XL, denim et chaussures en tailles numériques.",
+    "journal": "Lire le journal",
+    "copy": {
+      "women": "Robes, chemises, maille et manteaux pensés pour toute une garde-robe plutôt que pour une seule saison.",
+      "men": "Chemises, jersey et maille en fibres naturelles, coupés amples et faits pour être reconduits.",
+      "shoes": "Cuir tanné végétal sur semelles fines. Ressemelables, et faites pour s’assouplir à l’usage.",
+      "bags": "Cuir structuré et toile cirée, à la taille d’une journée dehors comme d’un week-end.",
+      "accessories": "Acier, cuir et verre. Les petites pièces qui terminent une tenue.",
+      "lifestyle": "Objets et imprimés pour garder une garde-robe en bon état."
+    },
+    "meta": {
+      "women": "Mode femme VAREL : robes, chemises, maille, pantalons, denim et manteaux en fibres naturelles."
+    }
+  },
+  "search": {
+    "title": "Recherche",
+    "placeholder": "Produits, catégories, journal",
+    "prompt": "Saisissez un terme pour chercher dans le catalogue et le journal.",
+    "searching": "Recherche de « {{term}} »",
+    "unavailable": "La recherche est indisponible pour le moment. Veuillez réessayer.",
+    "results_one": "{{count}} résultat pour « {{term}} »",
+    "results_other": "{{count}} résultats pour « {{term}} »",
+    "results_many": "{{count}} résultats pour « {{term}} »",
+    "suggested": "Suggestions",
+    "suggestions": {
+      "wool": "Laine",
+      "knitwear": "Maille",
+      "outerwear": "Manteaux",
+      "leather": "Cuir",
+      "stone": "Pierre",
+      "digital": "Numérique"
+    },
+    "resultType": "Type de résultat",
+    "tabs": {
+      "all": "Tout",
+      "products": "Produits",
+      "categories": "Catégories",
+      "journal": "Journal"
+    },
+    "noResults": "Aucun résultat pour « {{term}} »",
+    "noResultsBody": "Vérifiez l’orthographe, essayez une matière ou une catégorie, ou parcourez tout ce qui est à l’atelier en ce moment.",
+    "allProducts": "Tous les produits",
+    "tabEmpty_one": "Rien dans cet onglet. Les autres onglets contiennent {{count}} résultat pour « {{term}} ».",
+    "tabEmpty_other": "Rien dans cet onglet. Les autres onglets contiennent {{count}} résultats pour « {{term}} ».",
+    "tabEmpty_many": "Rien dans cet onglet. Les autres onglets contiennent {{count}} résultats pour « {{term}} ».",
+    "productsCount": "Produits ({{count}})",
+    "categoriesCount": "Catégories ({{count}})",
+    "journalCount": "Journal ({{count}})"
+  }
+}

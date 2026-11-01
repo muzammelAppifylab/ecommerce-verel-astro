@@ -1,0 +1,86 @@
+{
+  "home": "Home",
+  "title": "Returns & refunds",
+  "intro": "Thirty days to return unworn pieces with tags attached. Returns within Denmark and the EU are free; elsewhere the return postage is yours.",
+  "lookup": {
+    "label": "Start a return",
+    "placeholder": "Order number",
+    "button": "Look up",
+    "note": "Your order number starts with VRL- and is in your confirmation email",
+    "enterNumber": "Enter the order number from your confirmation email",
+    "notFound": "We cannot find that order number"
+  },
+  "steps": {
+    "label": "How returns work",
+    "step": "Step {{n}}",
+    "s1Title": "Look it up",
+    "s1Body": "Enter your order number, or open the order from your account.",
+    "s2Title": "Pick the pieces",
+    "s2Body": "Choose what is going back and tell us why in one line.",
+    "s3Title": "Post it",
+    "s3Body": "Print the prepaid label. EU returns are free; elsewhere postage is yours.",
+    "s4Title": "Get refunded",
+    "s4Body": "Three business days from the parcel arriving, back to your original payment."
+  },
+  "window": {
+    "title": "The window",
+    "p1": "Thirty days from delivery. EU law gives you fourteen; we extend it. Sale pieces marked as final are the one exception and cannot be returned unless faulty."
+  },
+  "condition": {
+    "title": "Condition",
+    "p1": "Unworn, unwashed, tags attached, in the original packaging. Try things on the way you would in a shop. Footwear should be tried indoors — soles that show wear cannot be accepted."
+  },
+  "refunds": {
+    "title": "Refunds",
+    "methodLabel": "Method",
+    "method": "Back to the card or wallet you paid with. We cannot refund elsewhere.",
+    "timingLabel": "Timing",
+    "timing": "Within three business days of the parcel arriving, then your bank's own delay.",
+    "shippingLabel": "Shipping paid",
+    "shipping": "Not refunded, unless a piece arrived faulty or we sent the wrong one.",
+    "discountsLabel": "Discounts",
+    "discounts": "A partial return recalculates the discount across the pieces you keep."
+  },
+  "exchanges": {
+    "title": "Exchanges",
+    "p1": "Easiest is to return and reorder, since stock moves. If the size you want is in stock, write with the order number and we will hold it for seven days while your return travels."
+  },
+  "digital": {
+    "title": "Digital products",
+    "p1": "Non-refundable once downloaded, since there is nothing to send back. If a file will not open, write to us and we will fix it or refund it."
+  },
+  "faults": {
+    "title": "Faults and repairs",
+    "p1": "Two years on manufacturing faults, and free repair in that time. After two years the Copenhagen studio still repairs any VAREL piece, charged at cost. Send a photograph first and we will tell you what it needs.",
+    "findOrder": "Find an order"
+  },
+  "writeStudio": "Write to the studio",
+  "related": {
+    "terms": "Terms & conditions",
+    "privacy": "Privacy policy"
+  },
+  "request": {
+    "order": "Order {{number}}",
+    "booked": "Your return is booked",
+    "choose": "Choose what is going back",
+    "notYet": "This order cannot be returned yet",
+    "lookupAnother": "Look up another order",
+    "requested_one": "Return requested for one piece. The prepaid label and instructions are on their way to {{email}}.",
+    "requested_other": "Return requested for {{count}} pieces. The prepaid label and instructions are on their way to {{email}}.",
+    "packCarrier": "Pack the pieces in their original packaging, attach the label and drop the parcel at any {{carrier}} point. The refund goes back to your original payment within three business days of the parcel arriving.",
+    "pack": "Pack the pieces in their original packaging, attach the label and drop the parcel at any carrier point. The refund goes back to your original payment within three business days of the parcel arriving.",
+    "reference": "Return reference {{id}}",
+    "notEligibleReason": "This order cannot be returned.",
+    "notEligible": "{{reason}} If something arrived damaged or faulty, write to the studio and we will sort it out.",
+    "allDigital": "Everything in this order is digital. Digital products are non-refundable once downloaded — if a file will not open, write to the studio and we will fix it or refund it.",
+    "estimatedRefund": "Estimated refund",
+    "submit": "Request return",
+    "chooseOne": "Choose at least one piece to return",
+    "whyOneLine": "Tell us why in one line",
+    "qty": "Qty {{qty}}",
+    "quantity": "Quantity",
+    "reason": "Reason",
+    "chooseReason": "Choose a reason",
+    "reasonPlaceholder": "Too large in the shoulder"
+  }
+}

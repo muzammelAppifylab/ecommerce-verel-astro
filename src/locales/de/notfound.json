@@ -1,0 +1,18 @@
+{
+  "title": "Seite nicht gefunden",
+  "heading": "Diese Seite gibt es nicht",
+  "body": "Der Link ist vielleicht veraltet, oder ein Stück ist ausverkauft und nicht mehr im Sortiment. Suche danach oder beginne bei der Kollektion.",
+  "searchPlaceholder": "Im Shop suchen",
+  "search": "Suche",
+  "allProducts": "Alle Produkte",
+  "home": "Startseite",
+  "popular": "Beliebte Seiten",
+  "quick": {
+    "women": "Damen",
+    "men": "Herren",
+    "journal": "Journal",
+    "contact": "Kontakt"
+  },
+  "alt": "Leere Studioecke im Tageslicht",
+  "picks": "Jetzt im Studio"
+}

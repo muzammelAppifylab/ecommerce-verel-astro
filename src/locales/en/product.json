@@ -1,0 +1,93 @@
+{
+  "page": {
+    "title": "Product",
+    "notFoundTitle": "Page not found",
+    "home": "Home"
+  },
+  "tile": {
+    "addToBag": "Add to bag",
+    "addedToBag": "Added to bag",
+    "soldOut": "Sold out",
+    "download": "Download",
+    "notifyMe": "View details",
+    "added": "Added",
+    "quickAdd": "Quick add",
+    "soldOutDetails": "{{name}} is sold out. View details",
+    "addNameToBag": "Add {{name}} to bag",
+    "addToWishlist": "Add to wishlist",
+    "removeFromWishlist": "Remove from wishlist",
+    "addNameToWishlist": "Add {{name}} to wishlist",
+    "removeNameFromWishlist": "Remove {{name}} from wishlist",
+    "rated": "Rated {{avg}} out of 5",
+    "promotionInBag": "{{label}} in your bag",
+    "bagWord": "bag"
+  },
+  "stock": {
+    "inStock": "In stock",
+    "lowLeft_one": "Only {{count}} left",
+    "lowLeft_other": "Only {{count}} left",
+    "instantDownload": "Instant download",
+    "soldOutSize": "Sold out in this size",
+    "backorder": "Made to order · ships in 2–3 weeks",
+    "digitalNoShipping": "Digital · no shipping"
+  },
+  "buy": {
+    "buyDownload": "Buy and download",
+    "added": "{{name}} added to bag",
+    "viewBag": "View bag",
+    "exclVat": "Excl. VAT",
+    "colour": "Colour",
+    "colourValue": "Colour — {{value}}",
+    "optionValue": "{{name}} — {{value}}",
+    "size": "Size",
+    "sizeValue": "Size — {{value}}",
+    "sizeSoldOut": "{{size}}, sold out",
+    "sizeGuide": "Size guide",
+    "sku": "SKU {{sku}}",
+    "digitalProduct": "Digital product",
+    "physicalProduct": "Physical product",
+    "noShipping": "No shipping — delivered as a download",
+    "ships": "Ships in 1–2 business days from Copenhagen",
+    "returns": "Thirty days to return unworn pieces"
+  },
+  "accordion": {
+    "details": "Details",
+    "material": "Material and make",
+    "materialBody": "{{material}}. Made in Europe in small runs with named partners. {{care}}",
+    "digitalCare": "Delivered as a download — nothing ships.",
+    "shipping": "Shipping",
+    "shippingDigital": "Digital delivery. A download link arrives with your confirmation email and stays in your account.",
+    "shippingBody": "Standard shipping is free within Denmark and the EU, and every order over $150 ships free. Express, and pickup at the Nørrebro studio, can be chosen at checkout.",
+    "returns": "Returns",
+    "returnsBody": "Thirty days to return unworn pieces with tags attached. Digital products are non-refundable once downloaded."
+  },
+  "gallery": {
+    "images": "{{name}} images",
+    "view": "{{name}} — view {{n}}",
+    "choose": "Choose a view",
+    "viewImage": "View image {{n}}"
+  },
+  "states": {
+    "loading": "Loading product",
+    "notFoundTitle": "This page is not here",
+    "notFoundBody": "The link may be old, or a piece may have sold through and left the catalogue. Search for it, or start from the collection.",
+    "allProducts": "All products",
+    "search": "Search",
+    "errorTitle": "This piece could not be loaded",
+    "errorBody": "Check your connection and try again. Your bag is kept as it was.",
+    "tryAgain": "Try again"
+  },
+  "related": {
+    "title": "Wears well with"
+  },
+  "sizeGuide": {
+    "title": "Size guide",
+    "description": "Body measurements in centimetres",
+    "body": "Body measurements in centimetres. Our pieces are cut with ease; if you are between sizes, take the smaller one.",
+    "size": "Size",
+    "chest": "Chest",
+    "waist": "Waist",
+    "hip": "Hip",
+    "fallback": "This piece comes in {{sizes}}. Write to the studio for exact measurements."
+  }
+}

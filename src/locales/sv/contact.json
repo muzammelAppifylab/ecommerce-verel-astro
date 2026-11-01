@@ -1,0 +1,44 @@
+{
+  "home": "Hem",
+  "title": "Kontakt",
+  "intro": "Vi svarar inom en arbetsdag, oftast snabbare. Ange ordernumret om det gäller en befintlig beställning.",
+  "subjects": {
+    "order": "En befintlig beställning",
+    "sizing": "Storlek och passform",
+    "repair": "Reparationer",
+    "return": "Returer och återbetalningar",
+    "stockist": "Återförsäljare och grossist",
+    "press": "Press"
+  },
+  "write": {
+    "hint": "Välj ett ämne så öppnas din e-postapp med ämnesraden ifylld.",
+    "direct": "Eller skriv direkt till studion på"
+  },
+  "studio": {
+    "label": "Om studion",
+    "photoAlt": "VAREL-studion på Nørrebro",
+    "photoCredit": "Foto av همَّام på Unsplash",
+    "studio": "Studio",
+    "addressLine1": "112 Studio, Nørrebro",
+    "addressLine2": "0000 Köpenhamn, Danmark",
+    "hours": "Öppettider",
+    "days": "Torsdag till lördag",
+    "time": "11.00–18.00",
+    "email": "E-post",
+    "phone": "Telefon"
+  },
+  "faq": {
+    "title": "Innan du skriver",
+    "whereQ": "Var är min beställning?",
+    "whereA": "Spårningen finns på ditt konto under orderhistorik och i leveransmejlet.",
+    "sizeQ": "Kan jag byta storlek?",
+    "sizeA": "Ja, innan beställningen har packats. Skriv till oss med ordernumret så byter vi.",
+    "repairQ": "Lagar ni äldre plagg?",
+    "repairA": "Ja. Reparationer är kostnadsfria de första två åren och debiteras därefter till självkostnadspris.",
+    "wholesaleQ": "Säljer ni till återförsäljare?",
+    "wholesaleA": "Till ett litet antal återförsäljare. Skriv till oss med din butik och stad.",
+    "returns": "Returer",
+    "track": "Spåra en beställning",
+    "terms": "Villkor"
+  }
+}

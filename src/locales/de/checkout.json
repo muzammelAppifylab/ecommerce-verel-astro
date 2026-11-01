@@ -1,0 +1,158 @@
+{
+  "title": "Kasse",
+  "steps": {
+    "label": "Schritte an der Kasse",
+    "information": "Angaben",
+    "shipping": "Versand",
+    "payment": "Zahlung"
+  },
+  "loadError": "Wir konnten deinen Warenkorb nicht laden.",
+  "tryAgain": "Erneut versuchen",
+  "contact": "Kontakt",
+  "email": "E-Mail",
+  "phone": "Telefon",
+  "phoneOptional": "Telefon (optional)",
+  "shippingAddress": "Lieferadresse",
+  "savedAddress": "Gespeicherte Adresse",
+  "chooseSaved": "Gespeicherte Adresse wählen",
+  "shippingMethod": "Versandart",
+  "shippingMethodZone": "Versandart — {{zone}}",
+  "digitalOnly": "Dein Warenkorb enthält nur digitale Produkte. Es wird nichts versendet – ein Download-Link kommt mit deiner Bestätigung.",
+  "loadingMethods": "Versandarten werden geladen",
+  "free": "Kostenlos",
+  "payment": "Zahlung",
+  "loadingSecure": "Sichere Zahlung wird geladen",
+  "loadingOptions": "Zahlungsarten werden geladen",
+  "paymentMethod": "Zahlungsart",
+  "methods": {
+    "card": "Karte"
+  },
+  "card": {
+    "name": "Name auf der Karte",
+    "number": "Kartennummer",
+    "expiry": "Ablaufdatum",
+    "cvc": "CVC"
+  },
+  "billingSame": "Rechnungsadresse entspricht der Lieferadresse",
+  "billingAddress": "Rechnungsadresse",
+  "note": {
+    "title": "Anmerkung zur Bestellung",
+    "placeholder": "Lieferhinweise, eine Geschenknachricht, alles, was wir wissen sollten"
+  },
+  "removeCode": "Code entfernen",
+  "pay": "{{total}} bezahlen",
+  "placeOrder": "Bestellung aufgeben",
+  "methodDigital": "digital",
+  "errors": {
+    "email": "Gib eine gültige E-Mail-Adresse ein",
+    "phone": "Gib eine Telefonnummer für die Zustellung ein",
+    "method": "Wähle eine Versandart",
+    "noteLength": "Halte deine Anmerkung unter {{max}} Zeichen",
+    "terms": "Akzeptiere die Bedingungen, um fortzufahren",
+    "payByCard": "Bezahle mit Karte, um diese Bestellung abzuschließen.",
+    "paymentLoading": "Das Zahlungsformular wird noch geladen. Versuche es gleich noch einmal",
+    "paymentGone": "Das Zahlungsformular ist nicht mehr verfügbar. Versuche es erneut",
+    "checkPayment": "Prüfe deine Zahlungsdaten",
+    "paymentFailed": "Deine Zahlung ist nicht durchgegangen. Versuche es erneut oder nutze eine andere Zahlungsart",
+    "paymentLoadDetail": "Das Zahlungsformular konnte nicht geladen werden: {{message}}",
+    "paymentLoad": "Das Zahlungsformular konnte nicht geladen werden. Lade die Seite neu, um es erneut zu versuchen",
+    "cardName": "Gib den Namen auf der Karte ein",
+    "cardNumber": "Gib deine Kartennummer ein",
+    "cardCheck": "Prüfe die Kartennummer",
+    "expiry": "Gib das Ablaufdatum ein",
+    "expiryPast": "Verwende eine Karte, die nicht abgelaufen ist (MM/JJ)",
+    "cvc": "Gib den 3- oder 4-stelligen Sicherheitscode ein",
+    "name": "Gib den vollständigen Namen ein",
+    "country": "Wähle ein Land, in das wir liefern",
+    "line1": "Gib die Straße und Hausnummer ein",
+    "city": "Gib den Ort ein",
+    "summary_one": "{{count}} Feld muss noch korrigiert werden",
+    "summary_other": "{{count}} Felder müssen noch korrigiert werden",
+    "line1Letters": "Gib den Straßennamen und die Hausnummer ein",
+    "line1Number": "Ergänze die Hausnummer",
+    "zipFormat": "Prüfe das Format, z. B. {{example}}",
+    "zipRequired": {
+      "zip": "Gib den ZIP-Code ein",
+      "postal": "Gib die Postleitzahl ein",
+      "postcode": "Gib die Postleitzahl ein",
+      "eircode": "Gib den Eircode ein"
+    },
+    "region": {
+      "state": "Wähle einen Bundesstaat",
+      "province": "Wähle eine Provinz",
+      "county": "Wähle ein County",
+      "stateTerritory": "Wähle einen Bundesstaat oder ein Territorium",
+      "prefecture": "Wähle eine Präfektur"
+    }
+  },
+  "address": {
+    "fullName": "Vollständiger Name",
+    "country": "Land",
+    "line1": "Straße und Hausnummer",
+    "city": "Ort",
+    "loadingCountries": "Länder werden geladen",
+    "line2": "Wohnung, Etage, c/o (optional)",
+    "optional": "{{label}} (optional)",
+    "choose": "Auswählen",
+    "zipLabel": {
+      "zip": "ZIP-Code",
+      "postal": "Postleitzahl",
+      "postcode": "Postleitzahl",
+      "eircode": "Eircode"
+    },
+    "region": {
+      "state": "Bundesstaat",
+      "province": "Provinz",
+      "county": "County",
+      "stateTerritory": "Bundesstaat/Territorium",
+      "prefecture": "Präfektur"
+    }
+  },
+  "signIn": {
+    "title": "Melde dich an, um zur Kasse zu gehen",
+    "body": "Bestellungen werden über ein VAREL-Konto aufgegeben. Melde dich an oder erstelle in einer Minute ein Konto – dein Warenkorb kommt mit.",
+    "signIn": "Anmelden",
+    "create": "Konto erstellen",
+    "back": "Zurück zum Warenkorb"
+  },
+  "summary": {
+    "title": "Bestellübersicht",
+    "show": "Bestellübersicht anzeigen",
+    "hide": "Bestellübersicht ausblenden",
+    "note_one": "{{tax}} wird an der Kasse anhand deines Lieferlands berechnet. {{count}} Tag, um ungetragene Teile zurückzugeben. Digitale Produkte sind nach dem Download nicht erstattungsfähig.",
+    "note_other": "{{tax}} wird an der Kasse anhand deines Lieferlands berechnet. {{count}} Tage, um ungetragene Teile zurückzugeben. Digitale Produkte sind nach dem Download nicht erstattungsfähig."
+  },
+  "qty": "Menge {{qty}}",
+  "discount": {
+    "label": "Rabattcode",
+    "apply": "Anwenden",
+    "enter": "Gib einen Rabattcode ein",
+    "applied": "{{code}} angewendet.",
+    "appliedReplaces": "{{code}} angewendet. Er ersetzt {{previous}}.",
+    "saved": "{{code}} in deinem Warenkorb gespeichert.",
+    "savedReplaces": "{{code}} in deinem Warenkorb gespeichert. Er ersetzt {{previous}}.",
+    "statusApplied": "{{code}} angewendet",
+    "statusSaved": "{{code}} gespeichert · noch nicht angewendet",
+    "fallback": "Rabatt",
+    "remove": "Entfernen",
+    "removeAria": "Code {{code}} entfernen",
+    "lineFree_one": "{{count}} gratis · {{amount}}",
+    "lineFree_other": "{{count}} gratis · {{amount}}",
+    "toggle": "Du hast einen Rabattcode?"
+  },
+  "totals": {
+    "subtotal": "Zwischensumme",
+    "shipping": "Versand",
+    "shippingWith": "Versand · {{method}}",
+    "taxRate": "{{name}} ({{rate}} %)",
+    "includes": "Inkl. {{tax}}",
+    "total": "Gesamt",
+    "freeWith": "Kostenlos · {{name}}",
+    "was": "Vorher ",
+    "now": "Jetzt ",
+    "youSave": "Du sparst {{amount}}"
+  },
+  "signInPrompt": "Du hast ein Konto?",
+  "signInLink": "Anmelden und schneller bezahlen",
+  "trust": "Sichere, verschlüsselte Zahlung · {{count}} Tage Rückgabe für ungetragene Teile"
+}

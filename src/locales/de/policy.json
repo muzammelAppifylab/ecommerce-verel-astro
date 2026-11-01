@@ -1,0 +1,53 @@
+{
+  "home": "Startseite",
+  "sections": "Abschnitte",
+  "onThisPage": "Auf dieser Seite",
+  "lastUpdated": "Zuletzt aktualisiert am {{date}}",
+  "contactStudio": "Studio kontaktieren",
+  "related": {
+    "terms": "Allgemeine Geschäftsbedingungen",
+    "privacy": "Datenschutzerklärung",
+    "returns": "Rücksendungen und Erstattungen"
+  },
+  "terms": {
+    "title": "Allgemeine Geschäftsbedingungen",
+    "company": "VAREL ApS, CVR 00 00 00 00",
+    "lead": "Diese Bedingungen gelten für Käufe auf varel.studio. Mit einer Bestellung akzeptierst du sie. Nichts hiervon schränkt die Rechte ein, die dir als Verbraucher nach dänischem und EU-Recht zustehen.",
+    "orders": {
+      "title": "Bestellungen",
+      "p1": "Eine Bestellung ist ein Angebot zum Kauf. Der Vertrag kommt zustande, wenn wir die Bestätigungs-E-Mail senden. Wir können eine Bestellung ablehnen, wenn ein Stück nicht vorrätig ist, der Preis falsch angegeben war oder wir nicht an deine Adresse liefern können.",
+      "p2": "Der Bestand wird pro Variante angezeigt. Ist eine Größe als ausverkauft markiert, ist sie in dieser Farbe bis zur Nachlieferung nicht erhältlich."
+    },
+    "prices": {
+      "title": "Preise und Steuern",
+      "p1": "Preise werden in US-Dollar ohne Steuern angezeigt. Mehrwertsteuer oder Umsatzsteuer wird an der Kasse anhand deines Lieferlands berechnet und vor der Zahlung angezeigt. Bei Bestellungen außerhalb der EU können bei der Ankunft Einfuhrabgaben anfallen, die du trägst.",
+      "p2": "Manche Rabattcodes haben einen Mindestbestellwert, ein Enddatum oder ein Limit pro Kunde. Wenn ein Code nicht gilt, sagt dir die Kasse, warum. Pro Bestellung gilt ein Code; Codes sind nicht kombinierbar."
+    },
+    "shipping": {
+      "title": "Versand",
+      "p1": "Wir versenden weltweit aus Kopenhagen. Die Versandkosten hängen von deiner Zone und der gewählten Versandart ab und werden an der Kasse angezeigt. Der Standardversand ist innerhalb Dänemarks und der EU kostenlos, und jede Bestellung ab $150 wird kostenlos verschickt, egal wohin. Die Abholung im Studio in Nørrebro ist kostenlos, donnerstags bis samstags.",
+      "p2": "Lieferzeiten sind Schätzungen. Die Gefahr geht mit der Lieferung auf dich über."
+    },
+    "digital": {
+      "title": "Digitale Produkte",
+      "p1": "Digitale Artikel werden nicht physisch versendet. Ein Download-Link kommt mit deiner Bestätigung und bleibt in deinem Konto verfügbar. Downloads sind für den persönlichen Gebrauch bestimmt und dürfen weder weiterverkauft noch weiterverbreitet werden. Mit dem Download stimmst du zu, dass das vierzehntägige Widerrufsrecht erlischt."
+    },
+    "cancellation": {
+      "title": "Widerruf",
+      "p1": "Nach EU-Recht kannst du innerhalb von vierzehn Tagen ab Lieferung widerrufen; für ungetragene Stücke mit Etikett verlängern wir das auf dreißig Tage. Die vollständigen Bedingungen, einschließlich der Art der Erstattung, findest du auf der Seite zu Rücksendungen.",
+      "link": "Rücksendungen und Erstattungen"
+    },
+    "defects": {
+      "title": "Mängel und Reparaturen",
+      "p1": "Für Herstellungsfehler gilt eine zweijährige Gewährleistung. Darüber hinaus repariert unser Studio in Kopenhagen jedes VAREL-Stück zum Selbstkostenpreis. Natürliches Verblassen, Pilling und Patina sind Eigenschaften der Materialien, keine Mängel."
+    },
+    "accounts": {
+      "title": "Kundenkonten",
+      "p1": "Behalte dein Passwort für dich und sag uns Bescheid, wenn du glaubst, dass jemand anderes es kennt. Du kannst dein Konto jederzeit schließen; Bestelldaten bewahren wir fünf Jahre lang auf, wie es das Buchhaltungsrecht verlangt."
+    },
+    "law": {
+      "title": "Recht und Streitigkeiten",
+      "p1": "Es gilt dänisches Recht. Schreib zuerst dem Studio; die meisten Dinge lassen sich mit einer E-Mail klären. Andernfalls kannst du dich an den dänischen Verbraucherbeschwerdeausschuss (Forbrugerklagenævnet) oder die Online-Streitbeilegungsplattform der EU wenden."
+    }
+  }
+}

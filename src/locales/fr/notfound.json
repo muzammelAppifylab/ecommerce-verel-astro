@@ -1,0 +1,18 @@
+{
+  "title": "Page introuvable",
+  "heading": "Cette page n’existe pas",
+  "body": "Le lien est peut-être ancien, ou une pièce a été épuisée et a quitté le catalogue. Recherchez-la, ou repartez de la collection.",
+  "searchPlaceholder": "Rechercher dans la boutique",
+  "search": "Rechercher",
+  "allProducts": "Tous les produits",
+  "home": "Accueil",
+  "popular": "Pages populaires",
+  "quick": {
+    "women": "Femme",
+    "men": "Homme",
+    "journal": "Journal",
+    "contact": "Contact"
+  },
+  "alt": "Coin d’atelier vide à la lumière du jour",
+  "picks": "En ce moment à l’atelier"
+}

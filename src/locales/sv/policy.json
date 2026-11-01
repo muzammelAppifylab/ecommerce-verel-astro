@@ -1,0 +1,53 @@
+{
+  "home": "Hem",
+  "sections": "Avsnitt",
+  "onThisPage": "På den här sidan",
+  "lastUpdated": "Senast uppdaterad {{date}}",
+  "contactStudio": "Kontakta studion",
+  "related": {
+    "terms": "Köpvillkor",
+    "privacy": "Integritetspolicy",
+    "returns": "Returer och återbetalningar"
+  },
+  "terms": {
+    "title": "Köpvillkor",
+    "company": "VAREL ApS, CVR 00 00 00 00",
+    "lead": "Dessa villkor gäller för köp på varel.studio. Genom att lägga en beställning godkänner du dem. Ingenting här begränsar de rättigheter du har som konsument enligt dansk lag och EU-rätt.",
+    "orders": {
+      "title": "Beställningar",
+      "p1": "En beställning är ett erbjudande om köp. Avtalet ingås när vi skickar orderbekräftelsen via e-post. Vi kan avböja en beställning om ett plagg är slut i lager, om priset angavs felaktigt eller om vi inte kan leverera till din adress.",
+      "p2": "Lagerstatus visas per variant. När en storlek visas som slutsåld finns den inte i den färgen förrän den har fyllts på."
+    },
+    "prices": {
+      "title": "Priser och skatter",
+      "p1": "Priserna visas i amerikanska dollar, exklusive skatt. Moms eller försäljningsskatt beräknas i kassan utifrån ditt leveransland och visas innan du betalar. Beställningar utanför EU kan beläggas med importavgifter vid ankomst, som du själv betalar.",
+      "p2": "Vissa rabattkoder har ett lägsta köpbelopp, ett slutdatum eller en gräns per kund. Om en kod inte kan användas får du veta varför i kassan. En kod gäller per beställning och koder kan inte kombineras."
+    },
+    "shipping": {
+      "title": "Frakt",
+      "p1": "Vi skickar till hela världen från Köpenhamn. Fraktkostnaden beror på din zon och det fraktsätt du väljer, och visas i kassan. Standardfrakt är gratis inom Danmark och EU, och alla beställningar över $150 skickas fraktfritt, vart de än ska. Upphämtning i studion på Nørrebro är kostnadsfri, torsdag till lördag.",
+      "p2": "Leveranstider är uppskattningar. Risken för varan övergår till dig vid leverans."
+    },
+    "digital": {
+      "title": "Digitala produkter",
+      "p1": "Digitala varor skickas inte fysiskt. En nedladdningslänk kommer med din bekräftelse och finns kvar på ditt konto. Nedladdningar är för personligt bruk och får inte säljas vidare eller spridas. Genom att ladda ned godkänner du att den fjortondagars ångerrätten inte längre gäller."
+    },
+    "cancellation": {
+      "title": "Ångerrätt",
+      "p1": "Enligt EU-rätten har du fjorton dagar från leverans på dig att ångra köpet, och vi förlänger det till trettio dagar för oanvända plagg med etiketterna kvar. De fullständiga villkoren, inklusive hur återbetalningar görs, finns på retursidan.",
+      "link": "Returer och återbetalningar"
+    },
+    "defects": {
+      "title": "Fel och reparationer",
+      "p1": "Du har två års reklamationsrätt för tillverkningsfel. Därutöver lagar vår studio i Köpenhamn alla VAREL-plagg till självkostnadspris. Naturlig blekning, noppor och patina är materialens egenskaper, inte fel."
+    },
+    "accounts": {
+      "title": "Konton",
+      "p1": "Håll ditt lösenord för dig själv och meddela oss om du tror att någon annan känner till det. Du kan när som helst avsluta ditt konto; orderuppgifter sparar vi i fem år, som bokföringslagen kräver."
+    },
+    "law": {
+      "title": "Lag och tvister",
+      "p1": "Dansk lag gäller. Skriv först till studion; det mesta löses med ett mejl. Annars kan du vända dig till danska Forbrugerklagenævnet eller EU:s plattform för tvistlösning online."
+    }
+  }
+}

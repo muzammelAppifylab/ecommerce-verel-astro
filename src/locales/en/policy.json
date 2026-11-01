@@ -1,0 +1,53 @@
+{
+  "home": "Home",
+  "sections": "Sections",
+  "onThisPage": "On this page",
+  "lastUpdated": "Last updated {{date}}",
+  "contactStudio": "Contact the studio",
+  "related": {
+    "terms": "Terms & conditions",
+    "privacy": "Privacy policy",
+    "returns": "Returns & refunds"
+  },
+  "terms": {
+    "title": "Terms & conditions",
+    "company": "VAREL ApS, CVR 00 00 00 00",
+    "lead": "These terms cover purchases from varel.studio. Placing an order means you accept them. Nothing here limits the rights you have as a consumer under Danish and EU law.",
+    "orders": {
+      "title": "Orders",
+      "p1": "An order is an offer to buy. The contract is formed when we send the confirmation email. We may decline an order if a piece is out of stock, if the price was listed incorrectly, or if we cannot ship to your address.",
+      "p2": "Stock is shown per variant. Where a size shows as sold out, it is unavailable in that colourway until restocked."
+    },
+    "prices": {
+      "title": "Prices and tax",
+      "p1": "Prices are shown in US dollars, excluding tax. VAT or sales tax is calculated at checkout from your shipping country and shown before you pay. Orders outside the EU may attract import duty on arrival, which is yours to pay.",
+      "p2": "Some discount codes have a minimum spend, an end date or a limit per customer. If a code cannot be used, checkout tells you why. One code applies per order, and codes do not stack."
+    },
+    "shipping": {
+      "title": "Shipping",
+      "p1": "We ship worldwide from Copenhagen. Rates depend on your zone and the method you choose, and are shown at checkout. Standard shipping is free within Denmark and the EU, and every order over $150 ships free, wherever it goes. Pickup at the Nørrebro studio is free, Thursday to Saturday.",
+      "p2": "Delivery estimates are estimates. Risk passes to you on delivery."
+    },
+    "digital": {
+      "title": "Digital products",
+      "p1": "Digital items ship nothing. A download link arrives with your confirmation and stays in your account. Downloads are for personal use and may not be resold or redistributed. By downloading you agree that the fourteen-day cancellation right no longer applies."
+    },
+    "cancellation": {
+      "title": "Cancellation",
+      "p1": "You have fourteen days from delivery to cancel under EU law, and we extend that to thirty days for unworn pieces with tags attached. The full terms, including how refunds are paid, sit on the returns page.",
+      "link": "Returns and refunds"
+    },
+    "defects": {
+      "title": "Faults and repairs",
+      "p1": "You have a two-year right of complaint on manufacturing faults. Beyond that, our Copenhagen studio repairs any VAREL piece at cost. Natural fading, pilling and patina are characteristics of the materials, not faults."
+    },
+    "accounts": {
+      "title": "Accounts",
+      "p1": "Keep your password to yourself, and tell us if you think someone else has it. You may close your account at any time; order records stay with us for five years as bookkeeping law requires."
+    },
+    "law": {
+      "title": "Law and disputes",
+      "p1": "Danish law applies. Write to the studio first; most things are settled in one email. If not, you may take the matter to the Danish Consumer Complaints Board or the EU online dispute platform."
+    }
+  }
+}

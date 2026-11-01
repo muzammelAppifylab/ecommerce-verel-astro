@@ -1,0 +1,22 @@
+{
+  "title": "Wishlist",
+  "crumbs": { "home": "Home", "account": "Account", "wishlist": "Wishlist" },
+  "saved_one": "{{count}} piece saved",
+  "saved_other": "{{count}} pieces saved",
+  "nothingSaved": "Nothing saved yet",
+  "addAll": "Add all in stock",
+  "added": "Added to bag",
+  "clear": "Clear list",
+  "loadError": "We could not load your wishlist.",
+  "tryAgain": "Try again",
+  "empty": {
+    "title": "Your wishlist is empty.",
+    "description": "Save pieces you are considering and they will wait here.",
+    "action": "Browse the collection"
+  },
+  "removeItem": "Remove {{name}} from wishlist",
+  "notifyMe": "Sold out",
+  "addToBag": "Add to bag",
+  "suggestions": "You might also consider",
+  "allProducts": "All products"
+}

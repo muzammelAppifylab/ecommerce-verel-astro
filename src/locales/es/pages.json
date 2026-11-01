@@ -1,0 +1,10 @@
+{
+  "home": "Inicio",
+  "notFound": "Página no encontrada",
+  "loadError": "Esta página no se ha podido cargar. Comprueba tu conexión e inténtalo de nuevo.",
+  "tryAgain": "Reintentar",
+  "lastUpdated": "Última actualización: {{date}}",
+  "sections": "Secciones",
+  "onThisPage": "En esta página",
+  "loading": "Cargando la página"
+}

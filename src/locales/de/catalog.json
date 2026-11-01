@@ -1,0 +1,107 @@
+{
+  "pieces_one": "{{count}} Stück",
+  "pieces_other": "{{count}} Stück",
+  "crumbs": {
+    "home": "Startseite",
+    "shop": "Shop"
+  },
+  "sort": {
+    "label": "Sortieren",
+    "aria": "Produkte sortieren",
+    "featured": "Empfohlen",
+    "newest": "Neueste",
+    "price-asc": "Preis · aufsteigend",
+    "price-desc": "Preis · absteigend",
+    "name": "Name · A bis Z"
+  },
+  "filters": {
+    "label": "Filter",
+    "title": "Filtern",
+    "titleCount": "Filtern ({{count}})",
+    "clear": "Zurücksetzen",
+    "description": "Grenze die Produkte nach Kategorie, Farbe, Größe, Material, Marke und Preis ein.",
+    "close": "Filter schließen",
+    "showResults": "Ergebnisse anzeigen",
+    "show_one": "{{count}} Stück anzeigen",
+    "show_other": "{{count}} Stück anzeigen",
+    "price": "Preis",
+    "maxPrice": "Höchstpreis",
+    "upTo": "Bis {{price}}",
+    "active": "Aktive Filter",
+    "remove": "Filter {{label}} entfernen"
+  },
+  "results": {
+    "errorTitle": "Die Kollektion wurde nicht geladen",
+    "errorBody": "Prüfe deine Verbindung und versuche es erneut.",
+    "tryAgain": "Erneut versuchen",
+    "noMatchTitle": "Nichts passt zu diesen Filtern",
+    "noMatchBody": "Entferne einen Filter oder sieh dir die ganze Kollektion an.",
+    "clearFilters": "Filter zurücksetzen"
+  },
+  "shop": {
+    "title": "Alle Produkte",
+    "meta": "Jedes VAREL-Stück: Kleidung, Schuhe, Taschen und Accessoires aus Naturfasern, in kleinen Serien gefertigt.",
+    "heading": "Alle Produkte",
+    "intro": "Alles, was gerade im Studio ist. Naturfasern, kleine Serien, vier Farben pro Saison."
+  },
+  "category": {
+    "eyebrow": "Kollektion · Herbst 2026",
+    "departments": "Kategorien",
+    "all": "Alles anzeigen",
+    "heroAlt": "Kollektion {{name}}, Editorial im natürlichen Tageslicht",
+    "detailAlt": "Detail aus der Kollektion {{name}}",
+    "notFoundTitle": "Diese Kollektion finden wir nicht",
+    "notFoundBody": "Vielleicht ist sie umgezogen. Sieh dir alles an, was gerade im Studio ist.",
+    "allProducts": "Alle Produkte",
+    "emptyTitle": "Diese Kategorie ist leer",
+    "emptyBody": "Die Stücke kommen hierher, sobald die Saison eintrifft. Sieh dir bis dahin alles andere an.",
+    "aboutEyebrow": "Über diese Kollektion",
+    "aboutTitle": "{{name}}, in vier Farben",
+    "aboutBody": "Jedes Stück dieser Kollektion ist an echten Körpern gradiert und in denselben vier Farben geschnitten, sodass alles hier zu allem passt. Die Größen reichen von XS bis XL, Denim und Schuhe in Zahlengrößen.",
+    "journal": "Zum Journal",
+    "copy": {
+      "women": "Kleider, Hemden, Strick und Oberbekleidung, geschnitten für eine ganze Garderobe statt für eine Saison.",
+      "men": "Hemden, Jersey und Strick aus Naturfasern, großzügig geschnitten und gemacht, um wieder aufgelegt zu werden.",
+      "shoes": "Pflanzlich gegerbtes Leder auf schlanken Sohlen. Neu besohlbar und gemacht, um mit dem Tragen weicher zu werden.",
+      "bags": "Formstabiles Leder und gewachstes Canvas, gemacht für einen Tag in der Stadt und ein Wochenende weg.",
+      "accessories": "Stahl, Leder und Glas. Die kleinen Stücke, die ein Outfit vollenden.",
+      "lifestyle": "Objekte und Gedrucktes, um eine Garderobe gut in Schuss zu halten."
+    },
+    "meta": {
+      "women": "Damenmode von VAREL: Kleider, Hemden, Strick, Hosen, Denim und Oberbekleidung aus Naturfasern."
+    }
+  },
+  "search": {
+    "title": "Suche",
+    "placeholder": "Produkte, Kategorien, Journal durchsuchen",
+    "prompt": "Tippe, um Sortiment und Journal zu durchsuchen.",
+    "searching": "Suche nach „{{term}}“",
+    "unavailable": "Die Suche ist gerade nicht verfügbar. Bitte versuche es erneut.",
+    "results_one": "{{count}} Ergebnis für „{{term}}“",
+    "results_other": "{{count}} Ergebnisse für „{{term}}“",
+    "suggested": "Vorschläge",
+    "suggestions": {
+      "wool": "Wolle",
+      "knitwear": "Strick",
+      "outerwear": "Oberbekleidung",
+      "leather": "Leder",
+      "stone": "Stein",
+      "digital": "Digital"
+    },
+    "resultType": "Ergebnistyp",
+    "tabs": {
+      "all": "Alles",
+      "products": "Produkte",
+      "categories": "Kategorien",
+      "journal": "Journal"
+    },
+    "noResults": "Keine Ergebnisse für „{{term}}“",
+    "noResultsBody": "Prüfe die Schreibweise, versuche es mit einem Material oder einer Kategorie, oder sieh dir alles an, was gerade im Studio ist.",
+    "allProducts": "Alle Produkte",
+    "tabEmpty_one": "In diesem Tab gibt es nichts. Die anderen Tabs enthalten {{count}} Ergebnis für „{{term}}“.",
+    "tabEmpty_other": "In diesem Tab gibt es nichts. Die anderen Tabs enthalten {{count}} Ergebnisse für „{{term}}“.",
+    "productsCount": "Produkte ({{count}})",
+    "categoriesCount": "Kategorien ({{count}})",
+    "journalCount": "Journal ({{count}})"
+  }
+}

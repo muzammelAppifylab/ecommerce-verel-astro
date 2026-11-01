@@ -1,0 +1,63 @@
+{
+  "title": "Privacy policy",
+  "lead": "VAREL ApS is the data controller for this store. We collect the minimum needed to sell you clothing and keep it wearable, and we do not sell your data to anyone.",
+  "collect": {
+    "title": "What we collect",
+    "p1": "When you order, we collect your name, email, phone number, shipping and billing address, and the contents of your order. Payment card details go directly to our payment processor and never reach our servers.",
+    "p2": "If you create an account we also keep your saved addresses, wishlist, order history and any digital downloads attached to your purchases. If you subscribe to the studio note we keep your email address until you unsubscribe."
+  },
+  "use": {
+    "title": "How we use it",
+    "p1": "To take payment, ship your order, handle returns and repairs, calculate tax for your country, answer your emails, and send the studio note if you asked for it. We use aggregate, non-identifying analytics to understand which pages are used."
+  },
+  "share": {
+    "title": "Who we share it with",
+    "paymentsLabel": "Payments",
+    "payments": "Card processing and fraud checks. They see the payment, not your wardrobe.",
+    "carriersLabel": "Carriers",
+    "carriers": "Name, address and phone number, so a parcel can be delivered.",
+    "emailLabel": "Email",
+    "email": "Order confirmations and the studio note, sent through our email provider.",
+    "neverLabel": "Never",
+    "never": "Advertising networks, data brokers, or anyone paying for a list."
+  },
+  "cookies": {
+    "title": "Cookies",
+    "p1": "Necessary cookies keep your bag and your session. Analytics cookies are optional and off until you accept them. You can change your choice at any time under Cookie settings at the foot of every page."
+  },
+  "rights": {
+    "title": "Your rights",
+    "p1": "Under the GDPR you can ask for a copy of your data, ask us to correct it, ask us to delete it, object to processing, or ask us to move it elsewhere. Write to the studio and we will answer within thirty days, at no cost."
+  },
+  "retention": {
+    "title": "How long we keep it",
+    "p1": "Order records for five years, as Danish bookkeeping law requires. Account data until you close the account. Newsletter data until you unsubscribe. Support emails for two years."
+  },
+  "contact": {
+    "title": "Contact",
+    "p1": "VAREL ApS, 112 Studio, Nørrebro, 0000 Copenhagen, Denmark. Write to care@varel.studio with anything about your data. You may also complain to the Danish Data Protection Agency."
+  },
+  "banner": {
+    "label": "Cookie consent",
+    "title": "Cookies",
+    "body": "We use necessary cookies to keep your bag, wishlist and sign-in working. With your permission we also count visits to learn what to make next.",
+    "privacyLink": "Privacy policy",
+    "acceptAll": "Accept all",
+    "necessaryOnly": "Necessary only",
+    "settings": "Settings"
+  },
+  "dialog": {
+    "title": "Cookie settings",
+    "description": "Choose which cookies VAREL may use",
+    "save": "Save choices",
+    "acceptAll": "Accept all",
+    "intro": "Necessary cookies are always on. Everything else waits for your permission, and you can change your mind here at any time.",
+    "necessaryTitle": "Necessary",
+    "necessaryBody": "Keep your bag, wishlist, checkout and sign-in working. They cannot be switched off.",
+    "necessarySwitch": "Necessary cookies, always on",
+    "analyticsTitle": "Analytics",
+    "analyticsBody": "Count page and product views so we learn what people look for. No advertising, never shared or sold.",
+    "analyticsSwitch": "Analytics cookies"
+  },
+  "settingsLink": "Cookie settings"
+}

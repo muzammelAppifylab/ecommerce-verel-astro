@@ -1,0 +1,63 @@
+{
+  "title": "Datenschutzerklärung",
+  "lead": "VAREL ApS ist der Verantwortliche für die Datenverarbeitung in diesem Shop. Wir erheben nur, was nötig ist, um dir Kleidung zu verkaufen und sie tragbar zu halten, und wir verkaufen deine Daten an niemanden.",
+  "collect": {
+    "title": "Was wir erheben",
+    "p1": "Bei einer Bestellung erheben wir deinen Namen, deine E-Mail-Adresse, deine Telefonnummer, deine Liefer- und Rechnungsadresse sowie den Inhalt deiner Bestellung. Zahlungskartendaten gehen direkt an unseren Zahlungsdienstleister und erreichen nie unsere Server.",
+    "p2": "Wenn du ein Konto anlegst, speichern wir außerdem deine Adressen, deine Merkliste, deinen Bestellverlauf und alle digitalen Downloads zu deinen Käufen. Wenn du die Studio-Notiz abonnierst, speichern wir deine E-Mail-Adresse, bis du dich abmeldest."
+  },
+  "use": {
+    "title": "Wie wir sie nutzen",
+    "p1": "Um Zahlungen entgegenzunehmen, deine Bestellung zu versenden, Rücksendungen und Reparaturen abzuwickeln, die Steuern für dein Land zu berechnen, deine E-Mails zu beantworten und dir die Studio-Notiz zu senden, wenn du sie angefordert hast. Wir nutzen zusammengefasste, nicht personenbezogene Statistiken, um zu verstehen, welche Seiten genutzt werden."
+  },
+  "share": {
+    "title": "An wen wir sie weitergeben",
+    "paymentsLabel": "Zahlungen",
+    "payments": "Kartenabwicklung und Betrugsprüfung. Sie sehen die Zahlung, nicht deine Garderobe.",
+    "carriersLabel": "Versanddienstleister",
+    "carriers": "Name, Adresse und Telefonnummer, damit ein Paket zugestellt werden kann.",
+    "emailLabel": "E-Mail",
+    "email": "Bestellbestätigungen und die Studio-Notiz, versendet über unseren E-Mail-Anbieter.",
+    "neverLabel": "Niemals",
+    "never": "Werbenetzwerke, Datenhändler oder alle, die für eine Liste bezahlen."
+  },
+  "cookies": {
+    "title": "Cookies",
+    "p1": "Notwendige Cookies speichern deinen Warenkorb und deine Sitzung. Statistik-Cookies sind optional und ausgeschaltet, bis du sie akzeptierst. Du kannst deine Wahl jederzeit unter Cookie-Einstellungen unten auf jeder Seite ändern."
+  },
+  "rights": {
+    "title": "Deine Rechte",
+    "p1": "Nach der DSGVO kannst du eine Kopie deiner Daten verlangen, ihre Berichtigung oder Löschung verlangen, der Verarbeitung widersprechen oder ihre Übertragung an einen anderen Anbieter verlangen. Schreib dem Studio, und wir antworten innerhalb von dreißig Tagen, kostenlos."
+  },
+  "retention": {
+    "title": "Wie lange wir sie aufbewahren",
+    "p1": "Bestelldaten fünf Jahre lang, wie es das dänische Buchhaltungsrecht verlangt. Kontodaten, bis du das Konto schließt. Newsletter-Daten, bis du dich abmeldest. Support-E-Mails zwei Jahre lang."
+  },
+  "contact": {
+    "title": "Kontakt",
+    "p1": "VAREL ApS, 112 Studio, Nørrebro, 0000 Kopenhagen, Dänemark. Schreib an care@varel.studio zu allem, was deine Daten betrifft. Du kannst dich auch bei der dänischen Datenschutzbehörde (Datatilsynet) beschweren."
+  },
+  "banner": {
+    "label": "Cookie-Einwilligung",
+    "title": "Cookies",
+    "body": "Wir verwenden notwendige Cookies, damit Warenkorb, Merkliste und Anmeldung funktionieren. Mit deiner Erlaubnis zählen wir auch Besuche, um zu lernen, was wir als Nächstes machen.",
+    "privacyLink": "Datenschutzerklärung",
+    "acceptAll": "Alle akzeptieren",
+    "necessaryOnly": "Nur notwendige",
+    "settings": "Einstellungen"
+  },
+  "dialog": {
+    "title": "Cookie-Einstellungen",
+    "description": "Wähle, welche Cookies VAREL verwenden darf",
+    "save": "Auswahl speichern",
+    "acceptAll": "Alle akzeptieren",
+    "intro": "Notwendige Cookies sind immer aktiv. Alles andere wartet auf deine Erlaubnis, und du kannst deine Meinung hier jederzeit ändern.",
+    "necessaryTitle": "Notwendig",
+    "necessaryBody": "Sorgen dafür, dass Warenkorb, Merkliste, Kasse und Anmeldung funktionieren. Sie lassen sich nicht ausschalten.",
+    "necessarySwitch": "Notwendige Cookies, immer aktiv",
+    "analyticsTitle": "Statistik",
+    "analyticsBody": "Zählen Seiten- und Produktaufrufe, damit wir lernen, wonach gesucht wird. Keine Werbung, niemals weitergegeben oder verkauft.",
+    "analyticsSwitch": "Statistik-Cookies"
+  },
+  "settingsLink": "Cookie-Einstellungen"
+}

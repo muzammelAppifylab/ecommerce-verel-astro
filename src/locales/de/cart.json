@@ -1,0 +1,30 @@
+{
+  "title": "Dein Warenkorb",
+  "crumbs": {
+    "home": "Startseite",
+    "bag": "Warenkorb"
+  },
+  "count_one": "{{count}} Artikel",
+  "count_other": "{{count}} Artikel",
+  "loadError": "Wir konnten deinen Warenkorb nicht laden.",
+  "tryAgain": "Erneut versuchen",
+  "empty": {
+    "title": "Dein Warenkorb ist leer.",
+    "description": "Hier liegt noch nichts. Die Herbstauswahl ist ein guter Anfang."
+  },
+  "continueShopping": "Weiter einkaufen",
+  "columns": {
+    "item": "Artikel",
+    "quantity": "Menge",
+    "total": "Gesamt"
+  },
+  "toFree": "Noch {{amount}} bis zum kostenlosen Versand",
+  "freeApplied": "Kostenloser Versand angewendet",
+  "related": "Passt gut zu",
+  "summaryLabel": "Bestellübersicht",
+  "summary": "Übersicht",
+  "checkout": "Zur Kasse",
+  "taxNote": "{{tax}} wird an der Kasse anhand deines Lieferlands berechnet. Die Versandart wählst du an der Kasse.",
+  "skuEach": "Art.-Nr. {{sku}} · {{price}} pro Stück",
+  "remove": "{{name}} entfernen"
+}

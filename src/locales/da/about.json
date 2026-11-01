@@ -1,0 +1,63 @@
+{
+  "title": "Om os",
+  "hero": {
+    "eyebrow": "Om studiet",
+    "title": "Mindre, men bedre.",
+    "body": "VAREL er et uafhængigt brand med studie på Nørrebro i København. Vi laver hverdagstøj, sko, tasker og tilbehør i naturfibre, i små serier, sammen med en kort liste af partnere i Portugal og Italien.",
+    "alt": "Studiet i dagslys, puds og træ"
+  },
+  "story": {
+    "title": "Hvorfor vi begyndte",
+    "p1": "Vi havde arbejdet i årevis i større modehuse og set kollektioner blive dobbelt så store og leve halvt så længe. De styk, vi faktisk gik med, var de enkleste, beholdt i årevis og repareret to gange.",
+    "p2": "Derfor lancerer VAREL få styk hver sæson og beholder dem, der fortjener deres plads. Intet er designet til at blive udskiftet næste år. Hvis et stykke tøj går op i en søm, reparerer vi det hellere end at sælge dig et nyt."
+  },
+  "principles": {
+    "form": {
+      "term": "Form",
+      "text": "Rene linjer, rummelige snit, intet dekorativt. Gradueret på rigtige kroppe, ikke på én enkelt prøvemodel."
+    },
+    "texture": {
+      "term": "Tekstur",
+      "text": "Uld fra Biella, bomuld og hør fra Portugal, vegetabilsk garvet læder fra Toscana."
+    },
+    "time": {
+      "term": "Tid",
+      "text": "Fire farver pr. sæson, som gentages. Alt fra en tidligere sæson passer stadig sammen med denne."
+    },
+    "repair": {
+      "term": "Reparation",
+      "text": "Vores reparationsværksted i København reparerer omkring fire hundrede stykker tøj om året. Reparationer er gratis de første to år."
+    }
+  },
+  "figures": {
+    "founded": {
+      "figure": "2019",
+      "caption": "Første kollektion, elleve styk, ét væveri"
+    },
+    "workshops": {
+      "figure": "6",
+      "caption": "Partnerværksteder i Portugal og Italien"
+    },
+    "fibres": {
+      "figure": "92 %",
+      "caption": "Naturlige eller genanvendte fibre i hele sortimentet"
+    },
+    "repairs": {
+      "figure": "400",
+      "caption": "Stykker tøj repareret hvert år i København"
+    }
+  },
+  "made": {
+    "alt": "Væveri med maskiner i dagslys",
+    "eyebrow": "Hvor tingene bliver lavet",
+    "title": "Seks værksteder, med navns nævnelse",
+    "body": "Strik og jersey i Porto. Uld vævet i Biella og skåret i Guimarães. Lædervarer i Toscana. Vi besøger hver partner mindst to gange om året, og vi fortæller, hvem de er.",
+    "link": "Læs, hvordan vi vælger et væveri"
+  },
+  "visit": {
+    "title": "Besøg studiet, eller skriv til os",
+    "body": "Studiet på Nørrebro har åbent torsdag til lørdag for prøvning, reparationer og afhentning. Alt andet klarer vi over e-mail.",
+    "contact": "Kontakt",
+    "shop": "Se kollektionen"
+  }
+}

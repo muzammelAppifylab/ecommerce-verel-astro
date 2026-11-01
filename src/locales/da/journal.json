@@ -1,0 +1,60 @@
+{
+  "home": "Forside",
+  "title": "Journal",
+  "metaDescription": "Noter fra VAREL-studiet om materialer, styling, pleje og rejser.",
+  "intro": "Noter fra studiet om materialer, håndværk, vedligeholdelse og brug. Udgives, når der er noget, der er værd at sige.",
+  "tryAgain": "Prøv igen",
+  "loadErrorDescription": "Noget gik galt hos os. Prøv igen om lidt.",
+  "allEntries": "Alle indlæg",
+  "categoriesLabel": "Journalkategorier",
+  "readPiece": "Læs indlægget",
+  "index": {
+    "errorTitle": "Journalen kunne ikke indlæses",
+    "emptyTitle": "Intet her endnu",
+    "emptyDescription": "Det første indlæg er stadig under skrivning."
+  },
+  "newsletter": {
+    "title": "Stille nyheder, to gange om måneden",
+    "body": "Nye styles, genopfyldninger og en gang imellem en note fra studiet. Ingen rabatstøj.",
+    "note": "Vi deler aldrig din adresse.",
+    "success": "Tak. Hold øje med den næste note i din indbakke."
+  },
+  "category": {
+    "pageTitle": "{{name}} — Journal",
+    "eyebrow": "Journalkategori",
+    "entries_one": "{{count}} indlæg",
+    "entries_other": "{{count}} indlæg",
+    "errorTitle": "Kategorien kunne ikke indlæses",
+    "emptyTitle": "Intet her endnu",
+    "emptyDescription": "Denne kategori venter på sit første indlæg."
+  },
+  "categoryBlurb": {
+    "materials": "Hvor fibrene kommer fra, hvordan de spindes og væves, og hvad der sker, når de slides op.",
+    "styling": "Hvordan delene spiller sammen, og hvor få af dem du egentlig har brug for.",
+    "care": "Vask, tørring, opbevaring og reparation, så et stykke tøj holder i ti år.",
+    "travel": "Let bagage med en garderobe, der kan kombineres igen og igen."
+  },
+  "authorRole": {
+    "studioDirector": "Studiechef"
+  },
+  "post": {
+    "pageTitle": "{{title}} — Journal",
+    "notFoundTitle": "Vi kan ikke finde det indlæg",
+    "notFoundDescription": "Det er måske flyttet, eller linket er ufuldstændigt. Alt, hvad vi har udgivet, ligger i journalen.",
+    "errorTitle": "Indlægget kunne ikke indlæses",
+    "linkCopied": "Link kopieret",
+    "share": "Del",
+    "print": "Udskriv",
+    "contents": "Indhold",
+    "keepReading": "Læs videre"
+  },
+  "newsletterForm": {
+    "note": "Vi deler aldrig din adresse.",
+    "success": "Tak. Det næste brev lander i din indbakke.",
+    "invalidEmail": "Indtast en gyldig e-mailadresse.",
+    "emailLabel": "E-mailadresse",
+    "subscribe": "Tilmeld",
+    "sending": "Sender",
+    "subscribed": "Tilmeldt"
+  }
+}

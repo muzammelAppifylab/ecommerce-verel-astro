@@ -1,0 +1,144 @@
+{
+  "shopCollection": "Zur Kollektion",
+  "pieces_one": "{{count}} Stück",
+  "pieces_other": "{{count}} Stück",
+  "hero": {
+    "eyebrow": "Herbst 2026",
+    "title": "Moderne Essentials.\nZu Ende gedacht.",
+    "body": "Alltagsstücke aus natürlichen Materialien, in kleinen Serien gefertigt und gemacht, um weit über die Saison hinaus getragen zu werden.",
+    "primaryCta": "Damen entdecken",
+    "secondaryCta": "Herren entdecken",
+    "alt": "Strick, ein brauner Wollmantel und Leinenhosen an einer hellen Holzstange im sanften Morgenlicht"
+  },
+  "categories": {
+    "title": "Nach Kategorie einkaufen",
+    "alt": "{{name}} — VAREL"
+  },
+  "newIn": {
+    "eyebrow": "Neu",
+    "title": "Die Saison, kuratiert",
+    "sortLabel": "Produkte sortieren",
+    "sort": {
+      "featured": "Empfohlen",
+      "price-asc": "Preis — aufsteigend",
+      "price-desc": "Preis — absteigend"
+    },
+    "filterLabel": "Produkte filtern",
+    "filters": {
+      "all": "Alle",
+      "new": "Neu",
+      "women": "Damen",
+      "men": "Herren",
+      "shoes": "Schuhe",
+      "bags": "Taschen",
+      "accessories": "Accessoires"
+    },
+    "error": "Die Kollektion konnte nicht geladen werden.",
+    "tryAgain": "Erneut versuchen",
+    "empty": "Hier ist noch nichts. Versuche einen anderen Filter."
+  },
+  "piece": {
+    "eyebrow": "Ausgewähltes Stück",
+    "altA": "Atelier Wool Coat — Ganzkörperlook vor Ort",
+    "altB": "Mantel und Hose über einem Stuhl im Studio",
+    "error": "Dieses Stück konnte gerade nicht geladen werden.",
+    "body": "Doppelseitige italienische Wolle aus unserer Weberei in Biella, ungefüttert und von Hand verarbeitet. Lang geschnitten mit überschnittener Schulter, damit er ohne aufzutragen über Strick passt.",
+    "note": "Kostenloser Versand ab $150 · Dreißig Tage Rückgabe für ungetragene Stücke",
+    "stock": {
+      "download": "Sofortiger Download",
+      "soldOut": "In dieser Größe ausverkauft",
+      "final_one": "Nur noch {{word}}",
+      "final_other": "Nur noch {{word}}",
+      "in": "Auf Lager"
+    },
+    "words": {
+      "1": "eins",
+      "2": "zwei",
+      "3": "drei",
+      "4": "vier",
+      "5": "fünf",
+      "6": "sechs"
+    }
+  },
+  "values": {
+    "label": "Wie wir fertigen",
+    "materials": {
+      "title": "Durchdachte Materialien",
+      "body": "Wolle, Leinen und pflanzlich gegerbtes Leder, ausgewählt dafür, wie sie sich über Jahre tragen, nicht über Saisons."
+    },
+    "lasting": {
+      "title": "Gemacht, um zu bleiben",
+      "body": "Kleine Serien mit namentlich bekannten Partnern in Portugal und Italien, nur wiederholt, wenn sie es verdienen."
+    },
+    "fit": {
+      "title": "Passform, gelöst",
+      "body": "Jedes Stück wird an echten Körpern gradiert, bevor es in die Kollektion kommt."
+    }
+  },
+  "bestPart": {
+    "eyebrow": "(Das Beste)",
+    "rows": {
+      "outerwear": "Oberbekleidung",
+      "knitwear": "Strick",
+      "shirting": "Hemden",
+      "denim": "Denim"
+    },
+    "body": "Von Alltags-Essentials bis zu durchdachter Oberbekleidung: Jedes Stück ist aus Naturfasern geschnitten und in kleinen Serien gefertigt. Trag es diese Saison und die nächste.",
+    "alt": "Kleidung an einer Stange in einem kahlen Betonstudio"
+  },
+  "featured": {
+    "eyebrow": "Empfohlen",
+    "title": "In dieser Saison immer dabei",
+    "allProducts": "Alle Produkte"
+  },
+  "featuredCollections": {
+    "eyebrow": "Kollektionen",
+    "title": "Vom Studio kuratiert",
+    "all": "Alle Kollektionen"
+  },
+  "newCollections": {
+    "eyebrow": "Neue Kollektionen",
+    "knit": {
+      "title": "Strick für die kalten Monate",
+      "body": "Lammwolle und Merino, gesponnen in Biella, in Portugal gestrickt in Rippen und Halbpatent, die wir jede Saison wiederholen. Weit im Körper geschnitten, damit ein Hemd darunter passt.",
+      "cta": "Strick entdecken",
+      "altA": "Gefaltete Strickpullover neben einem Wollknäuel",
+      "altB": "Goldringe auf einem cremefarbenen Strickärmel"
+    },
+    "shirt": {
+      "title": "Hemden, einmal geschnitten und behalten",
+      "body": "Trockener italienischer Baumwolltwill und gewaschener Popeline, kastig im Körper mit geradem Saum. Zwei Kragen, vier Farben, keine saisonale Variation.",
+      "cta": "Hemden entdecken",
+      "altA": "Hemddetail",
+      "altB": "Hemden im Editorial"
+    }
+  },
+  "collections": {
+    "eyebrow": "Trag die Saison",
+    "body": "Vier Auswahlen aus dem Studio, jede aus derselben kurzen Liste von Stoffen, zu denen wir jede Saison zurückkehren.",
+    "altA": "Jeansjacke vor einem gerippten Metallrollladen",
+    "altB": "Taillierte Jacken auf Kupferbügeln",
+    "items": {
+      "essentials": {
+        "title": "Alltags-Essentials",
+        "description": "Die Stücke, die wir jede Saison machen: schwere T-Shirts, weite Hosen und Rippstrick, aus den Stoffen, zu denen wir immer wieder zurückkehren."
+      },
+      "statement": {
+        "title": "Statement-Stücke",
+        "description": "Eine kleine Serie größerer Silhouetten: der Wollmantel, das Overshirt, die Weekender-Tasche."
+      },
+      "classics": {
+        "title": "Die Klassiker",
+        "description": "Hemden, Hosen und Strick, die seit den ersten Saisons im Sortiment sind, kaum verändert."
+      },
+      "seasonal": {
+        "title": "Saisonkollektionen",
+        "description": "Herbst- und Frühlingsdrops in kleiner Stückzahl, die selten wiederholt werden."
+      }
+    }
+  },
+  "journal": {
+    "title": "Aus dem Journal",
+    "all": "Alle Geschichten"
+  }
+}

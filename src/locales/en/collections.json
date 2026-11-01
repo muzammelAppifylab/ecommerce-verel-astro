@@ -1,0 +1,38 @@
+{
+  "pieces_one": "{{count}} piece",
+  "pieces_other": "{{count}} pieces",
+  "imageAlt": "{{title}} — VAREL collection",
+  "card": {
+    "cta": "Shop the edit"
+  },
+  "crumbs": {
+    "home": "Home",
+    "collections": "Collections"
+  },
+  "allCollections": "All collections",
+  "allProducts": "All products",
+  "tryAgain": "Try again",
+  "errorBody": "Check your connection and try again.",
+  "index": {
+    "title": "Collections",
+    "meta": "Edited sets from the VAREL studio: pieces chosen to be worn together, for a season, a trip or a way of dressing.",
+    "intro": "Edited sets from the studio. Pieces chosen to be worn together, for a season, a trip or a way of dressing.",
+    "count_one": "{{count}} collection",
+    "count_other": "{{count}} collections",
+    "errorTitle": "Collections could not be loaded",
+    "emptyTitle": "No collections at the moment",
+    "emptyBody": "New edits are on their way. Browse everything currently in the studio."
+  },
+  "page": {
+    "title": "Collection",
+    "eyebrow": "Collection",
+    "notFoundTitle": "Page not found",
+    "notFoundHeading": "We cannot find that collection",
+    "notFoundBody": "It may have ended or moved. Browse the current collections, or everything in the studio.",
+    "errorTitle": "This collection could not be loaded",
+    "piecesLabel": "Pieces in this collection",
+    "emptyTitle": "Nothing in this collection right now",
+    "emptyBody": "The pieces have sold through. Browse everything currently in the studio.",
+    "more": "More collections"
+  }
+}

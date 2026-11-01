@@ -1,0 +1,60 @@
+{
+  "home": "Home",
+  "title": "Journal",
+  "metaDescription": "Notes from the VAREL studio on materials, styling, care and travel.",
+  "intro": "Notes from the studio on materials, making, keeping and wearing. Published when there is something worth saying.",
+  "tryAgain": "Try again",
+  "loadErrorDescription": "Something went wrong on our side. Try again in a moment.",
+  "allEntries": "All entries",
+  "categoriesLabel": "Journal categories",
+  "readPiece": "Read the piece",
+  "index": {
+    "errorTitle": "The journal did not load",
+    "emptyTitle": "Nothing here yet",
+    "emptyDescription": "The first entry is still being written."
+  },
+  "newsletter": {
+    "title": "Quiet updates, twice a month",
+    "body": "New pieces, restocks and the occasional note from the studio. No discount noise.",
+    "note": "We will never share your address.",
+    "success": "Thank you. Look for the next note in your inbox."
+  },
+  "category": {
+    "pageTitle": "{{name}} — Journal",
+    "eyebrow": "Journal category",
+    "entries_one": "{{count}} entry",
+    "entries_other": "{{count}} entries",
+    "errorTitle": "This category did not load",
+    "emptyTitle": "Nothing here yet",
+    "emptyDescription": "This category is waiting on its first entry."
+  },
+  "categoryBlurb": {
+    "materials": "Where fibres come from, how they are spun and woven, and what happens when they wear out.",
+    "styling": "How the pieces work together, and how few of them you actually need.",
+    "care": "Washing, drying, storing and mending, so a garment lasts a decade.",
+    "travel": "Packing light with a wardrobe that repeats."
+  },
+  "authorRole": {
+    "studioDirector": "Studio director"
+  },
+  "post": {
+    "pageTitle": "{{title}} — Journal",
+    "notFoundTitle": "We cannot find that entry",
+    "notFoundDescription": "It may have been moved, or the link is incomplete. Everything we have published is in the journal.",
+    "errorTitle": "This entry did not load",
+    "linkCopied": "Link copied",
+    "share": "Share",
+    "print": "Print",
+    "contents": "Contents",
+    "keepReading": "Keep reading"
+  },
+  "newsletterForm": {
+    "note": "We never share your address.",
+    "success": "Thank you. The next letter will reach your inbox.",
+    "invalidEmail": "Enter a valid email address.",
+    "emailLabel": "Email address",
+    "subscribe": "Subscribe",
+    "sending": "Sending",
+    "subscribed": "Subscribed"
+  }
+}

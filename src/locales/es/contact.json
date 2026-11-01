@@ -1,0 +1,44 @@
+{
+  "home": "Inicio",
+  "title": "Contacto",
+  "intro": "Respondemos en un día laborable, normalmente antes. Si se trata de un pedido ya realizado, incluye el número de pedido.",
+  "subjects": {
+    "order": "Un pedido existente",
+    "sizing": "Tallas y ajuste",
+    "repair": "Reparaciones",
+    "return": "Devoluciones y reembolsos",
+    "stockist": "Distribuidores y venta al por mayor",
+    "press": "Prensa"
+  },
+  "write": {
+    "hint": "Elige un tema y tu aplicación de correo se abrirá con el asunto ya escrito.",
+    "direct": "O escribe directamente al estudio a"
+  },
+  "studio": {
+    "label": "Datos del estudio",
+    "photoAlt": "El estudio de VAREL en Nørrebro",
+    "photoCredit": "Foto de همَّام en Unsplash",
+    "studio": "Estudio",
+    "addressLine1": "112 Studio, Nørrebro",
+    "addressLine2": "0000 Copenhague, Dinamarca",
+    "hours": "Horario",
+    "days": "De jueves a sábado",
+    "time": "11:00–18:00",
+    "email": "Correo electrónico",
+    "phone": "Teléfono"
+  },
+  "faq": {
+    "title": "Antes de escribirnos",
+    "whereQ": "¿Dónde está mi pedido?",
+    "whereA": "El seguimiento está en tu cuenta, en el historial de pedidos, y en el correo de envío.",
+    "sizeQ": "¿Puedo cambiar una talla?",
+    "sizeA": "Sí, antes de que se prepare el pedido. Escríbenos con el número de pedido y la cambiamos.",
+    "repairQ": "¿Reparáis piezas antiguas?",
+    "repairA": "Sí. Las reparaciones son gratuitas los dos primeros años y después se cobran a precio de coste.",
+    "wholesaleQ": "¿Vendéis al por mayor?",
+    "wholesaleA": "A un número reducido de distribuidores. Escríbenos con el nombre de tu tienda y tu ciudad.",
+    "returns": "Devoluciones",
+    "track": "Seguir un pedido",
+    "terms": "Condiciones"
+  }
+}

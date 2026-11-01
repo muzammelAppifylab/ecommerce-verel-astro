@@ -1,0 +1,63 @@
+{
+  "title": "About",
+  "hero": {
+    "eyebrow": "About the studio",
+    "title": "Less, but better.",
+    "body": "VAREL is an independent label working out of a studio in Nørrebro, Copenhagen. We make everyday clothing, footwear, bags and accessories in natural fibres, in small runs, with a short list of partners in Portugal and Italy.",
+    "alt": "Studio interior in daylight, plaster and wood"
+  },
+  "story": {
+    "title": "Why we started",
+    "p1": "We had spent years working inside larger fashion houses, watching collections double in size and halve in life. The pieces we actually wore were the plainest ones, kept for years and repaired twice.",
+    "p2": "So VAREL releases a small number of pieces each season and keeps the ones that earn their place. Nothing is designed to be replaced next year. If a garment wears out at a seam, we would rather mend it than sell you another."
+  },
+  "principles": {
+    "form": {
+      "term": "Form",
+      "text": "Clean lines, generous cuts, nothing decorative. Graded on real bodies, not a single fit model."
+    },
+    "texture": {
+      "term": "Texture",
+      "text": "Wool from Biella, cotton and linen from Portugal, vegetable-tanned leather from Tuscany."
+    },
+    "time": {
+      "term": "Time",
+      "text": "Four colourways a season, repeated. Anything from an earlier season still works with this one."
+    },
+    "repair": {
+      "term": "Repair",
+      "text": "Our Copenhagen repair studio mends around four hundred garments a year. Repairs are free for the first two years."
+    }
+  },
+  "figures": {
+    "founded": {
+      "figure": "2019",
+      "caption": "First collection, eleven pieces, one mill"
+    },
+    "workshops": {
+      "figure": "6",
+      "caption": "Partner workshops in Portugal and Italy"
+    },
+    "fibres": {
+      "figure": "92%",
+      "caption": "Natural or recycled fibres across the catalogue"
+    },
+    "repairs": {
+      "figure": "400",
+      "caption": "Garments repaired each year in Copenhagen"
+    }
+  },
+  "made": {
+    "alt": "Mill workshop with machinery in daylight",
+    "eyebrow": "Where things are made",
+    "title": "Six workshops, named",
+    "body": "Knitwear and jersey in Porto. Wool woven in Biella and cut in Guimarães. Leather goods in Tuscany. We visit each partner at least twice a year, and we publish who they are.",
+    "link": "Read how we choose a mill"
+  },
+  "visit": {
+    "title": "Visit the studio, or write to us",
+    "body": "The Nørrebro studio is open Thursday to Saturday for fittings, repairs and collection. Everything else, email works.",
+    "contact": "Contact",
+    "shop": "Shop the collection"
+  }
+}

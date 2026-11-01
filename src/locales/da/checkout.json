@@ -1,0 +1,158 @@
+{
+  "title": "Kasse",
+  "steps": {
+    "label": "Trin i kassen",
+    "information": "Oplysninger",
+    "shipping": "Levering",
+    "payment": "Betaling"
+  },
+  "loadError": "Vi kunne ikke hente din kurv.",
+  "tryAgain": "Prøv igen",
+  "contact": "Kontakt",
+  "email": "E-mail",
+  "phone": "Telefon",
+  "phoneOptional": "Telefon (valgfrit)",
+  "shippingAddress": "Leveringsadresse",
+  "savedAddress": "Gemt adresse",
+  "chooseSaved": "Vælg en gemt adresse",
+  "shippingMethod": "Leveringsmetode",
+  "shippingMethodZone": "Leveringsmetode — {{zone}}",
+  "digitalOnly": "Din kurv indeholder kun digitale produkter. Intet sendes — et downloadlink følger med din bekræftelse.",
+  "loadingMethods": "Henter leveringsmetoder",
+  "free": "Gratis",
+  "payment": "Betaling",
+  "loadingSecure": "Indlæser sikker betaling",
+  "loadingOptions": "Indlæser betalingsmuligheder",
+  "paymentMethod": "Betalingsmetode",
+  "methods": {
+    "card": "Kort"
+  },
+  "card": {
+    "name": "Navn på kortet",
+    "number": "Kortnummer",
+    "expiry": "Udløb",
+    "cvc": "CVC"
+  },
+  "billingSame": "Faktureringsadressen er den samme som leveringsadressen",
+  "billingAddress": "Faktureringsadresse",
+  "note": {
+    "title": "Bemærkning til ordren",
+    "placeholder": "Leveringsinstruktioner, en gavehilsen, alt vi bør vide"
+  },
+  "removeCode": "Fjern kode",
+  "pay": "Betal {{total}}",
+  "placeOrder": "Afgiv ordre",
+  "methodDigital": "digital",
+  "errors": {
+    "email": "Indtast en gyldig e-mailadresse",
+    "phone": "Indtast et telefonnummer til leveringen",
+    "method": "Vælg en leveringsmetode",
+    "noteLength": "Hold din bemærkning under {{max}} tegn",
+    "terms": "Accepter betingelserne for at fortsætte",
+    "payByCard": "Betal med kort for at gennemføre denne ordre.",
+    "paymentLoading": "Betalingsformularen indlæses stadig. Prøv igen om et øjeblik",
+    "paymentGone": "Betalingsformularen er ikke længere tilgængelig. Prøv igen",
+    "checkPayment": "Tjek dine betalingsoplysninger",
+    "paymentFailed": "Din betaling gik ikke igennem. Prøv igen, eller brug en anden metode",
+    "paymentLoadDetail": "Betalingsformularen kunne ikke indlæses: {{message}}",
+    "paymentLoad": "Betalingsformularen kunne ikke indlæses. Genindlæs siden for at prøve igen",
+    "cardName": "Indtast navnet på kortet",
+    "cardNumber": "Indtast dit kortnummer",
+    "cardCheck": "Tjek kortnummeret",
+    "expiry": "Indtast udløbsdatoen",
+    "expiryPast": "Brug et kort, der ikke er udløbet (MM/ÅÅ)",
+    "cvc": "Indtast den 3- eller 4-cifrede sikkerhedskode",
+    "name": "Indtast det fulde navn",
+    "country": "Vælg et land, vi leverer til",
+    "line1": "Indtast adressen",
+    "city": "Indtast byen",
+    "summary_one": "{{count}} felt skal rettes",
+    "summary_other": "{{count}} felter skal rettes",
+    "line1Letters": "Indtast vejnavnet sammen med nummeret",
+    "line1Number": "Tilføj husnummeret",
+    "zipFormat": "Tjek formatet, fx {{example}}",
+    "zipRequired": {
+      "zip": "Indtast ZIP-koden",
+      "postal": "Indtast postnummeret",
+      "postcode": "Indtast postnummeret",
+      "eircode": "Indtast Eircode"
+    },
+    "region": {
+      "state": "Vælg en stat",
+      "province": "Vælg en provins",
+      "county": "Vælg et county",
+      "stateTerritory": "Vælg en stat eller et territorium",
+      "prefecture": "Vælg et præfektur"
+    }
+  },
+  "address": {
+    "fullName": "Fulde navn",
+    "country": "Land",
+    "line1": "Vejnavn og husnummer",
+    "city": "By",
+    "loadingCountries": "Henter lande",
+    "line2": "Etage, lejlighed m.m. (valgfrit)",
+    "optional": "{{label}} (valgfrit)",
+    "choose": "Vælg",
+    "zipLabel": {
+      "zip": "ZIP-kode",
+      "postal": "Postnummer",
+      "postcode": "Postnummer",
+      "eircode": "Eircode"
+    },
+    "region": {
+      "state": "Stat",
+      "province": "Provins",
+      "county": "County",
+      "stateTerritory": "Stat/territorium",
+      "prefecture": "Præfektur"
+    }
+  },
+  "signIn": {
+    "title": "Log ind for at gå til kassen",
+    "body": "Ordrer afgives fra en VAREL-konto. Log ind, eller opret en konto på et minut, så følger din kurv med.",
+    "signIn": "Log ind",
+    "create": "Opret en konto",
+    "back": "Tilbage til din kurv"
+  },
+  "summary": {
+    "title": "Ordreoversigt",
+    "show": "Vis ordreoversigt",
+    "hide": "Skjul ordreoversigt",
+    "note_one": "{{tax}} beregnes ud fra dit leveringsland i kassen. {{count}} dag til at returnere ubrugte styk. Digitale produkter refunderes ikke, når de er downloadet.",
+    "note_other": "{{tax}} beregnes ud fra dit leveringsland i kassen. {{count}} dage til at returnere ubrugte styk. Digitale produkter refunderes ikke, når de er downloadet."
+  },
+  "qty": "Antal {{qty}}",
+  "discount": {
+    "label": "Rabatkode",
+    "apply": "Anvend",
+    "enter": "Indtast en rabatkode",
+    "applied": "{{code}} er anvendt.",
+    "appliedReplaces": "{{code}} er anvendt. Den erstatter {{previous}}.",
+    "saved": "{{code}} er gemt i din kurv.",
+    "savedReplaces": "{{code}} er gemt i din kurv. Den erstatter {{previous}}.",
+    "statusApplied": "{{code}} anvendt",
+    "statusSaved": "{{code}} gemt · endnu ikke anvendt",
+    "fallback": "Rabat",
+    "remove": "Fjern",
+    "removeAria": "Fjern koden {{code}}",
+    "lineFree_one": "{{count}} gratis · {{amount}}",
+    "lineFree_other": "{{count}} gratis · {{amount}}",
+    "toggle": "Har du en rabatkode?"
+  },
+  "totals": {
+    "subtotal": "Subtotal",
+    "shipping": "Fragt",
+    "shippingWith": "Fragt · {{method}}",
+    "taxRate": "{{name}} ({{rate}} %)",
+    "includes": "Inkl. {{tax}}",
+    "total": "I alt",
+    "freeWith": "Gratis · {{name}}",
+    "was": "Før ",
+    "now": "Nu ",
+    "youSave": "Du sparer {{amount}}"
+  },
+  "signInPrompt": "Har du en konto?",
+  "signInLink": "Log ind for hurtigere betaling",
+  "trust": "Sikker, krypteret betaling · {{count}} dages returret på ubrugte styk"
+}

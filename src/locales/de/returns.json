@@ -1,0 +1,86 @@
+{
+  "home": "Startseite",
+  "title": "Rücksendungen und Erstattungen",
+  "intro": "Dreißig Tage, um ungetragene Stücke mit Etikett zurückzusenden. Rücksendungen innerhalb Dänemarks und der EU sind kostenlos; anderswo trägst du das Rückporto.",
+  "lookup": {
+    "label": "Rücksendung starten",
+    "placeholder": "Bestellnummer",
+    "button": "Suchen",
+    "note": "Deine Bestellnummer beginnt mit VRL- und steht in deiner Bestätigungs-E-Mail",
+    "enterNumber": "Gib die Bestellnummer aus deiner Bestätigungs-E-Mail ein",
+    "notFound": "Wir finden diese Bestellnummer nicht"
+  },
+  "steps": {
+    "label": "So funktionieren Rücksendungen",
+    "step": "Schritt {{n}}",
+    "s1Title": "Bestellung finden",
+    "s1Body": "Gib deine Bestellnummer ein oder öffne die Bestellung in deinem Konto.",
+    "s2Title": "Stücke auswählen",
+    "s2Body": "Wähle aus, was zurückgeht, und sag uns in einer Zeile, warum.",
+    "s3Title": "Abschicken",
+    "s3Body": "Drucke das vorfrankierte Etikett aus. Rücksendungen aus der EU sind kostenlos; anderswo trägst du das Porto.",
+    "s4Title": "Erstattung erhalten",
+    "s4Body": "Drei Werktage nach Eingang des Pakets, zurück auf dein ursprüngliches Zahlungsmittel."
+  },
+  "window": {
+    "title": "Die Frist",
+    "p1": "Dreißig Tage ab Lieferung. Das EU-Recht gibt dir vierzehn; wir verlängern sie. Als endgültig gekennzeichnete Sale-Stücke sind die einzige Ausnahme und können nur bei Mängeln zurückgegeben werden."
+  },
+  "condition": {
+    "title": "Zustand",
+    "p1": "Ungetragen, ungewaschen, mit Etikett und in der Originalverpackung. Probiere die Stücke an, wie du es in einem Geschäft tun würdest. Schuhe solltest du drinnen anprobieren — Sohlen mit Gebrauchsspuren können wir nicht annehmen."
+  },
+  "refunds": {
+    "title": "Erstattungen",
+    "methodLabel": "Zahlungsweg",
+    "method": "Zurück auf die Karte oder das Wallet, mit dem du bezahlt hast. Eine Erstattung an andere Stellen ist nicht möglich.",
+    "timingLabel": "Dauer",
+    "timing": "Innerhalb von drei Werktagen nach Eingang des Pakets, danach die Bearbeitungszeit deiner Bank.",
+    "shippingLabel": "Bezahlter Versand",
+    "shipping": "Wird nicht erstattet, außer ein Stück kam fehlerhaft an oder wir haben das falsche geschickt.",
+    "discountsLabel": "Rabatte",
+    "discounts": "Bei einer Teilrücksendung wird der Rabatt auf die behaltenen Stücke neu berechnet."
+  },
+  "exchanges": {
+    "title": "Umtausch",
+    "p1": "Am einfachsten ist es, zurückzuschicken und neu zu bestellen, da sich der Bestand ändert. Ist deine gewünschte Größe vorrätig, schreib uns mit der Bestellnummer, und wir reservieren sie sieben Tage lang, während deine Rücksendung unterwegs ist."
+  },
+  "digital": {
+    "title": "Digitale Produkte",
+    "p1": "Nach dem Download nicht erstattungsfähig, da es nichts zurückzuschicken gibt. Wenn sich eine Datei nicht öffnen lässt, schreib uns, und wir beheben das Problem oder erstatten den Betrag."
+  },
+  "faults": {
+    "title": "Mängel und Reparaturen",
+    "p1": "Zwei Jahre auf Herstellungsfehler, mit kostenloser Reparatur in dieser Zeit. Nach zwei Jahren repariert das Studio in Kopenhagen weiterhin jedes VAREL-Stück zum Selbstkostenpreis. Schick uns zuerst ein Foto, und wir sagen dir, was nötig ist.",
+    "findOrder": "Bestellung finden"
+  },
+  "writeStudio": "Dem Studio schreiben",
+  "related": {
+    "terms": "Allgemeine Geschäftsbedingungen",
+    "privacy": "Datenschutzerklärung"
+  },
+  "request": {
+    "order": "Bestellung {{number}}",
+    "booked": "Deine Rücksendung ist angemeldet",
+    "choose": "Wähle aus, was zurückgeht",
+    "notYet": "Diese Bestellung kann noch nicht zurückgesendet werden",
+    "lookupAnother": "Andere Bestellung suchen",
+    "requested_one": "Rücksendung für ein Stück angemeldet. Das vorfrankierte Etikett und die Anleitung sind unterwegs an {{email}}.",
+    "requested_other": "Rücksendung für {{count}} Stücke angemeldet. Das vorfrankierte Etikett und die Anleitung sind unterwegs an {{email}}.",
+    "packCarrier": "Verpacke die Stücke in ihrer Originalverpackung, bring das Etikett an und gib das Paket an einer beliebigen {{carrier}}-Annahmestelle ab. Die Erstattung geht innerhalb von drei Werktagen nach Eingang des Pakets auf dein ursprüngliches Zahlungsmittel zurück.",
+    "pack": "Verpacke die Stücke in ihrer Originalverpackung, bring das Etikett an und gib das Paket an einer beliebigen Annahmestelle ab. Die Erstattung geht innerhalb von drei Werktagen nach Eingang des Pakets auf dein ursprüngliches Zahlungsmittel zurück.",
+    "reference": "Rücksendenummer {{id}}",
+    "notEligibleReason": "Diese Bestellung kann nicht zurückgesendet werden.",
+    "notEligible": "{{reason}} Wenn etwas beschädigt oder fehlerhaft angekommen ist, schreib dem Studio, und wir kümmern uns darum.",
+    "allDigital": "Alles in dieser Bestellung ist digital. Digitale Produkte sind nach dem Download nicht erstattungsfähig — wenn sich eine Datei nicht öffnen lässt, schreib dem Studio, und wir beheben das Problem oder erstatten den Betrag.",
+    "estimatedRefund": "Voraussichtliche Erstattung",
+    "submit": "Rücksendung anmelden",
+    "chooseOne": "Wähle mindestens ein Stück zur Rücksendung aus",
+    "whyOneLine": "Sag uns in einer Zeile, warum",
+    "qty": "Menge {{qty}}",
+    "quantity": "Menge",
+    "reason": "Grund",
+    "chooseReason": "Grund auswählen",
+    "reasonPlaceholder": "An den Schultern zu weit"
+  }
+}
