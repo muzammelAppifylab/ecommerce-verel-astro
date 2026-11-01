@@ -1,0 +1,71 @@
+/* Staff (/dashboard/staff), WP-26. Tokens only (src/styles/global.css). */
+.screen-staff .staff-person {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.screen-staff .staff-person-name {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+}
+.screen-staff .nowrap {
+  white-space: nowrap;
+}
+.screen-staff .staff-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  max-width: 560px;
+}
+.screen-staff .staff-link input {
+  flex: 1;
+  min-width: 0;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+}
+.screen-staff .staff-link input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.screen-staff .staff-explainer {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.screen-staff .staff-explainer a,
+.staff-roles-link a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.staff-roles .staff-role + .staff-role {
+  margin-top: 4px;
+}
+.staff-roles .staff-role-help {
+  display: block;
+  margin-bottom: 6px;
+}
+.staff-roles-summary {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+.staff-roles-link {
+  margin: 8px 0 0;
+  font-size: 13px;
+}
+.staff-roles[aria-invalid='true'] .staff-roles-summary {
+  color: var(--danger);
+}
