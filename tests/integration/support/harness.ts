@@ -140,8 +140,17 @@ export const db = createDb(DATABASE_URL || 'postgresql://unused@localhost/unused
 
 export async function resetDatabase() {
   await db.$executeRawUnsafe(
-    'TRUNCATE "users", "user_roles", "refresh_tokens", "password_resets", "email_verifications", "email_changes", "recovery_codes", "sign_in_codes", "login_attempts", "audit_events", "jobs", "job_deliveries" RESTART IDENTITY CASCADE'
+    'TRUNCATE "users", "user_roles", "refresh_tokens", "password_resets", "email_verifications", "email_changes", "recovery_codes", "sign_in_codes", "login_attempts", "audit_events", "jobs", "job_deliveries", ' +
+      // VAREL shop tables (prisma/migrations/20261101090000_varel_schema).
+      '"customer_profiles", "visitors", "addresses", "departments", "categories", "products", "product_images", "variants", ' +
+      '"posts", "carts", "cart_lines", "wishlist_items", "discounts", "discount_codes", "discount_redemptions", "settings", ' +
+      '"shipping_zones", "shipping_methods", "tax_rates", "shop_orders", "shop_order_items", "shop_order_events", ' +
+      '"return_requests", "shop_payments", "newsletter_subscribers", "contact_messages", "collections", "collection_products", ' +
+      '"pages", "menus", "activity_logs", "email_templates", "email_messages", "reviews", "analytics_events", "translations" ' +
+      'RESTART IDENTITY CASCADE'
   );
+  // The store settings singleton always exists (as after the migration).
+  await db.$executeRawUnsafe('INSERT INTO "settings" ("id", "updated_at") VALUES (1, CURRENT_TIMESTAMP) ON CONFLICT ("id") DO NOTHING');
   await db.$executeRawUnsafe('DELETE FROM "roles" WHERE NOT "is_system"');
   await db.$executeRawUnsafe('UPDATE "auth_state" SET "owner_user_id" = NULL');
   emails.length = 0;
