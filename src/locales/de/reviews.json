@@ -39,12 +39,12 @@
     "reply": "Antwort von VAREL"
   },
   "rating": {
-    "label": "Deine Bewertung",
     "1": "Schlecht",
     "2": "Mittelmäßig",
     "3": "Gut",
     "4": "Sehr gut",
-    "5": "Ausgezeichnet"
+    "5": "Ausgezeichnet",
+    "label": "Deine Bewertung"
   },
   "form": {
     "error": "Deine Bewertung wurde nicht gesendet. Prüfe deine Verbindung und versuche es noch einmal.",
@@ -61,6 +61,13 @@
     "bodyHint": "Passform, Stoff, wie es sich trägt. Mindestens ein, zwei Sätze.",
     "postingAs": "Veröffentlicht als {{name}}",
     "submit": "Bewertung senden",
-    "checked": "Bewertungen werden vor der Veröffentlichung geprüft"
+    "checked": "Bewertungen werden vor der Veröffentlichung geprüft",
+    "submitting": "Wird gesendet…",
+    "titleRequired": "Gib einen Titel ein",
+    "titleTooLong": "Halte den Titel unter 120 Zeichen",
+    "bodyRequired": "Schreib deine Bewertung",
+    "bodyTooShort": "Schreib mindestens ein oder zwei Sätze",
+    "bodyTooLong": "Halte deine Bewertung unter 2000 Zeichen",
+    "ratingRange": "Wähl eine Bewertung von 1 bis 5"
   }
 }

@@ -1,0 +1,36 @@
+---
+/**
+ * The product page's reviews section (WP-04). The product page (WP-03) renders it after the buy grid:
+ *
+ *   <ReviewsSection slug={product.id} name={product.name} initial={reviews} />
+ *
+ * `initial`: the first page from `loadReviews(api, slug)` (./load.ts), awaited in parallel with the product
+ * read; leave it out and the section reads it itself. `null` (the read failed) still renders the island,
+ * which retries and shows "could not load" with a retry. Reviews off and none written: nothing renders.
+ * The first page is in the server HTML (island SSR); the visitor's eligibility loads in the browser, so the
+ * section adds nothing visitor-specific to the page.
+ */
+import {backend} from '@/server/backend';
+import {DEFAULT_LOCALE, localizedPath} from '@/lib/i18n';
+import {dictionary} from '@/lib/i18n/server';
+import type {ReviewsResponse} from '@/lib/types/reviews';
+
+import {loadReviews} from './load';
+import {ProductReviews} from './ProductReviews';
+
+interface Props {
+  slug: string;
+  name: string;
+  initial?: ReviewsResponse | null;
+}
+
+const {slug, name} = Astro.props;
+const initial = Astro.props.initial === undefined ? await loadReviews(backend(Astro.request), slug) : Astro.props.initial;
+const locale = (Astro.locals as {locale?: string}).locale ?? DEFAULT_LOCALE;
+const hidden = !!initial && !initial.settings.enabled && initial.summary.count === 0;
+const dict = dictionary(locale, ['reviews']);
+const back = `${localizedPath(`/product/${slug}/`, locale)}#reviews`;
+const loginHref = `/account/login/?next=${encodeURIComponent(back)}`;
+---
+
+{!hidden && <ProductReviews client:visible slug={slug} name={name} initial={initial} dict={dict} locale={locale} loginHref={loginHref} />}

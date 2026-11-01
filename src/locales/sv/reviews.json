@@ -39,12 +39,12 @@
     "reply": "Svar från VAREL"
   },
   "rating": {
-    "label": "Ditt betyg",
     "1": "Dålig",
     "2": "Godtagbar",
     "3": "Bra",
     "4": "Mycket bra",
-    "5": "Utmärkt"
+    "5": "Utmärkt",
+    "label": "Ditt betyg"
   },
   "form": {
     "error": "Din recension skickades inte. Kontrollera din anslutning och försök igen.",
@@ -61,6 +61,13 @@
     "bodyHint": "Passform, tyg, hur det håller. Minst en mening eller två.",
     "postingAs": "Publiceras som {{name}}",
     "submit": "Skicka recension",
-    "checked": "Recensioner granskas innan de visas"
+    "checked": "Recensioner granskas innan de visas",
+    "submitting": "Skickar…",
+    "titleRequired": "Skriv en rubrik",
+    "titleTooLong": "Håll rubriken under 120 tecken",
+    "bodyRequired": "Skriv din recension",
+    "bodyTooShort": "Skriv minst en mening eller två",
+    "bodyTooLong": "Håll din recension under 2000 tecken",
+    "ratingRange": "Välj ett betyg från 1 till 5"
   }
 }

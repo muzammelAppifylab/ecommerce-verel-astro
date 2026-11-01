@@ -42,12 +42,12 @@
     "reply": "Réponse de VAREL"
   },
   "rating": {
-    "label": "Votre note",
     "1": "Décevant",
     "2": "Passable",
     "3": "Bien",
     "4": "Très bien",
-    "5": "Excellent"
+    "5": "Excellent",
+    "label": "Votre note"
   },
   "form": {
     "error": "Votre avis n’a pas été envoyé. Vérifiez votre connexion et réessayez.",
@@ -64,6 +64,13 @@
     "bodyHint": "Coupe, tissu, tenue dans le temps. Au moins une ou deux phrases.",
     "postingAs": "Publié en tant que {{name}}",
     "submit": "Envoyer l’avis",
-    "checked": "Les avis sont vérifiés avant publication"
+    "checked": "Les avis sont vérifiés avant publication",
+    "submitting": "Envoi…",
+    "titleRequired": "Saisissez un titre",
+    "titleTooLong": "Gardez le titre sous 120 caractères",
+    "bodyRequired": "Rédigez votre avis",
+    "bodyTooShort": "Écrivez au moins une phrase ou deux",
+    "bodyTooLong": "Gardez votre avis sous 2000 caractères",
+    "ratingRange": "Choisissez une note de 1 à 5"
   }
 }
