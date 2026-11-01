@@ -122,7 +122,8 @@ describe('localizeProblem', () => {
     expect(r.fields).toEqual({email: en.errors.emailNotReal, password: en.checks.common});
   });
   it('unknown problems keep the server message, else a generic one', () => {
-    expect(localizeProblem(answer(500), {error: 'boom', message: 'Boom'}, t).message).toBe('Boom');
+    expect(localizeProblem(answer(409), {error: 'boom', message: 'Boom'}, t).message).toBe('Boom');
+    expect(localizeProblem(answer(500), {error: 'server_error', message: 'Boom'}, t).message).toBe('Something went wrong (500). Try again.');
     expect(localizeProblem(answer(502), null, t).message).toBe('Something went wrong (502). Try again.');
   });
 });

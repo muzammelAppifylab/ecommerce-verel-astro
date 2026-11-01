@@ -86,5 +86,7 @@ export function localizeProblem(
     }
     if (Object.keys(fields).length) return { ok: false, message: serverMessage || undefined, fields }
   }
+  // Server failures: the page's words, not the core's English.
+  if (res.status >= 500) return say(t('errors.generic', { status: res.status }))
   return say(serverMessage || t('errors.generic', { status: res.status }))
 }
