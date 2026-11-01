@@ -18,6 +18,7 @@ import { useAccountT } from './i18n'
 import { addressesQuery, overviewQuery, securityQuery } from './queries'
 import { appPaths } from './ui/orderUtils'
 import { outlineAction } from './ui/recipes'
+import { useTitle } from './useTitle'
 
 export interface AccountRouterContext {
   queryClient: QueryClient
@@ -29,6 +30,7 @@ const orderScreens = import.meta.glob<{ default: ComponentType }>('./screens/ord
 
 function OrdersComingSoon() {
   const t = useAccountT('account')
+  useTitle(t('nav.orders'))
   return (
     <EmptyState
       title={t('nav.orders')}
