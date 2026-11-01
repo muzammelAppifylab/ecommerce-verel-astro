@@ -9,9 +9,8 @@ import { cn } from '@/lib/utils'
 import { AppLink } from './AppLink'
 import { useAccountContext, useAccountT } from './i18n'
 import { overviewQuery, useSignOut } from './queries'
+import { inAppPath, sectionOf, type Section } from './paths'
 import { accountLinks, appPaths } from './ui/orderUtils'
-
-export type Section = 'overview' | 'orders' | 'wishlist' | 'details' | 'addresses' | 'downloads' | 'privacy'
 
 const NAV: { key: Section; icon: IconName; to: string; external?: boolean }[] = [
   { key: 'overview', icon: 'user', to: appPaths.account },
@@ -23,17 +22,7 @@ const NAV: { key: Section; icon: IconName; to: string; external?: boolean }[] = 
   { key: 'privacy', icon: 'lock', to: appPaths.privacy },
 ]
 
-/** The section a path inside the app belongs to ("/orders/VRL-1/" → orders). `path` is relative to the basepath. */
-export function sectionOf(path: string): Section {
-  const seg = path.replace(/^\/+/, '').split('/')[0] as Section | undefined
-  return seg && NAV.some((n) => n.key === seg && !n.external) ? seg : 'overview'
-}
-
-/** The pathname without the router's basepath ("/da/account/orders/" → "/orders/"). */
-export function inAppPath(pathname: string, basepath: string): string {
-  const rest = pathname.startsWith(basepath) ? pathname.slice(basepath.length) : pathname
-  return rest.startsWith('/') ? rest : `/${rest}`
-}
+export { inAppPath, sectionOf, type Section }
 
 /** The root route's component: the frame plus the current screen. */
 export function AccountShell() {

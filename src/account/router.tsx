@@ -61,8 +61,8 @@ export function AccountNotFound() {
   )
 }
 
-const warm = (qc: QueryClient, ...queries: Parameters<QueryClient['ensureQueryData']>[0][]) =>
-  Promise.all(queries.map((q) => qc.ensureQueryData(q).catch(() => undefined))).then(() => undefined)
+const warm = (qc: QueryClient, ...queries: Array<{ queryKey: readonly unknown[] }>) =>
+  Promise.all(queries.map((q) => qc.ensureQueryData(q as never).catch(() => undefined))).then(() => undefined)
 
 const rootRoute = createRootRouteWithContext<AccountRouterContext>()({
   component: AccountShell,
