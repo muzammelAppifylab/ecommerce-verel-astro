@@ -1,0 +1,54 @@
+---
+/**
+ * /search/?q=&tab= (WP-08; VAREL src/pages/Search.tsx + src/routes/_site/search.tsx). SSR: the first answer is
+ * rendered on the server (the form, chips and tabs work without JavaScript), then the island searches as you type.
+ * Results for a query are thin, generated pages: `?q=` pages are `noindex`; the bare `/search/` stays indexable.
+ */
+import {SearchApp} from '@/components/search/SearchApp';
+import {termOf} from '@/components/search/search-state';
+import {dictsFor, serverText} from '@/components/layout/dictionaries';
+import Storefront from '@/layouts/Storefront.astro';
+import {rawSearch, validateSearchSearch} from '@/lib/search-params';
+import type {SearchResponse} from '@/lib/types/catalog';
+import {backend, read} from '@/server/backend';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const locale = (Astro.locals as {locale?: string}).locale ?? 'en';
+const sp = validateSearchSearch(rawSearch(Astro.url.searchParams));
+const rawQ = (sp.q ?? '').slice(0, 200);
+// A hand-typed URL over 200 characters is clipped, never shown as an error page.
+const term = termOf(rawQ);
+const tab = sp.tab ?? 'all';
+
+// The visitor and the search in parallel (an empty term never calls the API).
+const [ctx, data] = await Promise.all([
+  pageContext(Astro.request, Astro.response),
+  term ? read<SearchResponse>(backend(Astro.request).search.$get({query: {q: term}})) : Promise.resolve(null),
+]);
+const failed = !!term && !data;
+if (failed) Astro.response.status = 503;
+
+const t = serverText(locale);
+const dicts = dictsFor(locale, {catalog: ['search'], product: true, common: ['free', 'error']});
+---
+
+<Storefront
+  site={ctx.site}
+  viewer={ctx.viewer}
+  api={ctx.api}
+  title={t('catalog', 'search.title')}
+  description={t('catalog', 'search.prompt')}
+  noindex={!!term}
+>
+  <SearchApp
+    client:load
+    initial={data}
+    initialQ={rawQ}
+    initialTab={tab}
+    failed={failed}
+    locale={locale}
+    dicts={dicts}
+  />
+</Storefront>
