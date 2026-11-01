@@ -207,7 +207,7 @@ export async function localize<R extends { id: string | number }>(
     const list = (fields ?? ENTITY_FIELDS[entity]) as (keyof R & string)[]
     return await localizeRows(db, rows, entity, loc, list)
   } catch (e) {
-    console.error(`[i18n] could not localize ${entity}`, e)
+    console.error(`[i18n] could not localize ${entity}`, e instanceof Error ? e.message : 'unknown error')
     return rows
   }
 }

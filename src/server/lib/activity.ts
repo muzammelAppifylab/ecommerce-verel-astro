@@ -41,7 +41,7 @@ export async function logActivity(db: Db, user: Actor | null, e: ActivityEntry):
       },
     })
   } catch (err) {
-    console.error('[activity] could not write log', err)
+    console.error('[activity] could not write log', err instanceof Error ? err.message : 'unknown error')
   }
 }
 
@@ -393,6 +393,6 @@ export const activityLog = (base = '/site-api/manage') =>
       const e = describe({ method, segs, body, result, pre })
       if (e) await logActivity(db, actorOf(c), e)
     } catch (err) {
-      console.error('[activity] skipped', err)
+      console.error('[activity] skipped', err instanceof Error ? err.message : 'unknown error')
     }
   })
