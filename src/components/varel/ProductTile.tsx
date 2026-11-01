@@ -137,8 +137,10 @@ export function ProductTile({
             href={href}
             data-name="true"
             className={cn(
-              'min-w-0 font-display leading-display text-text-primary hover:text-text-primary',
-              NAME_SIZE[nameSize ?? (compact ? 20 : 22)]
+              'min-w-0 font-display text-text-primary hover:text-text-primary',
+              NAME_SIZE[nameSize ?? (compact ? 20 : 22)],
+              // After the size: tailwind-merge drops a leading-* that precedes a text-[size].
+              'leading-display'
             )}>
             {name}
           </a>
