@@ -189,7 +189,10 @@ const productIdList = (label: string) =>
     .refine(xs => new Set(xs).size === xs.length, `Each of the ${label} can appear once`);
 
 const positiveId = (message: string) =>
-  z.union([z.string(), z.number()], {error: message}).pipe(z.coerce.number({error: message}).int(message).positive(message).max(2_147_483_647, message));
+  z
+    .union([z.string(), z.number()], {error: message})
+    .transform(v => (typeof v === 'number' ? v : /^\s*\d+\s*$/.test(v) ? Number(v) : NaN))
+    .pipe(z.number({error: message}).int(message).positive(message).max(2_147_483_647, message));
 
 const title = z.string({error: 'Enter a title'}).trim().min(1, 'Enter a title').max(120, 'Keep the title under 120 characters');
 const slug = z
