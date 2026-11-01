@@ -1,55 +1,87 @@
 ---
 /**
- * Confirm a NEW email address for an existing account, from the link mailed to
- * that address (`?token=`, single use, 24 hours). PRERENDERED. A button press,
- * not the page load, uses the token: email scanners open links too. Confirming
- * signs every device out; the person signs in again with the new address.
+ * Confirm a NEW email address for an existing account, from the link mailed to that address (`?token=`,
+ * single use, 24 hours): the template's flow in VAREL's auth look and copy. A button press, not the page
+ * load, uses the token (email scanners open links too). Confirming signs every device out; the person signs
+ * in again with the new address.
+ *
+ * ON DEMAND so `/da/account/confirm-email/` renders in Danish (PLAN.md D7). A secret travels in the URL:
+ * `secretInUrl` (no Referer) and `no-store`.
  */
-import Base from '../../layouts/Base.astro';
+import '../../components/auth/auth.css';
+
+import AuthCopy from '../../components/auth/AuthCopy.astro';
+import {pathIn, tFor} from '../../components/auth/auth-server';
+import {INTRO, QUIET_LINK, SUBMIT, TITLE_44} from '../../components/auth/classes';
+import {AUTH_IMAGES} from '../../components/layout/auth-images';
+import AuthShell from '../../layouts/AuthShell.astro';
 import {staticContext} from '../../server/page';
 
-export const prerender = true;
+export const prerender = false;
 
 const {site, viewer} = await staticContext(Astro.request);
+const locale = Astro.locals.locale ?? 'en';
+const t = tFor(locale, 'auth');
+const href = pathIn(locale);
+Astro.response.headers.set('Cache-Control', 'no-store');
 ---
 
-<Base site={site} viewer={viewer} isStatic noindex secretInUrl title="Confirm your new email">
-  <main id="main" tabindex="-1" class="wrap auth-wrap section">
-    <div class="card auth-card">
-      <h1>Confirm your new email</h1>
-      <form id="confirm-form" class="auth-form" novalidate>
-        <p class="muted">Your account will sign in with this address from now on. Every device is signed out once you confirm.</p>
-        <p class="notice" data-form-status hidden></p>
-        <button class="button" type="submit">Confirm my new email</button>
-      </form>
-    </div>
-  </main>
-</Base>
+<AuthShell
+  site={site}
+  viewer={viewer}
+  isStatic
+  noindex
+  secretInUrl
+  title={t('confirmEmail.title')}
+  image={AUTH_IMAGES.reset}
+  imageSide="right"
+  maxWidth={440}>
+  <div class="auth-page flex flex-col">
+    <AuthCopy locale={locale} />
+    <h1 class={TITLE_44}>{t('confirmEmail.title')}</h1>
+
+    <form id="confirm-form" class="flex flex-col gap-[26px]" novalidate data-signin={href('/account/login/')}>
+      <p class={INTRO.replace('mb-9', 'mb-0')}>{t('confirmEmail.intro')}</p>
+      <p class="notice" data-form-status hidden></p>
+      <button class={SUBMIT} type="submit">{t('confirmEmail.submit')}</button>
+    </form>
+
+    <a href={href('/account/login/')} class:list={[QUIET_LINK, 'mt-7']}>{t('backToSignIn')}</a>
+  </div>
+</AuthShell>
 
 <script>
-  import {replaceWithMessage, takeToken} from '../../lib/account';
+  import {readCopy, replaceWithStatus} from '../../components/auth/auth-page';
+  import {localizeProblem} from '../../components/auth/messages';
+  import {takeToken} from '../../lib/account';
   import {bindForm, postJson} from '../../lib/form';
   import {siteFetch} from '../../platform/browser';
 
-  // Client navigation (ClientRouter): a bundled script runs once, so this page's code runs on
-  // every `astro:page-load` (the first load, each navigation, back/forward) while it is this page.
+  // Client navigation (ClientRouter): runs on every `astro:page-load` while it is this page.
   document.addEventListener('astro:page-load', () => {
-    if (!document.querySelector('#confirm-form')) return;
+    const form = document.querySelector<HTMLFormElement>('#confirm-form');
+    if (!form) return;
+    const t = readCopy();
     const token = takeToken();
-    const form = document.querySelector<HTMLFormElement>('#confirm-form')!;
+    const signIn = {href: form.dataset.signin || '/account/login/', text: t('signIn')};
     if (!token) {
-      replaceWithMessage(form, 'This link is not complete. Open it again from the email, or ask for a new one in your account.');
+      // Nothing to confirm: say so in place of the button (template behaviour).
+      const box = replaceWithStatus(form, t('confirmEmail.incomplete'));
+      box.className = 'notice notice-error';
+      box.setAttribute('role', 'alert');
+      return;
     }
 
     bindForm(form, {
       rules: {},
-      pendingLabel: 'Confirming…',
+      pendingLabel: t('verify.confirming'),
       async submit() {
-        const {result} = await postJson(siteFetch, '/site-api/auth/email/confirm', {token});
+        const {res, data, result} = await postJson(siteFetch, '/site-api/auth/email/confirm', {token});
         if (result.ok) {
-          replaceWithMessage(form, result.message ?? 'Your email address is changed.', {href: '/account/login/', text: 'Sign in'});
+          replaceWithStatus(form, t('confirmEmail.done'), signIn);
+          return {ok: true};
         }
-        return result;
+        return localizeProblem(res, data, t, {emailTaken: t('confirmEmail.taken'), invalidToken: t('errors.badLink')});
       },
     });
   });

@@ -1,0 +1,217 @@
+/* Sign-in pages (WP-15): the elements the template's form helpers create at runtime
+   (src/lib/form.ts `bindForm`, src/lib/account.ts, src/components/auth/*), in VAREL's look
+   (`src/pages/auth/ui.tsx`, `PasswordStrength.tsx`, varel `Input`). Static markup is styled with
+   Tailwind classes in the pages; this file only covers what the scripts create. Tokens come from
+   src/styles/storefront.css (`--signal-*`, `--ink-*`, `--text-*`). No hex, nothing inline (CSP). */
+
+/* `hidden` wins over the display classes here and in the markup. */
+.auth-page [hidden] {
+  display: none !important;
+}
+
+.auth-page .field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* bindForm: the error under a field. */
+.auth-page .field-error {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.62;
+  color: var(--signal-critical);
+}
+
+.auth-page .field-hint {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* Status lines: VAREL AuthAlert (critical box) and the positive "sent" box. */
+.auth-page .notice {
+  margin: 0;
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.62;
+  border: 1px solid var(--border-hairline);
+  color: var(--text-secondary);
+}
+.auth-page .notice-error {
+  border-color: var(--signal-critical);
+  color: var(--signal-critical);
+}
+.auth-page .notice-ok,
+.auth-page .auth-status {
+  border: 1px solid var(--signal-positive);
+  color: var(--signal-positive);
+}
+.auth-page .notice a,
+.auth-page .notice button {
+  color: inherit;
+  border-bottom: 1px solid currentColor;
+}
+
+/* A form swapped for a message (success). */
+.auth-page .auth-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.62;
+  outline: none;
+}
+.auth-page .auth-status p {
+  margin: 0;
+}
+
+.auth-page .auth-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--ink-900);
+  color: var(--text-inverse);
+  border: 1px solid transparent;
+  transition: var(--transition-hover);
+}
+.auth-page .auth-button:hover {
+  background: var(--ink-700);
+}
+
+/* bindForm: the pending spinner inside the submit button (VAREL Spinner, 12px). */
+.auth-page .spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 9999px;
+  animation: auth-spin 0.8s linear infinite;
+}
+@keyframes auth-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .auth-page .spinner {
+    animation: none;
+    border-right-color: currentColor;
+    opacity: 0.6;
+  }
+}
+
+/* Show / hide password (AGENTS.md: every password field). */
+.auth-page .pw-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.auth-page .pw-input input {
+  padding-right: 64px;
+}
+.auth-page .pw-reveal {
+  position: absolute;
+  right: 0;
+  padding: 6px 0 6px 8px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: none;
+  cursor: pointer;
+}
+.auth-page .pw-reveal:hover {
+  color: var(--text-primary);
+}
+.auth-page .pw-reveal:focus-visible {
+  outline: 1px solid var(--border-strong);
+  outline-offset: 2px;
+}
+
+/* The live password rules. */
+.auth-page .pw-checks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.auth-page .pw-checks li::before {
+  content: '○';
+  display: inline-block;
+  width: 16px;
+}
+.auth-page .pw-checks li[data-ok] {
+  color: var(--signal-positive);
+}
+.auth-page .pw-checks li[data-ok]::before {
+  content: '✓';
+}
+.auth-page .pw-checks[data-tried] li:not([data-ok]) {
+  color: var(--signal-critical);
+}
+.auth-page .pw-checks-state {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* VAREL PasswordStrength: 2px meter, width by level (no inline style). */
+.auth-page .auth-strength .auth-strength-bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: var(--ink-400);
+  transition: width var(--duration-base) var(--ease-standard), background-color var(--duration-base) var(--ease-standard);
+}
+.auth-page .auth-strength [data-strength-label] {
+  color: var(--ink-400);
+}
+.auth-page .auth-strength[data-level='1'] .auth-strength-bar {
+  width: 25%;
+  background: var(--signal-critical);
+}
+.auth-page .auth-strength[data-level='1'] [data-strength-label] {
+  color: var(--signal-critical);
+}
+.auth-page .auth-strength[data-level='2'] .auth-strength-bar {
+  width: 55%;
+  background: var(--signal-notice);
+}
+.auth-page .auth-strength[data-level='2'] [data-strength-label] {
+  color: var(--signal-notice);
+}
+.auth-page .auth-strength[data-level='3'] .auth-strength-bar {
+  width: 80%;
+  background: var(--signal-positive);
+}
+.auth-page .auth-strength[data-level='4'] .auth-strength-bar {
+  width: 100%;
+  background: var(--signal-positive);
+}
+.auth-page .auth-strength[data-level='3'] [data-strength-label],
+.auth-page .auth-strength[data-level='4'] [data-strength-label] {
+  color: var(--signal-positive);
+}
+@media (prefers-reduced-motion: reduce) {
+  .auth-page .auth-strength .auth-strength-bar {
+    transition: none;
+  }
+}

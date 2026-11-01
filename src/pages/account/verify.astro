@@ -1,54 +1,78 @@
 ---
 /**
- * Confirm an email address from an emailed link (`?token=`, single use, 24
- * hours). PRERENDERED. The visitor presses a button to confirm: links in
- * emails are often opened by scanners, which must not use the token up.
- * An expired link offers to send a new one.
+ * Confirm an email address from an emailed link (`?token=`, single use, 24 hours): the template's flow in
+ * VAREL's auth look and copy. The visitor presses a button to confirm: links in emails are often opened by
+ * scanners, which must not use the token up. An expired link offers to send a new one.
+ *
+ * ON DEMAND so `/da/account/verify/` renders in Danish (PLAN.md D7). A secret travels in the URL:
+ * `secretInUrl` (no Referer) and `no-store`.
  */
-import Base from '../../layouts/Base.astro';
+import '../../components/auth/auth.css';
+
+import AuthCopy from '../../components/auth/AuthCopy.astro';
+import AuthField from '../../components/auth/AuthField.astro';
+import {pathIn, tFor} from '../../components/auth/auth-server';
+import {INTRO, QUIET_LINK, SECONDARY_OUTLINE, SUBMIT, TITLE_44} from '../../components/auth/classes';
+import {AUTH_IMAGES} from '../../components/layout/auth-images';
+import AuthShell from '../../layouts/AuthShell.astro';
 import {staticContext} from '../../server/page';
 
-export const prerender = true;
+export const prerender = false;
 
 const {site, viewer} = await staticContext(Astro.request);
+const locale = Astro.locals.locale ?? 'en';
+const t = tFor(locale, 'auth');
+const href = pathIn(locale);
+Astro.response.headers.set('Cache-Control', 'no-store');
 ---
 
-<Base site={site} viewer={viewer} isStatic noindex secretInUrl title="Confirm your email">
-  <main id="main" tabindex="-1" class="wrap auth-wrap section">
-    <div class="card auth-card">
-      <h1>Confirm your email</h1>
-      <form id="verify-form" class="auth-form" novalidate>
-        <p class="muted">One click and your account is ready.</p>
-        <p class="notice" data-form-status hidden></p>
-        <button class="button" type="submit">Confirm my email</button>
-      </form>
-      <form id="resend-form" class="auth-form" novalidate hidden>
-        <p class="muted">Need a new link? Enter your email and we will send one.</p>
-        <div class="field">
-          <label for="resend-email">Email</label>
-          <input id="resend-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="name@example.com" />
-        </div>
-        <p class="notice" data-form-status hidden></p>
-        <button class="button ghost" type="submit">Send a new link</button>
-      </form>
-    </div>
-  </main>
-</Base>
+<AuthShell
+  site={site}
+  viewer={viewer}
+  isStatic
+  noindex
+  secretInUrl
+  title={t('verify.title')}
+  image={AUTH_IMAGES.reset}
+  imageSide="right"
+  maxWidth={440}>
+  <div class="auth-page flex flex-col">
+    <AuthCopy locale={locale} />
+    <h1 class={TITLE_44}>{t('verify.title')}</h1>
+
+    <form id="verify-form" class="flex flex-col gap-[26px]" novalidate data-signin={href('/account/login/')}>
+      <p class={INTRO.replace('mb-9', 'mb-0')}>{t('verify.intro')}</p>
+      <p class="notice" data-form-status hidden></p>
+      <button class={SUBMIT} type="submit">{t('verify.submit')}</button>
+    </form>
+
+    <form id="resend-form" class="mt-9 flex flex-col gap-[26px]" novalidate hidden>
+      <p class={INTRO.replace('mb-9', 'mb-0')}>{t('verify.resendIntro')}</p>
+      <AuthField id="resend-email" name="email" type="email" label={t('email')} autocomplete="email" inputmode="email" maxlength={254} />
+      <p class="notice" data-form-status hidden></p>
+      <button class={SECONDARY_OUTLINE} type="submit">{t('verify.resendSubmit')}</button>
+    </form>
+
+    <a href={href('/account/login/')} class:list={[QUIET_LINK, 'mt-7']}>{t('backToSignIn')}</a>
+  </div>
+</AuthShell>
 
 <script>
-  import {replaceWithMessage, takeToken} from '../../lib/account';
+  import {authRules, readCopy, replaceWithStatus} from '../../components/auth/auth-page';
+  import {localizeProblem} from '../../components/auth/messages';
+  import {takeToken} from '../../lib/account';
   import {bindForm, postJson} from '../../lib/form';
-  import {AUTH_RULES} from '../../lib/rules';
-  import {verifyOutcome} from '../../lib/verify-outcome';
   import {siteFetch} from '../../platform/browser';
 
-  // Client navigation (ClientRouter): a bundled script runs once, so this page's code runs on
-  // every `astro:page-load` (the first load, each navigation, back/forward) while it is this page.
+  // Client navigation (ClientRouter): runs on every `astro:page-load` while it is this page.
   document.addEventListener('astro:page-load', () => {
-    if (!document.querySelector('#verify-form')) return;
+    const verify = document.querySelector<HTMLFormElement>('#verify-form');
+    if (!verify) return;
+    const t = readCopy();
+    const R = authRules(t);
     const token = takeToken();
-    const verify = document.querySelector<HTMLFormElement>('#verify-form')!;
     const resend = document.querySelector<HTMLFormElement>('#resend-form')!;
+    const signIn = {href: verify.dataset.signin || '/account/login/', text: t('signIn')};
     const offerResend = () => {
       resend.hidden = false;
     };
@@ -59,27 +83,28 @@ const {site, viewer} = await staticContext(Astro.request);
 
     bindForm(verify, {
       rules: {},
-      pendingLabel: 'Confirming…',
+      pendingLabel: t('verify.confirming'),
       async submit() {
-        const {data, result} = await postJson(siteFetch, '/site-api/auth/verify-email', {token});
+        const {res, data, result} = await postJson(siteFetch, '/site-api/auth/verify-email', {token});
         if (result.ok) {
-          // An owner address that must choose its password first gets no Sign in link.
-          const {message, link} = verifyOutcome(data);
-          replaceWithMessage(verify, message, link);
-        } else {
-          offerResend();
+          // An owner address that must choose its password first gets no Sign in link (template verifyOutcome).
+          if (data?.setPassword === true) replaceWithStatus(verify, t('verify.setPassword'));
+          else replaceWithStatus(verify, t('verify.done'), signIn);
+          return {ok: true};
         }
-        return result;
+        offerResend();
+        return localizeProblem(res, data, t);
       },
     });
 
     bindForm(resend, {
-      rules: {email: AUTH_RULES.email},
-      pendingLabel: 'Sending…',
+      rules: {email: R.email},
+      pendingLabel: t('login.sending'),
       async submit(values) {
-        const {result} = await postJson(siteFetch, '/site-api/auth/resend-verification', values);
-        if (result.ok) replaceWithMessage(resend, result.message ?? 'Check your inbox.');
-        return result;
+        const {res, data, result} = await postJson(siteFetch, '/site-api/auth/resend-verification', {email: values.email?.trim()});
+        if (!result.ok) return localizeProblem(res, data, t);
+        replaceWithStatus(resend, t('verify.resent'));
+        return {ok: true};
       },
     });
   });
