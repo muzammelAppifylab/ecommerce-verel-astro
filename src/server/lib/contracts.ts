@@ -3,6 +3,7 @@ import type {MiddlewareHandler} from 'hono';
 import type {Prisma, PrismaClient} from '../../generated/prisma/client';
 import type {EventType} from '../../lib/types/events';
 import {sendTemplateImpl} from './email/send';
+import {activityLogMiddleware, writeActivity} from '../routes/admin/activity-describe';
 
 /**
  * Cross-package contracts (PLAN.md §4–5): functions one Wave 1 package calls and ANOTHER package
@@ -119,26 +120,28 @@ export interface ActivityTarget {
  * Write one staff activity row (VAREL `logActivity`): `action` like `product.update`, a readable
  * `summary` in `meta.summary` ("Updated product Atelier Wool Coat · price, stock"). Never throws.
  *
- * WP-26 implements. Stub: does nothing.
+ * WP-26 implements (src/server/routes/admin/activity-describe.ts `writeActivity`): action ≤ 60, entity ≤ 40,
+ * entity id ≤ 120, summary ≤ 500 (whitespace collapsed; the action when no summary), a null actor is 'System'.
+ * Other `meta` keys are ignored (no column for them). Accepts a transaction client.
  */
 export async function recordActivity(
-  _db: Db,
-  _actor: ActivityActor | null,
-  _action: string,
-  _target: ActivityTarget,
-  _meta: {summary?: string} & Record<string, unknown> = {}
-): Promise<void> {}
+  db: Db,
+  actor: ActivityActor | null,
+  action: string,
+  target: ActivityTarget,
+  meta: {summary?: string} & Record<string, unknown> = {}
+): Promise<void> {
+  await writeActivity(db, actor, action, target, meta);
+}
 
 /**
  * Middleware on every `/site-api/manage/*` request (VAREL `activityLog()`): after a successful
  * write (POST/PATCH/PUT/DELETE, 2xx) it records one activity row built from the route, the body
  * and the response. Never fails the request.
  *
- * WP-26 implements. Stub: passes through.
+ * WP-26 implements (src/server/routes/admin/activity-describe.ts `activityLogMiddleware`).
  */
-export const activityLog: MiddlewareHandler = async (_c, next) => {
-  await next();
-};
+export const activityLog: MiddlewareHandler = activityLogMiddleware('/site-api/manage');
 
 // ─── i18n (F4 base, WP-25) ────────────────────────────────────────────────────
 

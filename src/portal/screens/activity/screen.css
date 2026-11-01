@@ -1,0 +1,72 @@
+/* Activity (/dashboard/activity), WP-26. Tokens only (src/styles/global.css). */
+.screen-activity .activity-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.screen-activity .activity-intro {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.screen-activity .activity-head .activity-intro {
+  margin: 0;
+}
+.screen-activity .activity-filters {
+  justify-content: flex-start;
+  margin-bottom: 16px;
+}
+.screen-activity .activity-filters .search-input {
+  flex: 1 1 260px;
+  max-width: 320px;
+}
+.screen-activity .activity-updating {
+  font-size: 12px;
+}
+.screen-activity .nowrap {
+  white-space: nowrap;
+}
+.screen-activity .tabular {
+  font-variant-numeric: tabular-nums;
+}
+.screen-activity .activity-phone {
+  display: none;
+}
+.screen-activity .activity-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.screen-activity .activity-list li {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.screen-activity .activity-list li:last-child {
+  border-bottom: 0;
+}
+.screen-activity .activity-list-summary {
+  margin: 0;
+  color: var(--ink);
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+.screen-activity .activity-list-meta {
+  margin: 4px 0 0;
+  color: var(--subtle);
+  font-size: 12px;
+}
+@media (max-width: 720px) {
+  .screen-activity .activity-table {
+    display: none;
+  }
+  .screen-activity .activity-phone {
+    display: block;
+  }
+  .screen-activity .activity-filters .search-input {
+    max-width: none;
+    flex-basis: 100%;
+  }
+}
