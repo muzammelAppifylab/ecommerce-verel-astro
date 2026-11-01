@@ -1,4 +1,4 @@
-import {Hono} from 'hono';
+import {Hono, type MiddlewareHandler} from 'hono';
 import {z} from 'zod';
 
 import {config} from '../../../platform/config';
@@ -67,6 +67,15 @@ const originOf = (url: string) => config.siteUrl ?? new URL(url).origin;
 
 const noStore = {'Cache-Control': 'private, no-store'};
 
+/**
+ * These POSTs take no input, but the portal sends `{}`: read (and ignore) the body, so an unread body never
+ * leaves the connection in a bad state (the dev runtime then fails the NEXT request on it).
+ */
+const ignoreBody: MiddlewareHandler = async (c, next) => {
+  await c.req.text().catch(() => '');
+  await next();
+};
+
 export const abandonedAdmin = new Hono()
   .get('/', query(listQuery), withDb, async c => {
     const q = c.req.valid('query');
@@ -109,7 +118,7 @@ export const abandonedAdmin = new Hono()
     return c.json(out, 200, noStore);
   })
 
-  .post('/run', withAuthCore, async c => {
+  .post('/run', ignoreBody, withAuthCore, async c => {
     const result = await runAbandonedReminders(c.var.db, {origin: originOf(c.req.url), secret: c.var.secret, requestUrl: c.req.url});
     return c.json(result, 200, noStore);
   })
@@ -170,7 +179,7 @@ export const abandonedAdmin = new Hono()
     return c.json(out, 200, noStore);
   })
 
-  .post('/:id/remind', params(z.object({id: intId('We cannot find that bag')})), withAuthCore, async c => {
+  .post('/:id/remind', params(z.object({id: intId('We cannot find that bag')})), ignoreBody, withAuthCore, async c => {
     const {id} = c.req.valid('param');
     const db = c.var.db;
     const cart = await db.cart.findUnique({where: {id}, include: abandonedInclude});
