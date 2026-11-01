@@ -97,3 +97,24 @@ describe('home sections (WP-01)', () => {
     expect(scrolledRow(800, -1000, 1000)).toBe(5);
   });
 });
+
+describe('home server render (WP-01)', () => {
+  it('renders the hero, best part and new-in skeleton without inline styles', async () => {
+    const {createElement} = await import('react');
+    const {renderToString} = await import('react-dom/server');
+    const {HomeHero} = await import('../src/components/home/HomeHero');
+    const {BestPart} = await import('../src/components/home/BestPart');
+    const {NewInSection} = await import('../src/components/home/NewInSection');
+    const {DEFAULT_HERO: hero} = await import('../src/components/home/hero');
+    const base = {locale: 'da', dicts: {}};
+    const heroHtml = renderToString(createElement(HomeHero, {...base, hero}));
+    expect(heroHtml).toContain('href="/da/shop/women/"');
+    expect(heroHtml).toContain('Modern essentials.<br/>Considered deeply.');
+    expect(heroHtml).toContain('fetchPriority="high"');
+    const best = renderToString(createElement(BestPart, {...base, departments: null}));
+    expect(best.match(/<li>/g)).toHaveLength(4);
+    const newIn = renderToString(createElement(NewInSection, {...base, initial: null, currency: 'EUR'}));
+    expect(newIn).toContain('aria-pressed="true"');
+    for (const html of [heroHtml, best, newIn]) expect(html).not.toMatch(/style="/);
+  });
+});
