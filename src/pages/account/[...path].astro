@@ -35,7 +35,9 @@ const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
 const locale = (Astro.locals as {locale?: string}).locale ?? 'en';
 const signedIn = viewer.state === 'user';
 
-if (!signedIn && !config.preview) {
+// `returning` (the short access token expired, the refresh cookie is still there): the app starts and its first
+// siteFetch renews the session. Only a real guest is sent to sign in.
+if (viewer.state === 'guest' && !config.preview) {
   // Back to the URL the visitor asked for, language prefix included (`Astro.originPathname` keeps `/da/`).
   const next = `${Astro.originPathname || Astro.url.pathname}${Astro.url.search}`;
   return Astro.redirect(loginLink(next), 302);
