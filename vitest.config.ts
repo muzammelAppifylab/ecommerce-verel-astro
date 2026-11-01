@@ -25,6 +25,8 @@ export default defineConfig({
         find: /^(?:\.\.\/)+generated\/prisma\/client$/,
         replacement: fileURLToPath(new URL('./src/generated/prisma-node/client.ts', import.meta.url)),
       },
+      // The `@/` alias (tsconfig paths): storefront modules import through it.
+      {find: /^@\//, replacement: fileURLToPath(new URL('./src/', import.meta.url))},
     ],
   },
   test: {

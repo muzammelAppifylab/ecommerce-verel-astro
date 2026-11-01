@@ -38,7 +38,7 @@ const name = site?.name ?? 'My site';
     <!-- Signed-in screens are never search results. -->
     <meta name="robots" content="noindex" />
     <!-- The dashboard's text face (VAREL: Lato), self-hosted in public/fonts/ like the storefront's. -->
-    <link rel="preload" href="/fonts/lato-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/lato-400-latin.woff2" as="font" type="font/woff2" crossorigin />
     {site?.favIcon ? <link rel="icon" href={site.favIcon} /> : <link rel="icon" href="/favicon.svg" type="image/svg+xml" />}
   </head>
   <body class="app-body" data-viewer={viewer.state}>

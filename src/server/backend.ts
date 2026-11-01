@@ -17,7 +17,8 @@ import {app, type AppType} from './app';
  * site's own hostname for a Site API path instead: it is a second Worker
  * invocation (slower, billed twice) and loses the per-request memo.
  */
-const FORWARDED = ['cookie', 'authorization', 'user-agent', 'accept-language'];
+// `x-locale`: set by src/middleware.ts on a language-prefixed URL, so in-process calls answer in that language.
+const FORWARDED = ['cookie', 'authorization', 'user-agent', 'accept-language', 'x-locale'];
 
 export function backend(request: Request) {
   const origin = new URL(request.url).origin;
