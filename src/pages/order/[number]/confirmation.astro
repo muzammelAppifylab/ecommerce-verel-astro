@@ -1,0 +1,170 @@
+---
+/**
+ * `/order/<number>/confirmation/` (port of VAREL src/pages/OrderConfirmation.tsx).
+ *
+ * The order is read in-process (`GET /site-api/orders/:number?email=`; guests need the `?email=` the checkout
+ * put in the URL, a signed-in owner needs none). By payment state:
+ *   - Paid / Refunded → the confirmed view, rendered on the server (no JS)
+ *   - Pending         → `ConfirmingPayment` asks the server every 2 s for 30 s (Stripe settling)
+ *   - Failed          → `PaymentFailed`: "Return to your bag" releases the order
+ * Not found / not yours → 404 with "Sign in" (never reveals whether the order exists); a failed read → 503.
+ *
+ * The URL carries the guest's email and, after a Stripe redirect, `payment_intent_client_secret`: the page
+ * sends no Referer (`secretInUrl`), is never indexed, and drops the Stripe parameters from the address bar.
+ */
+import ConfirmationBody from '@/components/checkout/ConfirmationBody';
+import ConfirmingPayment from '@/components/checkout/ConfirmingPayment';
+import PaymentFailed from '@/components/checkout/PaymentFailed';
+import {OUTLINE_CTA, SOLID_CTA} from '@/components/checkout/ui';
+import {dictsFor, serverText} from '@/components/layout/dictionaries';
+import {DEFAULT_LOCALE} from '@/components/varel/href';
+import Storefront from '@/layouts/Storefront.astro';
+import {loginLink} from '@/lib/links';
+import {validateConfirmationSearch} from '@/lib/search-params';
+import type {Order} from '@/lib/types/orders';
+import type {PublicSettings} from '@/lib/types/settings';
+import {read} from '@/server/backend';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const ORDERS_KEYS = [
+  'confirmation',
+  'payment',
+  'fulfillment',
+  'stages',
+  'stageNotes',
+  'step',
+  'tryAgain',
+  'signIn',
+  'continueShopping',
+  'contactStudio',
+  'returnsRefunds',
+  'allOrders',
+  'orderNumber',
+  'noShippingDigital',
+  'free',
+  'sku',
+  'download',
+] as const;
+
+const locale = (Astro.locals as {locale?: string}).locale ?? DEFAULT_LOCALE;
+const t = serverText(locale);
+const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
+const signedIn = viewer.state === 'user';
+
+const number = (Astro.params.number ?? '').trim().slice(0, 40);
+const email = validateConfirmationSearch({email: Astro.url.searchParams.get('email') ?? undefined}).email?.slice(0, 254) ?? null;
+
+async function readOrder(): Promise<{state: 'ok'; order: Order} | {state: 'not-found'} | {state: 'error'}> {
+  if (!number) return {state: 'not-found'};
+  try {
+    const args = {param: {number}, query: email ? {email} : {}};
+    const res = await api.orders[':number'].$get(args);
+    if (res.ok) return {state: 'ok', order: (await res.json()) as unknown as Order};
+    if (res.status === 404 || res.status === 401 || res.status === 403) return {state: 'not-found'};
+    return {state: 'error'};
+  } catch {
+    return {state: 'error'};
+  }
+}
+
+const [found, settings] = await Promise.all([readOrder(), read<PublicSettings>(api.settings.public.$get())]);
+const order = found.state === 'ok' ? found.order : null;
+
+if (found.state === 'not-found') Astro.response.status = 404;
+if (found.state === 'error') Astro.response.status = 503;
+
+const view = !order
+  ? found.state
+  : order.payment === 'Pending'
+    ? 'pending'
+    : order.payment === 'Failed'
+      ? 'failed'
+      : 'confirmed';
+
+const title =
+  view === 'pending'
+    ? t('orders', 'confirmation.titleConfirming')
+    : view === 'failed'
+      ? t('orders', 'confirmation.titleFailed')
+      : view === 'confirmed'
+        ? t('orders', 'confirmation.titleConfirmed')
+        : view === 'not-found'
+          ? t('orders', 'confirmation.notFound')
+          : t('orders', 'confirmation.loadError');
+
+const dicts = order ? dictsFor(locale, {orders: ORDERS_KEYS, checkout: true}) : {};
+const currency = order?.currency ?? settings?.currency ?? 'USD';
+const here = Astro.url.pathname + (email ? `?email=${encodeURIComponent(email)}` : '');
+---
+
+<Storefront site={site} viewer={viewer} api={api} title={title} noindex secretInUrl>
+  <div data-order-confirmation>
+    {
+      view === 'not-found' && (
+        <div class="mx-auto w-full max-w-page px-6 py-16 md:px-12 md:py-24">
+          <div class="flex flex-col items-center gap-4 border border-hairline px-6 py-16 text-center md:px-12 md:py-24">
+            <h1 class="m-0 font-display text-display-4 font-normal">{t('orders', 'confirmation.notFound')}</h1>
+            <p class="m-0 max-w-[40ch] text-[15px] text-text-secondary">{t('orders', 'confirmation.notFoundBody')}</p>
+            {!signedIn && (
+              <a href={loginLink(here)} class:list={[SOLID_CTA, 'mt-2 px-8 py-[16px]']}>
+                {t('orders', 'signIn')}
+              </a>
+            )}
+          </div>
+        </div>
+      )
+    }
+    {
+      view === 'error' && (
+        <div class="mx-auto w-full max-w-page px-6 py-16 md:px-12 md:py-24">
+          <div class="flex flex-col items-center gap-4 border border-hairline px-6 py-16 text-center md:px-12 md:py-24">
+            <h1 class="m-0 font-display text-display-4 font-normal">{t('orders', 'confirmation.loadError')}</h1>
+            <a href={here} class:list={[OUTLINE_CTA, 'mt-2 px-8 py-[15px]']}>
+              {t('orders', 'tryAgain')}
+            </a>
+          </div>
+        </div>
+      )
+    }
+    {
+      view === 'pending' && order && (
+        <ConfirmingPayment client:load number={order.number} orderEmail={order.email} email={email} locale={locale} dicts={dicts} />
+      )
+    }
+    {
+      view === 'failed' && order && (
+        <PaymentFailed client:load number={order.number} orderEmail={order.email} email={email} locale={locale} dicts={dicts} />
+      )
+    }
+    {
+      view === 'confirmed' && order && (
+        <ConfirmationBody
+          order={order}
+          signedIn={signedIn}
+          viewerFirstName={viewer.name?.split(' ')[0] ?? null}
+          taxName={settings?.taxName ?? 'VAT'}
+          taxRate={settings?.taxRate ?? null}
+          currency={currency}
+          email={email}
+          locale={locale}
+          dicts={dicts}
+        />
+      )
+    }
+  </div>
+</Storefront>
+
+<script>
+  // After a Stripe redirect the URL carries `payment_intent`, `payment_intent_client_secret` and
+  // `redirect_status`: drop them from the address bar (keep `?email=`, keep the router's history state).
+  const STRIPE_PARAMS = ['payment_intent', 'payment_intent_client_secret', 'redirect_status'];
+  document.addEventListener('astro:page-load', () => {
+    if (!document.querySelector('[data-order-confirmation]')) return;
+    const url = new URL(location.href);
+    if (!STRIPE_PARAMS.some(p => url.searchParams.has(p))) return;
+    for (const p of STRIPE_PARAMS) url.searchParams.delete(p);
+    history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+  });
+</script>

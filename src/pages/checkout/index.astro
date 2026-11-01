@@ -1,167 +1,126 @@
 ---
 /**
- * The checkout ON this site (docs/agent/payments.md "How a payment opens"):
+ * `/checkout/` (port of VAREL src/pages/Checkout.tsx + routes/_checkout): the bag's checkout.
  *
- *   /checkout/?id=pcs_…       pay: the payment provider's form, popup or payment window
- *                             (`EmbeddedCheckout`), the buyer never leaves this site
- *   /checkout/?price=<key>…   ask first: which way to pay (more than one is set up), or, with
- *                             `trialUsed=1`, whether to pay now without the free trial. A plain
- *                             form posting to `/site-api/checkout`, so it works without JavaScript.
- *   /checkout/?error=<code>   a Buy button posted without JavaScript and the checkout could not start.
+ * Every read happens here, in parallel and in-process (the bag, the store's checkout rules, the payment
+ * provider, the countries, the signed-in customer's details, then the first country's shipping methods), and
+ * the guards VAREL ran in the component run here too:
+ *   - the bag could not be read      → 503 + "couldn't load" (never a 404)
+ *   - the bag is empty               → 302 to /cart/
+ *   - guest checkout off + a guest   → "Sign in to check out" (no JS)
+ * Otherwise ONE island (`CheckoutApp`, client:load) gets everything as props.
  *
- * Rendered on request; never indexed.
+ * Stripe (D3): only when Stripe is the active provider does this page open its CSP to Stripe's hosts
+ * (`allowEmbeddedCheckout`), and only then does the island download Stripe.js. Never indexed.
  */
-import EmbeddedCheckout from '../../components/payments/EmbeddedCheckout';
-import CheckoutAskForm from '../../components/payments/CheckoutAskForm.astro';
-import TestModeBadge from '../../components/payments/TestModeBadge.astro';
-import Base from '../../layouts/Base.astro';
-import {formatMoney} from '../../lib/format';
-import {allowEmbeddedCheckout, type EmbeddedCheckout as Embedded, type PaymentGateway} from '../../platform/payments';
-import {backend, read} from '../../server/backend';
-import {pageContext} from '../../server/page';
+import CheckoutApp, {type CheckoutRules} from '@/components/checkout/CheckoutApp';
+import SignInRequired from '@/components/checkout/SignInRequired.astro';
+import {OUTLINE_CTA} from '@/components/checkout/ui';
+import {dictsFor, serverText} from '@/components/layout/dictionaries';
+import {DEFAULT_LOCALE} from '@/components/varel/href';
+import CheckoutShell from '@/layouts/CheckoutShell.astro';
+import {cartLink} from '@/lib/links';
+import type {AccountOverview} from '@/lib/types/account';
+import type {Cart} from '@/lib/types/cart';
+import type {CheckoutConfig, ShippingMethodsResponse} from '@/lib/types/orders';
+import type {PublicSettings} from '@/lib/types/settings';
+import {allowEmbeddedCheckout} from '@/platform/payments';
+import {read} from '@/server/backend';
+import {pageContext} from '@/server/page';
 
 export const prerender = false;
 
-type Answer = {
-  checkout: {
-    id: string;
-    mode: 'test' | 'live';
-    status: 'open' | 'paid' | 'failed' | 'expired';
-    price: string;
-    amountCents: number;
-    currency: string;
-    embedded: Embedded | null;
-  };
-};
+const locale = (Astro.locals as {locale?: string}).locale ?? DEFAULT_LOCALE;
+const t = serverText(locale);
+const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
+const signedIn = viewer.state === 'user';
 
-const q = Astro.url.searchParams;
-const id = q.get('id') ?? '';
-const error = q.get('error');
-const askPrice = !id && /^[a-z0-9][a-z0-9-]{0,62}$/.test(q.get('price') ?? '') ? q.get('price')! : null;
-const api = backend(Astro.request);
-const [{site, viewer}, found, ways] = await Promise.all([
-  pageContext(Astro.request, Astro.response),
-  id ? read<Answer>(api.checkout[':id'].$get({param: {id}})) : Promise.resolve(null),
-  askPrice ? read<{gateways: PaymentGateway[]}>(api.checkout.gateways.$get({query: {price: askPrice}})) : Promise.resolve(null),
+const [cart, settings, config, countryList, overview] = await Promise.all([
+  read<Cart>(api.cart.$get()),
+  read<PublicSettings>(api.settings.public.$get()),
+  read<CheckoutConfig>(api.checkout.config.$get()),
+  read<string[]>(api.countries.$get()),
+  signedIn ? read<AccountOverview>(api.account.overview.$get()) : Promise.resolve(null),
 ]);
-const checkout = found?.checkout ?? null;
-if (checkout?.status === 'paid') return Astro.redirect(`/thanks/?checkout=${encodeURIComponent(checkout.id)}`, 303);
-const embedded = checkout?.status === 'open' ? checkout.embedded : null;
-// The provider's hosts on THIS page only: its form (element) or its popup's script. A payment
-// window is another window, so it needs nothing here.
-if (embedded && embedded.kind !== 'window') allowEmbeddedCheckout(Astro.csp, embedded.gateway);
 
-// Asking first: the hidden fields carry the Buy button's choice back to the checkout.
-const ask = askPrice
-  ? {
-      price: askPrice,
-      quantity: q.get('quantity') ?? '1',
-      successPath: q.get('successPath') ?? '/thanks/',
-      cancelPath: q.get('cancelPath') ?? '/',
-      email: q.get('email') ?? '',
-      gateway: q.get('gateway') ?? '',
-      trialUsed: q.get('trialUsed') === '1',
-    }
-  : null;
-const gateways = ways?.gateways ?? [];
-const choosing = !!ask && !ask.gateway && gateways.length > 1;
-// With JavaScript the checkout island asks (and opens the payment); the form is the no-JavaScript way.
-const island = !!ask && !ask.trialUsed && !ask.gateway;
-// The island may open any of these ways to pay: their hosts on THIS page only.
-if (island) for (const g of gateways) allowEmbeddedCheckout(Astro.csp, g.slug);
-if (!embedded && !ask) Astro.response.status = error ? 422 : 404;
-
-const MESSAGES: Record<string, string> = {
-  e_payments_not_ready: 'This shop is not taking payments yet. Try again later.',
-  e_price_not_found: 'That item is no longer for sale.',
-  e_quantity: 'Choose a quantity from 1 to 99.',
-  e_site_payments_gateway_unavailable: 'That way to pay is not available right now. Choose another one.',
+// Store rules (VAREL defaults when the settings can't be read).
+const rules: CheckoutRules = {
+  guestCheckout: settings?.guestCheckout ?? true,
+  requirePhone: settings?.requirePhone ?? false,
+  orderNotes: settings?.orderNotes ?? false,
+  termsText: settings?.termsText ?? '',
+  returnWindowDays: settings?.returnWindowDays ?? 30,
 };
-const message = error ? (MESSAGES[error.toLowerCase()] ?? 'Checkout did not open. Go back and try again.') : null;
+const currency = config?.currency || settings?.currency || 'USD';
+const countries = Array.isArray(countryList) ? countryList : [];
+
+type View = 'error' | 'sign-in' | 'checkout';
+let view: View = 'checkout';
+if (!cart) {
+  view = 'error';
+  Astro.response.status = 503;
+} else if (cart.lines.length === 0) {
+  return Astro.redirect(cartLink(locale), 302);
+} else if (!rules.guestCheckout && !signedIn) {
+  view = 'sign-in';
+}
+
+// The first country: the primary saved address's, else the store's home (Denmark in VAREL), else the first listed.
+const addresses = overview?.addresses ?? [];
+const primary = addresses.find(a => a.primary) ?? addresses[0];
+const initialCountry =
+  primary?.country || (countries.includes('Denmark') ? 'Denmark' : (countries[0] ?? 'Denmark'));
+const digitalOnly = !!cart && cart.lines.length > 0 && cart.lines.every(l => l.digital);
+
+let initialMethods: ShippingMethodsResponse | null = null;
+if (view === 'checkout' && !digitalOnly) {
+  const methodsQuery = {query: {country: initialCountry}};
+  initialMethods = await read<ShippingMethodsResponse>(api.shipping.methods.$get(methodsQuery));
+}
+
+// Stripe's Payment Element on THIS page only.
+if (view === 'checkout' && config?.provider === 'stripe') allowEmbeddedCheckout(Astro.csp, 'stripe');
+
+const user = overview?.user
+  ? {email: overview.user.email, name: overview.user.name, phone: overview.user.phone}
+  : signedIn && viewer.email
+    ? {email: viewer.email, name: viewer.name ?? '', phone: null}
+    : null;
+
+const dicts = view === 'checkout' ? dictsFor(locale, {checkout: true}) : {};
+const title = view === 'sign-in' ? t('checkout', 'signIn.title') : t('checkout', 'title');
 ---
 
-<Base site={site} viewer={viewer} title="Checkout" noindex>
-  <main id="main" tabindex="-1" class="wrap narrow section">
-    <TestModeBadge mode={checkout?.mode ?? null} />
-    {
-      embedded && checkout ? (
-        <>
-          <h1>Checkout</h1>
-          <p class="lede">Total {formatMoney(checkout.amountCents, checkout.currency)}</p>
-          <EmbeddedCheckout
-            client:only="react"
-            price={checkout.price}
-            result={{id: checkout.id, mode: checkout.mode, embedded}}
-            payLabel={`Pay ${formatMoney(checkout.amountCents, checkout.currency)}`}
-          />
-        </>
-      ) : ask ? (
-        <>
-          <h1>Checkout</h1>
-          {island && (
-            <EmbeddedCheckout
-              client:only="react"
-              price={ask.price}
-              quantity={Number(ask.quantity) || 1}
-              successPath={ask.successPath}
-              cancelPath={ask.cancelPath}
-            />
-          )}
-          {ask.trialUsed && <p class="lede">You've already used the free trial for this. Continue to pay now without a trial.</p>}
-          {island ? (
-            <noscript>
-              <CheckoutAskForm ask={ask} gateways={choosing ? gateways : []} />
-            </noscript>
-          ) : (
-            <CheckoutAskForm ask={ask} gateways={choosing ? gateways : []} />
-          )}
-          <p>
-            <a href={ask.cancelPath.startsWith('/') && !ask.cancelPath.startsWith('//') ? ask.cancelPath : '/'}>Go back</a>
-          </p>
-        </>
-      ) : (
-        <>
-          <h1>{message ? 'Checkout did not open' : 'This checkout has ended'}</h1>
-          <p class="lede">{message ?? 'It was finished or it expired. Start again from the page you were buying on.'}</p>
-          <p>
-            <a class="button" href="/">Back to home</a>
-          </p>
-        </>
-      )
-    }
-  </main>
-</Base>
-
-<script>
-  import {bindBuyButtons} from '../../lib/buy-button';
-
-  // The "ask first" form starts its checkout like a Buy button (pending state, errors in place).
-  document.addEventListener('astro:page-load', bindBuyButtons);
-</script>
-
-<style>
-  /* The island's way-to-pay list (the no-JavaScript form styles its own). */
-  :global(.embedded-checkout .checkout-ways) {
-    display: grid;
-    gap: 0.5rem;
-    margin: 0 0 1rem;
-    padding: 0;
-    border: 0;
+<CheckoutShell site={site} viewer={viewer} title={title} noindex currency={currency}>
+  {
+    view === 'error' && (
+      <div class="mx-auto w-full max-w-page px-6 py-24 md:px-12">
+        <div class="flex flex-col items-center gap-4 border border-hairline px-6 py-16 text-center md:px-12 md:py-24">
+          <h1 class="m-0 font-display text-display-4 font-normal">{t('checkout', 'loadError')}</h1>
+          <a href={Astro.url.pathname + Astro.url.search} class:list={[OUTLINE_CTA, 'mt-2 px-8 py-[15px]']}>
+            {t('checkout', 'tryAgain')}
+          </a>
+        </div>
+      </div>
+    )
   }
-  :global(.embedded-checkout .checkout-ways legend) {
-    margin-bottom: 0.5rem;
-    font-weight: 600;
+  {view === 'sign-in' && <SignInRequired locale={locale} />}
+  {
+    view === 'checkout' && cart && (
+      <CheckoutApp
+        client:load
+        cart={cart}
+        initialMethods={initialMethods}
+        initialCountry={initialCountry}
+        countries={countries}
+        rules={rules}
+        config={config}
+        currency={currency}
+        locale={locale}
+        dicts={dicts}
+        user={user}
+        addresses={addresses}
+      />
+    )
   }
-  :global(.embedded-checkout .checkout-way) {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--line, currentColor);
-    border-radius: var(--radius);
-    cursor: pointer;
-  }
-  :global(.embedded-checkout .checkout-way:has(input:checked)) {
-    border-color: var(--accent);
-  }
-</style>
+</CheckoutShell>
