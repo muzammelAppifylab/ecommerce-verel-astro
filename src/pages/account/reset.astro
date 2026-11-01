@@ -78,7 +78,7 @@ Astro.response.headers.set('Cache-Control', 'no-store');
           <ul class="pw-checks" id="reset-confirm-checks" hidden></ul>
         </AuthField>
         <p class="notice notice-error" id="reset-expired" role="alert" hidden>
-          {t('reset.expired')}
+          {t('reset.expired')}{' '}
           <a href={href('/account/forgot/')}>{t('reset.requestNew')}</a>
         </p>
         <p class="notice" data-form-status hidden></p>
