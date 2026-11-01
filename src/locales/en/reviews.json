@@ -39,12 +39,12 @@
     "reply": "Reply from VAREL"
   },
   "rating": {
-    "label": "Your rating",
     "1": "Poor",
     "2": "Fair",
     "3": "Good",
     "4": "Very good",
-    "5": "Excellent"
+    "5": "Excellent",
+    "label": "Your rating"
   },
   "form": {
     "error": "Your review was not sent. Check your connection and try again.",
@@ -61,6 +61,13 @@
     "bodyHint": "Fit, fabric, how it wears. At least a sentence or two.",
     "postingAs": "Posting as {{name}}",
     "submit": "Submit review",
-    "checked": "Reviews are checked before they appear"
+    "checked": "Reviews are checked before they appear",
+    "submitting": "Submitting…",
+    "titleRequired": "Enter a title",
+    "titleTooLong": "Keep a title under 120 characters",
+    "bodyRequired": "Enter your review",
+    "bodyTooShort": "Write at least a sentence or two",
+    "bodyTooLong": "Keep your review under 2000 characters",
+    "ratingRange": "Choose a rating from 1 to 5"
   }
 }

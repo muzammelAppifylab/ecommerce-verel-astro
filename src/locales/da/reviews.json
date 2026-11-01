@@ -39,12 +39,12 @@
     "reply": "Svar fra VAREL"
   },
   "rating": {
-    "label": "Din bedømmelse",
     "1": "Dårlig",
     "2": "Nogenlunde",
     "3": "God",
     "4": "Meget god",
-    "5": "Fremragende"
+    "5": "Fremragende",
+    "label": "Din bedømmelse"
   },
   "form": {
     "error": "Din anmeldelse blev ikke sendt. Tjek din forbindelse, og prøv igen.",
@@ -61,6 +61,13 @@
     "bodyHint": "Pasform, stof, hvordan den holder. Mindst en sætning eller to.",
     "postingAs": "Skriver som {{name}}",
     "submit": "Send anmeldelse",
-    "checked": "Anmeldelser gennemgås, før de vises"
+    "checked": "Anmeldelser gennemgås, før de vises",
+    "submitting": "Sender…",
+    "titleRequired": "Skriv en titel",
+    "titleTooLong": "Hold titlen under 120 tegn",
+    "bodyRequired": "Skriv din anmeldelse",
+    "bodyTooShort": "Skriv mindst en sætning eller to",
+    "bodyTooLong": "Hold din anmeldelse under 2000 tegn",
+    "ratingRange": "Vælg en bedømmelse fra 1 til 5"
   }
 }

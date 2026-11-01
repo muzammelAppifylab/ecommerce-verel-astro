@@ -42,12 +42,12 @@
     "reply": "Respuesta de VAREL"
   },
   "rating": {
-    "label": "Tu valoración",
     "1": "Mala",
     "2": "Regular",
     "3": "Buena",
     "4": "Muy buena",
-    "5": "Excelente"
+    "5": "Excelente",
+    "label": "Tu valoración"
   },
   "form": {
     "error": "Tu reseña no se ha enviado. Comprueba tu conexión e inténtalo de nuevo.",
@@ -64,6 +64,13 @@
     "bodyHint": "Ajuste, tejido, cómo envejece. Al menos una o dos frases.",
     "postingAs": "Publicas como {{name}}",
     "submit": "Enviar opinión",
-    "checked": "Las opiniones se revisan antes de publicarse"
+    "checked": "Las opiniones se revisan antes de publicarse",
+    "submitting": "Enviando…",
+    "titleRequired": "Escribe un título",
+    "titleTooLong": "Mantén el título por debajo de 120 caracteres",
+    "bodyRequired": "Escribe tu opinión",
+    "bodyTooShort": "Escribe al menos una o dos frases",
+    "bodyTooLong": "Mantén tu opinión por debajo de 2000 caracteres",
+    "ratingRange": "Elige una valoración del 1 al 5"
   }
 }
