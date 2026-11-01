@@ -80,7 +80,7 @@ describe.skipIf(!DATABASE_URL)('store settings admin (integration, real Postgres
     it('field errors use dotted keys', async () => {
       const res = await owner.request('PATCH', '/site-api/manage/settings', {socialLinks: {instagram: '/path'}, orderPrefix: 'VRL1'});
       expect(res.status).toBe(422);
-      expect(Object.keys(res.json.fields)).toEqual(expect.arrayContaining(['socialLinks.instagram', 'orderPrefix']));
+      expect(Object.keys(res.json.fields as Record<string, string>)).toEqual(expect.arrayContaining(['socialLinks.instagram', 'orderPrefix']));
     });
 
     it('{} changes nothing; homeHero {} clears a stored hero', async () => {
@@ -118,7 +118,7 @@ describe.skipIf(!DATABASE_URL)('store settings admin (integration, real Postgres
       envAny.STRIPE_SECRET_KEY = 'sk_test_supersecretvalue';
       const saved = await owner.request('PATCH', '/site-api/manage/settings', {paymentProvider: 'stripe', stripePublishableKey: 'pk_test_abc'});
       expect(saved.status).toBe(200);
-      expect(saved.json.secrets.stripeSecretKey).toBe(true);
+      expect((saved.json.secrets as Record<string, boolean>).stripeSecretKey).toBe(true);
       const res = await owner.get('/site-api/manage/payments/status');
       expect(res.json).toMatchObject({
         active: 'stripe',

@@ -44,7 +44,7 @@ describe.skipIf(!DATABASE_URL)('tax rates admin (integration, real Postgres)', (
     const de = (await owner.post(base, {country: 'Germany', rate: 0.19})).json;
     const list = await owner.get(base);
     expect(list.status).toBe(200);
-    expect(list.json.map((r: {country: string}) => r.country)).toEqual(['Germany', 'Sweden']);
+    expect((list.json as unknown as {country: string}[]).map((r: {country: string}) => r.country)).toEqual(['Germany', 'Sweden']);
     expect((await owner.request('PATCH', `${base}/${de.id}`, {country: 'sweden'})).status).toBe(409);
     const renamed = await owner.request('PATCH', `${base}/${de.id}`, {rate: 0.07, name: 'MwSt'});
     expect(renamed.json).toMatchObject({country: 'Germany', rate: 0.07, name: 'MwSt'});

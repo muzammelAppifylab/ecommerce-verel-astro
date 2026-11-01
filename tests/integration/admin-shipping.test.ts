@@ -34,9 +34,10 @@ describe.skipIf(!DATABASE_URL)('shipping admin (integration, real Postgres)', ()
   it('lists zones in order with the catch-all and rates in units', async () => {
     const res = await owner.get(base);
     expect(res.status).toBe(200);
-    expect(res.json.map((z: {id: string}) => z.id)).toEqual(['denmark', 'european-union', 'rest-of-world']);
-    expect(res.json[2]).toMatchObject({zone: 'Rest of world', countries: []});
-    expect(res.json[0].methods.map((m: {id: string; rate: number}) => [m.id, m.rate])).toEqual([
+    const zones = res.json as unknown as {id: string; methods: {id: string; rate: number}[]}[];
+    expect(zones.map((z) => z.id)).toEqual(['denmark', 'european-union', 'rest-of-world']);
+    expect(zones[2]).toMatchObject({zone: 'Rest of world', countries: []});
+    expect(zones[0].methods.map((m: {id: string; rate: number}) => [m.id, m.rate])).toEqual([
       ['denmark-standard', 0],
       ['denmark-express', 12],
     ]);
@@ -46,7 +47,7 @@ describe.skipIf(!DATABASE_URL)('shipping admin (integration, real Postgres)', ()
   it('one country in one zone', async () => {
     const res = await owner.post(`${base}/zones`, {zone: 'Nordics', countries: ['Norway', 'sweden']});
     expect(res.status).toBe(422);
-    expect(res.json.fields['countries.1']).toBe('Sweden is already in European Union');
+    expect((res.json.fields as Record<string, string>)['countries.1']).toBe('Sweden is already in European Union');
   });
 
   it('creates zones with slug ids, next position, and a free id on a repeated name', async () => {
