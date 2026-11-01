@@ -1364,3 +1364,22 @@ model Translation {
   @@index([locale, source])
   @@map("translations")
 }
+
+/// Images staff uploaded to platform storage as PUBLIC files (WP-17, docs/agent/files.md). A product,
+/// post, collection or setting may link a platform file only when its id is a ready row here.
+model MediaUpload {
+  id          Int      @id @default(autoincrement())
+  fileId      String   @unique @map("file_id") @db.VarChar(32)
+  name        String   @db.VarChar(200)
+  contentType String   @map("content_type") @db.VarChar(40)
+  size        Int
+  /// `publicFileUrl(file)`, set on complete.
+  url         String?  @db.VarChar(400)
+  ready       Boolean  @default(false)
+  /// Template user id of the uploader (no FK: uploads outlive staff accounts).
+  uploadedBy  Int?     @map("uploaded_by")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  @@index([uploadedBy, id])
+  @@map("media_uploads")
+}
