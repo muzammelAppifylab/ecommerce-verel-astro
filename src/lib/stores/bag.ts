@@ -154,7 +154,7 @@ export const bag = {
     syncing = (async () => {
       const [cart, wished] = await Promise.allSettled([
         request<CartLike>('/cart'),
-        request<Array<{id: string}> | {ids: string[]}>('/wishlist'),
+        request<Array<{id: string}> | {ids: string[]}>('/wishlist/ids'),
       ]);
       const patch: Partial<BagState> = {synced: true};
       if (cart.status === 'fulfilled' && cart.value) patch.count = cart.value.totals?.count ?? 0;
