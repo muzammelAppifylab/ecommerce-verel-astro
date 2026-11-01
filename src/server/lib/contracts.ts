@@ -138,15 +138,46 @@ export const activityLog: MiddlewareHandler = async (_c, next) => {
  * `Translation` rows for (entity, row.id, locale), falling back to the source text. The default
  * locale returns the rows unchanged. One bounded query for all rows. Never throws.
  *
- * F4 provides the working base; WP-25 extends. Stub: returns the rows unchanged.
+ * F4 provides the base (`src/server/lib/i18n/localize.ts`); WP-25 extends it to structured fields: a JSON
+ * field (post/page `body`, menu `items`, setting `returnReasons`/`homeHero`) whose row value is an object or
+ * an array is replaced by its parsed translation (VAREL `trJson`); text fields as F4 does (`tr`).
  */
 export async function localize<T extends {id: string | number}>(
   rows: T[],
-  _entity: string,
-  _locale: string,
-  _fields?: readonly string[]
+  entity: string,
+  locale: string,
+  fields?: readonly string[]
 ): Promise<T[]> {
-  return rows;
+  if (!rows.length || !locale) return rows;
+  try {
+    const [{getDb}, {localeSettings}, {ENTITY_FIELDS, isEntity, isJsonField}, {loadTranslations, tr, trJson}] = await Promise.all([
+      import('../../platform/db'),
+      import('./locale'),
+      import('./i18n/sources'),
+      import('./i18n/localize'),
+    ]);
+    if (!isEntity(entity)) return rows;
+    const db = getDb();
+    if (!db) return rows;
+    const {defaultLocale} = await localeSettings(db);
+    if (locale === defaultLocale) return rows;
+    const list = (fields ?? ENTITY_FIELDS[entity]).filter(f => ENTITY_FIELDS[entity].includes(f));
+    if (!list.length) return rows;
+    const map = await loadTranslations(db, locale, defaultLocale, entity, rows.map(r => r.id), list);
+    if (!map.size) return rows;
+    return rows.map(row => {
+      const out = {...row} as Record<string, unknown>;
+      for (const f of list) {
+        const v = out[f];
+        if (typeof v === 'string') out[f] = tr(map, row.id, f, v);
+        else if (v && typeof v === 'object' && isJsonField(entity, f)) out[f] = trJson(map, row.id, f, v);
+      }
+      return out as T;
+    });
+  } catch (e) {
+    console.error(`[i18n] could not localize ${entity}`, e);
+    return rows;
+  }
 }
 
 /** An English error message in `locale` (VAREL `localizeMessage`). F4 implements. Stub: unchanged. */
@@ -169,14 +200,25 @@ export function localizeFields(
  * write never waits on a provider; the hourly `translations-backfill` job catches anything missed.
  * Never throws. Entities: product, department, category, collection, post, page, menu, discount, setting.
  *
- * WP-25 implements. Stub: does nothing (the backfill job covers it once WP-25 lands).
+ * Pass `{requestUrl: c.req.url}` (the job is sent through the platform; without it the site's own
+ * address is used). Sends nothing when auto-translation is off or the provider has no secrets.
+ * Also: option, post_category, shipping_method, email_template (by key), setting (`'1'`).
+ *
+ * WP-25 implements (`enqueueTranslation`, src/server/lib/i18n/translate.ts).
  */
 export async function queueEntityTranslation(
-  _db: Db,
-  _entity: string,
-  _id: string | number | null | undefined,
-  _opts: {requestUrl?: string} = {}
-): Promise<void> {}
+  db: Db,
+  entity: string,
+  id: string | number | null | undefined,
+  opts: {requestUrl?: string} = {}
+): Promise<void> {
+  try {
+    const {enqueueTranslation} = await import('./i18n/translate');
+    await enqueueTranslation(db, entity, id, opts);
+  } catch (e) {
+    console.error(`[i18n] could not queue ${entity}:${String(id)}`, e);
+  }
+}
 
 // ─── Analytics (WP-16) ────────────────────────────────────────────────────────
 
