@@ -14,5 +14,11 @@
     "contact": "Contact"
   },
   "alt": "Empty studio corner in daylight",
-  "picks": "In the studio now"
+  "picks": "In the studio now",
+  "error": {
+    "title": "Something went wrong",
+    "heading": "This page could not be shown",
+    "body": "Try again in a minute.",
+    "home": "Back to home"
+  }
 }

@@ -1,4 +1,5 @@
 import {Hono} from 'hono';
+import {createMiddleware} from 'hono/factory';
 import {z} from 'zod';
 
 import type {AdminMenu} from '../../../lib/types/admin/content';
@@ -61,6 +62,12 @@ export const menuSchema = z.object({
     .max(MENU_ITEM_LIMIT, 'Keep a menu to 20 links or fewer'),
 });
 
+/** Unknown menu keys are a 404 before the body is read (VAREL checked the key first). */
+const knownKey = createMiddleware(async (c, next) => {
+  if (!MENU_KEYS.some(m => m.key === c.req.param('key'))) return apiError(c, 404, 'not_found', 'We cannot find that menu');
+  await next();
+});
+
 const menuSelect = {id: true, key: true, title: true, items: true, updatedAt: true} as const;
 
 export const menusAdmin = new Hono()
@@ -78,7 +85,7 @@ export const menusAdmin = new Hono()
     });
     return c.json(out);
   })
-  .put('/:key', json(menuSchema), withDb, async c => {
+  .put('/:key', knownKey, json(menuSchema), withDb, async c => {
     const key = MENU_KEYS.find(m => m.key === c.req.param('key'))?.key;
     if (!key) return apiError(c, 404, 'not_found', 'We cannot find that menu');
     const input = c.req.valid('json');

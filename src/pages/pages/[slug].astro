@@ -1,0 +1,46 @@
+---
+/**
+ * /pages/<slug>/ — a CMS page (admin → Pages), VAREL `src/pages/CmsPage.tsx`, rendered on the server.
+ *   200: the page (contents column when it has two or more headings)
+ *   404: the route answered 404 (missing or hidden page): the not-found view, noindex
+ *   503: the read failed (a database outage is never a 404): "did not load" + a "Try again" link
+ * `privacy` and `terms` live at /privacy/ and /terms/: their /pages/ address redirects there.
+ */
+import {CmsPageView} from '@/components/pages/CmsPageView';
+import {NotFoundView} from '@/components/pages/NotFoundView';
+import {notFoundPicks} from '@/components/pages/picks';
+import {clip, firstParagraph, isBuiltInPage} from '@/components/pages/policy';
+import {dictsFor} from '@/components/layout/dictionaries';
+import Storefront from '@/layouts/Storefront.astro';
+import {t} from '@/lib/i18n/server';
+import {href} from '@/lib/links';
+import type {CmsPage} from '@/lib/types/content';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const locale = Astro.locals.locale ?? 'en';
+const slug = Astro.params.slug ?? '';
+if (isBuiltInPage(slug)) return Astro.redirect(href(`/${slug}/`, locale), 301);
+
+const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
+const res = await api.pages[':slug'].$get({param: {slug}}).catch(() => null);
+const page = res?.ok ? ((await res.json().catch(() => null)) as CmsPage | null) : null;
+const missing = res?.status === 404;
+const picks = missing ? await notFoundPicks(api) : null;
+
+if (missing) Astro.response.status = 404;
+else if (!page) {
+  Astro.response.status = 503;
+  Astro.response.headers.set('Retry-After', '60');
+}
+
+const title = page ? page.seoTitle || page.title : missing ? t(locale, 'pages', 'notFound') : undefined;
+const description = page ? page.seoDescription || clip(firstParagraph(page.body)) || undefined : undefined;
+const dicts = dictsFor(locale, missing ? {notfound: true, layout: ['ui']} : {pages: true, layout: ['ui']});
+const retryHref = href(`/pages/${encodeURIComponent(slug)}/`, locale);
+---
+
+<Storefront api={api} site={site} viewer={viewer} title={title} description={description} noindex={!page}>
+  {missing ? <NotFoundView locale={locale} dicts={dicts} picks={picks} /> : <CmsPageView locale={locale} dicts={dicts} page={page} retryHref={retryHref} />}
+</Storefront>
