@@ -69,7 +69,8 @@
       "line1": "Indtast en adresse",
       "zip": "Indtast et postnummer",
       "city": "Indtast en by",
-      "country": "Vælg et land"
+      "country": "Vælg et land",
+      "tooLong": "Hold det under {{max}} tegn"
     }
   },
   "confirm": {
@@ -87,9 +88,14 @@
     "errors": {
       "firstName": "Indtast dit fornavn",
       "lastName": "Indtast dit efternavn",
-      "email": "Indtast en gyldig e-mailadresse"
+      "email": "Indtast en gyldig e-mailadresse",
+      "firstNameLong": "Hold dit fornavn under 80 tegn",
+      "lastNameLong": "Hold dit efternavn under 80 tegn",
+      "phoneLong": "Hold telefonnummeret under 40 tegn"
     },
-    "description": "Bruges på dine ordrer, kvitteringer og leveringsopdateringer."
+    "description": "Bruges på dine ordrer, kvitteringer og leveringsopdateringer.",
+    "emailHint": "For at ændre din e-mail sender vi et link til den nye adresse.",
+    "changeEmail": "Skift e-mail"
   },
   "privacy": {
     "title": "Privatliv",
@@ -116,7 +122,11 @@
       "warning": "Vi sender dig en bekræftelse på e-mail og logger dig derefter ud. Dine ordrer gemmes til regnskabet med din e-mail skjult. Det kan ikke fortrydes.",
       "password": "Adgangskode",
       "enterPassword": "Indtast din adgangskode",
-      "deleted": "Din konto er slettet"
+      "deleted": "Din konto er slettet",
+      "confirmLabel": "Skriv DELETE for at bekræfte",
+      "errors": {
+        "confirm": "Skriv DELETE med store bogstaver for at bekræfte"
+      }
     },
     "description": "Download dine data, vælg cookies eller luk din konto."
   },
@@ -163,7 +173,7 @@
     "current": "Nuværende adgangskode",
     "new": "Ny adgangskode",
     "confirm": "Bekræft ny adgangskode",
-    "rule": "Mindst 8 tegn.",
+    "rule": "Mindst 10 tegn.",
     "show": "Vis adgangskoder",
     "save": "Skift adgangskode",
     "saving": "Skifter…",
@@ -171,9 +181,15 @@
     "forgot": "Glemt din adgangskode?",
     "errors": {
       "current": "Indtast din nuværende adgangskode",
-      "length": "Brug mindst 8 tegn",
-      "match": "Adgangskoderne er ikke ens"
-    }
+      "length": "Brug mindst 10 tegn",
+      "match": "Adgangskoderne er ikke ens",
+      "tooLong": "Brug højst 128 tegn",
+      "email": "Brug ikke din e-mailadresse i din adgangskode"
+    },
+    "showOne": "Vis adgangskode",
+    "hideOne": "Skjul adgangskode",
+    "noPassword": "Du logger ind med en kode, vi sender på e-mail. Bed om et link for at oprette en adgangskode.",
+    "setLink": "Opret en adgangskode"
   },
   "preferences": {
     "title": "Kommunikation",
@@ -182,5 +198,25 @@
     "newsletterBody": "Nye kollektioner, historier fra journalen og arrangementer i studiet, cirka en gang om måneden.",
     "on": "Du er tilmeldt nyhedsbrevet",
     "off": "Du er afmeldt nyhedsbrevet"
-  }
+  },
+  "email": {
+    "title": "Skift e-mail",
+    "new": "Ny e-mail",
+    "password": "Nuværende adgangskode",
+    "send": "Send link",
+    "sending": "Sender…",
+    "errors": {
+      "email": "Indtast en gyldig e-mailadresse",
+      "password": "Indtast din nuværende adgangskode",
+      "same": "Det er allerede din e-mailadresse"
+    }
+  },
+  "downloading": "Gør download klar…",
+  "downloadError": "Filen er ikke tilgængelig lige nu. Kontakt studiet.",
+  "ordersMore": "99+",
+  "notFound": {
+    "title": "Siden findes ikke",
+    "action": "Tilbage til din konto"
+  },
+  "ordersComingSoon": "Dine ordrer er på vej til denne side. Se den seneste i oversigten."
 }
