@@ -35,6 +35,7 @@ import {zoneForCountry} from '../lib/shipping';
 import {summaryLabel} from '../lib/totals';
 import {emailField, json, optionalText, params, requiredText} from '../lib/validate';
 import {withVisitor} from '../lib/visitor';
+import {rateLimit} from '../lib/rate-limit';
 
 /**
  * Checkout (VAREL own payments, D3). Port of VAREL worker/routes/checkout.ts (WP-11): VAREL
@@ -423,10 +424,10 @@ export const checkoutRoutes = new Hono()
     return c.json({provider: cfg.provider, publishableKey: cfg.publishableKey, currency: cfg.currency} satisfies CheckoutConfig);
   })
 
-  // I2: rate limit.
   .post('/', json(checkoutBody), withViewer, returningIs401, withDb, withVisitor, async c => {
     const input = c.req.valid('json');
     const db = c.var.db;
+    await rateLimit(c, db, 'checkout');
     const loc = await locOf(c); // messages in the request language (order snapshots stay in the source text)
     const user = userOf(c.var.viewer);
     const rules = await applyCheckoutRules(db, user, input); // guest checkout, phone, terms, order notes
@@ -553,11 +554,11 @@ export const checkoutRoutes = new Hono()
   // ─── Settling a Stripe order from the browser ──────────────────────────────
 
   /** Check a Pending Stripe order against Stripe (webhooks may lag): Paid or Failed when it has settled. */
-  // I2: rate limit.
   .post('/:number/sync', params(numberParam), json(ownerBody), withViewer, withDb, async c => {
     const {number} = c.req.valid('param');
     const {email} = c.req.valid('json');
     const db = c.var.db;
+    await rateLimit(c, db, 'checkoutSync');
     const loc = await locOf(c);
     const order = await ownOrder(c, number, email);
     const ref = order.payments.find(p => p.provider === 'stripe' && p.providerRef)?.providerRef;
@@ -579,11 +580,11 @@ export const checkoutRoutes = new Hono()
 
   /** The customer gave up on this payment (declined card, closed the bank page…): cancel the PaymentIntent, release
       the stock and discount usage, and put the pieces back in the bag so they can try again. Paid orders stay paid. */
-  // I2: rate limit.
   .post('/:number/cancel', params(numberParam), json(ownerBody), withViewer, withDb, withVisitor, async c => {
     const {number} = c.req.valid('param');
     const {email} = c.req.valid('json');
     const db = c.var.db;
+    await rateLimit(c, db, 'checkoutSync');
     const loc = await locOf(c);
     const order = await ownOrder(c, number, email);
     if (order.paymentProvider !== 'stripe' || order.payment === 'Paid' || order.payment === 'Refunded') {

@@ -11,6 +11,7 @@ import {EN_LOC, type Loc, locOf} from '../lib/i18n/localize';
 import {DELIVERED_EVENT} from '../lib/orders';
 import {getSettings} from '../lib/settings';
 import {json, optionalText} from '../lib/validate';
+import {rateLimit} from '../lib/rate-limit';
 import {findOrderByNumber, isOrderOwner, orderNumberOf, redactOrder, toOrder, tokenExpired} from './orders';
 
 /**
@@ -170,10 +171,11 @@ async function lookupOrder(db: Db, viewer: Viewer, number: string, email: string
 export const returnRoutes = new Hono()
   /* POST /returns/lookup — the order and whether it can be returned (the owner, a matching email, or the number
      alone, then redacted). */
-  // I2: rate limit (order-number lookups).
   .post('/lookup', json(lookupBody), withViewer, withDb, async c => {
     const input = c.req.valid('json');
     const db = c.var.db;
+    // Order numbers are guessable: limit look-ups per IP (I2).
+    await rateLimit(c, db, 'returnsLookup');
     const {order, access} = await lookupOrder(db, c.var.viewer, input.order, input.email);
     const [loc, settings] = await Promise.all([locOf(c), getSettings(db)]);
     const {eligible, reason} = await eligibility(db, order, settings.returnWindowDays, loc);
@@ -191,6 +193,7 @@ export const returnRoutes = new Hono()
   .post('/', json(returnBody), withViewer, withDb, async c => {
     const input = c.req.valid('json');
     const db = c.var.db;
+    await rateLimit(c, db, 'returnsCreate');
     const {order, access} = await lookupOrder(db, c.var.viewer, input.order, input.email);
     if (access === 'number') {
       throw new HttpError(422, 'invalid_input', 'Enter the email you used for this order', {

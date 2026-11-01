@@ -2,6 +2,7 @@
    currency units in the API. */
 import type { Prisma } from '../../generated/prisma/client'
 import type { Db } from './db'
+import { HttpError } from './errors'
 import { fromCents } from './money'
 import type { ShippingMethod, ShippingZone } from './contract-types'
 
@@ -30,6 +31,7 @@ export async function zoneForCountry(db: Db, country: string | null | undefined)
     zones.find((z) => z.countries.some((x) => x.toLowerCase() === c) || z.name.toLowerCase() === c) ??
     zones.find((z) => z.countries.length === 0) ??
     zones[zones.length - 1]
-  if (!match) throw new Error('No shipping zones configured — run the seed')
+  // No zone at all (the owner deleted them, or no seed): a known answer, not a 500 (I2).
+  if (!match) throw new HttpError(503, 'SHIPPING_NOT_CONFIGURED', 'Shipping is not set up yet. Try again in a moment.')
   return match
 }

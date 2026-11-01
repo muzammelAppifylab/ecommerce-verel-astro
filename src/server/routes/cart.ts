@@ -30,6 +30,7 @@ import {fromCents} from '../lib/money';
 import {zoneForCountry} from '../lib/shipping';
 import {emailField, json, params, query} from '../lib/validate';
 import {readVisitorId} from '../lib/visitor';
+import {rateLimit} from '../lib/rate-limit';
 
 /**
  * Bag (cart), discounts at the bag, abandoned-bag recovery (WP-09, docs/migration/PLAN.md §5).
@@ -344,6 +345,7 @@ export const cartRoutes = new Hono()
   .post('/email', json(emailBody), withViewer, withDb, withLocale, async c => {
     const {email} = c.req.valid('json');
     const db = dbOf(c);
+    await rateLimit(c, db, 'cartEmail');
     const cart = await writableCart(c, db);
     const {locale} = await locOf(c);
     // Only a real change touches the row: `updatedAt` stays the bag's last activity (abandoned-bag idle check).

@@ -16,6 +16,7 @@ import {type OrderRow, serializeOrder} from '../lib/serializers';
 import {getSettings} from '../lib/settings';
 import {json, params, query} from '../lib/validate';
 import {variantMeta} from '../lib/variant-options';
+import {rateLimit} from '../lib/rate-limit';
 
 /**
  * Orders (customer). WP-14 (docs/migration/PLAN.md §5), port of VAREL worker/routes/orders.ts (orders part):
@@ -344,10 +345,11 @@ export const orderRoutes = new Hono()
   })
 
   /* GET /orders/:number — the owner, or a guest with ?email= (confirmation page, guest links). */
-  // I2: rate limit (lookups by email).
   .get('/:number', params(numberParam), query(detailQuery), withViewer, withDb, async c => {
     const {number} = c.req.valid('param');
     const {email} = c.req.valid('query');
+    // Look-ups by number + email are guessable: limited per IP (I2). The signed-in owner is not counted.
+    if (email) await rateLimit(c, c.var.db, 'orderLookup');
     const order = await accessibleOrder(c.var.db, c.var.viewer, number, email || undefined);
     return c.json(toOrder(order, await locOf(c)));
   })
@@ -359,6 +361,7 @@ export const orderRoutes = new Hono()
     const {number} = c.req.valid('param');
     const input = c.req.valid('json');
     const db = c.var.db;
+    if (input.email) await rateLimit(c, db, 'orderLookup');
     const o = await accessibleOrder(db, c.var.viewer, number, input.email || undefined);
     if (o.fulfillment === 'Cancelled') throw new HttpError(409, 'already_cancelled', 'This order is already cancelled');
     if (!canCancel(o)) throw new HttpError(409, 'not_cancellable', NOT_CANCELLABLE);

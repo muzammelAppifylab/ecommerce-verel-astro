@@ -3,6 +3,7 @@ import {z} from 'zod';
 
 import {withDb} from '../../platform/guards';
 import {apiError} from '../lib/http';
+import {rateLimit} from '../lib/rate-limit';
 import {emailField, json} from '../lib/validate';
 
 /**
@@ -41,6 +42,8 @@ export const contactRoutes = new Hono().post('/', json(contactSchema), withDb, a
   const input = c.req.valid('json');
   if (input.website) return c.body(null, 204);
   const db = c.var.db;
+  // Per IP (I2): the per-email throttle below is easy to dodge with a new address.
+  await rateLimit(c, db, 'contact');
   const recent = await db.contactMessage.findMany({
     where: {email: input.email, createdAt: {gte: new Date(Date.now() - THROTTLE_MS)}},
     select: {id: true},

@@ -37,6 +37,14 @@ export const RATE_LIMITS = {
   download: {limit: 60, windowMs: 60 * 60_000, message: 'Too many downloads. Try again later.'},
   /** Personal-data exports per account. */
   export: {limit: 3, windowMs: 60 * 60_000, message: 'You have asked for your data a few times already. Try again in an hour.'},
+  /** Order look-ups by number + email (order page, guest links, cancel) per IP: guessable, so tight. */
+  orderLookup: {limit: 30, windowMs: 15 * 60_000, message: 'Too many look-ups. Try again in 15 minutes.'},
+  /** Orders placed per IP (each one holds stock and may create a PaymentIntent). */
+  checkout: {limit: 20, windowMs: 10 * 60_000, message: 'Too many checkout attempts. Try again in a few minutes.'},
+  /** Settling / giving up a card payment from the browser (calls Stripe) per IP. */
+  checkoutSync: {limit: 60, windowMs: 10 * 60_000, message: 'Too many payment checks. Try again in a few minutes.'},
+  /** Catalogue searches per IP (each loads the catalogue). */
+  search: {limit: 60, windowMs: 60_000, message: 'Too many searches. Try again in a minute.'},
   /** Abandoned-bag email captures per IP. */
   cartEmail: {limit: 10, windowMs: 60 * 60_000, message: 'Too many requests. Try again later.'},
 } as const satisfies Record<string, {limit: number; windowMs: number; message: string}>;
