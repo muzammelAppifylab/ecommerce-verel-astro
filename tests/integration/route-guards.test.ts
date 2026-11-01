@@ -1,6 +1,6 @@
 import {afterAll, beforeAll, describe, expect, it} from 'vitest';
 
-import {requireAuth} from '../../src/platform/guards';
+import {requireAuth, withViewer} from '../../src/platform/guards';
 import {app} from '../../src/server/app';
 import {Browser, configureEnv, DATABASE_URL, db, resetDatabase, signedIn, userId} from './support/harness';
 
@@ -18,6 +18,16 @@ type Route = {method: string; path: string};
 type Entry = Route & {handler: unknown};
 
 const entries = () => (app as unknown as {routes: Entry[]}).routes;
+
+/** True when `handler` runs before this route's own handlers (on the route or on a `use('*')` above it). */
+function inChain(r: Route, handler: unknown): boolean {
+  return entries().some(
+    e =>
+      e.handler === handler &&
+      ((e.path === r.path && (e.method === r.method || e.method === 'ALL')) ||
+        (e.method === 'ALL' && e.path.endsWith('/*') && r.path.startsWith(e.path.slice(0, -1))))
+  );
+}
 
 /** True when `requireAuth` runs before the handlers of this route (on the route or on a `use('*')` above it). */
 function signedInOnly(r: Route): boolean {
@@ -159,4 +169,18 @@ describe.skipIf(!DATABASE_URL)('every Site API route is guarded (integration, re
     }
     expect(crashes).toEqual([]);
   }, 600_000);
+
+  it('nothing that read the visitor is cached publicly', async () => {
+    const guest = new Browser(app, '203.0.113.76');
+    const leaks: string[] = [];
+    for (const r of routes()) {
+      if (r.method !== 'GET' || !inChain(r, withViewer)) continue;
+      for (const who of [guest, customer]) {
+        const res = await who.get(urlOf(r.path));
+        const cc = res.headers.get('cache-control') ?? '';
+        if (/public/.test(cc)) leaks.push(`${r.path} → ${res.status} ${cc}`);
+      }
+    }
+    expect(leaks).toEqual([]);
+  }, 300_000);
 });
