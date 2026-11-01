@@ -1,0 +1,10 @@
+---
+/** `/shop/<dept>/`: a department (VAREL src/pages/Category.tsx). The page is src/components/catalog/CategoryPage.astro. */
+import CategoryPage from '@/components/catalog/CategoryPage.astro';
+
+export const prerender = false;
+
+const {dept = ''} = Astro.params;
+---
+
+<CategoryPage dept={dept} />
