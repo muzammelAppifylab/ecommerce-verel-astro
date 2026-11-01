@@ -18,7 +18,6 @@ import {
 import {intId, json, multiValue, params, parse, query} from '../src/server/lib/validate';
 import {cartRoutes} from '../src/server/routes/cart';
 import {taxonomyRoutes} from '../src/server/routes/catalog';
-import {postRoutes} from '../src/server/routes/posts';
 
 /** F3 contracts: the error shape, keyset helpers, validators and the Wave 0 route stubs. */
 describe('error shape', () => {
@@ -120,7 +119,6 @@ describe('Wave 0 route stubs', () => {
 
   it('sitemap and feed slots answer empty lists', async () => {
     expect(await (await taxonomyRoutes.request('/sitemap')).json()).toEqual({items: []});
-    expect(await (await postRoutes.request('/sitemap')).json()).toEqual({items: []});
-    expect(await (await postRoutes.request('/feed')).json()).toEqual({items: []});
+    // posts: filled by WP-06 (tests/integration/journal.test.ts covers /posts/sitemap and /posts/feed).
   });
 });

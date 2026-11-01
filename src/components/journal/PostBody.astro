@@ -1,0 +1,68 @@
+---
+/**
+ * Article body rendered from PostBlock[] (port of VAREL src/pages/journal/PostBody.tsx): 62ch measure,
+ * Cormorant subheads, chalk pull quotes. The first paragraph is the 18px standfirst in primary ink.
+ * Server-rendered, zero JS; every text is a text node (never set:html). WP-07 (CMS pages) uses it too.
+ */
+import {Img} from '@/components/varel/Img';
+import type {PostBlock} from '@/lib/types/content';
+
+import {headingIds, quoteText} from './headings';
+
+interface Props {
+  body: PostBlock[];
+}
+
+const {body} = Astro.props;
+const firstP = body.findIndex(b => b.type === 'p');
+const ids = headingIds(body);
+---
+
+<div class="flex max-w-[62ch] min-w-0 flex-col gap-7">
+  {
+    body.map((b, i) => {
+      switch (b.type) {
+        case 'p':
+          return i === firstP ? (
+            <p class="m-0 text-[17px] leading-[1.7] text-text-primary md:text-[18px]">{b.text}</p>
+          ) : (
+            <p class="m-0 text-body-md leading-[1.7] text-text-secondary">{b.text}</p>
+          );
+        case 'h2':
+          return (
+            <h2
+              id={ids.get(i)}
+              class="m-0 mt-5 scroll-mt-24 font-display text-[28px] font-normal leading-[1.1] tracking-normal md:text-[34px]">
+              {b.text}
+            </h2>
+          );
+        case 'quote':
+          return (
+            <blockquote class="mx-0 my-5 bg-chalk px-6 py-6 font-display text-[22px] leading-[1.3] md:px-8 md:py-7 md:text-[26px]">
+              <p class="m-0">“{quoteText(b.text)}”</p>
+              {b.cite && (
+                <footer class="mt-4 font-sans text-[11px] leading-snug tracking-label text-text-muted uppercase">{b.cite}</footer>
+              )}
+            </blockquote>
+          );
+        case 'list':
+          return (
+            <ul class="m-0 flex list-disc flex-col gap-3 pl-[22px] text-body-md leading-[1.7] text-text-secondary">
+              {b.items.map(it => (
+                <li>{it}</li>
+              ))}
+            </ul>
+          );
+        case 'image':
+          return (
+            <figure class="m-0 my-2 flex flex-col gap-3">
+              <Img photo={b.image} alt={b.caption ?? ''} ratio="4/5" width={900} sizes="(min-width: 768px) 62ch, 100vw" />
+              {b.caption && <figcaption class="text-body-xs text-text-muted">{b.caption}</figcaption>}
+            </figure>
+          );
+        default:
+          return null;
+      }
+    })
+  }
+</div>

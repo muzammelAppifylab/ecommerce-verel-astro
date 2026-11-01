@@ -1,0 +1,118 @@
+---
+/**
+ * /journal/ — lead entry, the rest in a three-column grid, categories, newsletter
+ * (port of VAREL src/pages/Blog.tsx). Server-rendered per language (`/da/journal/` is rewritten here
+ * by src/middleware.ts); the posts come from `GET /site-api/posts` in-process. The only JS is the
+ * newsletter island and the layout's own.
+ */
+import CategoryChips from '@/components/journal/CategoryChips.astro';
+import FeaturedPost from '@/components/journal/FeaturedPost.astro';
+import {JournalNewsletter, JournalState, Trail} from '@/components/journal/parts';
+import PostCard from '@/components/journal/PostCard.astro';
+import {GUTTER, PAGE_TITLE} from '@/components/journal/shared';
+import {dictsFor} from '@/components/layout/dictionaries';
+import Storefront from '@/layouts/Storefront.astro';
+import {tFor} from '@/lib/i18n/server';
+import {homeLink} from '@/lib/links';
+import type {Post, PostCategory} from '@/lib/types/content';
+import {cn} from '@/lib/utils';
+import {backend, read} from '@/server/backend';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const locale = (Astro.locals as {locale?: string}).locale ?? 'en';
+const t = tFor(locale, 'journal');
+const posts = backend(Astro.request).posts;
+const [{api, site, viewer}, list, categories] = await Promise.all([
+  pageContext(Astro.request, Astro.response),
+  read<Post[]>(posts.$get({query: {}})),
+  read<PostCategory[]>(posts.categories.$get()),
+]);
+
+if (!list) {
+  // The read failed (database down): never a cached empty page.
+  Astro.response.status = 503;
+  Astro.response.headers.set('Retry-After', '60');
+}
+const [lead, ...rest] = list ?? [];
+const trailDicts = dictsFor(locale, {layout: ['ui']});
+const newsletterDicts = dictsFor(locale, {journal: ['newsletterForm'], common: true});
+---
+
+<Storefront site={site} viewer={viewer} api={api} title={t('title')} description={t('metaDescription')} noindex={!list}>
+  <div class="mx-auto w-full max-w-page">
+    <Trail
+      className={cn('pt-6', GUTTER)}
+      locale={locale}
+      dicts={trailDicts}
+      items={[{label: t('home'), href: homeLink(locale)}, {label: t('title')}]}
+    />
+
+    <header class={cn('flex flex-col gap-4 pt-6 pb-10', GUTTER)}>
+      <h1 class={PAGE_TITLE}>{t('title')}</h1>
+      <p class="m-0 max-w-[54ch] text-body-md text-text-secondary">{t('intro')}</p>
+    </header>
+
+    <CategoryChips
+      categories={categories ?? []}
+      active={null}
+      locale={locale}
+      label={t('categoriesLabel')}
+      allLabel={t('allEntries')}
+    />
+
+    {
+      !list ? (
+        <div class={cn('py-12', GUTTER)}>
+          <JournalState
+            title={t('index.errorTitle')}
+            description={t('loadErrorDescription')}
+            actionLabel={t('tryAgain')}
+            actionHref={Astro.originPathname}
+          />
+        </div>
+      ) : !lead ? (
+        <div class={cn('py-12', GUTTER)}>
+          <JournalState title={t('index.emptyTitle')} description={t('index.emptyDescription')} />
+        </div>
+      ) : (
+        <>
+          <article class={cn('border-b border-hairline py-12', GUTTER)}>
+            <FeaturedPost post={lead} locale={locale} readLabel={t('readPiece')} />
+          </article>
+          {rest.length > 0 && (
+            <div class={cn('grid grid-cols-1 gap-x-7 gap-y-12 py-12 sm:grid-cols-2 lg:grid-cols-3', GUTTER)}>
+              {rest.map(p => (
+                <PostCard post={p} locale={locale} />
+              ))}
+            </div>
+          )}
+        </>
+      )
+    }
+
+    <section
+      aria-labelledby="journal-newsletter"
+      class={cn(
+        'grid grid-cols-1 items-center gap-10 border-t border-hairline py-14 md:grid-cols-2 md:gap-16 md:py-[72px]',
+        GUTTER
+      )}>
+      <div class="flex flex-col gap-3.5">
+        <h2
+          id="journal-newsletter"
+          class="m-0 max-w-[22ch] font-display text-[28px] font-normal leading-tight tracking-normal md:text-[34px]">
+          {t('newsletter.title')}
+        </h2>
+        <p class="m-0 max-w-[44ch] text-[15px] leading-body text-text-secondary">{t('newsletter.body')}</p>
+      </div>
+      <JournalNewsletter
+        client:visible
+        locale={locale}
+        dicts={newsletterDicts}
+        note={t('newsletter.note')}
+        successNote={t('newsletter.success')}
+      />
+    </section>
+  </div>
+</Storefront>

@@ -1,0 +1,41 @@
+---
+/** "All entries" + one chip per journal category. `active` is the category slug, or null for all.
+    (VAREL journal/shared.tsx `CategoryChips`; server-rendered, so no loading chips.) */
+import {slugify} from '@/lib/format';
+import {journalCategoryLink, journalLink} from '@/lib/links';
+import type {PostCategory} from '@/lib/types/content';
+import {cn} from '@/lib/utils';
+
+import {CHIP, CHIP_OFF, CHIP_ON, GUTTER} from './shared';
+
+interface Props {
+  categories: PostCategory[];
+  active: string | null;
+  locale: string;
+  /** journal:categoriesLabel */
+  label: string;
+  /** journal:allEntries */
+  allLabel: string;
+}
+
+const {categories, active, locale, label, allLabel} = Astro.props;
+---
+
+<nav aria-label={label} class={cn('flex flex-wrap gap-2 border-b border-hairline pb-8', GUTTER)}>
+  <a
+    href={journalLink(locale)}
+    aria-current={active === null ? 'page' : undefined}
+    class={cn(CHIP, active === null ? CHIP_ON : CHIP_OFF)}>
+    {allLabel}
+  </a>
+  {
+    categories.map(c => {
+      const on = slugify(c.name) === active;
+      return (
+        <a href={journalCategoryLink(c.name, locale)} aria-current={on ? 'page' : undefined} class={cn(CHIP, on ? CHIP_ON : CHIP_OFF)}>
+          {c.label ?? c.name}
+        </a>
+      );
+    })
+  }
+</nav>

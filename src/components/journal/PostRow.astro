@@ -1,0 +1,40 @@
+---
+/** Category list row: 300px image · copy · arrow. Stacks on small screens. (VAREL PostCards `PostRow`.) */
+import {Icon} from '@/components/varel/Icon';
+import {Img} from '@/components/varel/Img';
+import {dotJoin} from '@/lib/format';
+import {postLink} from '@/lib/links';
+import type {Post} from '@/lib/types/content';
+
+import {META} from './shared';
+
+interface Props {
+  post: Post;
+  locale: string;
+}
+
+const {post, locale} = Astro.props;
+---
+
+<a
+  href={postLink(post.slug, locale)}
+  data-card
+  class="grid grid-cols-1 items-center gap-5 border-0 border-b border-hairline py-8 text-text-primary hover:border-hairline hover:text-text-primary sm:grid-cols-[200px_minmax(0,1fr)] sm:gap-8 lg:grid-cols-[300px_minmax(0,1fr)_auto]">
+  <Img
+    photo={post.image}
+    alt={post.title}
+    ratio="16/9"
+    width={600}
+    sizes="(min-width: 1024px) 300px, (min-width: 640px) 200px, 100vw"
+  />
+  <div class="flex min-w-0 flex-col gap-3">
+    <span class={META}>{dotJoin(post.date, post.read, post.author)}</span>
+    <h2 class="m-0 font-display text-[26px] font-normal leading-[1.1] tracking-normal md:text-[32px]">
+      <span data-name>{post.title}</span>
+    </h2>
+    <p class="m-0 max-w-[58ch] text-[15px] leading-body text-text-secondary">{post.excerpt}</p>
+  </div>
+  <span aria-hidden="true" class="hidden text-text-muted lg:flex">
+    <Icon name="arrow-right" size={20} />
+  </span>
+</a>

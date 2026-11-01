@@ -1,0 +1,46 @@
+---
+/** Grid entry: image, category · read, title, excerpt, date · author. `compact` = Keep reading row (no excerpt/byline).
+    (VAREL PostCards `PostCard`.) */
+import {Img} from '@/components/varel/Img';
+import {dotJoin} from '@/lib/format';
+import {postLink} from '@/lib/links';
+import type {Post} from '@/lib/types/content';
+import {cn} from '@/lib/utils';
+
+import {META} from './shared';
+
+interface Props {
+  post: Post;
+  locale: string;
+  compact?: boolean;
+}
+
+const {post, locale, compact = false} = Astro.props;
+---
+
+<a
+  href={postLink(post.slug, locale)}
+  data-card
+  class={cn('flex min-w-0 flex-col border-0 text-text-primary hover:text-text-primary', compact ? 'gap-3.5' : 'gap-4')}>
+  <Img
+    photo={post.image}
+    alt={post.title}
+    ratio="16/9"
+    width={800}
+    sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 100vw"
+  />
+  <span class={META}>{dotJoin(post.categoryLabel ?? post.category, post.read)}</span>
+  {
+    compact ? (
+      <span class="font-display text-[24px] leading-display" data-name>
+        {post.title}
+      </span>
+    ) : (
+      <>
+        <h2 class="m-0 font-display text-[26px] font-normal leading-display tracking-normal">{post.title}</h2>
+        <p class="m-0 text-body-sm text-text-secondary">{post.excerpt}</p>
+        <span class="text-[12px] text-text-muted">{dotJoin(post.date, post.author)}</span>
+      </>
+    )
+  }
+</a>
