@@ -5,6 +5,7 @@ import {DEFAULT_HERO, heroFormOf, resolveHero, toHero, validateHero} from '../sr
 import {blockFromPost, blockToPost, listItems, validatePage} from '../src/portal/screens/pages/blocks';
 import {MENU_KEYS, isMenuUrl, menuItems, menuSchema} from '../src/server/routes/admin/menus';
 import {block, isImageSrc} from '../src/server/routes/admin/pages';
+import type {PostBlock} from '../src/lib/types/content';
 
 /** WP-07: menu, page block and home hero rules (server and dashboard). */
 describe('menus', () => {
@@ -63,7 +64,7 @@ describe('page blocks', () => {
       {type: 'quote', text: 'Q', cite: 'C'},
       {type: 'image', image: {src: 'https://a.test/i.jpg', credit: 'X', creditHref: ''}, caption: 'Cap'},
       {type: 'list', items: ['a', 'b']},
-    ] as const;
+    ] satisfies PostBlock[];
     for (const b of blocks) expect(blockToPost(blockFromPost(b))).toEqual(b);
     expect(listItems('- one\n\n• two\n * three')).toEqual(['one', 'two', 'three']);
   });
