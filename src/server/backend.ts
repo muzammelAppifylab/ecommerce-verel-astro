@@ -1,5 +1,6 @@
 import {hc} from 'hono/client';
 
+import {DEFAULT_LOCALE, LOCALE_HEADER} from '../lib/i18n/locales';
 import {app, type AppType} from './app';
 
 /**
@@ -18,10 +19,14 @@ import {app, type AppType} from './app';
  * invocation (slower, billed twice) and loses the per-request memo.
  */
 // `x-locale`: set by src/middleware.ts on a language-prefixed URL, so in-process calls answer in that language.
+// An unprefixed page is English (PLAN.md D7, src/middleware.ts), so its calls name that language
+// too: a `varel_locale` cookie or Accept-Language never mixes another language into an English page.
 const FORWARDED = ['cookie', 'authorization', 'user-agent', 'accept-language', 'x-locale'];
 
 export function backend(request: Request) {
-  const origin = new URL(request.url).origin;
+  const url = new URL(request.url);
+  const origin = url.origin;
+  const fromApi = url.pathname.startsWith('/site-api/');
   return hc<AppType>(origin, {
     fetch: (input: RequestInfo | URL, init?: RequestInit) => {
       const headers = new Headers(init?.headers);
@@ -29,6 +34,7 @@ export function backend(request: Request) {
         const value = request.headers.get(name);
         if (value && !headers.has(name)) headers.set(name, value);
       }
+      if (!fromApi && !headers.has(LOCALE_HEADER)) headers.set(LOCALE_HEADER, DEFAULT_LOCALE);
       return app.request(input instanceof Request ? input : String(input), {...init, headers});
     },
   })['site-api'];
