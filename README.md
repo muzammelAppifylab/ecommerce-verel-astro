@@ -35,21 +35,50 @@ The platform sees `astro` and `@astrojs/cloudflare`, installs with `npm ci`, run
 `npm run build` (`prisma generate && astro build`), applies new migrations to your live database,
 then deploys. If a migration fails, the previous version keeps serving.
 
+## Owner setup for the live store (VAREL)
+
+The store works without any of this: card payments run on the **simulated** provider, store
+emails are kept in the **outbox** (Dashboard › Settings › Emails) instead of being sent, seed
+images are https links, and machine translation is off. Each item below turns one real service
+on. Secrets are added by the owner in the site's dashboard (the app's **Secrets**); the code only
+reads them through `config.ownerSecret('NAME')`, never from a file. Never put a key in the repo,
+`.env` or a chat.
+
+| # | What | Where | Names / values |
+| --- | --- | --- | --- |
+| 1 | **Site Database** | the app's Database tab, before the first Publish | — (migrations are refused without it) |
+| 2 | **Owner account** | automatic: the account owner's email (plus `ownerEmails` in `src/server/auth-settings.ts`) | sign in at `/dashboard` with the emailed code |
+| 3 | **Stripe** (real card payments) | secrets: `STRIPE_SECRET_KEY` (`sk_test_…` first, `sk_live_…` to go live), `STRIPE_WEBHOOK_SECRET` (`whsec_…`) · Dashboard › Settings › Payments: provider **Stripe** + the publishable key (`pk_…`, public) | Stripe webhook endpoint: `https://<your domain>/site-api/webhooks/stripe`, events `payment_intent.succeeded`, `payment_intent.payment_failed`, `payment_intent.canceled`, `charge.refunded`. The Payments screen shows whether each key is set and its test/live mode: keep all three in the same mode. |
+| 4 | **Store emails** (order confirmation, shipping, refunds, returns, abandoned bag, newsletter) | secret `EMAIL_API_KEY` (Resend or Postmark API key, or the shared secret of your webhook) · Dashboard › Settings › Emails: provider, sender name and address | The sender's domain must be verified at the provider (SPF/DKIM). Account emails (confirm, reset, sign-in codes) are sent by the platform and need nothing here. |
+| 5 | **File storage** (product, collection and journal images uploaded in the dashboard; digital downloads) | the app's **Storage** tab: a storage pack, then "Turn on" | Without it uploads stop with a clear message; https image links keep working. |
+| 6 | **Machine translation** (optional) | Workers AI: secrets `CF_ACCOUNT_ID` + `CF_AI_TOKEN` (an API token with Workers AI permission) · or DeepL: `DEEPL_API_KEY` · Dashboard › Settings › Languages: provider | Runs hourly in the background (`translations-backfill`); hand translations always win. |
+| 7 | **Custom domain** (optional) | the app's Domains tab; then `SITE.url` in `src/content/site.ts` (`https://www.example.com`, no trailing slash) and Publish | Canonical URLs, hreflang, the sitemap, RSS and social cards use it. Update the Stripe webhook URL to the new domain. |
+| 8 | **Store details for search and social** | Dashboard › Settings: store name, SEO title and description, share image (1200×630), logo, support email, phone, legal name, social links, enabled languages | Feeds `<title>`, Open Graph, the home page's `Organization` data and the sitemap's language alternates. |
+
+Background work (no setup; check it with `npm run platform -- jobs`): abandoned-bag reminders and
+unpaid-order expiry every 15 minutes, translations hourly, store emails as they are queued
+(`background.json`).
+
+Before going live: switch Stripe to live keys (both secrets and the publishable key, same mode),
+send a test order end to end, and check `/sitemap.xml` and `/robots.txt` on the live address.
+
 ## What this site controls
 
 | Address | Served by |
 | --- | --- |
-| `/`, `/about/`, `/blog/`, `/jobs/` | this site |
-| `/sitemap.xml`, `/robots.txt`, `/rss.xml` | this site (search engines, feed readers) |
+| `/`, `/shop/…`, `/product/<id>/`, `/collections/…`, `/journal/…`, `/search/`, `/about/`, `/contact/`, `/returns/`, `/privacy/`, `/terms/`, `/pages/<slug>/` | this site (the storefront; `/da/`, `/de/`, `/fr/`, `/es/`, `/sv/` for other languages) |
+| `/cart/`, `/checkout/`, `/order/<number>/confirmation/`, `/wishlist/` | this site (per visitor, not indexed) |
+| `/sitemap.xml`, `/robots.txt`, `/rss.xml` | this site (search engines, the journal feed) |
 | `/account/login`, `/account/register`, `/account/forgot`, … | this site (sign-in) |
-| `/dashboard/…` | this site (the dashboard) |
-| `/site-api/…` | this site (your API) |
+| `/account/…` | this site (the customer account: orders, addresses, downloads) |
+| `/dashboard/…` | this site (the store admin) |
+| `/site-api/…` | this site (your API; `/site-api/webhooks/stripe` for Stripe) |
 | `/api/…` | the platform |
 
-## Write a post
+## Write a journal post
 
-Add a Markdown file to `src/content/blog/` (`my-post.md` → `/blog/my-post/`) with a `title`,
-`description` and `publishedAt` at the top (see `how-to-add-a-post.md` there), then Publish.
+Journal posts live in the Site Database: write them in Dashboard › Journal (they appear on
+`/journal/`, in `/rss.xml` and the sitemap as soon as they are published; no Publish needed).
 
 ## Accounts
 

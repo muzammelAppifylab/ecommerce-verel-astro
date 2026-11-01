@@ -13,6 +13,7 @@ import Storefront from '@/layouts/Storefront.astro';
 import {slugify} from '@/lib/format';
 import {tFor} from '@/lib/i18n/server';
 import {homeLink, journalLink} from '@/lib/links';
+import {breadcrumbJsonLd} from '@/lib/seo';
 import type {Post, PostCategory} from '@/lib/types/content';
 import {cn} from '@/lib/utils';
 import {backend, read} from '@/server/backend';
@@ -54,7 +55,8 @@ const trailDicts = dictsFor(locale, {layout: ['ui']});
   api={api}
   title={t('category.pageTitle', {name})}
   description={blurb || t('metaDescription')}
-  noindex={failed || !known}>
+  noindex={failed || !known}
+  jsonLd={breadcrumbJsonLd([{label: t('home'), href: homeLink(locale)}, {label: t('title'), href: journalLink(locale)}, {label: name}])}>
   <div class="mx-auto w-full max-w-page">
     <Trail
       className={cn('pt-6', GUTTER)}

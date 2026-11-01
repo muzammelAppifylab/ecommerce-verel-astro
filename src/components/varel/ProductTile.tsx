@@ -47,6 +47,8 @@ export interface ProductTileProps {
   nameSize?: 20 | 21 | 22;
   /** `sizes` hint for the image */
   sizes?: string;
+  /** Load the image eagerly with high priority (the first tiles of a listing: the likely LCP image) */
+  priority?: boolean;
   className?: string;
 }
 
@@ -90,6 +92,7 @@ export function ProductTile({
   variant = 'full',
   nameSize,
   sizes = '(min-width: 1024px) 30vw, 50vw',
+  priority = false,
   className,
 }: ProductTileProps) {
   const t = useText('product');
@@ -99,7 +102,7 @@ export function ProductTile({
     <article data-card="true" className={cn('group flex min-w-0 flex-col', compact ? 'gap-3' : 'gap-3.5', className)}>
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-chalk">
         <a href={href} aria-label={name} tabIndex={compact ? undefined : -1} className="absolute inset-0 block border-0">
-          <Img photo={photo} alt={alt ?? name} ratio="fill" width={800} sizes={sizes} />
+          <Img photo={photo} alt={alt ?? name} ratio="fill" width={800} sizes={sizes} priority={priority} />
         </a>
         {!compact && badge && (
           <span className="absolute top-0 left-0">

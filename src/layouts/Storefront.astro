@@ -37,7 +37,7 @@ import Base from './Base.astro';
 
 type BaseProps = ComponentProps<typeof Base>;
 
-interface Props extends Omit<BaseProps, 'chrome' | 'locale' | 'alternates'> {
+interface Props extends Omit<BaseProps, 'chrome' | 'locale' | 'alternates' | 'identity'> {
   /** The page's in-process Site API client (`pageContext().api`); one is made when omitted. */
   api?: unknown;
   /** Hide the newsletter + footer (rare: a bare editorial page). Default false. */
@@ -58,6 +58,15 @@ const chrome = buildChrome({
 setMoneyContext(chrome.currency, locale);
 const t = serverText(locale);
 const alternates = chrome.languages.map(l => ({code: l.code, href: l.href}));
+// The store behind the home page's Organization JSON-LD (VAREL html.ts storeSeo): name, logo, contact, socials.
+const identity = {
+  ...(settings?.storeName && {name: settings.storeName}),
+  ...(settings?.logoUrl && {logo: settings.logoUrl}),
+  ...(settings?.supportEmail && {email: settings.supportEmail}),
+  ...(settings?.phone && {telephone: settings.phone}),
+  ...(settings?.legalName && {legalName: settings.legalName}),
+  sameAs: Object.values(settings?.socialLinks ?? {}).filter((link): link is string => typeof link === 'string'),
+};
 const headerProps = {
   header: chrome.header,
   links: chrome.links,
@@ -70,10 +79,12 @@ const headerProps = {
 const cookieDicts = {privacy: chrome.dicts.privacy ?? {}, common: chrome.dicts.common ?? {}};
 ---
 
-<Base {...base} chrome="none" locale={locale} alternates={alternates}>
+<Base {...base} chrome="none" locale={locale} alternates={alternates} identity={identity}>
   <Fragment slot="head">
     <meta name="theme-color" content="#FFFFFF" />
     <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin />
+    {/* The body face too: the header, prices and copy above the fold are Lato 400 (I1). */}
+    <link rel="preload" href="/fonts/lato-400-latin.woff2" as="font" type="font/woff2" crossorigin />
     <slot name="head" />
   </Fragment>
   <div class="flex min-h-screen w-full flex-col bg-surface-page" data-store-currency={chrome.currency}>

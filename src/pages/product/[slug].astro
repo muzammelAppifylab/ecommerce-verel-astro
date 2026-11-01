@@ -25,7 +25,7 @@ import {slugify} from '@/lib/format';
 import {categoryLink, deptLink, homeLink, productLink} from '@/lib/links';
 import {badgeTone} from '@/lib/product';
 import {toPlainText} from '@/lib/rich-text';
-import {absoluteUrl} from '@/lib/seo';
+import {absoluteUrl, breadcrumbJsonLd} from '@/lib/seo';
 import type {Product} from '@/lib/types/catalog';
 import type {PublicSettings} from '@/lib/types/settings';
 import {read} from '@/server/backend';
@@ -84,18 +84,19 @@ const view = product
       const category = p.categorySlug || slugify(p.category);
       const canonical = absoluteUrl(productLink(p.id, locale));
       const image = absImage(p.gallery[0]?.src ?? p.image.src, absoluteUrl) ?? absImage(settings?.ogImage, absoluteUrl);
+      const crumbs = [
+        {label: t('page.home'), href: homeLink(locale)},
+        {label: p.deptLabel ?? p.dept, href: deptLink(dept, locale)},
+        {label: p.categoryLabel ?? p.category, href: categoryLink(dept, category, locale)},
+        {label: p.name},
+      ];
       return {
         p,
         title: p.seoTitle || p.name,
         description: metaDescription(p, settings?.seoDescription),
         image,
-        jsonLd: productJsonLd(p, {canonical, currency, storeName, locale, abs: absoluteUrl}),
-        crumbs: [
-          {label: t('page.home'), href: homeLink(locale)},
-          {label: p.deptLabel ?? p.dept, href: deptLink(dept, locale)},
-          {label: p.categoryLabel ?? p.category, href: categoryLink(dept, category, locale)},
-          {label: p.name},
-        ],
+        jsonLd: [productJsonLd(p, {canonical, currency, storeName, locale, abs: absoluteUrl}), breadcrumbJsonLd(crumbs, productLink(p.id, locale))],
+        crumbs,
         summary: p.short || toPlainText(p.description),
         gallery: p.gallery.length ? p.gallery : [p.image],
         initial: {color: param('color'), size: param('size')},
