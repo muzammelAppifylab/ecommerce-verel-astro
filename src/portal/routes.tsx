@@ -808,22 +808,67 @@ const settingsRoute = createRoute({
   staticData: {title: 'Settings'},
   component: lazyRouteComponent(() => import('./screens/settings'), 'SettingsLayout'),
 });
-const settingsSection = (section: SettingsSection, path: string, title: string, name: string) =>
-  createRoute({
-    getParentRoute: () => settingsRoute,
-    path,
-    staticData: {title},
-    loader: ({context: {queryClient}}) => warm(loadSettings(queryClient, section)),
-    component: lazyRouteComponent(() => import('./screens/settings'), name as 'GeneralSettings'),
-  });
-const generalSettingsRoute = settingsSection('general', '/', 'Settings', 'GeneralSettings');
-const checkoutSettingsRoute = settingsSection('checkout', '/checkout', 'Checkout', 'CheckoutSettings');
-const paymentsSettingsRoute = settingsSection('payments', '/payments', 'Payments', 'PaymentsSettings');
-const taxSettingsRoute = settingsSection('tax', '/tax', 'Tax and currency', 'TaxSettings');
-const shippingSettingsRoute = settingsSection('shipping', '/shipping', 'Shipping', 'ShippingSettings');
-const inventorySettingsRoute = settingsSection('inventory', '/inventory', 'Inventory and returns', 'InventorySettings');
-const privacySettingsRoute = settingsSection('privacy', '/privacy', 'Customers and privacy', 'PrivacySettings');
-const seoSettingsRoute = settingsSection('seo', '/seo', 'SEO', 'SeoSettings');
+// One literal route per section (a factory would widen `path` to `string` and untype `<Link to>`).
+const settingsLoader =
+  (section: SettingsSection) =>
+  ({context: {queryClient}}: {context: {queryClient: QueryClient}}) =>
+    warm(loadSettings(queryClient, section));
+const generalSettingsRoute = createRoute({
+  getParentRoute: () => settingsRoute,
+  path: '/',
+  staticData: {title: 'Settings'},
+  loader: settingsLoader('general'),
+  component: lazyRouteComponent(() => import('./screens/settings'), 'GeneralSettings'),
+});
+const checkoutSettingsRoute = createRoute({
+  getParentRoute: () => settingsRoute,
+  path: '/checkout',
+  staticData: {title: 'Checkout'},
+  loader: settingsLoader('checkout'),
+  component: lazyRouteComponent(() => import('./screens/settings'), 'CheckoutSettings'),
+});
+const paymentsSettingsRoute = createRoute({
+  getParentRoute: () => settingsRoute,
+  path: '/payments',
+  staticData: {title: 'Payments'},
+  loader: settingsLoader('payments'),
+  component: lazyRouteComponent(() => import('./screens/settings'), 'PaymentsSettings'),
+});
+const taxSettingsRoute = createRoute({
+  getParentRoute: () => settingsRoute,
+  path: '/tax',
+  staticData: {title: 'Tax and currency'},
+  loader: settingsLoader('tax'),
+  component: lazyRouteComponent(() => import('./screens/settings'), 'TaxSettings'),
+});
+const shippingSettingsRoute = createRoute({
+  getParentRoute: () => settingsRoute,
+  path: '/shipping',
+  staticData: {title: 'Shipping'},
+  loader: settingsLoader('shipping'),
+  component: lazyRouteComponent(() => import('./screens/settings'), 'ShippingSettings'),
+});
+const inventorySettingsRoute = createRoute({
+  getParentRoute: () => settingsRoute,
+  path: '/inventory',
+  staticData: {title: 'Inventory and returns'},
+  loader: settingsLoader('inventory'),
+  component: lazyRouteComponent(() => import('./screens/settings'), 'InventorySettings'),
+});
+const privacySettingsRoute = createRoute({
+  getParentRoute: () => settingsRoute,
+  path: '/privacy',
+  staticData: {title: 'Customers and privacy'},
+  loader: settingsLoader('privacy'),
+  component: lazyRouteComponent(() => import('./screens/settings'), 'PrivacySettings'),
+});
+const seoSettingsRoute = createRoute({
+  getParentRoute: () => settingsRoute,
+  path: '/seo',
+  staticData: {title: 'SEO'},
+  loader: settingsLoader('seo'),
+  component: lazyRouteComponent(() => import('./screens/settings'), 'SeoSettings'),
+});
 const emailsSettingsRoute = createRoute({
   getParentRoute: () => settingsRoute,
   path: '/emails',
