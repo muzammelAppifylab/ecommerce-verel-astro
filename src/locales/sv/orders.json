@@ -104,7 +104,13 @@
     "empty": {
       "title": "Inga ordrar i den här vyn",
       "description": "Byt filter, eller börja med något från höstens urval."
-    }
+    },
+    "countMore_one": "{{count}}+ order",
+    "countMore_other": "{{count}}+ ordrar",
+    "countSinceMore_one": "{{count}}+ order sedan {{since}}",
+    "countSinceMore_other": "{{count}}+ ordrar sedan {{since}}",
+    "more": "Visa fler ordrar",
+    "loadingMore": "Hämtar ordrar…"
   },
   "card": {
     "order": "Order",
@@ -168,7 +174,8 @@
     },
     "paidWith": "Betald med {{card}}",
     "refunded": "Den här ordern har återbetalats.",
-    "footer": "Tack för att du handlar hos {{store}}. Frågor om fakturan? Skriv till {{email}} och ange fakturanumret."
+    "footer": "Tack för att du handlar hos {{store}}. Frågor om fakturan? Skriv till {{email}} och ange fakturanumret.",
+    "documentTitle": "{{store}} faktura {{number}}"
   },
   "cancel": {
     "button": "Avbryt order",

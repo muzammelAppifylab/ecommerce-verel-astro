@@ -8,7 +8,9 @@
     "button": "Look up",
     "note": "Your order number starts with VRL- and is in your confirmation email",
     "enterNumber": "Enter the order number from your confirmation email",
-    "notFound": "We cannot find that order number"
+    "notFound": "We cannot find that order number",
+    "pending": "Looking up…",
+    "emailLabel": "Email used for the order"
   },
   "steps": {
     "label": "How returns work",
@@ -81,6 +83,9 @@
     "quantity": "Quantity",
     "reason": "Reason",
     "chooseReason": "Choose a reason",
-    "reasonPlaceholder": "Too large in the shoulder"
+    "reasonPlaceholder": "Too large in the shoulder",
+    "emailHint": "We match it to the order before booking the return.",
+    "emailNeeded": "Enter the email you used for this order",
+    "submitting": "Requesting…"
   }
 }

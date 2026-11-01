@@ -8,7 +8,9 @@
     "button": "Rechercher",
     "note": "Votre numéro de commande commence par VRL- et figure dans votre e-mail de confirmation",
     "enterNumber": "Saisissez le numéro de commande figurant dans votre e-mail de confirmation",
-    "notFound": "Nous ne trouvons pas ce numéro de commande"
+    "notFound": "Nous ne trouvons pas ce numéro de commande",
+    "pending": "Recherche…",
+    "emailLabel": "E-mail utilisé pour la commande"
   },
   "steps": {
     "label": "Comment fonctionnent les retours",
@@ -82,6 +84,9 @@
     "quantity": "Quantité",
     "reason": "Motif",
     "chooseReason": "Choisissez un motif",
-    "reasonPlaceholder": "Trop large aux épaules"
+    "reasonPlaceholder": "Trop large aux épaules",
+    "emailHint": "Nous le comparons à la commande avant d’enregistrer le retour.",
+    "emailNeeded": "Saisissez l’e-mail utilisé pour cette commande",
+    "submitting": "Envoi de la demande…"
   }
 }
