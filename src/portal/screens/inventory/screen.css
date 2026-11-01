@@ -1,0 +1,193 @@
+/* Inventory (WP-18): scoped to the screen; tokens from src/styles/global.css. */
+
+.screen-inventory .inv-search {
+  flex: 0 1 18rem;
+  min-width: 0;
+}
+
+.screen-inventory .inv-search .search-input {
+  width: 100%;
+}
+
+/* Multi-select filter: the kit's segmented look, pressed state instead of radio. */
+.filter-toggles .segment[aria-pressed='true'] {
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 0 0 1px var(--line-strong);
+}
+
+.screen-inventory .inv-product {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  max-width: 300px;
+}
+
+.screen-inventory .inv-product a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inv-thumb {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 43px;
+  overflow: hidden;
+  background: var(--surface);
+  color: var(--subtle);
+}
+
+.inv-thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+.screen-inventory .inv-sku {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.row-check {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.row-check:disabled {
+  cursor: not-allowed;
+}
+
+.stock-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.375rem;
+}
+
+.stock-input {
+  width: 4rem;
+  height: 2rem;
+  padding: 0 0.5rem;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.stock-input:hover {
+  border-color: var(--line-strong);
+}
+
+.stock-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--ink);
+}
+
+.stock-input[data-changed] {
+  border-color: var(--ink);
+  background: var(--surface);
+}
+
+.inv-old {
+  color: var(--subtle);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  text-decoration: line-through;
+}
+
+.inv-zero {
+  color: var(--danger);
+}
+
+.screen-inventory .inv-error {
+  display: grid;
+  justify-items: start;
+  gap: 0.75rem;
+}
+
+.screen-inventory .inv-bar-space {
+  height: 4rem;
+}
+
+/* Bulk dialog */
+.inv-bulk-body {
+  display: grid;
+  gap: 0.75rem;
+  font-size: 13px;
+}
+
+.inv-amount {
+  max-width: 10rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.inv-preview {
+  max-height: 14rem;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  border: 1px solid var(--line);
+}
+
+.inv-preview li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.inv-preview li + li {
+  border-top: 1px solid var(--line);
+}
+
+.inv-preview-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inv-preview-count {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.375rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.inv-preview-count svg {
+  color: var(--subtle);
+}
+
+@media (max-width: 760px) {
+  .screen-inventory .inv-search {
+    flex-basis: 100%;
+  }
+
+  .screen-inventory .filter-toggles {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}

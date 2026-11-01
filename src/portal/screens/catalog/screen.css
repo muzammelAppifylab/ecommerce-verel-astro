@@ -1,0 +1,70 @@
+/* Departments (WP-18): scoped to the screen; tokens from src/styles/global.css. */
+
+.screen-catalog .dept-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.screen-catalog .dept-card {
+  transition: opacity 160ms ease;
+}
+
+.screen-catalog .dept-card[aria-busy='true'] {
+  opacity: 0.7;
+}
+
+.screen-catalog .dept-card .card-head h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.screen-catalog .dept-card .card-head p {
+  font-size: 12px;
+  color: var(--subtle);
+}
+
+.screen-catalog .dept-card .card-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.screen-catalog .dept-count {
+  color: inherit;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.screen-catalog .dept-count:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.screen-catalog .move-buttons {
+  display: inline-flex;
+  gap: 0.125rem;
+}
+
+.screen-catalog .dept-empty {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  font-size: 13px;
+}
+
+.screen-catalog .dept-empty p {
+  margin: 0;
+}
+
+.screen-catalog .dept-error {
+  display: grid;
+  justify-items: start;
+  gap: 0.75rem;
+}
