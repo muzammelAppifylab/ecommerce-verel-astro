@@ -1,0 +1,74 @@
+/* Subscribers screen (WP-20; VAREL pages/admin/subscribers/*). Bundled by src/layouts/App.astro. */
+
+.screen-subscribers .subscribers-export {
+  display: grid;
+  justify-items: end;
+  gap: 0.25rem;
+}
+
+.screen-subscribers .subscribers-hint {
+  font-size: 0.75rem;
+}
+
+.screen-subscribers .subscribers-search {
+  flex: 1 1 18rem;
+  max-width: 20rem;
+}
+
+.screen-subscribers .subscribers-search .search-input {
+  width: 100%;
+}
+
+.screen-subscribers .subscribers-count {
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.screen-subscribers .subscribers-email {
+  color: var(--ink);
+  word-break: break-all;
+}
+
+.screen-subscribers .subscribers-source {
+  text-transform: capitalize;
+}
+
+.screen-subscribers .subscribers-date {
+  white-space: nowrap;
+}
+
+.screen-subscribers .subscribers-retry {
+  margin-top: 0.75rem;
+}
+
+.screen-subscribers .subscribers-bulk-spacer {
+  height: 4rem;
+}
+
+/* The addresses in the remove confirmation (the dialog lives outside the screen's element). */
+.subscribers-email-list {
+  display: block;
+  max-height: 10rem;
+  margin-top: 0.75rem;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  font-size: 0.8125rem;
+}
+
+.subscribers-email-list > span {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.subscribers-email-list > span + span {
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 720px) {
+  .screen-subscribers .subscribers-export {
+    justify-items: start;
+  }
+}

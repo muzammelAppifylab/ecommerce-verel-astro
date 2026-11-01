@@ -1,20 +1,69 @@
 import {Hono} from 'hono';
+import {z} from 'zod';
 
-import {notImplemented} from '../lib/http';
+import {withDb} from '../../platform/guards';
+import type {Db} from '../lib/db';
+import {apiError} from '../lib/http';
+import {emailField, json, optionalText} from '../lib/validate';
 
 /**
- * Newsletter sign-up. WP-20 implements (docs/migration/PLAN.md §5).
- * Port of VAREL worker/routes/misc.ts (POST /newsletter): VAREL `/api/<path>` is `/site-api/<path>` here, same shapes
- * (src/lib/types/*), errors as `{error, message, fields?}` (src/server/lib/http.ts).
+ * Newsletter sign-up (port of VAREL worker/routes/misc.ts `POST /newsletter`): VAREL `/api/newsletter`
+ * is `/site-api/newsletter` here, same body (`NewsletterInput`, src/lib/types/account.ts).
  *
  *   POST   /site-api/newsletter                        NewsletterInput → 204 (idempotent, rate limited)
  *
- * Wave 0 stub: every route answers 501 `not_implemented` (sitemap/feed routes answer `{items: []}`).
- * Replace each handler IN PLACE, keeping the method and path (the typed client and the pages rely on
- * them). Per route: validator (src/server/lib/validate.ts) → withViewer → requireAuth → … → withDb.
- * Several public modules share a mount prefix (`/products`, `/account`): never `.use('*')` here,
- * put middleware on each route. Static paths stay before `/:param` ones.
+ * Visitor-independent: no `withViewer`. The app-wide `sameOrigin`, `csrf` and body limit apply.
+ * The same 204 answers a new and an existing address (no enumeration); an existing row keeps its
+ * original `source` and date. Per-IP limits are I2's; a global flood guard refuses a burst.
+ *
+ * `subscribe` / `unsubscribe` are the writes every other writer of `newsletter_subscribers` should
+ * reuse (checkout, account preferences, sign-up onboarding), so the subscriber row and the account's
+ * `CustomerProfile.marketingOptIn` (VAREL `User.newsletter`) always move together.
  */
+
+/** Sign-ups accepted from everyone together in one minute before answering 429. */
+export const NEWSLETTER_FLOOD_LIMIT = 30;
+const FLOOD_WINDOW_MS = 60_000;
+export const FLOOD_MESSAGE = 'Too many sign-ups right now. Try again in a minute.';
+
+/** Where the form was: `footer`, `journal`, `home`, `checkout`, `signup`, `account`… (lower-cased). */
+export const newsletterSource = optionalText(40)
+  .refine(s => s === null || /^[a-z0-9_-]+$/i.test(s), 'Use letters, digits, - or _')
+  .transform(s => (s ? s.toLowerCase() : null));
+
+export const newsletterBody = z.object({email: emailField, source: newsletterSource});
+
+/** Subscribe `email` (already trimmed and lower-cased): upsert the row, never overwriting it, and set the account's opt-in. */
+export async function subscribe(db: Db, email: string, source: string | null): Promise<void> {
+  await db.newsletterSubscriber.upsert({where: {email}, create: {email, source}, update: {}, select: {id: true}});
+  await db.customerProfile.updateMany({where: {user: {email}, marketingOptIn: false}, data: {marketingOptIn: true}});
+}
+
+/**
+ * Unsubscribe `email`: delete the row AND clear the account's opt-in, or they would still count as a
+ * subscriber (subscriber-only discounts read both). Returns how many subscriber rows were removed
+ * (0 = the address was not on the list).
+ */
+export async function unsubscribe(db: Db, email: string): Promise<number> {
+  const removed = await db.newsletterSubscriber.deleteMany({where: {email}});
+  await db.customerProfile.updateMany({where: {user: {email}, marketingOptIn: true}, data: {marketingOptIn: false}});
+  return removed.count;
+}
+
 /** Mounted at `/site-api/newsletter` (src/server/app.ts). */
-export const newsletterRoutes = new Hono()
-  .post('/', notImplemented);
+export const newsletterRoutes = new Hono().post('/', json(newsletterBody), withDb, async c => {
+  const {email, source} = c.req.valid('json');
+  const db = c.var.db;
+  const recent = await db.newsletterSubscriber.findMany({
+    where: {createdAt: {gt: new Date(Date.now() - FLOOD_WINDOW_MS)}},
+    select: {id: true},
+    take: NEWSLETTER_FLOOD_LIMIT + 1,
+  });
+  if (recent.length > NEWSLETTER_FLOOD_LIMIT) {
+    c.header('Retry-After', '60');
+    return apiError(c, 429, 'rate_limited', FLOOD_MESSAGE);
+  }
+  await subscribe(db, email, source);
+  c.header('Cache-Control', 'no-store');
+  return c.body(null, 204);
+});
