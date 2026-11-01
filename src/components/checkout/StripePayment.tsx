@@ -130,7 +130,8 @@ export default function StripePayment({publishableKey, amount, currency, handleR
           amount: Math.max(initial.current.minor, 1),
           currency: initial.current.currency.toLowerCase(),
           appearance,
-          fonts: [{cssSrc: 'https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap'}],
+          // No Google Fonts inside Stripe's frame (I2: the visitor's IP would go to Google); the appearance's
+          // font stack falls back to the system sans when Lato is not installed.
           loader: 'never',
           // Payment Element in the storefront language
           locale: initial.current.locale as StripeElementsOptions['locale'],
