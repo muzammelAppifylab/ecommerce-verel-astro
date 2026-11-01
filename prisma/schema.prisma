@@ -1383,3 +1383,16 @@ model MediaUpload {
   @@index([uploadedBy, id])
   @@map("media_uploads")
 }
+
+/// I2: one counted hit of a store rate limit (src/server/lib/rate-limit.ts). `subject` is an HMAC of
+/// the client IP or the account id, never the raw value. Rows older than a day are pruned.
+model RateHit {
+  id        BigInt   @id @default(autoincrement())
+  kind      String   @db.VarChar(24)
+  subject   String   @db.Char(64)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  @@index([kind, subject, createdAt])
+  @@index([createdAt])
+  @@map("rate_hits")
+}
