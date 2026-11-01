@@ -195,6 +195,29 @@ export interface ServerEvent {
  * Record one analytics event from server code (search results, checkout start), only when the
  * store has analytics on. Never throws.
  *
- * WP-16 implements. Stub: does nothing.
+ * WP-16: same normalisation as `POST /site-api/events` (src/server/routes/events.ts). `purchase` is a
+ * documented no-op (purchases are read from paid orders); product ids are not verified (callers pass real ids).
  */
-export async function trackEvent(_db: Db, _event: ServerEvent): Promise<void> {}
+export async function trackEvent(db: Db, event: ServerEvent): Promise<void> {
+  if (event.type === 'purchase') return;
+  try {
+    const settings = await db.setting.findUnique({where: {id: 1}, select: {analyticsEnabled: true}});
+    if (settings && !settings.analyticsEnabled) return;
+    const search = event.type === 'search';
+    const query = search && event.query ? event.query.trim().slice(0, 120).toLowerCase() : '';
+    const results = search && Number.isInteger(event.results) && (event.results ?? -1) >= 0 ? (event.results ?? null) : null;
+    await db.analyticsEvent.create({
+      data: {
+        type: event.type,
+        sessionId: event.visitorId ? event.visitorId.slice(0, 64) : null,
+        userId: event.userId ?? null,
+        productId: event.productId ? event.productId.slice(0, 120) : null,
+        query: query || null,
+        results,
+        path: event.path ? event.path.slice(0, 300) : null,
+      },
+    });
+  } catch {
+    console.error('[analytics] trackEvent failed');
+  }
+}
