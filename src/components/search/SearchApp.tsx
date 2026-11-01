@@ -16,7 +16,7 @@ import {cn} from '@/lib/utils';
 
 import {chipCls} from './classes';
 import {SearchResults} from './SearchResults';
-import {resultLine, searchEvent, searchUrl, SUGGESTIONS, TABS, termOf, visibleSections} from './search-state';
+import {MAX_TERM, resultLine, searchEvent, searchUrl, SUGGESTIONS, TABS, termOf, visibleSections} from './search-state';
 import {trackSearch} from './track';
 
 export interface SearchAppProps {
@@ -109,6 +109,21 @@ function Search({initial, initialQ, initialTab, failed: initialFailed, locale}: 
     // `fetched` is read only on the first run.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [term]);
+
+  // Back / forward between search entries: the page follows the URL again (VAREL's router did this).
+  useEffect(() => {
+    const onPop = () => {
+      const params = new URLSearchParams(window.location.search);
+      const nextQ = (params.get('q') ?? '').slice(0, MAX_TERM);
+      const rawTab = params.get('tab');
+      window.clearTimeout(timer.current);
+      setQ(nextQ);
+      setText(nextQ);
+      setTabState(TABS.includes(rawTab as Tab) ? (rawTab as Tab) : 'all');
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
 
   /** Moves the URL (and the search) to `value`. Typing replaces the history entry; submit and chips push one. */
   const writeQuery = useCallback(
