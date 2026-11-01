@@ -1,0 +1,88 @@
+---
+/**
+ * /collections/<slug>/ — one collection: hero (title, rich description, piece count, image), the
+ * curated product grid (island) and up to two other collections (port of VAREL
+ * src/pages/Collection.tsx + the `/collections/:slug` head of worker/routes/html.ts).
+ * Unknown or unpublished collections answer 404 + noindex; a failed read answers 503 + Retry-After
+ * (never a 404). An uppercase slug redirects (301) to its lowercase URL.
+ */
+import {CollectionEmpty, CollectionHero, CollectionMore, CollectionProblem} from '@/components/collections/CollectionPageView';
+import {CollectionProducts} from '@/components/collections/CollectionProducts';
+import {collectionDescription, collectionJsonLd, socialImage, toTileProduct} from '@/components/collections/seo';
+import {dictsFor} from '@/components/layout/dictionaries';
+import Storefront from '@/layouts/Storefront.astro';
+import {tFor} from '@/lib/i18n/server';
+import {collectionLink} from '@/lib/links';
+import type {CollectionDetail, CollectionSummary} from '@/lib/types/collections';
+import {absoluteUrl} from '@/lib/seo';
+import {backend, read} from '@/server/backend';
+import {pageContext} from '@/server/page';
+import {normalizeCollectionSlug} from '@/server/routes/collections';
+
+export const prerender = false;
+
+const locale = (Astro.locals as {locale?: string}).locale ?? 'en';
+const t = tFor(locale, 'collections');
+const raw = Astro.params.slug ?? '';
+const slug = normalizeCollectionSlug(raw);
+
+if (slug && raw !== slug) return Astro.redirect(collectionLink(slug, locale), 301);
+
+const [{api, site, viewer}, answer] = await Promise.all([
+  pageContext(Astro.request, Astro.response),
+  (async (): Promise<{c: CollectionDetail | null; status: number}> => {
+    if (!slug) return {c: null, status: 404};
+    try {
+      const res = await backend(Astro.request).collections[':slug'].$get({param: {slug}});
+      return {c: res.ok ? ((await res.json()) as CollectionDetail) : null, status: res.status};
+    } catch {
+      return {c: null, status: 503};
+    }
+  })(),
+]);
+const c = answer.c;
+const missing = !c && answer.status === 404;
+if (!c) {
+  Astro.response.status = missing ? 404 : 503;
+  if (!missing) Astro.response.headers.set('Retry-After', '60');
+}
+
+// "More collections": a failed read only hides the section.
+const others = c ? await read<CollectionSummary[]>(api.collections.$get({query: {featured: ''}})) : null;
+const more = (others ?? []).filter(o => o.slug !== c?.slug && o.productCount > 0).slice(0, 2);
+
+const dicts = dictsFor(locale, {collections: true, layout: ['ui']});
+const productDicts = dictsFor(locale, {product: true, common: true, collections: ['pieces']});
+
+const description = c ? collectionDescription(c, t('index.meta')) : undefined;
+const canonical = c ? collectionLink(c.slug, locale) : '';
+const seo = c
+  ? {
+      title: c.seoTitle || c.title,
+      description,
+      image: socialImage(c.image?.src),
+      imageAlt: t('imageAlt', {title: c.title}),
+      jsonLd: collectionJsonLd({name: c.title, description: description ?? '', url: absoluteUrl(canonical), locale}),
+    }
+  : {title: missing ? t('page.notFoundTitle') : t('page.title'), noindex: true};
+---
+
+<Storefront site={site} viewer={viewer} api={api} {...seo}>
+  {
+    !c ? (
+      <CollectionProblem locale={locale} dicts={dicts} kind={missing ? 'missing' : 'failed'} retryHref={Astro.originPathname} />
+    ) : (
+      <div class="mx-auto max-w-page">
+        <CollectionHero locale={locale} dicts={dicts} collection={{...c, pieces: c.products.length}} />
+        <section aria-label={t('page.piecesLabel')} class="px-6 pt-12 pb-20 md:px-12 md:pt-16 md:pb-24">
+          {c.products.length === 0 ? (
+            <CollectionEmpty locale={locale} dicts={dicts} />
+          ) : (
+            <CollectionProducts client:visible products={c.products.map(toTileProduct)} locale={locale} dicts={productDicts} />
+          )}
+        </section>
+        <CollectionMore locale={locale} dicts={dicts} others={more} />
+      </div>
+    )
+  }
+</Storefront>

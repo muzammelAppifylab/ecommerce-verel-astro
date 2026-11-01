@@ -1,0 +1,34 @@
+---
+/**
+ * /collections/ — every published collection that has pieces, in the studio's order (port of VAREL
+ * src/pages/Collections.tsx + the `/collections` head of worker/routes/html.ts). Server-rendered
+ * (never prerendered: the list lives in the Site Database and the page is localised by prefix).
+ * A failed read answers 503 + Retry-After with a "Try again" link; no page JS beyond the shell.
+ */
+import {CollectionsIndexView} from '@/components/collections/CollectionsIndexView';
+import {dictsFor} from '@/components/layout/dictionaries';
+import Storefront from '@/layouts/Storefront.astro';
+import {tFor} from '@/lib/i18n/server';
+import type {CollectionSummary} from '@/lib/types/collections';
+import {read} from '@/server/backend';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const locale = (Astro.locals as {locale?: string}).locale ?? 'en';
+const t = tFor(locale, 'collections');
+
+const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
+const data = await read<CollectionSummary[]>(api.collections.$get({query: {featured: ''}}));
+// Empty collections stay in the API (the home page filters them itself); the index shows only those with pieces.
+const list = data ? data.filter(c => c.productCount > 0) : null;
+if (!list) {
+  Astro.response.status = 503;
+  Astro.response.headers.set('Retry-After', '60');
+}
+const dicts = dictsFor(locale, {collections: true, layout: ['ui']});
+---
+
+<Storefront site={site} viewer={viewer} api={api} title={t('index.title')} description={t('index.meta')} noindex={!list}>
+  <CollectionsIndexView locale={locale} dicts={dicts} list={list} retryHref={Astro.originPathname} />
+</Storefront>
