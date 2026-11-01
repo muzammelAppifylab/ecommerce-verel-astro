@@ -6,7 +6,7 @@ import {Badge} from '@/components/varel/Badge';
 import {Img} from '@/components/varel/Img';
 import {type Dicts, TextProvider, useText} from '@/components/varel/text';
 import {badgeTone as toneOf} from '@/lib/product';
-import type {Photo} from '@/lib/types/catalog';
+import type {Photo} from '@/lib/types/common';
 import {cn} from '@/lib/utils';
 
 export interface ProductGalleryProps {
