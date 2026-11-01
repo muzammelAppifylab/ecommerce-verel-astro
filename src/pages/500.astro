@@ -1,23 +1,37 @@
 ---
 /**
- * What a visitor sees when a page fails on the server (an error thrown while
- * rendering), instead of an empty answer. Astro renders it with a 500 status.
- * It reads nothing (no brand, no visitor, no database): whatever broke the
- * page must not break this one too. The error itself is never shown here;
- * it is in the Worker's log.
+ * What a visitor sees when a page fails on the server (an error thrown while rendering), instead of an
+ * empty answer. Astro renders it with a 500 status. It reads NOTHING (no brand, no visitor, no database,
+ * no menus): whatever broke the page must not break this one too. Storefront look (storefront.css) with
+ * the type-set wordmark; words from the bundled catalogs (`notfound:error.*`) in the URL's language.
+ * The error itself is never shown here; it is in the Worker's log.
  *
- * In `npm run dev` and the editor Preview you see Astro's error overlay
- * instead, with the stack trace.
+ * In `npm run dev` and the editor Preview you see Astro's error overlay instead, with the stack trace.
  */
-import Base from '../layouts/Base.astro';
-import {GUEST} from '../platform/auth';
+import '../styles/storefront.css';
+
+import Wordmark from '@/components/varel/Wordmark.astro';
+import Base from '@/layouts/Base.astro';
+import {t} from '@/lib/i18n/server';
+import {href} from '@/lib/links';
+import {GUEST} from '@/platform/auth';
+
+const locale = (Astro.locals as {locale?: string} | undefined)?.locale ?? 'en';
+const home = href('/', locale);
 ---
 
-<Base site={null} viewer={GUEST} title="Something went wrong" noindex>
-  <main id="main" tabindex="-1" class="wrap narrow section center">
-    <p class="eyebrow">500</p>
-    <h1>Something went wrong</h1>
-    <p class="lede">This page could not be shown just now. Try again in a minute.</p>
-    <p><a class="button" href="/" data-astro-prefetch>Back to home</a></p>
-  </main>
+<Base site={null} viewer={GUEST} title={t(locale, 'notfound', 'error.title')} noindex chrome="none" locale={locale}>
+  <div class="flex min-h-screen w-full flex-col bg-surface-page">
+    <header class="flex h-16 items-center justify-center border-b border-hairline px-6">
+      <Wordmark href={home} size={22} />
+    </header>
+    <main id="main" tabindex="-1" class="mx-auto flex w-full max-w-page flex-1 flex-col items-start justify-center gap-6 px-6 py-24 md:px-12">
+      <span class="font-display text-[72px] leading-none text-text-muted md:text-[96px]" aria-hidden="true">500</span>
+      <h1 class="m-0 font-display text-[36px] leading-tight font-normal tracking-display md:text-[48px]">{t(locale, 'notfound', 'error.heading')}</h1>
+      <p class="m-0 max-w-[42ch] text-body-md text-text-secondary">{t(locale, 'notfound', 'error.body')}</p>
+      <a href={home} class="text-label-sm tracking-label uppercase border-0 bg-ink-900 px-6 py-[15px] text-text-inverse hover:bg-ink-700 hover:text-text-inverse">
+        {t(locale, 'notfound', 'error.home')}
+      </a>
+    </main>
+  </div>
 </Base>
