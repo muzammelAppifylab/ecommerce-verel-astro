@@ -4,6 +4,11 @@
    Tailwind classes in the pages; this file only covers what the scripts create. Tokens come from
    src/styles/storefront.css (`--signal-*`, `--ink-*`, `--text-*`). No hex, nothing inline (CSP). */
 
+/* `hidden` wins over the display classes here and in the markup. */
+.auth-page [hidden] {
+  display: none !important;
+}
+
 .auth-page .field {
   display: flex;
   flex-direction: column;

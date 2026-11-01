@@ -1,0 +1,32 @@
+---
+/** VAREL ResetPassword's two-step nav ("1 Request link · 2 New password"), shared by forgot and reset. */
+interface Props {
+  active: 1 | 2;
+  label: string;
+  steps: [string, string];
+}
+
+const {active, label, steps} = Astro.props;
+---
+
+<nav aria-label={label} class="mb-8 flex gap-5">
+  {
+    steps.map((text, i) => {
+      const on = i + 1 === active;
+      return (
+        <span
+          aria-current={on ? 'step' : undefined}
+          class:list={['flex items-center gap-2.5 text-label-sm tracking-label uppercase', on ? 'text-text-primary' : 'text-text-muted']}>
+          <span
+            class:list={[
+              'flex size-[22px] items-center justify-center border border-strong text-label-sm',
+              on ? 'bg-ink-900 text-text-inverse' : 'bg-transparent text-ink-900',
+            ]}>
+            {i + 1}
+          </span>
+          {text}
+        </span>
+      );
+    })
+  }
+</nav>

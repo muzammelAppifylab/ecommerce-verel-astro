@@ -1,85 +1,167 @@
 ---
 /**
- * Choose a new password from an emailed link (`?token=`, single use, 30
- * minutes). PRERENDERED; the script takes the token out of the address bar
- * first and posts it to `/site-api/auth/reset-password`.
+ * Choose a new password: step 2 of VAREL `src/pages/ResetPassword.tsx` (stages "new" and "done"), on the
+ * template's flow. The emailed link carries `?token=` (single use, 30 minutes): the script takes it out of
+ * the address bar first (`takeToken`) and posts it to `/site-api/auth/reset-password`. Without one (VAREL
+ * "I have the link"), a field takes the pasted link or token.
+ *
+ * ON DEMAND so `/da/account/reset/` renders in Danish (PLAN.md D7). A secret travels in the URL:
+ * `secretInUrl` (no Referer) and `no-store`.
  */
-import Base from '../../layouts/Base.astro';
+import '../../components/auth/auth.css';
+
+import AuthCopy from '../../components/auth/AuthCopy.astro';
+import AuthField from '../../components/auth/AuthField.astro';
+import ResetSteps from '../../components/auth/ResetSteps.astro';
+import {pathIn, tFor} from '../../components/auth/auth-server';
+import {INTRO, QUIET_LINK, SECONDARY_SOLID, SUBMIT, TITLE_44} from '../../components/auth/classes';
+import {AUTH_IMAGES} from '../../components/layout/auth-images';
+import AuthShell from '../../layouts/AuthShell.astro';
 import {staticContext} from '../../server/page';
 
-export const prerender = true;
+export const prerender = false;
 
 const {site, viewer} = await staticContext(Astro.request);
+const locale = Astro.locals.locale ?? 'en';
+const t = tFor(locale, 'auth');
+const href = pathIn(locale);
+const reveal = {show: t('reveal.show'), showLabel: t('reveal.showLabel')};
+Astro.response.headers.set('Cache-Control', 'no-store');
 ---
 
-<Base site={site} viewer={viewer} isStatic noindex secretInUrl title="Choose a new password">
-  <main id="main" tabindex="-1" class="wrap auth-wrap section">
-    <div class="card auth-card">
-      <h1>Choose a new password</h1>
-      <p class="notice notice-error" data-no-token hidden>
-        This link is incomplete. Open the link from the email again, or <a href="/account/forgot/">ask for a new one</a>.
-      </p>
-      <form id="reset-form" class="auth-form" novalidate>
-        <div class="field">
-          <label for="reset-password">New password</label>
-          <div class="pw-input">
-            <input id="reset-password" name="password" type="password" autocomplete="new-password" aria-describedby="reset-password-checks" data-describedby="reset-password-checks" />
-            <button class="pw-reveal" type="button" data-reveal-password aria-controls="reset-password" aria-pressed="false" aria-label="Show password" hidden>Show</button>
-          </div>
-          <ul class="pw-checks" id="reset-password-checks"><li>At least 10 characters</li></ul>
-        </div>
-        <div class="field">
-          <label for="reset-confirm">Type it again</label>
-          <div class="pw-input">
-            <input id="reset-confirm" name="confirm" type="password" autocomplete="new-password" aria-describedby="reset-confirm-checks" data-describedby="reset-confirm-checks" />
-            <button class="pw-reveal" type="button" data-reveal-password aria-controls="reset-confirm" aria-pressed="false" aria-label="Show password" hidden>Show</button>
-          </div>
+<AuthShell
+  site={site}
+  viewer={viewer}
+  isStatic
+  noindex
+  secretInUrl
+  title={t('reset.title')}
+  image={AUTH_IMAGES.reset}
+  imageSide="right"
+  maxWidth={440}>
+  <div class="auth-page flex flex-col">
+    <AuthCopy locale={locale} />
+    <ResetSteps active={2} label={t('reset.steps.label')} steps={[t('reset.steps.request'), t('reset.steps.new')]} />
+
+    <!-- Stage "new" -->
+    <div id="reset-new" class="flex flex-col">
+      <h1 class={TITLE_44}>{t('reset.newTitle')}</h1>
+      <p class={INTRO}>{t('reset.newIntro')}</p>
+      <form id="reset-form" class="flex flex-col gap-[26px]" novalidate>
+        <AuthField
+          id="reset-link"
+          name="link"
+          label={t('reset.link')}
+          autocomplete="one-time-code"
+          placeholder={t('reset.pasteLink')}
+          maxlength={2048}
+          spellcheck={false}
+        />
+        <AuthField
+          id="reset-password"
+          name="password"
+          label={t('reset.newPassword')}
+          autocomplete="new-password"
+          maxlength={128}
+          describedby="reset-password-checks"
+          reveal={reveal}>
+          <ul class="pw-checks" id="reset-password-checks"><li>{t('checks.length', {min: 10})}</li></ul>
+        </AuthField>
+        <AuthField
+          id="reset-confirm"
+          name="confirm"
+          label={t('confirmPassword')}
+          autocomplete="new-password"
+          maxlength={128}
+          describedby="reset-confirm-checks"
+          reveal={reveal}>
           <ul class="pw-checks" id="reset-confirm-checks" hidden></ul>
-        </div>
+        </AuthField>
+        <p class="notice notice-error" id="reset-expired" role="alert" hidden>
+          {t('reset.expired')}
+          <a href={href('/account/forgot/')}>{t('reset.requestNew')}</a>
+        </p>
         <p class="notice" data-form-status hidden></p>
-        <button class="button" type="submit">Save the new password</button>
+        <button class={SUBMIT} type="submit">{t('reset.save')}</button>
       </form>
     </div>
-  </main>
-</Base>
+
+    <!-- Stage "done" -->
+    <div id="reset-done" class="flex flex-col" tabindex="-1" hidden>
+      <h1 class={TITLE_44}>{t('reset.doneTitle')}</h1>
+      <p class={INTRO.replace('mb-9', 'mb-7')}>{t('reset.doneIntro')}</p>
+      <a href={href('/account/login/')} class:list={[SECONDARY_SOLID, 'self-start']}>{t('signIn')}</a>
+    </div>
+
+    <a href={href('/account/login/')} class:list={[QUIET_LINK, 'mt-7']}>{t('backToSignIn')}</a>
+  </div>
+</AuthShell>
 
 <script>
-  import {replaceWithMessage, takeToken} from '../../lib/account';
+  import {readCopy, TOKEN_RE, tokenFrom} from '../../components/auth/auth-page';
+  import {localizeProblem} from '../../components/auth/messages';
+  import {bindLocalizedPasswordChecks, bindLocalizedReveal, localizedPasswordRule} from '../../components/auth/password-ui';
+  import {takeToken} from '../../lib/account';
   import {bindForm, postJson} from '../../lib/form';
-  import {bindPasswordChecks, bindPasswordReveal} from '../../lib/password-checks';
-  import {passwordMeetsRules} from '../../lib/rules';
   import {siteFetch} from '../../platform/browser';
 
-  // Client navigation (ClientRouter): a bundled script runs once, so this page's code runs on
-  // every `astro:page-load` (the first load, each navigation, back/forward) while it is this page.
+  // Client navigation (ClientRouter): runs on every `astro:page-load` while it is this page.
   document.addEventListener('astro:page-load', () => {
-    if (!document.querySelector('#reset-form')) return;
-    const token = takeToken();
-    const form = document.querySelector<HTMLFormElement>('#reset-form')!;
-    if (!token) {
-      document.querySelector<HTMLElement>('[data-no-token]')!.hidden = false;
-      form.hidden = true;
-    }
-    const password = form.elements.namedItem('password') as HTMLInputElement;
-    const confirm = form.elements.namedItem('confirm') as HTMLInputElement;
-    bindPasswordChecks(password, document.getElementById('reset-password-checks')!, {
+    const form = document.querySelector<HTMLFormElement>('#reset-form');
+    if (!form) return;
+    const t = readCopy();
+    // First thing: the token leaves the address bar (history, bookmarks, Referer).
+    const urlToken = takeToken();
+    const field = (name: string) => form.elements.namedItem(name) as HTMLInputElement;
+    const link = field('link');
+    const password = field('password');
+    const confirm = field('confirm');
+    const linkField = link.closest<HTMLElement>('.field')!;
+    const expired = document.getElementById('reset-expired')!;
+    // With a token from the URL, the paste field is not needed (VAREL hides it).
+    linkField.hidden = !!urlToken;
+
+    bindLocalizedReveal(form, t);
+    bindLocalizedPasswordChecks(password, document.getElementById('reset-password-checks')!, t, {
       confirm,
       confirmList: document.getElementById('reset-confirm-checks'),
     });
-    bindPasswordReveal(form);
+    // VAREL: editing the link clears the "expired" alert.
+    link.addEventListener('input', () => {
+      expired.hidden = true;
+    });
+
+    const pasted = (value: string) => {
+      const token = tokenFrom(value);
+      return TOKEN_RE.test(token) ? token : null;
+    };
 
     bindForm(form, {
       rules: {
-        password: [passwordMeetsRules()],
-        confirm: [value => (value === password.value ? null : 'The two passwords are not the same.')],
+        ...(urlToken
+          ? {}
+          : {link: [(value: string) => (!value.trim() ? t('reset.pasteLink') : pasted(value) ? null : t('reset.invalidLink'))]}),
+        password: [localizedPasswordRule(t)],
+        confirm: [value => (!value ? t('choosePassword') : value === password.value ? null : t('mismatch'))],
       },
-      pendingLabel: 'Saving…',
+      pendingLabel: t('reset.saving'),
       async submit(values) {
-        const {result} = await postJson(siteFetch, '/site-api/auth/reset-password', {token, password: values.password});
+        expired.hidden = true;
+        const token = urlToken ?? pasted(values.link ?? '');
+        const {res, data, result} = await postJson(siteFetch, '/site-api/auth/reset-password', {token, password: values.password});
         if (result.ok) {
-          replaceWithMessage(form, result.message ?? 'Your password is changed.', {href: '/account/login/', text: 'Sign in'});
+          document.getElementById('reset-new')!.hidden = true;
+          const done = document.getElementById('reset-done')!;
+          done.hidden = false;
+          done.focus();
+          return {ok: true};
         }
-        return result;
+        if (data?.error === 'invalid_token') {
+          // VAREL: "expired or already used" + a link to ask for a new one.
+          expired.hidden = false;
+          return {ok: false};
+        }
+        return localizeProblem(res, data, t);
       },
     });
   });
