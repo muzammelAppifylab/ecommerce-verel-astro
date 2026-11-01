@@ -1,9 +1,9 @@
 import {useQuery} from '@tanstack/react-query';
 import {Link} from '@tanstack/react-router';
 
-import {firstAuditQuery, firstJobsQuery, firstUsersQuery, healthQuery, siteQuery, twoFactorQuery} from '../queries';
-import {ago, pageCount, useMe, when} from '../shared';
-import {Badge, buttonClass, Card, EmptyState, ErrorNote, Icon, type IconName, LoadingBlock, Notice, PageHeader, ProgressBar, Stat} from '../ui';
+import {firstAuditQuery, firstUsersQuery, healthQuery, siteQuery, twoFactorQuery} from '../../queries';
+import {ago, pageCount, useMe, when} from '../../shared';
+import {Badge, buttonClass, Card, EmptyState, ErrorNote, Icon, type IconName, LoadingBlock, Notice, PageHeader, ProgressBar, Stat} from '../../ui';
 
 /**
  * `/` of the dashboard: a greeting, what needs attention, stat tiles, a
@@ -24,7 +24,6 @@ export function Overview() {
   const twoFactor = useQuery(twoFactorQuery);
   // Under the screens' own query keys, so a save there refreshes these too.
   const users = useQuery({...firstUsersQuery, enabled: Boolean(abilities?.manageUsers)});
-  const jobs = useQuery({...firstJobsQuery, enabled: Boolean(abilities?.manageJobs)});
   const activity = useQuery({...firstAuditQuery, enabled: Boolean(abilities?.readAudit)});
   const recent = activity.data?.events.slice(0, 6) ?? [];
   const firstName = viewer?.name?.split(/\s+/)[0];
@@ -53,14 +52,6 @@ export function Overview() {
       to: '/users',
       icon: 'user-plus',
     });
-  if (abilities?.manageJobs)
-    steps.push({
-      label: 'Post your first job',
-      detail: 'It shows on the public job board at once.',
-      done: jobs.data ? jobs.data.jobs.length > 0 : undefined,
-      to: '/jobs',
-      icon: 'briefcase',
-    });
   const done = steps.filter(step => step.done).length;
   const setupLeft = steps.some(step => step.done === false);
 
@@ -75,12 +66,6 @@ export function Overview() {
               <Icon name="globe" size={18} />
               View the website
             </a>
-            {abilities?.manageJobs && (
-              <Link className={buttonClass()} to="/jobs">
-                <Icon name="plus" size={18} />
-                Post a job
-              </Link>
-            )}
           </>
         }
       />
@@ -106,15 +91,6 @@ export function Overview() {
             value={pageCount(users.data?.users, Boolean(users.data?.nextBefore))}
             hint="Accounts on this site"
             to="/users"
-          />
-        )}
-        {abilities?.manageJobs && (
-          <Stat
-            label="Open jobs"
-            icon="briefcase"
-            value={jobs.data ? String(jobs.data.jobs.filter(job => job.status === 'open').length) + (jobs.data.nextBefore ? '+' : '') : null}
-            hint="On the public job board"
-            to="/jobs"
           />
         )}
         <Stat

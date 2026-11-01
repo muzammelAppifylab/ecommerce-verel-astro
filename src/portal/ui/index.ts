@@ -15,3 +15,15 @@ export * from './icon';
 export * from './nav';
 export * from './overlay';
 export * from './table';
+// VAREL kit additions (docs/migration/PLAN.md §6), on screen at /dashboard/components.
+export * from './bulk-bar';
+export * from './chart';
+export * from './date-range';
+export * from './image-uploader';
+export * from './inputs';
+export * from './placeholder';
+export * from './popover';
+export * from './rich-text-editor';
+export * from './seo-panel';
+export * from './sortable';
+export * from './translation-editor';

@@ -1,6 +1,6 @@
 import {infiniteQueryOptions, queryOptions} from '@tanstack/react-query';
 
-import type {AdminUser, AuditRow, JobsPage, PermissionRow, RoleRow} from '../lib/types';
+import type {AdminUser, AuditRow, PermissionRow, RoleRow} from '../lib/types';
 import {refreshSession} from '../platform/browser';
 import {api, read} from './api';
 import type {Me} from './shared';
@@ -12,7 +12,10 @@ import type {Me} from './shared';
  * screen renders from the cache. Kept apart from the screens so the routes can
  * import them without pulling the (lazy) screen code into the first bundle.
  *
- * A save invalidates by key prefix (`['users']`, `['jobs']`, `['roles']`).
+ * The store admin's reads live per area in `./queries/<area>.ts` (each owned by
+ * its feature package, docs/migration/PLAN.md §5) and are re-exported at the end.
+ *
+ * A save invalidates by key prefix (`['users']`, `['roles']`, `['admin', 'orders']`).
  */
 
 /** Who is signed in, and what the portal may SHOW them. Shared by every screen. */
@@ -47,10 +50,6 @@ export const firstUsersQuery = queryOptions({
   queryKey: ['users', 'first'],
   queryFn: () => read<UsersPage>(api.admin.users.$get({query: {before: '', email: '', status: ''}})),
 });
-export const firstJobsQuery = queryOptions({
-  queryKey: ['jobs', 'manage', 'first'],
-  queryFn: () => read<JobsPage>(api.jobs.manage.$get({query: {before: ''}})),
-});
 export const firstAuditQuery = queryOptions({
   queryKey: ['audit', 'first'],
   queryFn: () => read<AuditPage>(api.admin.audit.$get({query: {before: ''}})),
@@ -65,14 +64,6 @@ export const usersQuery = (filter: {email: string; status: string}) =>
       read<UsersPage>(api.admin.users.$get({query: {before: pageParam ?? '', email: filter.email, status: filter.status}})),
     getNextPageParam: last => (last.nextBefore ? String(last.nextBefore) : undefined),
   });
-
-/** `/dashboard/jobs`: every job, open and closed. */
-export const manageJobsQuery = infiniteQueryOptions({
-  queryKey: ['jobs', 'manage'],
-  initialPageParam: undefined as string | undefined,
-  queryFn: ({pageParam}) => read<JobsPage>(api.jobs.manage.$get({query: {before: pageParam ?? ''}})),
-  getNextPageParam: last => (last.nextBefore ? String(last.nextBefore) : undefined),
-});
 
 /** `/dashboard/activity`: the audit log, newest first. */
 export const auditQuery = infiniteQueryOptions({
@@ -107,3 +98,26 @@ export const sessionsQuery = queryOptions({
   queryKey: ['account', 'sessions'],
   queryFn: () => read<{sessions: DeviceSession[]}>(api.auth.sessions.$get()),
 });
+
+// The store admin, per area (src/portal/queries/<area>.ts): search validators, loaders, reads.
+export * from './queries/abandoned';
+export * from './queries/activity';
+export * from './queries/analytics';
+export * from './queries/catalog';
+export * from './queries/collections';
+export * from './queries/customers';
+export * from './queries/discounts';
+export * from './queries/emails';
+export * from './queries/inventory';
+export * from './queries/journal';
+export * from './queries/languages';
+export * from './queries/navigation';
+export * from './queries/orders';
+export * from './queries/overview';
+export * from './queries/pages';
+export * from './queries/products';
+export * from './queries/returns';
+export * from './queries/reviews';
+export * from './queries/settings';
+export * from './queries/staff';
+export * from './queries/subscribers';

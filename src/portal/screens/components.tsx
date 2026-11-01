@@ -3,11 +3,14 @@ import {useState} from 'react';
 import {
   Badge,
   BarChart,
+  BulkAction,
+  BulkBar,
   Button,
   Card,
   Checkbox,
   type Column,
   DataTable,
+  DateRangeFilter,
   DefinitionList,
   Drawer,
   EmptyState,
@@ -15,24 +18,39 @@ import {
   Icon,
   ICON_NAMES,
   IconButton,
+  type ImageItem,
+  ImageUploader,
+  LineChart,
+  type LinePoint,
   LoadingBlock,
   Menu,
   Modal,
+  MoneyInput,
   Notice,
   PageHeader,
+  type Period,
+  PeriodToggle,
   Person,
   ProgressBar,
   RadioCards,
+  RichTextEditor,
   rules,
+  type SalesDay,
+  SalesChart,
   SearchInput,
   SegmentedControl,
   Select,
+  SeoPanel,
   SettingRow,
+  SortableList,
   Sparkline,
   Stat,
   StatusBadge,
   Switch,
   Tabs,
+  TagInput,
+  TranslationEditor,
+  type uploadImage,
   useConfirm,
   useForm,
   useToast,
@@ -54,10 +72,34 @@ const SAMPLE: Sample[] = [
 ];
 const STATUS_TONES = {active: 'success', trial: 'info', overdue: 'warning'} as const;
 
+/** Sample series for the store kit's charts: fixed numbers, the same picture every render. */
+const DAYS = 30;
+const dayLabel = (i: number) => new Date(Date.UTC(2026, 9, 1 + i)).toISOString().slice(0, 10);
+const SALES: SalesDay[] = Array.from({length: DAYS}, (_, i) => ({
+  date: dayLabel(i),
+  total: 400 + ((i * 137) % 900) + (i % 7 === 5 ? 600 : 0),
+  orders: 2 + ((i * 5) % 9),
+}));
+const SESSIONS: LinePoint[] = Array.from({length: DAYS}, (_, i) => ({label: dayLabel(i), value: 180 + ((i * 53) % 140) + i * 4}));
+const SESSIONS_BEFORE: LinePoint[] = Array.from({length: DAYS}, (_, i) => ({label: dayLabel(i), value: 160 + ((i * 41) % 120)}));
+const SAMPLE_IMAGES: ImageItem[] = [
+  {uid: 'img-sample-1', src: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=70', credit: 'Unsplash', creditHref: 'https://unsplash.com'},
+  {uid: 'img-sample-2', src: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=400&q=70', credit: null, creditHref: null},
+];
+const wait = (ms: number) => new Promise<void>(resolve => window.setTimeout(resolve, ms));
+/** Stands in for the uploads route on this page, so the uploader works without storage. */
+const sampleUpload: typeof uploadImage = async (_file, onProgress = () => undefined) => {
+  for (const p of [0.3, 0.6, 0.9]) {
+    await wait(250);
+    onProgress(p);
+  }
+  return {url: SAMPLE_IMAGES[0].src, fileId: 'sample'};
+};
+
 export function Components() {
   const toast = useToast();
   const confirm = useConfirm();
-  const [tab, setTab] = useState<'buttons' | 'forms' | 'data' | 'feedback' | 'icons'>('buttons');
+  const [tab, setTab] = useState<'buttons' | 'forms' | 'data' | 'feedback' | 'store' | 'icons'>('buttons');
 
   return (
     <div className="app-page">
@@ -81,12 +123,14 @@ export function Components() {
           {value: 'forms', label: 'Forms'},
           {value: 'data', label: 'Data'},
           {value: 'feedback', label: 'States'},
+          {value: 'store', label: 'Store kit'},
           {value: 'icons', label: 'Icons & colours', count: ICON_NAMES.length},
         ]}>
         {tab === 'buttons' && <ButtonsDemo onToast={toast.success} confirm={confirm} />}
         {tab === 'forms' && <FormsDemo onSaved={() => toast.success('Saved.')} />}
         {tab === 'data' && <DataDemo />}
         {tab === 'feedback' && <FeedbackDemo />}
+        {tab === 'store' && <StoreKitDemo onSaved={message => toast.success(message)} />}
         {tab === 'icons' && <IconsDemo />}
       </Tabs>
     </div>
@@ -386,6 +430,139 @@ function FeedbackDemo() {
           <StatusBadge tone="danger">Suspended</StatusBadge>
           <StatusBadge tone="neutral">Closed</StatusBadge>
         </div>
+      </Card>
+    </div>
+  );
+}
+
+/** The pieces added for the shop's admin (VAREL `components/admin`; docs/migration/PLAN.md §6). */
+function StoreKitDemo({onSaved}: {onSaved: (message: string) => void}) {
+  const [period, setPeriod] = useState<Period | undefined>(30);
+  const [range, setRange] = useState<{from?: string; to?: string}>({});
+  const [body, setBody] = useState('<p>Washed linen, cut <strong>loose</strong> through the body.</p>');
+  const [price, setPrice] = useState('128.00');
+  const [tags, setTags] = useState<string[]>(['linen', 'summer']);
+  const [order, setOrder] = useState(['Women', 'Men', 'Home', 'Journal']);
+  const [images, setImages] = useState<ImageItem[]>(SAMPLE_IMAGES);
+  const [translation, setTranslation] = useState('Vasket hør, løst skåret gennem kroppen.');
+  const [saving, setSaving] = useState(false);
+  const [seo, setSeo] = useState({seoTitle: '', seoDescription: ''});
+  const [selected, setSelected] = useState<Set<number>>(new Set());
+  const [exporting, setExporting] = useState(false);
+  const clearSelection = () => setSelected(new Set());
+
+  async function exportSelected() {
+    setExporting(true);
+    await wait(800);
+    setExporting(false);
+    onSaved(`${selected.size} exported.`);
+  }
+
+  async function saveTranslation(value: string) {
+    setSaving(true);
+    await wait(600);
+    setTranslation(value);
+    setSaving(false);
+    onSaved('Translation saved.');
+  }
+
+  return (
+    <div className="kit-section">
+      <Card title="PeriodToggle and DateRangeFilter" description="Report windows (overview, analytics) and list filters (orders, activity).">
+        <div className="kit-demo-stack">
+          <div className="kit-row">
+            <PeriodToggle
+              value={period}
+              onChange={p => {
+                setPeriod(p);
+                setRange({});
+              }}
+            />
+            <DateRangeFilter
+              from={range.from}
+              to={range.to}
+              onChange={next => {
+                setRange(next);
+                setPeriod(undefined);
+              }}
+            />
+          </div>
+          <pre className="kit-demo-output">{JSON.stringify({period: period ?? null, ...range})}</pre>
+        </div>
+      </Card>
+      <Card title="SalesChart" description="Revenue per day: ink bars, a hover and keyboard readout, a table fallback.">
+        <SalesChart data={SALES} />
+      </Card>
+      <Card title="LineChart" description="One series over time, with an optional dashed comparison.">
+        <LineChart data={SESSIONS} compare={SESSIONS_BEFORE} label="Sessions per day" />
+      </Card>
+      <Card title="RichTextEditor" description="Tiptap, from VAREL: headings, lists, links, colours. Emits HTML.">
+        <div className="kit-demo-stack">
+          <Field label="Description" id="kit-rte">
+            <RichTextEditor id="kit-rte" label="Description" value={body} onChange={setBody} />
+          </Field>
+          <pre className="kit-demo-output">{body}</pre>
+        </div>
+      </Card>
+      <Card title="MoneyInput and TagInput">
+        <div className="kit-demo-stack">
+          <Field label="Price" id="kit-price" hint="Digits and one decimal point.">
+            <MoneyInput id="kit-price" value={price} onChange={e => setPrice(e.target.value)} />
+          </Field>
+          <Field label="Tags" id="kit-tags" hint="Enter or a comma adds one.">
+            <TagInput id="kit-tags" value={tags} onChange={setTags} />
+          </Field>
+        </div>
+      </Card>
+      <Card title="SortableList" description="Drag a row, or focus its handle and use the arrow keys.">
+        <SortableList items={order} getKey={item => item} getLabel={item => item} onReorder={setOrder} label="Menu items" renderItem={item => <span>{item}</span>} />
+      </Card>
+      <Card title="ImageUploader" description="Platform files, pre-sized in the browser. The first image is the primary one. Uploads here are simulated.">
+        <ImageUploader images={images} onChange={setImages} upload={sampleUpload} label="Product images" />
+      </Card>
+      <Card title="TranslationEditor" description="The source beside its translation (WP-25 connects it to the translations route).">
+        <TranslationEditor
+          field={{field: 'description', sourceValue: 'Washed linen, cut loose through the body.', json: false}}
+          initial={translation}
+          saving={saving}
+          onCancel={() => undefined}
+          onSave={value => void saveTranslation(value)}
+        />
+      </Card>
+      <SeoPanel
+        seoTitle={seo.seoTitle}
+        seoDescription={seo.seoDescription}
+        onChange={patch => setSeo(prev => ({...prev, ...patch}))}
+        fallbackTitle="Choosing a mill"
+        fallbackDescription="How we pick the mills that weave our linen, and what we ask of them."
+        path="/journal/choosing-a-mill/"
+      />
+      <Card title="BulkBar" description="Tick rows: the bar floats at the foot of the screen. Esc or × clears.">
+        <div className="kit-demo-stack">
+          {SAMPLE.map(row => (
+            <Checkbox
+              key={row.id}
+              label={row.name}
+              checked={selected.has(row.id)}
+              onChange={checked =>
+                setSelected(prev => {
+                  const next = new Set(prev);
+                  if (checked) next.add(row.id);
+                  else next.delete(row.id);
+                  return next;
+                })
+              }
+            />
+          ))}
+        </div>
+        <BulkBar count={selected.size} noun={['customer', 'customers']} onClear={clearSelection}>
+          <BulkAction icon="download" pending={exporting} pendingLabel="Exporting…" onClick={() => void exportSelected()}>
+            Export
+          </BulkAction>
+          <BulkAction icon="trash" danger disabled={exporting} hint="Sample only" onClick={clearSelection}>
+            Delete
+          </BulkAction>
+        </BulkBar>
       </Card>
     </div>
   );
