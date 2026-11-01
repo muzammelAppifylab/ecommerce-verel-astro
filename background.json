@@ -1,4 +1,13 @@
 {
-  "lists": {},
-  "schedules": {}
+  "lists": {
+    "abandoned-carts": {"retries": 2, "concurrency": 1, "label": "Abandoned-bag reminders"},
+    "pending-payments": {"retries": 2, "concurrency": 1, "label": "Expire unpaid card orders"},
+    "translations-backfill": {"retries": 1, "concurrency": 1, "label": "Machine translations"},
+    "send-email": {"retries": 5, "concurrency": 5, "label": "Store emails"}
+  },
+  "schedules": {
+    "abandoned-carts": {"cron": "*/15 * * * *", "label": "Send abandoned-bag reminders"},
+    "pending-payments": {"cron": "*/15 * * * *", "label": "Expire unpaid card orders"},
+    "translations-backfill": {"every": "hour", "label": "Translate new and changed content"}
+  }
 }
