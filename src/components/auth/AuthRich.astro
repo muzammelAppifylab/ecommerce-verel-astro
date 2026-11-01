@@ -1,0 +1,14 @@
+---
+/** A VAREL rich string (`<terms>terms</terms>`) as text and links: never `set:html`. */
+import {richParts} from './auth-server';
+import {TEXT_LINK} from './classes';
+
+interface Props {
+  text: string;
+  links: Record<string, string>;
+}
+
+const parts = richParts(Astro.props.text, Astro.props.links);
+---
+
+{parts.map(part => (part.href ? <a href={part.href} class={TEXT_LINK}>{part.text}</a> : part.text))}

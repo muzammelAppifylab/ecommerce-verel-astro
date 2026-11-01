@@ -1,0 +1,93 @@
+---
+/**
+ * One sign-in field in VAREL's look (varel `Input`: tracked uppercase label, underline-only input) with the
+ * structure the template's `bindForm` needs: `div.field > label[for] + input#id[name]` (errors are added
+ * under it at runtime). `reveal` adds the show / hide button every password field has (AGENTS.md).
+ */
+import type {HTMLAttributes} from 'astro/types';
+
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  type?: 'text' | 'email' | 'password' | 'hidden';
+  autocomplete?: HTMLAttributes<'input'>['autocomplete'];
+  inputmode?: HTMLAttributes<'input'>['inputmode'];
+  maxlength?: number;
+  placeholder?: string;
+  value?: string;
+  /** Ids that must stay in `aria-describedby` whatever the state (a password checklist). */
+  describedby?: string;
+  /** Password fields: the localized show / hide button (`bindLocalizedReveal`). */
+  reveal?: {show: string; showLabel: string};
+  spellcheck?: boolean;
+  class?: string;
+}
+
+const {
+  id,
+  name,
+  label,
+  type = 'text',
+  autocomplete,
+  inputmode,
+  maxlength,
+  placeholder,
+  value,
+  describedby,
+  reveal,
+  spellcheck,
+  class: className,
+} = Astro.props;
+
+const inputClass =
+  'h-[46px] w-full min-w-0 rounded-none border-0 border-b border-hairline bg-transparent p-0 font-sans text-body-md font-light text-text-primary outline-none transition-hover placeholder:text-text-muted focus:border-strong focus-visible:outline-none aria-invalid:border-signal-critical';
+---
+
+<div class:list={['field', className]}>
+  <label for={id} class="flex items-center gap-2 font-sans text-label-md font-normal tracking-label text-text-secondary uppercase">
+    {label}
+  </label>
+  {
+    reveal ? (
+      <div class="pw-input">
+        <input
+          id={id}
+          name={name}
+          type="password"
+          autocomplete={autocomplete}
+          maxlength={maxlength}
+          aria-describedby={describedby}
+          data-describedby={describedby}
+          class={inputClass}
+        />
+        <button
+          class="pw-reveal"
+          type="button"
+          data-reveal-password
+          aria-controls={id}
+          aria-pressed="false"
+          aria-label={reveal.showLabel}
+          hidden>
+          {reveal.show}
+        </button>
+      </div>
+    ) : (
+      <input
+        id={id}
+        name={name}
+        type={type}
+        autocomplete={autocomplete}
+        inputmode={inputmode}
+        maxlength={maxlength}
+        placeholder={placeholder}
+        value={value}
+        spellcheck={spellcheck === undefined ? undefined : spellcheck ? 'true' : 'false'}
+        aria-describedby={describedby}
+        data-describedby={describedby}
+        class={inputClass}
+      />
+    )
+  }
+  <slot />
+</div>

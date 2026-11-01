@@ -1,125 +1,131 @@
 ---
 /**
- * Sign in. PRERENDERED (a file, no server work). The usual way is a 6-digit code
- * emailed to the account (`/site-api/auth/code`, then `/code/verify`): no password
- * needed, and the site's admin signs in this way. "Use a password instead" posts to
- * `/site-api/auth/login` for an account that set one. `?next=<path>` is where to go
- * afterwards (checked: same-site paths only). With two-step sign-in on, the first
- * step answers a challenge and the authenticator step
- * (`/site-api/auth/login/two-factor`) finishes it; `?mfa=<challenge>` opens that
- * step directly (a one-click sign-in from the dashboard, owner.ts). `?notice=` explains
- * why the visitor landed here (a dashboard link that expired).
+ * Sign in (VAREL `src/pages/Login.tsx` look and copy, the template's sign-in flow).
+ *
+ * The usual way is a 6-digit code emailed to the account (`/site-api/auth/code`, then
+ * `/code/verify`): no password needed, and the site's admin signs in this way. "Use a password
+ * instead" posts to `/site-api/auth/login` for an account that set one. `?next=<path>` is where to
+ * go afterwards (same-site paths only, never back to a sign-in page; default `/account/`). With
+ * two-step sign-in on, the first step answers a challenge and the authenticator step
+ * (`/site-api/auth/login/two-factor`) finishes it; `?mfa=<challenge>` opens that step directly (a
+ * one-click sign-in from the dashboard, owner.ts). `?notice=` explains why the visitor landed here.
+ * After any sign-in the page calls `POST /site-api/account/onboarding` (profile, sign-up extras,
+ * guest bag merge), then redirects.
+ *
+ * ON DEMAND (not prerendered) so `/da/account/login/` renders in Danish (PLAN.md D7); no visitor data
+ * in the HTML, so it may be cached for a few minutes.
  */
-import Base from '../../layouts/Base.astro';
+import '../../components/auth/auth.css';
+
+import AuthCopy from '../../components/auth/AuthCopy.astro';
+import AuthField from '../../components/auth/AuthField.astro';
+import AuthRich from '../../components/auth/AuthRich.astro';
+import {legalLinks, pathIn, tFor} from '../../components/auth/auth-server';
+import {INTRO, OUTLINE_BLOCK, QUIET_LINK, SUBMIT, TITLE_46, UNDERLINE_LINK} from '../../components/auth/classes';
+import {AUTH_IMAGES} from '../../components/layout/auth-images';
+import AuthShell from '../../layouts/AuthShell.astro';
 import {staticContext} from '../../server/page';
 
-export const prerender = true;
+export const prerender = false;
 
 const {site, viewer} = await staticContext(Astro.request);
+const locale = Astro.locals.locale ?? 'en';
+const t = tFor(locale, 'auth');
+const href = pathIn(locale);
+const reveal = {show: t('reveal.show'), showLabel: t('reveal.showLabel')};
+Astro.response.headers.set('Cache-Control', 'public, max-age=300');
 ---
 
-<Base site={site} viewer={viewer} isStatic noindex title="Sign in">
-  <main id="main" tabindex="-1" class="wrap auth-wrap section">
-    <div class="card auth-card">
-      <h1 id="login-title">Sign in</h1>
-      <p class="notice notice-error" id="login-notice" role="alert" hidden></p>
+<AuthShell site={site} viewer={viewer} isStatic noindex title={t('signIn')} image={AUTH_IMAGES.login} imageSide="right" maxWidth={440}>
+  <div class="auth-page flex flex-col">
+    <AuthCopy locale={locale} />
+    <h1 id="login-title" class={TITLE_46}>{t('signIn')}</h1>
+    <p class={INTRO}>{t('login.intro')}</p>
+    <p class="notice notice-error mb-7" id="login-notice" role="alert" hidden></p>
 
-      <!-- 1. The usual way: a code by email (no password needed). -->
-      <form id="email-form" class="auth-form" novalidate>
-        <p class="muted" id="email-lead">Enter your email and we'll send you a 6-digit code. No password needed.</p>
-        <div class="field">
-          <label for="login-email">Email</label>
-          <input id="login-email" name="email" type="email" autocomplete="username" inputmode="email" placeholder="name@example.com" />
-        </div>
-        <p class="notice" data-form-status hidden></p>
-        <button class="button" type="submit">Email me a code</button>
-      </form>
+    <!-- 1. The usual way: a code by email (no password needed). -->
+    <form id="email-form" class="flex flex-col gap-7" novalidate>
+      <p class="m-0 text-body-sm leading-body text-text-secondary" id="email-lead">{t('login.codeIntro')}</p>
+      <AuthField id="login-email" name="email" type="email" label={t('email')} autocomplete="username" inputmode="email" maxlength={254} />
+      <p class="notice" data-form-status hidden></p>
+      <button class={SUBMIT} type="submit">{t('login.sendCode')}</button>
+    </form>
 
-      <!-- 2. The emailed code. -->
-      <form id="email-code-form" class="auth-form" novalidate hidden>
-        <p class="muted" id="email-code-lead" aria-live="polite"></p>
-        <div class="field">
-          <label for="email-code">Code from the email</label>
-          <input id="email-code" name="code" type="text" autocomplete="one-time-code" inputmode="numeric" maxlength="7" spellcheck="false" />
-        </div>
-        <p class="notice" data-form-status hidden></p>
-        <button class="button" type="submit">Sign in</button>
-        <p class="auth-links">
-          <button class="button link" type="button" id="code-resend">Send a new code</button>
-          <span aria-hidden="true">·</span>
-          <button class="button link" type="button" id="code-other-email">Use another email</button>
-        </p>
-      </form>
-
-      <!-- Or a password, for an account that set one. -->
-      <form id="login-form" class="auth-form" novalidate hidden>
-        <div class="field">
-          <label for="login-password-email">Email</label>
-          <input id="login-password-email" name="email" type="email" autocomplete="username" inputmode="email" placeholder="name@example.com" />
-        </div>
-        <div class="field">
-          <label for="login-password">Password</label>
-          <div class="pw-input">
-            <input id="login-password" name="password" type="password" autocomplete="current-password" />
-            <button class="pw-reveal" type="button" data-reveal-password aria-controls="login-password" aria-pressed="false" aria-label="Show password" hidden>Show</button>
-          </div>
-        </div>
-        <p class="notice" data-form-status hidden></p>
-        <button class="button" type="submit">Sign in</button>
-      </form>
-
-      <!-- Two-step sign-in: the authenticator code, after a password, an emailed code or one click. -->
-      <form id="code-form" class="auth-form" novalidate hidden>
-        <p class="muted">Open your authenticator app and enter the 6-digit code for this site. Lost your phone? Enter one of your recovery codes instead.</p>
-        <div class="field">
-          <label for="login-code">Code</label>
-          <input id="login-code" name="code" type="text" autocomplete="one-time-code" inputmode="numeric" maxlength="20" spellcheck="false" />
-        </div>
-        <p class="notice" data-form-status hidden></p>
-        <button class="button" type="submit">Continue</button>
-      </form>
-
-      <p class="auth-links" id="login-links">
-        <button class="button link" type="button" id="use-password">Use a password instead</button>
-        <button class="button link" type="button" id="use-code" hidden>Email me a code instead</button>
-        <span aria-hidden="true">·</span>
-        <a href="/account/forgot/">Forgot your password?</a>
-        <span aria-hidden="true">·</span>
-        <a href="/account/register/" data-keep-next>Create an account</a>
+    <!-- 2. The emailed code. -->
+    <form id="email-code-form" class="flex flex-col gap-7" novalidate hidden>
+      <p class="m-0 text-body-sm leading-body text-text-secondary" id="email-code-lead" aria-live="polite"></p>
+      <AuthField id="email-code" name="code" label={t('login.codeLabel')} autocomplete="one-time-code" inputmode="numeric" maxlength={7} spellcheck={false} />
+      <p class="notice" data-form-status hidden></p>
+      <button class={SUBMIT} type="submit">{t('signIn')}</button>
+      <p class="m-0 flex flex-wrap items-center gap-4">
+        <button class={UNDERLINE_LINK} type="button" id="code-resend">{t('login.resend')}</button>
+        <button class={UNDERLINE_LINK} type="button" id="code-other-email">{t('login.otherEmail')}</button>
       </p>
+    </form>
+
+    <!-- Or a password, for an account that set one. -->
+    <form id="login-form" class="flex flex-col gap-7" novalidate hidden>
+      <AuthField id="login-password-email" name="email" type="email" label={t('email')} autocomplete="username" inputmode="email" maxlength={254} />
+      <AuthField id="login-password" name="password" label={t('password')} autocomplete="current-password" reveal={reveal} />
+      <p class="notice" data-form-status hidden></p>
+      <button class={SUBMIT} type="submit">{t('signIn')}</button>
+    </form>
+
+    <!-- Two-step sign-in: the authenticator code, after a password, an emailed code or one click. -->
+    <form id="code-form" class="flex flex-col gap-7" novalidate hidden>
+      <p class="m-0 text-body-sm leading-body text-text-secondary">{t('twoFactor.intro')}</p>
+      <AuthField id="login-code" name="code" label={t('twoFactor.label')} autocomplete="one-time-code" inputmode="numeric" maxlength={20} spellcheck={false} />
+      <p class="notice" data-form-status hidden></p>
+      <button class={SUBMIT} type="submit">{t('twoFactor.submit')}</button>
+    </form>
+
+    <div id="login-links" class="mt-7 flex flex-wrap items-center justify-between gap-4">
+      <button class={UNDERLINE_LINK} type="button" id="use-password">{t('login.usePassword')}</button>
+      <button class={UNDERLINE_LINK} type="button" id="use-code" hidden>{t('login.useCode')}</button>
+      <a href={href('/account/forgot/')} class={UNDERLINE_LINK}>{t('login.forgot')}</a>
     </div>
-  </main>
-</Base>
+
+    <div id="login-more" class="flex flex-col">
+      <div class="my-8 flex items-center gap-4" aria-hidden="true">
+        <span class="h-px flex-1 bg-ink-200"></span>
+        <span class="text-label-sm tracking-label text-text-muted uppercase">{t('login.or')}</span>
+        <span class="h-px flex-1 bg-ink-200"></span>
+      </div>
+      <a href={href('/account/register/')} data-keep-next class={OUTLINE_BLOCK}>{t('createAccount')}</a>
+      <a href={href('/shop/')} class:list={[QUIET_LINK, 'mt-5']}>{t('login.guest')}</a>
+    </div>
+  </div>
+  <Fragment slot="footer">
+    <span class="text-label-md text-text-muted"><AuthRich text={t('login.legal')} links={legalLinks(locale)} /></span>
+  </Fragment>
+</AuthShell>
 
 <script>
-  import {nextPath, signedIn} from '../../lib/account';
+  import {authRules, finishSignIn, keepNext, readCopy, say} from '../../components/auth/auth-page';
+  import {localizeProblem} from '../../components/auth/messages';
+  import {authNext, withNext} from '../../components/auth/next';
+  import {bindLocalizedReveal} from '../../components/auth/password-ui';
+  import {signedIn} from '../../lib/account';
   import {bindForm, postJson} from '../../lib/form';
-  import {bindPasswordReveal} from '../../lib/password-checks';
-  import {AUTH_RULES, rules} from '../../lib/rules';
+  import {rules} from '../../lib/rules';
   import {siteFetch} from '../../platform/browser';
 
   // Client navigation (ClientRouter): a bundled script runs once, so this page's code runs on
   // every `astro:page-load` (the first load, each navigation, back/forward) while it is this page.
   document.addEventListener('astro:page-load', () => {
     if (!document.querySelector('#email-form')) return;
-    bindPasswordReveal(document);
-    const NOTICES: Record<string, string> = {
-      'owner-link': 'That sign-in link has expired or was already used. Open the portal again from the dashboard, or sign in below.',
-      suspended: 'This account is suspended. Contact the site owner.',
-    };
+    const t = readCopy();
+    const R = authRules(t);
+    bindLocalizedReveal(document, t);
+    const NOTICES: Record<string, string> = {'owner-link': t('notice.ownerLink'), suspended: t('notice.suspended')};
 
     const params = new URLSearchParams(window.location.search);
-    const next = nextPath();
+    const next = authNext();
     const notice = params.get('notice');
     const $ = <T extends HTMLElement>(id: string) => document.querySelector<T>(`#${id}`)!;
     const noticeBox = $('login-notice');
-    if (notice && NOTICES[notice]) {
-      noticeBox.textContent = NOTICES[notice];
-      noticeBox.hidden = false;
-    }
-    document.querySelectorAll<HTMLAnchorElement>('[data-keep-next]').forEach(a => {
-      a.href = `${a.pathname}?next=${encodeURIComponent(next)}`;
-    });
+    if (notice && NOTICES[notice]) say(noticeBox, NOTICES[notice]);
+    keepNext(next);
 
     const emailForm = $<HTMLFormElement>('email-form');
     const emailCodeForm = $<HTMLFormElement>('email-code-form');
@@ -135,6 +141,7 @@ const {site, viewer} = await staticContext(Astro.request);
       $('use-password').hidden = form !== emailForm;
       $('use-code').hidden = form !== loginForm;
       $('login-links').hidden = form === codeForm || form === emailCodeForm;
+      $('login-more').hidden = form === codeForm || form === emailCodeForm;
       $<HTMLInputElement>(focus).focus();
     }
 
@@ -142,7 +149,7 @@ const {site, viewer} = await staticContext(Astro.request);
     function askTwoFactor(value: string) {
       challenge = value;
       noticeBox.hidden = true;
-      show(codeForm, 'Enter your code', 'login-code');
+      show(codeForm, t('twoFactor.title'), 'login-code');
     }
 
     /** After a one-click sign-in from the dashboard when two-step sign-in is on (`?mfa=`, 5 minutes). */
@@ -154,84 +161,101 @@ const {site, viewer} = await staticContext(Astro.request);
       void signedIn().then(yes => yes && window.location.replace(next));
     }
 
-    const done = (data: {next?: unknown} | null | undefined) => ({ok: true as const, redirect: typeof data?.next === 'string' ? data.next : next});
-
     async function sendCode(address: string) {
-      const {result} = await postJson(siteFetch, '/site-api/auth/code', {email: address, next});
-      if (result.ok) {
-        email = address;
-        $('email-code-lead').textContent = `If ${address} has an account here, we sent it a 6-digit code. It works for 10 minutes. Check your spam folder if it isn't there.`;
-      }
+      const {res, data, result} = await postJson(siteFetch, '/site-api/auth/code', {email: address, next});
+      if (!result.ok) return localizeProblem(res, data, t);
+      email = address;
+      $('email-code-lead').textContent = t('login.codeSent', {email: address});
       return result;
     }
 
     bindForm(emailForm, {
-      rules: {email: AUTH_RULES.email},
-      pendingLabel: 'Sending…',
+      rules: {email: R.email},
+      pendingLabel: t('login.sending'),
       async submit(values) {
         const result = await sendCode(String(values.email).trim());
-        if (result.ok) {
-          show(emailCodeForm, 'Check your email', 'email-code');
-          return {ok: true};
-        }
-        return result;
+        if (!result.ok) return result;
+        show(emailCodeForm, t('login.checkEmailTitle'), 'email-code');
+        return {ok: true};
       },
     });
 
     bindForm(emailCodeForm, {
-      rules: {code: [rules.required('Enter the 6-digit code from the email.')]},
-      pendingLabel: 'Checking…',
+      rules: {code: [rules.required(t('login.codeRequired'))]},
+      pendingLabel: t('login.checking'),
       async submit(values) {
-        const {result, data} = await postJson(siteFetch, '/site-api/auth/code/verify', {email, code: values.code, next});
+        const {res, data, result} = await postJson(siteFetch, '/site-api/auth/code/verify', {email, code: values.code, next});
         if (result.ok && data?.twoFactor === true && typeof data.challenge === 'string') {
           askTwoFactor(data.challenge);
           return {ok: true};
         }
-        return result.ok ? done(data) : result;
+        return result.ok ? finishSignIn(next, email, data?.next) : localizeProblem(res, data, t);
       },
     });
 
-    $('code-resend').addEventListener('click', async () => {
+    $('code-resend').addEventListener('click', async event => {
+      const button = event.currentTarget as HTMLButtonElement;
+      if (button.disabled) return;
+      button.disabled = true;
+      button.setAttribute('aria-busy', 'true');
       const result = await sendCode(email);
-      const status = emailCodeForm.querySelector<HTMLElement>('[data-form-status]')!;
-      status.textContent = result.ok ? 'We sent a new code. Only the newest one works.' : result.message ?? 'That did not work. Try again in a moment.';
-      status.hidden = false;
+      button.disabled = false;
+      button.removeAttribute('aria-busy');
+      const status = emailCodeForm.querySelector<HTMLElement>('[data-form-status]');
+      say(status, result.ok ? t('login.resent') : (result.message ?? t('login.resendFailed')), result.ok ? 'ok' : 'error');
     });
-    $('code-other-email').addEventListener('click', () => show(emailForm, 'Sign in', 'login-email'));
+    $('code-other-email').addEventListener('click', () => show(emailForm, t('signIn'), 'login-email'));
     $('use-password').addEventListener('click', () => {
       $<HTMLInputElement>('login-password-email').value = $<HTMLInputElement>('login-email').value;
-      show(loginForm, 'Sign in with your password', 'login-password-email');
+      show(loginForm, t('login.passwordTitle'), 'login-password-email');
     });
     $('use-code').addEventListener('click', () => {
       $<HTMLInputElement>('login-email').value = $<HTMLInputElement>('login-password-email').value;
-      show(emailForm, 'Sign in', 'login-email');
+      show(emailForm, t('signIn'), 'login-email');
     });
 
+    // VAREL: a wrong email or password is ONE generic line, and both fields turn red until edited.
+    const passwordInputs = [$<HTMLInputElement>('login-password-email'), $<HTMLInputElement>('login-password')];
+    const markBoth = (on: boolean) => {
+      for (const input of passwordInputs) {
+        if (on) input.setAttribute('aria-invalid', 'true');
+        else if (!input.closest('.field')?.hasAttribute('data-invalid')) input.removeAttribute('aria-invalid');
+      }
+    };
+    for (const input of passwordInputs) input.addEventListener('input', () => markBoth(false));
+
     bindForm(loginForm, {
-      rules: {email: AUTH_RULES.email, password: AUTH_RULES.password},
-      pendingLabel: 'Signing in…',
+      rules: {email: R.email, password: R.password},
+      pendingLabel: t('login.signingIn'),
       async submit(values) {
-        const {result, data} = await postJson(siteFetch, '/site-api/auth/login', {...values, next});
+        const address = String(values.email).trim();
+        const {res, data, result} = await postJson(siteFetch, '/site-api/auth/login', {...values, email: address, next});
         if (result.ok && data?.twoFactor === true && typeof data.challenge === 'string') {
+          email = address;
           askTwoFactor(data.challenge);
           return {ok: true};
         }
-        // A wrong email or password is ONE generic line (the server never says which).
-        return result.ok ? done(data) : result;
+        if (result.ok) return finishSignIn(next, address, data?.next);
+        const failure = localizeProblem(res, data, t, {login: true});
+        if (data?.error === 'invalid_credentials' || data?.error === 'invalid_input') {
+          markBoth(true);
+          return {ok: false, message: failure.message};
+        }
+        return failure;
       },
     });
 
     bindForm(codeForm, {
-      rules: {code: [rules.required('Enter the 6-digit code from your app, or a recovery code.')]},
-      pendingLabel: 'Checking…',
+      rules: {code: [rules.required(t('twoFactor.required'))]},
+      pendingLabel: t('login.checking'),
       async submit(values) {
         const {result, data, res} = await postJson(siteFetch, '/site-api/auth/login/two-factor', {...values, challenge, next});
         if (res?.status === 401) {
           // The challenge expired (5 minutes) or the password changed: start again.
-          window.location.replace(`/account/login/?next=${encodeURIComponent(next)}`);
-          return result;
+          window.location.replace(withNext(window.location.pathname, next));
+          return {ok: false};
         }
-        return result.ok ? done(data) : result;
+        return result.ok ? finishSignIn(next, email, data?.next) : localizeProblem(res, data, t);
       },
     });
   });

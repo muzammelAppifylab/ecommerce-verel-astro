@@ -1,0 +1,12 @@
+---
+/** The page's `auth` strings for its script (`readCopy()` in auth-page.ts): a data attribute, not a script (CSP). */
+import {authDictionary} from './auth-server';
+
+interface Props {
+  locale: string;
+}
+
+const copy = JSON.stringify(authDictionary(Astro.props.locale));
+---
+
+<div id="auth-copy" data-copy={copy} hidden></div>
