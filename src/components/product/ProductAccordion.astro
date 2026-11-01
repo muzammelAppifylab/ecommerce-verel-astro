@@ -1,0 +1,55 @@
+---
+/**
+ * Details / material / shipping / returns (port of VAREL src/pages/product/ProductAccordion.tsx), rendered on the
+ * server with no JS: native `<details name="pdp-panels">` keep one panel open at a time (older browsers may open
+ * several), Details open by default, `+` / `−` from the `open` state. The description is F2's CSP-safe RichText
+ * rendered statically (no client directive): allowlisted elements only, never injected HTML.
+ */
+import {RichText} from '@/components/varel/RichText';
+import type {Product} from '@/lib/types/catalog';
+
+interface Props {
+  product: Pick<Product, 'type' | 'description' | 'material' | 'care'>;
+  /** The `product` namespace translator (serverText(locale) bound to 'product') */
+  t: (key: string, vars?: Record<string, string | number | null | undefined>) => string;
+}
+
+const {product: p, t} = Astro.props;
+const digital = p.type === 'digital';
+const panels = [
+  {key: 'details', title: t('accordion.details'), rich: true, body: ''},
+  {
+    key: 'material',
+    title: t('accordion.material'),
+    rich: false,
+    body: t('accordion.materialBody', {material: p.material, care: p.care || t('accordion.digitalCare')}),
+  },
+  {
+    key: 'shipping',
+    title: t('accordion.shipping'),
+    rich: false,
+    body: digital ? t('accordion.shippingDigital') : t('accordion.shippingBody'),
+  },
+  {key: 'returns', title: t('accordion.returns'), rich: false, body: t('accordion.returnsBody')},
+];
+---
+
+<div class="border-t border-hairline">
+  {
+    panels.map(panel => (
+      <details name="pdp-panels" class="group border-b border-hairline" open={panel.key === 'details'}>
+        <summary class="flex w-full list-none items-center justify-between gap-4 py-[18px] text-left font-sans text-label-md tracking-label text-text-primary uppercase [&::-webkit-details-marker]:hidden">
+          {panel.title}
+          <span aria-hidden="true" class="text-text-muted">
+            <span class="group-open:hidden">+</span>
+            <span class="hidden group-open:inline">−</span>
+          </span>
+        </summary>
+        <div id={`pdp-panel-${panel.key}`} class="max-w-[56ch] pb-5 text-body-sm leading-body text-text-secondary">
+          {/* Headings inside the description sit under the product name (h1), so "##" renders as h2. */}
+          {panel.rich ? <RichText text={p.description} size="sm" headingLevel={2} /> : <p>{panel.body}</p>}
+        </div>
+      </details>
+    ))
+  }
+</div>

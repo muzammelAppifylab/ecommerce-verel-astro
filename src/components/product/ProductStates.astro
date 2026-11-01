@@ -1,0 +1,56 @@
+---
+/**
+ * The PDP's 404 and 503 bodies (port of VAREL src/pages/product/ProductStates.tsx). Static markup with link
+ * buttons: "Try again" is a plain reload of the same URL, so no JS. VAREL's loading skeleton is gone: the page
+ * is server-rendered.
+ */
+import {buttonClasses} from '@/components/varel/Button';
+import {searchLink, shopLink} from '@/lib/links';
+
+interface Props {
+  state: 'not-found' | 'error';
+  locale: string;
+  t: (key: string, vars?: Record<string, string | number | null | undefined>) => string;
+  /** The current path + query, reloaded by "Try again" */
+  retryHref?: string;
+}
+
+const {state, locale, t, retryHref} = Astro.props;
+const solid = buttonClasses({size: 'md', className: 'text-label-sm'});
+const outline = buttonClasses({variant: 'outline', size: 'md', className: 'text-label-sm'});
+---
+
+{
+  state === 'not-found' ? (
+    <section class="grid gap-[2px]">
+      <div class="flex flex-col justify-center gap-6 bg-chalk px-6 py-16 md:px-12 md:py-24">
+        <span class="font-display text-[72px] leading-none text-text-muted md:text-[96px]">404</span>
+        <h1 class="font-display text-[36px] leading-tight font-normal tracking-display md:text-[48px]">
+          {t('states.notFoundTitle')}
+        </h1>
+        <p class="max-w-[42ch] text-body-md text-text-secondary">{t('states.notFoundBody')}</p>
+        <div class="mt-2 flex flex-wrap gap-3">
+          <a href={shopLink(locale)} class={solid}>
+            {t('states.allProducts')}
+          </a>
+          <a href={searchLink(null, locale)} class={outline}>
+            {t('states.search')}
+          </a>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <section class="flex flex-col items-start gap-6 px-6 py-16 md:px-12 md:py-24">
+      <h1 class="font-display text-[36px] leading-tight font-normal tracking-display">{t('states.errorTitle')}</h1>
+      <p class="max-w-[46ch] text-body-md text-text-secondary">{t('states.errorBody')}</p>
+      <div class="flex flex-wrap gap-3">
+        <a href={retryHref ?? Astro.url.pathname} class={solid} data-astro-reload>
+          {t('states.tryAgain')}
+        </a>
+        <a href={shopLink(locale)} class={outline}>
+          {t('states.allProducts')}
+        </a>
+      </div>
+    </section>
+  )
+}

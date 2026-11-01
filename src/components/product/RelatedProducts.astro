@@ -1,0 +1,51 @@
+---
+/**
+ * "Wears well with": four related pieces, same department or category first (port of VAREL
+ * src/pages/product/RelatedProducts.tsx). Server-rendered from the page's parallel read; hidden when that read
+ * failed or came back empty, as VAREL hid it on error and on empty. Plain links (the targets are SSR pages,
+ * so no prefetch).
+ */
+import {Img} from '@/components/varel/Img';
+import {priceText} from '@/components/varel/support';
+import {productLink, shopLink} from '@/lib/links';
+import type {Product} from '@/lib/types/catalog';
+
+interface Props {
+  items: Product[] | null;
+  locale: string;
+  t: (key: string, vars?: Record<string, string | number | null | undefined>) => string;
+}
+
+const {items, locale, t} = Astro.props;
+const list = items ?? [];
+---
+
+{
+  list.length > 0 && (
+    <section class="flex flex-col gap-8 border-t border-hairline px-6 pt-12 pb-16 md:px-12 md:pt-[72px] md:pb-24">
+      <div class="flex items-baseline justify-between gap-8">
+        <h2 class="font-display text-[28px] font-normal md:text-[34px]">{t('related.title')}</h2>
+        <a href={shopLink(locale)} class="shrink-0 border-b border-strong pb-1 font-sans text-label-sm tracking-label uppercase">
+          {t('states.allProducts')}
+        </a>
+      </div>
+      <div class="grid grid-cols-2 gap-x-5 gap-y-10 lg:grid-cols-4 lg:gap-5">
+        {list.map(r => (
+          <a
+            href={productLink(r.id, locale)}
+            data-card="true"
+            class="flex min-w-0 flex-col gap-3 border-0 text-text-primary hover:text-text-primary">
+            <Img photo={r.image} alt={r.alt} width={600} sizes="(min-width: 1024px) 25vw, 50vw" />
+            <div class="flex items-baseline justify-between gap-3">
+              <span data-name="true" class="font-display text-xl leading-snug">
+                {r.name}
+              </span>
+              <span class="shrink-0 text-body-sm">{priceText(r.price)}</span>
+            </div>
+            <span class="text-label-md text-text-muted">{r.categoryLabel ?? r.category}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}

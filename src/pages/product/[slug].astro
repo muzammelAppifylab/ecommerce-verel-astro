@@ -1,0 +1,166 @@
+---
+/**
+ * The product detail page, `/product/<slug>/` (and `/da/product/<slug>/` … rewritten by src/middleware.ts).
+ * Port of VAREL src/pages/Product.tsx (+ the `/product/:slug` meta of worker/routes/html.ts): SSR, the product,
+ * its related pieces and the store's SEO settings read in parallel through the in-process Site API.
+ *
+ *   200  gallery (island, client:visible) · buy column (island, client:load) + accordion (server HTML) ·
+ *        reviews (WP-04 slot) · related (server HTML)
+ *   404  unknown, draft, archived or malformed slug (noindex)
+ *   503  the read failed (Retry-After: 60, noindex): an outage must never look like a missing page
+ */
+import {dictsFor, serverText} from '@/components/layout/dictionaries';
+import {BuyColumnIsland} from '@/components/product/BuyColumn';
+import ProductAccordion from '@/components/product/ProductAccordion.astro';
+import {ProductBreadcrumb} from '@/components/product/ProductBreadcrumb';
+import {ProductGalleryIsland} from '@/components/product/ProductGallery';
+import ProductStates from '@/components/product/ProductStates.astro';
+import RelatedProducts from '@/components/product/RelatedProducts.astro';
+import {absImage, metaDescription, productJsonLd} from '@/components/product/seo';
+import {DEFAULT_LOCALE} from '@/components/varel/href';
+import Storefront from '@/layouts/Storefront.astro';
+import {slugify} from '@/lib/format';
+import {categoryLink, deptLink, homeLink, productLink} from '@/lib/links';
+import {badgeTone} from '@/lib/product';
+import {toPlainText} from '@/lib/rich-text';
+import {absoluteUrl} from '@/lib/seo';
+import type {Product} from '@/lib/types/catalog';
+import type {PublicSettings} from '@/lib/types/settings';
+import {read} from '@/server/backend';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const slug = Astro.params.slug ?? '';
+const locale = (Astro.locals as {locale?: string}).locale ?? DEFAULT_LOCALE;
+const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
+
+/** The product read: the product, 'missing' (404) or 'failed' (anything else). */
+async function readProduct(): Promise<Product | 'missing' | 'failed'> {
+  try {
+    const res = await api.products[':slug'].$get({param: {slug}});
+    if (res.status === 404) return 'missing';
+    if (!res.ok) return 'failed';
+    return (await res.json()) as Product;
+  } catch {
+    return 'failed';
+  }
+}
+
+const [answer, related, settings] = await Promise.all([
+  readProduct(),
+  read<Product[]>(api.products[':slug'].related.$get({param: {slug}, query: {limit: '4'}})),
+  read<Partial<PublicSettings>>(api.settings.public.$get()),
+]);
+
+const st = serverText(locale);
+const t = (key: string, vars?: Record<string, string | number | null | undefined>) => st('product', key, vars);
+
+// ?color=&size= (VAREL validateProductSearch): trimmed, at most 60 characters; unknown values fall back in the island.
+const param = (name: string) => {
+  const v = Astro.url.searchParams.get(name)?.trim();
+  return v && v.length <= 60 ? v : null;
+};
+
+const product = typeof answer === 'object' ? answer : null;
+if (answer === 'missing') Astro.response.status = 404;
+if (answer === 'failed') {
+  Astro.response.status = 503;
+  Astro.response.headers.set('Retry-After', '60');
+}
+
+const storeName = settings?.storeName || site?.name || 'VAREL';
+const currency = settings?.currency || 'USD';
+const productDicts = dictsFor(locale, {product: true});
+const crumbDicts = dictsFor(locale, {layout: ['ui']});
+
+const view = product
+  ? (() => {
+      const p = product;
+      const dept = p.deptSlug || slugify(p.dept);
+      const category = p.categorySlug || slugify(p.category);
+      const canonical = absoluteUrl(productLink(p.id, locale));
+      const image = absImage(p.gallery[0]?.src ?? p.image.src, absoluteUrl) ?? absImage(settings?.ogImage, absoluteUrl);
+      return {
+        p,
+        title: p.seoTitle || p.name,
+        description: metaDescription(p, settings?.seoDescription),
+        image,
+        jsonLd: productJsonLd(p, {canonical, currency, storeName, locale, abs: absoluteUrl}),
+        crumbs: [
+          {label: t('page.home'), href: homeLink(locale)},
+          {label: p.deptLabel ?? p.dept, href: deptLink(dept, locale)},
+          {label: p.categoryLabel ?? p.category, href: categoryLink(dept, category, locale)},
+          {label: p.name},
+        ],
+        summary: p.short || toPlainText(p.description),
+        gallery: p.gallery.length ? p.gallery : [p.image],
+        initial: {color: param('color'), size: param('size')},
+      };
+    })()
+  : null;
+---
+
+{
+  view ? (
+    <Storefront
+      api={api}
+      site={site}
+      viewer={viewer}
+      title={view.title}
+      description={view.description}
+      image={view.image}
+      imageAlt={view.p.alt}
+      jsonLd={view.jsonLd}>
+      <div class="mx-auto w-full max-w-page">
+        <div class="px-6 pt-6 md:px-12">
+          <ProductBreadcrumb items={view.crumbs} locale={locale} dicts={crumbDicts} />
+        </div>
+
+        <div class="grid items-start gap-10 px-6 pt-6 pb-16 md:px-12 md:pb-24 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-12">
+          <ProductGalleryIsland
+            client:visible
+            name={view.p.name}
+            alt={view.p.alt}
+            gallery={view.gallery}
+            badge={view.p.badge}
+            badgeTone={badgeTone(view.p.badge, view.p)}
+            locale={locale}
+            dicts={productDicts}
+          />
+          <div class="flex flex-col gap-6 lg:sticky lg:top-24">
+            <BuyColumnIsland
+              client:load
+              product={view.p}
+              initial={view.initial}
+              summary={view.summary}
+              locale={locale}
+              dicts={productDicts}
+            />
+            <ProductAccordion product={view.p} t={t} />
+          </div>
+        </div>
+
+        {/* WP-04 slot: the reviews island (<ProductReviews client:visible slug={view.p.id} name={view.p.name} … />). */}
+
+        <RelatedProducts items={related} locale={locale} t={t} />
+      </div>
+    </Storefront>
+  ) : (
+    <Storefront
+      api={api}
+      site={site}
+      viewer={viewer}
+      title={answer === 'missing' ? t('page.notFoundTitle') : t('page.title')}
+      noindex>
+      <div class="mx-auto w-full max-w-page">
+        <ProductStates
+          state={answer === 'missing' ? 'not-found' : 'error'}
+          locale={locale}
+          t={t}
+          retryHref={`${Astro.originPathname || Astro.url.pathname}${Astro.url.search}`}
+        />
+      </div>
+    </Storefront>
+  )
+}
