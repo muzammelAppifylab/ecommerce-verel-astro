@@ -1,0 +1,72 @@
+---
+/**
+ * "Featured piece" (port of VAREL src/pages/home/FeaturedPiece.tsx): an editorial image pair on chalk and an
+ * inline buy box for one product (`FEATURED_SLUG`). The frame, photos and eyebrow are server HTML; the buy
+ * box is an island. Without the product (read failed or not published): VAREL's fallback copy and a link
+ * to the shop.
+ */
+import {buttonClasses} from '@/components/varel/Button';
+import {Img} from '@/components/varel/Img';
+import type {Dicts} from '@/components/varel/text';
+import {serverText} from '@/components/layout/dictionaries';
+import {shopLink} from '@/lib/links';
+import type {Product} from '@/lib/types/catalog';
+
+import {FeaturedBuyBox} from './FeaturedBuyBox';
+import {HOME_PHOTOS} from './photos';
+
+interface Props {
+  product: Product | null;
+  locale: string;
+  dicts: Dicts;
+  currency?: string;
+}
+
+const {product, locale, dicts, currency} = Astro.props;
+const t = (key: string) => serverText(locale)('home', key);
+---
+
+<section aria-label={t('piece.eyebrow')} class="px-6 pt-16 md:px-12 md:pt-24">
+  <div class="grid items-stretch bg-chalk lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+    <div class="grid min-w-0 grid-cols-1 content-center gap-7 p-6 md:p-14">
+      <div class="relative aspect-[3/4] w-[72%] min-w-0 justify-self-start overflow-hidden bg-ink-100">
+        <Img
+          photo={HOME_PHOTOS.featureA}
+          alt={t('piece.altA')}
+          ratio="fill"
+          width={1000}
+          sizes="(min-width: 1024px) 28vw, 72vw"
+          media={false}
+        />
+      </div>
+      <div class="relative aspect-[4/5] w-[72%] min-w-0 justify-self-end overflow-hidden bg-ink-100">
+        <Img
+          photo={HOME_PHOTOS.featureB}
+          alt={t('piece.altB')}
+          ratio="fill"
+          width={1000}
+          sizes="(min-width: 1024px) 28vw, 72vw"
+          media={false}
+        />
+      </div>
+    </div>
+    <div class="flex max-w-[520px] flex-col gap-5 self-center px-6 pt-4 pb-12 md:px-14 md:py-16">
+      <span class="text-label-md tracking-loose text-text-secondary uppercase">{t('piece.eyebrow')}</span>
+      {
+        product ? (
+          <FeaturedBuyBox client:visible product={product} locale={locale} dicts={dicts} currency={currency} />
+        ) : (
+          <>
+            <h2 class="m-0 font-display text-[36px] leading-tight font-normal tracking-display md:text-display-3">
+              Atelier Wool Coat
+            </h2>
+            <p class="m-0 text-body-md text-text-secondary">{t('piece.error')}</p>
+            <a href={shopLink(locale)} class={buttonClasses({variant: 'outline', size: 'md', className: 'self-start'})}>
+              {t('shopCollection')}
+            </a>
+          </>
+        )
+      }
+    </div>
+  </div>
+</section>
