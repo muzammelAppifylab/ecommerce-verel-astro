@@ -76,6 +76,10 @@ interface Props {
   locale?: string;
   /** The same page in each enabled language, for `hreflang` (`href` is a path like `/da/shop/`). */
   alternates?: {code: string; href: string}[];
+  /** The whole `<title>` (and og/twitter title) as given, no " · site" suffix (the storefront layouts build it). */
+  documentTitle?: string;
+  /** The brand name for `og:site_name`, the RSS link and JSON-LD, over the platform's `site.name` (the store name). */
+  siteName?: string;
 }
 
 const {
@@ -95,10 +99,13 @@ const {
   chrome = 'site',
   locale: localeProp,
   alternates = [],
+  documentTitle,
+  siteName,
 } = Astro.props;
 const locale = localeProp ?? (Astro.locals as {locale?: string}).locale ?? SITE.lang;
-const name = site?.name ?? 'My site';
-const fullTitle = title ? `${title} · ${name}` : name;
+const name = siteName || site?.name || 'My site';
+const fullTitle = documentTitle || (title ? `${title} · ${name}` : name);
+const socialTitle = documentTitle || title || name;
 const description = pageDescription ?? withName(SITE.description, name);
 const path = Astro.url.pathname;
 /** Every page URL ends with `/`: prerendered pages are served there (`/about` redirects to `/about/`). */
@@ -143,7 +150,7 @@ const structured = indexable
     {secretInUrl && <meta name="referrer" content="no-referrer" />}
     <meta property="og:site_name" content={name} />
     <meta property="og:type" content={type} />
-    <meta property="og:title" content={title ?? name} />
+    <meta property="og:title" content={socialTitle} />
     <meta property="og:description" content={description} />
     {canonical && <meta property="og:url" content={canonical} />}
     {socialImage && <meta property="og:image" content={socialImage} />}
@@ -151,7 +158,7 @@ const structured = indexable
     {type === 'article' && publishedAt && <meta property="article:published_time" content={publishedAt.toISOString()} />}
     {type === 'article' && updatedAt && <meta property="article:modified_time" content={updatedAt.toISOString()} />}
     <meta name="twitter:card" content={socialImage ? 'summary_large_image' : 'summary'} />
-    <meta name="twitter:title" content={title ?? name} />
+    <meta name="twitter:title" content={socialTitle} />
     <meta name="twitter:description" content={description} />
     {socialImage && <meta name="twitter:image" content={socialImage} />}
     {chrome === 'site' && <meta name="color-scheme" content="light dark" />}

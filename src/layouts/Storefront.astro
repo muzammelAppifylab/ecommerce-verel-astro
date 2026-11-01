@@ -30,6 +30,7 @@ import {SiteHeader} from '@/components/layout/SiteHeader';
 import {DEFAULT_LOCALE} from '@/components/varel/href';
 import {setMoneyContext} from '@/components/varel/support';
 import {backend} from '@/server/backend';
+import {serverT} from '@/server/lib/i18n/messages';
 
 import {Toaster} from '@/components/varel/Toast';
 
@@ -37,14 +38,16 @@ import Base from './Base.astro';
 
 type BaseProps = ComponentProps<typeof Base>;
 
-interface Props extends Omit<BaseProps, 'chrome' | 'locale' | 'alternates'> {
+interface Props extends Omit<BaseProps, 'chrome' | 'locale' | 'alternates' | 'documentTitle' | 'siteName'> {
   /** The page's in-process Site API client (`pageContext().api`); one is made when omitted. */
   api?: unknown;
   /** Hide the newsletter + footer (rare: a bare editorial page). Default false. */
   hideFooter?: boolean;
+  /** Use `title` as the whole tab title, without " — <store>" (an explicit SEO title, VAREL `rawTitle`). */
+  rawTitle?: boolean;
 }
 
-const {api, hideFooter = false, ...base} = Astro.props;
+const {api, hideFooter = false, rawTitle = false, ...base} = Astro.props;
 const locale = (Astro.locals as {locale?: string}).locale ?? DEFAULT_LOCALE;
 const {settings, menus} = await readChromeData(api ?? backend(Astro.request), locale);
 const chrome = buildChrome({
@@ -68,9 +71,28 @@ const headerProps = {
   dicts: {layout: chrome.dicts.layout ?? {}, i18n: chrome.dicts.i18n ?? {}, common: chrome.dicts.common ?? {}},
 };
 const cookieDicts = {privacy: chrome.dicts.privacy ?? {}, common: chrome.dicts.common ?? {}};
+/* SEO as VAREL `useSeo`: "<title> — <store>", else the admin's SEO title, else the designed default title;
+   the description and share image fall back to the store's SEO defaults (Settings → SEO). */
+const {storeName} = chrome.seo;
+const pageTitle = base.title?.trim();
+const documentTitle = pageTitle
+  ? rawTitle
+    ? pageTitle
+    : serverT(locale, 'seo.titleWithStore', {title: pageTitle, store: storeName})
+  : chrome.seo.title || serverT(locale, 'seo.defaultTitle');
+const description = base.description?.trim() || chrome.seo.description || serverT(locale, 'seo.defaultDescription');
+const image = base.image || chrome.seo.image;
 ---
 
-<Base {...base} chrome="none" locale={locale} alternates={alternates}>
+<Base
+  {...base}
+  description={description}
+  image={image}
+  chrome="none"
+  locale={locale}
+  alternates={alternates}
+  documentTitle={documentTitle}
+  siteName={storeName}>
   <Fragment slot="head">
     <meta name="theme-color" content="#FFFFFF" />
     <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin />

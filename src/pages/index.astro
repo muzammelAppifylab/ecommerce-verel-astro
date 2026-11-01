@@ -85,9 +85,8 @@ const showCollections = featuredCollectionsOf(collectionList).items.length > 0;
 const postList = Array.isArray(posts) ? posts : [];
 
 /* SEO (VAREL useSeo() + html.ts storeSeo): the admin's SEO title/description, else the designed defaults.
-   Base appends the site name to `title`, so the designed default title is the site name alone. */
+   No `title`: Storefront shows the admin's SEO title, else the designed default title, as VAREL. */
 const description = settings?.seoDescription?.trim() || serverT(locale, 'seo.defaultDescription');
-const seoTitle = settings?.seoTitle?.trim() || undefined;
 const og = settings?.ogImage?.trim() || null;
 const ogImage =
   og && /^https:\/\/images\.unsplash\.com\//.test(og) && !og.includes('?')
@@ -95,7 +94,7 @@ const ogImage =
     : og;
 ---
 
-<Storefront site={site} viewer={viewer} api={api} title={seoTitle} description={description} image={ogImage}>
+<Storefront site={site} viewer={viewer} api={api} description={description} image={ogImage}>
   <HomeHero hero={hero} locale={locale} dicts={ssrDicts} />
   <div class="mx-auto max-w-page">
     {

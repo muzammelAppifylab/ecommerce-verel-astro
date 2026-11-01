@@ -30,6 +30,9 @@ export interface ChromeSettings {
   analyticsEnabled?: boolean;
   defaultLocale?: string;
   locales?: string[];
+  seoTitle?: string;
+  seoDescription?: string;
+  ogImage?: string | null;
 }
 
 export type SocialKey = 'instagram' | 'pinterest' | 'tiktok' | 'facebook' | 'x';
@@ -106,6 +109,15 @@ export interface Chrome {
   /** Catalogs for the islands: header + menus + bag (layout, i18n, common), cookie banner (privacy), newsletter (journal) */
   dicts: Dicts;
   currency: string;
+  /** Store SEO defaults (VAREL `useSeo`): the title suffix and the default title / description / share image. */
+  seo: {storeName: string; title: string | null; description: string | null; image: string | null};
+}
+
+/** VAREL `shareImage`: a bare Unsplash photo gets a 1200×630 crop; anything else is used as it is. */
+export function shareImage(src: string | null | undefined): string | null {
+  const s = src?.trim();
+  if (!s) return null;
+  return /^https:\/\/images\.unsplash\.com\//.test(s) && !s.includes('?') ? `${s}?auto=format&fit=crop&w=1200&h=630&q=80` : s;
 }
 
 const telOf = (phone: string) => `tel:${phone.replace(/[^\d+]/g, '')}`;
@@ -211,5 +223,11 @@ export function buildChrome({
       journal: ['newsletterForm'],
     }),
     currency: settings?.currency ?? 'USD',
+    seo: {
+      storeName: settings?.storeName?.trim() || 'VAREL',
+      title: settings?.seoTitle?.trim() || null,
+      description: settings?.seoDescription?.trim() || null,
+      image: shareImage(settings?.ogImage),
+    },
   };
 }
