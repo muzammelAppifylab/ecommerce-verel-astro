@@ -10,6 +10,8 @@ import {photoUrl} from '../../../lib/format';
 import type {PreviewTarget} from '../../../lib/types/admin/promotions';
 import {discountNamesQuery, discountPreviewQuery, discountTaxonomyQuery} from '../../queries/discounts';
 import {Icon, Popover, Skeleton} from '../../ui';
+import {hasAbility} from '../../api';
+import {useMe} from '../../shared';
 import {formatWhen} from './helpers';
 
 /** `aria-describedby` for a control inside a kit `Field` (its error, else its hint). */
@@ -353,7 +355,7 @@ export function MultiPicker({
 function Thumb({src}: {src?: string | null}) {
   return (
     <span className="picker-thumb">
-      {src ? <img src={photoUrl(src, 80)} alt="" loading="lazy" width={24} height={32} /> : <Icon name="package" size={12} />}
+      {src ? <img src={photoUrl(src, 80)} alt="" loading="lazy" width={24} height={32} /> : <Icon name="package" size={14} />}
     </span>
   );
 }
@@ -366,7 +368,7 @@ function Chip({id, name, onRemove}: {id: string; name?: string; onRemove?: () =>
       <span className="chip-text">{resolved}</span>
       {onRemove && (
         <button type="button" className="chip-remove" aria-label={`Remove ${resolved}`} onClick={onRemove}>
-          <Icon name="x" size={12} />
+          <Icon name="x" size={14} />
         </button>
       )}
     </li>
@@ -409,5 +411,22 @@ export function FilterToggles<V extends string>({
         </button>
       ))}
     </div>
+  );
+}
+
+/* ── Access ────────────────────────────────────────────────────────────── */
+
+/** VAREL `useCanWrite()` for this area: the ability `manageDiscounts` (reads need it too, so it is mostly true). */
+export function useCanWrite(): boolean {
+  const me = useMe();
+  return hasAbility(me.data?.abilities, 'manageDiscounts');
+}
+
+/** Copy a code to the clipboard with a toast either way. */
+export function copyText(text: string, toast: {success: (m: string) => void; danger: (m: string) => void}) {
+  if (!navigator.clipboard) return toast.danger('Copy is not available in this browser');
+  void navigator.clipboard.writeText(text).then(
+    () => toast.success(`${text} copied`),
+    () => toast.danger('Copy is not available in this browser')
   );
 }
