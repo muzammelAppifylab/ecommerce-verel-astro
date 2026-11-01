@@ -69,7 +69,8 @@
       "line1": "Gib eine Straße und Hausnummer ein",
       "zip": "Gib eine Postleitzahl ein",
       "city": "Gib einen Ort ein",
-      "country": "Wähle ein Land"
+      "country": "Wähle ein Land",
+      "tooLong": "Halte es unter {{max}} Zeichen"
     }
   },
   "confirm": {
@@ -87,9 +88,14 @@
     "errors": {
       "firstName": "Gib deinen Vornamen ein",
       "lastName": "Gib deinen Nachnamen ein",
-      "email": "Gib eine gültige E-Mail-Adresse ein"
+      "email": "Gib eine gültige E-Mail-Adresse ein",
+      "firstNameLong": "Halte deinen Vornamen unter 80 Zeichen",
+      "lastNameLong": "Halte deinen Nachnamen unter 80 Zeichen",
+      "phoneLong": "Halte die Telefonnummer unter 40 Zeichen"
     },
-    "description": "Wird für deine Bestellungen, Belege und Lieferinfos verwendet."
+    "description": "Wird für deine Bestellungen, Belege und Lieferinfos verwendet.",
+    "emailHint": "Um deine E-Mail zu ändern, senden wir einen Link an die neue Adresse.",
+    "changeEmail": "E-Mail ändern"
   },
   "privacy": {
     "title": "Datenschutz",
@@ -116,7 +122,11 @@
       "warning": "Wir schicken dir eine Bestätigung per E-Mail und melden dich dann ab. Deine Bestellungen bleiben für die Buchhaltung erhalten, deine E-Mail-Adresse wird ausgeblendet. Das lässt sich nicht rückgängig machen.",
       "password": "Passwort",
       "enterPassword": "Gib dein Passwort ein",
-      "deleted": "Dein Konto wurde gelöscht"
+      "deleted": "Dein Konto wurde gelöscht",
+      "confirmLabel": "Gib DELETE ein, um zu bestätigen",
+      "errors": {
+        "confirm": "Gib DELETE in Großbuchstaben ein, um zu bestätigen"
+      }
     },
     "description": "Lade deine Daten herunter, wähle Cookies oder schließe dein Konto."
   },
@@ -163,7 +173,7 @@
     "current": "Aktuelles Passwort",
     "new": "Neues Passwort",
     "confirm": "Neues Passwort bestätigen",
-    "rule": "Mindestens 8 Zeichen.",
+    "rule": "Mindestens 10 Zeichen.",
     "show": "Passwörter anzeigen",
     "save": "Passwort ändern",
     "saving": "Wird geändert…",
@@ -171,9 +181,15 @@
     "forgot": "Passwort vergessen?",
     "errors": {
       "current": "Gib dein aktuelles Passwort ein",
-      "length": "Verwende mindestens 8 Zeichen",
-      "match": "Die Passwörter stimmen nicht überein"
-    }
+      "length": "Verwende mindestens 10 Zeichen",
+      "match": "Die Passwörter stimmen nicht überein",
+      "tooLong": "Verwende höchstens 128 Zeichen",
+      "email": "Verwende deine E-Mail-Adresse nicht im Passwort"
+    },
+    "showOne": "Passwort anzeigen",
+    "hideOne": "Passwort verbergen",
+    "noPassword": "Du meldest dich mit einem Code an, den wir dir per E-Mail senden. Fordere einen Link an, um ein Passwort festzulegen.",
+    "setLink": "Passwort festlegen"
   },
   "preferences": {
     "title": "Kommunikation",
@@ -182,5 +198,25 @@
     "newsletterBody": "Neue Kollektionen, Journal-Geschichten und Studio-Events, etwa einmal im Monat.",
     "on": "Du hast den Newsletter abonniert",
     "off": "Du hast den Newsletter abbestellt"
-  }
+  },
+  "email": {
+    "title": "E-Mail ändern",
+    "new": "Neue E-Mail",
+    "password": "Aktuelles Passwort",
+    "send": "Link senden",
+    "sending": "Wird gesendet…",
+    "errors": {
+      "email": "Gib eine gültige E-Mail-Adresse ein",
+      "password": "Gib dein aktuelles Passwort ein",
+      "same": "Das ist bereits deine E-Mail-Adresse"
+    }
+  },
+  "downloading": "Download wird vorbereitet…",
+  "downloadError": "Diese Datei ist gerade nicht verfügbar. Kontaktiere das Studio.",
+  "ordersMore": "99+",
+  "notFound": {
+    "title": "Diese Seite gibt es nicht",
+    "action": "Zurück zu deinem Konto"
+  },
+  "ordersComingSoon": "Deine Bestellungen sind auf dem Weg zu dieser Seite. Die neueste siehst du in der Übersicht."
 }
