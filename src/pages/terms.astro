@@ -1,0 +1,28 @@
+---
+/**
+ * /terms/ — the CMS page "terms" (admin → Pages) when it exists and is published, otherwise the
+ * built-in copy (VAREL `src/pages/Terms.tsx`). A missing, hidden or unreadable CMS page is a normal
+ * answer: the built-in copy, status 200. Server HTML only (no island).
+ */
+import {TermsView} from '@/components/pages/PolicyView';
+import {clip, firstParagraph} from '@/components/pages/policy';
+import {dictsFor} from '@/components/layout/dictionaries';
+import Storefront from '@/layouts/Storefront.astro';
+import {t} from '@/lib/i18n/server';
+import type {CmsPage} from '@/lib/types/content';
+import {read} from '@/server/backend';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const locale = Astro.locals.locale ?? 'en';
+const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
+const cms = await read<CmsPage>(api.pages[':slug'].$get({param: {slug: 'terms'}}));
+const title = cms?.seoTitle || cms?.title || t(locale, 'policy', 'terms.title');
+const description = cms ? cms.seoDescription || clip(firstParagraph(cms.body)) || undefined : clip(t(locale, 'policy', 'terms.lead'));
+const dicts = dictsFor(locale, {policy: true, layout: ['ui']});
+---
+
+<Storefront api={api} site={site} viewer={viewer} title={title} description={description}>
+  <TermsView locale={locale} dicts={dicts} cms={cms} />
+</Storefront>
