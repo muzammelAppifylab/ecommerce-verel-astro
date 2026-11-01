@@ -24,6 +24,9 @@ import {PERMISSIONS} from '../../permissions';
 
 const LIST_LIMIT = 100;
 const select = {id: true, country: true, rate: true, name: true} as const;
+/** F4's `serializeTaxRate` reads only these four fields; its parameter type asks for the whole row. */
+type TaxRateRow = Parameters<typeof serializeTaxRate>[0];
+const serialize = (r: Pick<TaxRateRow, 'id' | 'country' | 'rate' | 'name'>) => serializeTaxRate(r as TaxRateRow);
 
 const taxRateFields = {
   country: z
@@ -66,7 +69,7 @@ export const taxRatesAdmin = new Hono()
   .get('/', withDb, async c => {
     c.header('Cache-Control', 'private, no-store');
     const rows = await c.var.db.taxRate.findMany({select, orderBy: {country: 'asc'}, take: LIST_LIMIT});
-    return c.json(rows.map(serializeTaxRate));
+    return c.json(rows.map(serialize));
   })
   .post('/', json(taxRateInput), requirePermission(PERMISSIONS.STORE_SETTINGS_MANAGE), withDb, async c => {
     const input = c.req.valid('json');
@@ -74,7 +77,7 @@ export const taxRatesAdmin = new Hono()
     if (await db.taxRate.findUnique({where: {country: input.country}, select: {id: true}})) throw taken(input.country);
     try {
       const row = await db.taxRate.create({data: input, select});
-      return c.json(serializeTaxRate(row), 201);
+      return c.json(serialize(row), 201);
     } catch (err) {
       if (isUniqueViolation(err)) throw taken(input.country); // a parallel create won the race
       throw err;
@@ -89,7 +92,7 @@ export const taxRatesAdmin = new Hono()
     if (!existing) throw missing();
     try {
       const row = await db.taxRate.update({where: {id}, data: input, select});
-      return c.json(serializeTaxRate(row));
+      return c.json(serialize(row));
     } catch (err) {
       if (isUniqueViolation(err)) throw taken(input.country ?? existing.country);
       throw err;

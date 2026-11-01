@@ -3,7 +3,7 @@ import {Link, Outlet, useNavigate, useRouterState} from '@tanstack/react-router'
 import {hasAbility} from '../../api';
 import {SETTINGS_NAV, type SettingsNavItem} from '../../queries';
 import {useMe} from '../../shared';
-import {ScreenPlaceholder, Select} from '../../ui';
+import {Select} from '../../ui';
 
 /**
  * Settings (`/dashboard/settings/*`). WP-23 owns this folder (Emails is WP-22's
@@ -11,9 +11,6 @@ import {ScreenPlaceholder, Select} from '../../ui';
  * `pages/admin/settings/SettingsLayout.tsx`: a grouped section nav beside the
  * section from 1100px, a section picker above it on smaller screens. Sections
  * that need an ability the person lacks are hidden (General shows read-only).
- *
- * The section screens below are STUBS: WP-23 replaces their bodies with the
- * ports of `pages/admin/settings/*` and `pages/admin/seo/*`, keeping the names.
  */
 export function SettingsLayout() {
   const me = useMe();
@@ -56,42 +53,13 @@ export function SettingsLayout() {
   );
 }
 
-/** `/dashboard/settings`: Settings · General (read-only without `manageStoreSettings`). */
-export function GeneralSettings() {
-  return <ScreenPlaceholder title="General" description="Store name, contact, legal details, logo, social links, order numbers." />;
-}
-
-/** `/dashboard/settings/checkout`. */
-export function CheckoutSettings() {
-  return <ScreenPlaceholder title="Checkout" description="Guest checkout, phone, order notes, terms." />;
-}
-
-/** `/dashboard/settings/payments`. */
-export function PaymentsSettings() {
-  return <ScreenPlaceholder title="Payments" description="Stripe or simulated payments." />;
-}
-
-/** `/dashboard/settings/tax`. */
-export function TaxSettings() {
-  return <ScreenPlaceholder title="Tax and currency" description="Currency, prices with or without tax, rates by country." />;
-}
-
-/** `/dashboard/settings/shipping`. */
-export function ShippingSettings() {
-  return <ScreenPlaceholder title="Shipping" description="Zones are matched by the shipping country. Methods and rates show at checkout." />;
-}
-
-/** `/dashboard/settings/inventory`. */
-export function InventorySettings() {
-  return <ScreenPlaceholder title="Inventory and returns" description="Low stock, sold-out products, return window and reasons." />;
-}
-
-/** `/dashboard/settings/privacy`. */
-export function PrivacySettings() {
-  return <ScreenPlaceholder title="Customers and privacy" description="Cookie consent, reviews, analytics, abandoned bags." />;
-}
-
-/** `/dashboard/settings/seo`. */
-export function SeoSettings() {
-  return <ScreenPlaceholder title="SEO" description="Default title, description and share image." />;
-}
+// The section screens (ports of VAREL `pages/admin/settings/*` and `pages/admin/seo/*`),
+// lazy-loaded by name from `routes.tsx`.
+export {GeneralSettings} from './general';
+export {CheckoutSettings} from './checkout';
+export {PaymentsSettings} from './payments';
+export {TaxSettings} from './tax';
+export {ShippingSettings} from './shipping';
+export {InventorySettings} from './inventory';
+export {PrivacySettings} from './privacy';
+export {SeoSettings} from './seo';
