@@ -64,6 +64,17 @@ model User {
   recoveryCodes      RecoveryCode[]
   signInCodes        SignInCode[]
 
+  // VAREL shop data pointing at the account. Relation fields only (no column
+  // on `users`): Prisma needs both sides of a relation declared.
+  customerProfile     CustomerProfile?
+  addresses           Address[]
+  cart                Cart?
+  wishlistItems       WishlistItem[]
+  shopOrders          ShopOrder[]
+  discountRedemptions DiscountRedemption[]
+  reviews             Review[]
+  activityLogs        ActivityLog[]
+
   @@index([status, id])
   @@map("users")
 }
@@ -389,4 +400,967 @@ model Job {
 
   @@index([status, id])
   @@map("jobs")
+}
+
+// ================================================================ VAREL shop
+// Ported from VAREL's prisma/schema.prisma (docs/migration/PLAN.md, package F1).
+// Conventions: snake_case tables/columns, money in Int cents (+ `currency Char(3)`
+// where an amount leaves the row), rates and measures in Decimal, small fixed sets
+// as VarChar + CHECK (in the migration SQL; the allowed values are listed on each
+// field), `Timestamptz(3)`, explicit `onDelete`. VAREL's `User`, `Session`,
+// `PasswordResetToken` and `StaffInvite` are not ported (D5): accounts are the
+// template's `users`; guests are `visitors`. Enum values keep VAREL's spelling
+// (`Paid`, `Unfulfilled`, `published`…) so ported code compares the same strings.
+
+// ---------------------------------------------------------------- people
+
+/// Shop profile of an account (VAREL `User` profile fields). One per user,
+/// created on sign-up or first save; deleted with the account.
+model CustomerProfile {
+  id             Int      @id @default(autoincrement())
+  userId         Int      @unique @map("user_id")
+  firstName      String   @default("") @map("first_name") @db.VarChar(80)
+  lastName       String   @default("") @map("last_name") @db.VarChar(80)
+  phone          String?  @db.VarChar(40)
+  /// Preferred storefront language (emails use it): `en`, `da`, `de`, `fr`, `es`, `sv`.
+  locale         String   @default("en") @db.VarChar(10)
+  /// Opted in to the newsletter at sign-up or in the account (VAREL `User.newsletter`).
+  marketingOptIn Boolean  @default(false) @map("marketing_opt_in")
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("customer_profiles")
+}
+
+/// A guest browser (VAREL `Session`): the random `visitor_id` cookie set by the
+/// storefront (src/server/lib/visitor.ts). Owns a guest's cart and wishlist.
+/// Not an auth cookie.
+model Visitor {
+  /// The cookie value: 48 hex characters (random).
+  id         String   @id @db.VarChar(64)
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  lastSeenAt DateTime @default(now()) @map("last_seen_at") @db.Timestamptz(3)
+
+  cart     Cart?
+  wishlist WishlistItem[]
+
+  @@index([lastSeenAt])
+  @@map("visitors")
+}
+
+/// A saved address of an account (`/account/addresses/`).
+model Address {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  label     String?  @db.VarChar(40)
+  name      String   @db.VarChar(120)
+  line1     String   @db.VarChar(200)
+  line2     String?  @db.VarChar(200)
+  city      String   @db.VarChar(100)
+  zip       String   @db.VarChar(20)
+  country   String   @db.VarChar(80)
+  phone     String?  @db.VarChar(40)
+  primary   Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, id])
+  @@map("addresses")
+}
+
+// ---------------------------------------------------------------- catalog
+
+model Department {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(80)
+  /// URL name: `/shop/<slug>/`.
+  slug      String   @unique @db.VarChar(80)
+  position  Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  categories Category[]
+  products   Product[]
+
+  @@map("departments")
+}
+
+model Category {
+  id           Int      @id @default(autoincrement())
+  name         String   @db.VarChar(80)
+  /// URL name inside its department: `/shop/<dept>/<slug>/`.
+  slug         String   @db.VarChar(80)
+  position     Int      @default(0)
+  departmentId Int      @map("department_id")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  department Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  products   Product[]
+
+  @@unique([departmentId, slug])
+  @@index([slug])
+  @@map("categories")
+}
+
+/// A product. Its id IS its slug (`/product/<id>/`), as in VAREL.
+model Product {
+  /// Slug, e.g. `forma-overshirt`.
+  id               String   @id @db.VarChar(120)
+  name             String   @db.VarChar(160)
+  brand            String   @db.VarChar(80)
+  /// `physical` | `digital`.
+  type             String   @default("physical") @db.VarChar(10)
+  /// `draft` | `published` | `archived`: only published products reach the storefront.
+  status           String   @default("published") @db.VarChar(10)
+  priceCents       Int      @map("price_cents")
+  compareAtCents   Int?     @map("compare_at_cents")
+  sku              String   @unique @db.VarChar(64)
+  short            String   @db.VarChar(300)
+  description      String   @db.VarChar(10000)
+  material         String   @db.VarChar(120)
+  care             String?  @db.VarChar(2000)
+  /// Lower-case tags (≤ 30, each ≤ 40 characters).
+  tags             String[] @default([]) @db.VarChar(40)
+  /// Private download file key (platform files) for digital products.
+  download         String?  @db.VarChar(200)
+  /// "Featured" order in the shop.
+  position         Int      @default(0)
+  /// Manual order inside its category (merchandising).
+  categoryPosition Int      @default(0) @map("category_position")
+  /// Shown in the home page "featured" row.
+  featured         Boolean  @default(false)
+  /// Sell below zero stock.
+  allowBackorder   Boolean  @default(false) @map("allow_backorder")
+  /// What one unit costs the studio (admin only: profit and margin).
+  costCents        Int?     @map("cost_cents")
+  /// Packed weight, in `weightUnit`.
+  weight           Decimal? @db.Decimal(10, 3)
+  /// `kg` | `g` | `lb` | `oz`.
+  weightUnit       String   @default("kg") @map("weight_unit") @db.VarChar(2)
+  packageLength    Decimal? @map("package_length") @db.Decimal(10, 2)
+  packageWidth     Decimal? @map("package_width") @db.Decimal(10, 2)
+  packageHeight    Decimal? @map("package_height") @db.Decimal(10, 2)
+  /// `cm` | `in`.
+  dimensionUnit    String   @default("cm") @map("dimension_unit") @db.VarChar(2)
+  /// Variant options in display order, up to 3: `[{kind: 'color'|'size'|'custom', name, values[]}]`.
+  /// Colour and size values live in `variants.color` / `variants.size`; custom ones in
+  /// `variants.options`. Empty = derived from the variants.
+  options          Json     @default("[]") @db.JsonB
+  seoTitle         String?  @map("seo_title") @db.VarChar(160)
+  seoDescription   String?  @map("seo_description") @db.VarChar(320)
+  /// Kept on write from approved reviews.
+  ratingAvg        Decimal? @map("rating_avg") @db.Decimal(3, 2)
+  ratingCount      Int      @default(0) @map("rating_count")
+  departmentId     Int      @map("department_id")
+  categoryId       Int      @map("category_id")
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  department  Department          @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  category    Category            @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  images      ProductImage[]
+  variants    Variant[]
+  cartLines   CartLine[]
+  wishlist    WishlistItem[]
+  orderItems  ShopOrderItem[]
+  reviews     Review[]
+  collections CollectionProduct[]
+
+  @@index([status, position, id])
+  @@index([departmentId, status, position])
+  @@index([categoryId, status, categoryPosition])
+  @@index([featured, status, position])
+  @@index([name(ops: raw("gin_trgm_ops"))], type: Gin, map: "products_name_trgm_idx")
+  @@index([brand(ops: raw("gin_trgm_ops"))], type: Gin, map: "products_brand_trgm_idx")
+  @@index([short(ops: raw("gin_trgm_ops"))], type: Gin, map: "products_short_trgm_idx")
+  @@map("products")
+}
+
+model ProductImage {
+  id         Int      @id @default(autoincrement())
+  productId  String   @map("product_id") @db.VarChar(120)
+  /// Stable image key (VAREL photo key, or the platform file key).
+  key        String   @db.VarChar(200)
+  /// Public https URL.
+  src        String   @db.VarChar(2000)
+  credit     String   @default("") @db.VarChar(200)
+  creditHref String   @default("") @map("credit_href") @db.VarChar(2000)
+  /// 0 = primary.
+  position   Int      @default(0)
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt  DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId, position])
+  @@map("product_images")
+}
+
+/// A variant. Its id IS its SKU (`VRL-FRM-STO-M`), as in VAREL.
+model Variant {
+  id         String   @id @db.VarChar(64)
+  productId  String   @map("product_id") @db.VarChar(120)
+  color      String?  @db.VarChar(60)
+  size       String?  @db.VarChar(60)
+  /// Swatch colour (CSS colour) for `color`.
+  swatch     String?  @db.VarChar(40)
+  /// Custom option values, e.g. `{"Fabric": "Canvas"}`.
+  options    Json     @default("{}") @db.JsonB
+  priceCents Int      @map("price_cents")
+  /// Units in stock; null for digital products.
+  inventory  Int?
+  position   Int      @default(0)
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt  DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  product   Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  cartLines CartLine[]
+
+  @@index([productId, position])
+  @@map("variants")
+}
+
+// ---------------------------------------------------------------- journal
+
+model Post {
+  id             Int       @id @default(autoincrement())
+  /// URL name: `/journal/<slug>/`.
+  slug           String    @unique @db.VarChar(120)
+  title          String    @db.VarChar(160)
+  category       String    @db.VarChar(60)
+  /// `draft` | `published`.
+  status         String    @default("published") @db.VarChar(10)
+  /// Null for drafts never published; a future date schedules the post.
+  publishedAt    DateTime? @map("published_at") @db.Timestamptz(3)
+  /// Reading time label ("6 min read").
+  read           String    @db.VarChar(40)
+  author         String    @db.VarChar(80)
+  excerpt        String    @db.VarChar(600)
+  /// Photo `{src, credit, creditHref, alt?}`.
+  image          Json      @db.JsonB
+  /// PostBlock[] (rich text blocks).
+  body           Json      @db.JsonB
+  seoTitle       String?   @map("seo_title") @db.VarChar(160)
+  seoDescription String?   @map("seo_description") @db.VarChar(320)
+  createdAt      DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@index([status, publishedAt(sort: Desc), id(sort: Desc)])
+  @@index([category, status, publishedAt(sort: Desc)])
+  @@index([title(ops: raw("gin_trgm_ops"))], type: Gin, map: "posts_title_trgm_idx")
+  @@index([excerpt(ops: raw("gin_trgm_ops"))], type: Gin, map: "posts_excerpt_trgm_idx")
+  @@map("posts")
+}
+
+// ---------------------------------------------------------------- bag & wishlist
+
+/// A bag: one per account (`userId`) or per guest (`visitorId`), never both.
+model Cart {
+  id             Int       @id @default(autoincrement())
+  userId         Int?      @unique @map("user_id")
+  visitorId      String?   @unique @map("visitor_id") @db.VarChar(64)
+  discountCode   String?   @map("discount_code") @db.VarChar(64)
+  /// Captured at checkout for abandoned-bag reminders.
+  email          String?   @db.VarChar(254)
+  /// Visitor language when the email was captured (abandoned-bag email).
+  locale         String?   @db.VarChar(10)
+  reminderSentAt DateTime? @map("reminder_sent_at") @db.Timestamptz(3)
+  /// Admin dismissed this bag's current contents (no reminder).
+  dismissedAt    DateTime? @map("dismissed_at") @db.Timestamptz(3)
+  createdAt      DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  user    User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  visitor Visitor?   @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  lines   CartLine[]
+
+  // Abandoned bags (`email` set, by last change): partial index `carts_abandoned_idx` in SQL.
+  @@index([updatedAt(sort: Desc), id(sort: Desc)])
+  @@map("carts")
+}
+
+model CartLine {
+  id        Int      @id @default(autoincrement())
+  cartId    Int      @map("cart_id")
+  productId String   @map("product_id") @db.VarChar(120)
+  variantId String   @map("variant_id") @db.VarChar(64)
+  qty       Int
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  cart    Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  variant Variant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+
+  @@unique([cartId, variantId])
+  @@index([productId])
+  @@index([variantId])
+  @@map("cart_lines")
+}
+
+/// A saved product: an account's (`userId`) or a guest's (`visitorId`).
+model WishlistItem {
+  id        Int      @id @default(autoincrement())
+  userId    Int?     @map("user_id")
+  visitorId String?  @map("visitor_id") @db.VarChar(64)
+  productId String   @map("product_id") @db.VarChar(120)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  user    User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  visitor Visitor? @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  product Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@unique([visitorId, productId])
+  @@index([productId])
+  @@map("wishlist_items")
+}
+
+// ---------------------------------------------------------------- discounts
+
+/// A coupon or promotion (VAREL docs/PROMOTIONS.md), evaluated by the pure engine
+/// in src/server/lib/discounts.ts. VAREL's `value` is split by kind:
+/// `percent` → `percentOff`, `fixed` → `amountCents`; `shipping` and `bxgy` use neither.
+model Discount {
+  id               Int       @id @default(autoincrement())
+  /// `code` | `automatic`.
+  method           String    @default("code") @db.VarChar(10)
+  /// Internal name; customer-facing for automatic discounts.
+  name             String    @default("") @db.VarChar(120)
+  /// Upper-case; null for automatic discounts and unique-code batches.
+  code             String?   @unique @db.VarChar(64)
+  /// `shared` | `unique`.
+  codeType         String    @default("shared") @map("code_type") @db.VarChar(10)
+  /// `percent` | `fixed` | `shipping` | `bxgy`.
+  kind             String    @db.VarChar(10)
+  /// `percent`: 0–100.
+  percentOff       Decimal?  @map("percent_off") @db.Decimal(5, 2)
+  /// `fixed`: the amount off, in cents.
+  amountCents      Int?      @map("amount_cents")
+  /// Cap for `percent`, in cents.
+  maxAmountCents   Int?      @map("max_amount_cents")
+  /// bxgy: buy this many…
+  buyQty           Int?      @map("buy_qty")
+  /// …get this many…
+  getQty           Int?      @map("get_qty")
+  /// …at this percent off (100 = free).
+  getPercent       Int?      @map("get_percent")
+  /// `order` | `products` | `categories` | `departments`.
+  scope            String    @default("order") @db.VarChar(12)
+  productIds       String[]  @default([]) @map("product_ids") @db.VarChar(120)
+  categoryIds      Int[]     @default([]) @map("category_ids")
+  departmentIds    Int[]     @default([]) @map("department_ids")
+  /// Customer-facing summary ("10% off").
+  label            String    @db.VarChar(120)
+  /// Minimum in-scope spend, in cents.
+  minimumCents     Int       @default(0) @map("minimum_cents")
+  minimumQty       Int?      @map("minimum_qty")
+  /// `everyone` | `signed_in` | `first_order` | `subscribers` | `customers`.
+  eligibility      String    @default("everyone") @db.VarChar(12)
+  /// `users.id` of the customers allowed (eligibility `customers`).
+  customerIds      Int[]     @default([]) @map("customer_ids")
+  perCustomerLimit Int?      @map("per_customer_limit")
+  combinable       Boolean   @default(false)
+  /// Higher applies first.
+  priority         Int       @default(0)
+  note             String    @default("") @db.VarChar(300)
+  active           Boolean   @default(true)
+  startsAt         DateTime? @map("starts_at") @db.Timestamptz(3)
+  endsAt           DateTime? @map("ends_at") @db.Timestamptz(3)
+  /// Max redemptions; null = unlimited.
+  usageLimit       Int?      @map("usage_limit")
+  createdAt        DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  redemptions DiscountRedemption[]
+  orders      ShopOrder[]
+  codes       DiscountCode[]
+
+  @@index([method, active])
+  @@index([createdAt(sort: Desc), id(sort: Desc)])
+  @@map("discounts")
+}
+
+/// A single-use code of a `codeType = unique` discount. Marked used inside the
+/// checkout transaction with a conditional update (`used_at IS NULL`).
+model DiscountCode {
+  id         Int       @id @default(autoincrement())
+  discountId Int       @map("discount_id")
+  /// Upper-case.
+  code       String    @unique @db.VarChar(64)
+  usedAt     DateTime? @map("used_at") @db.Timestamptz(3)
+  orderId    Int?      @unique @map("order_id")
+  createdAt  DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt  DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  discount Discount   @relation(fields: [discountId], references: [id], onDelete: Cascade)
+  order    ShopOrder? @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  @@index([discountId, usedAt])
+  @@map("discount_codes")
+}
+
+/// One row per applied discount per order (written in the checkout transaction;
+/// automatic discounts too). Usage limits, per-customer limits and reports count these.
+model DiscountRedemption {
+  id           Int      @id @default(autoincrement())
+  discountId   Int      @map("discount_id")
+  orderId      Int      @map("order_id")
+  userId       Int?     @map("user_id")
+  email        String   @db.VarChar(254)
+  /// Snapshot of the code as used; null for automatic discounts.
+  code         String?  @db.VarChar(64)
+  /// Snapshot of the customer-facing label ("STUDIO10 · 10% off").
+  label        String?  @db.VarChar(200)
+  /// Snapshot: it was a free-shipping discount.
+  freeShipping Boolean? @map("free_shipping")
+  /// Value of the discount on that order (shipping saved for free shipping), in cents.
+  amountCents  Int      @map("amount_cents")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  discount Discount  @relation(fields: [discountId], references: [id], onDelete: Restrict)
+  order    ShopOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  user     User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@unique([discountId, orderId])
+  @@index([discountId, createdAt])
+  @@index([orderId])
+  @@index([userId])
+  @@index([email])
+  @@map("discount_redemptions")
+}
+
+// ---------------------------------------------------------------- store config
+
+/// Store-wide settings: a single row with `id = 1` (created by the migration).
+model Setting {
+  id                         Int      @id @default(1)
+  storeName                  String   @default("VAREL") @map("store_name") @db.VarChar(80)
+  currency                   String   @default("USD") @db.Char(3)
+  taxName                    String   @default("VAT") @map("tax_name") @db.VarChar(40)
+  /// Default tax rate as a fraction (0.25 = 25 %).
+  taxRate                    Decimal  @default(0.25) @map("tax_rate") @db.Decimal(6, 4)
+  freeShippingThresholdCents Int      @default(15000) @map("free_shipping_threshold_cents")
+  announcement               String   @default("") @db.VarChar(300)
+  supportEmail               String   @default("care@varel.studio") @map("support_email") @db.VarChar(254)
+  /// Stock at or below this (and above 0) is "low".
+  lowStockThreshold          Int      @default(6) @map("low_stock_threshold")
+  /// Days after delivery a return can be requested.
+  returnWindowDays           Int      @default(30) @map("return_window_days")
+  // Tax & currency
+  /// true: catalogue prices are gross; tax is extracted, not added.
+  pricesIncludeTax           Boolean  @default(false) @map("prices_include_tax")
+  taxDigital                 Boolean  @default(true) @map("tax_digital")
+  taxShipping                Boolean  @default(false) @map("tax_shipping")
+  // General
+  legalName                  String   @default("") @map("legal_name") @db.VarChar(160)
+  vatNumber                  String   @default("") @map("vat_number") @db.VarChar(40)
+  businessAddress            String   @default("") @map("business_address") @db.VarChar(500)
+  phone                      String   @default("") @db.VarChar(40)
+  logoUrl                    String?  @map("logo_url") @db.VarChar(2000)
+  /// `{instagram?, pinterest?, tiktok?, facebook?, x?}` URLs.
+  socialLinks                Json     @default("{}") @map("social_links") @db.JsonB
+  orderPrefix                String   @default("VRL-") @map("order_prefix") @db.VarChar(10)
+  // Checkout
+  guestCheckout              Boolean  @default(true) @map("guest_checkout")
+  requirePhone               Boolean  @default(false) @map("require_phone")
+  /// Show an order-notes field at checkout.
+  orderNotes                 Boolean  @default(false) @map("order_notes")
+  /// Shown next to a required terms checkbox when not empty.
+  termsText                  String   @default("") @map("terms_text") @db.VarChar(2000)
+  // Inventory & returns
+  hideSoldOut                Boolean  @default(false) @map("hide_sold_out")
+  returnReasons              String[] @default([]) @map("return_reasons") @db.VarChar(120)
+  refundShipping             Boolean  @default(false) @map("refund_shipping")
+  // Payments (secrets are owner secrets, never here)
+  /// `simulated` | `stripe`.
+  paymentProvider            String   @default("simulated") @map("payment_provider") @db.VarChar(20)
+  stripePublishableKey       String?  @map("stripe_publishable_key") @db.VarChar(255)
+  // Email
+  /// `outbox` | `resend` | `postmark` | `webhook`.
+  emailProvider              String   @default("outbox") @map("email_provider") @db.VarChar(20)
+  /// Non-secret provider config, e.g. `{endpoint}`.
+  emailConfig                Json     @default("{}") @map("email_config") @db.JsonB
+  emailFromName              String   @default("VAREL") @map("email_from_name") @db.VarChar(80)
+  emailFromAddress           String   @default("care@varel.studio") @map("email_from_address") @db.VarChar(254)
+  emailReplyTo               String?  @map("email_reply_to") @db.VarChar(254)
+  staffAlertEmail            String?  @map("staff_alert_email") @db.VarChar(254)
+  // SEO & content
+  seoTitle                   String   @default("") @map("seo_title") @db.VarChar(160)
+  seoDescription             String   @default("") @map("seo_description") @db.VarChar(320)
+  ogImage                    String?  @map("og_image") @db.VarChar(2000)
+  /// `{eyebrow, title, body, primaryCta: {label, url}, secondaryCta, image: Photo}`.
+  homeHero                   Json     @default("{}") @map("home_hero") @db.JsonB
+  // Customers & privacy
+  cookieConsent              Boolean  @default(true) @map("cookie_consent")
+  abandonedCartEnabled       Boolean  @default(false) @map("abandoned_cart_enabled")
+  abandonedCartHours         Int      @default(24) @map("abandoned_cart_hours")
+  reviewsEnabled             Boolean  @default(true) @map("reviews_enabled")
+  reviewsRequireApproval     Boolean  @default(true) @map("reviews_require_approval")
+  reviewsVerifiedOnly        Boolean  @default(false) @map("reviews_verified_only")
+  analyticsEnabled           Boolean  @default(true) @map("analytics_enabled")
+  // Languages
+  defaultLocale              String   @default("en") @map("default_locale") @db.VarChar(10)
+  /// Enabled storefront languages.
+  locales                    String[] @default(["en", "da", "de", "fr", "es", "sv"]) @db.VarChar(10)
+  /// `workers-ai` | `deepl` | `none`.
+  translationProvider        String   @default("workers-ai") @map("translation_provider") @db.VarChar(20)
+  /// Translate content automatically when it is saved.
+  autoTranslate              Boolean  @default(true) @map("auto_translate")
+  createdAt                  DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt                  DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@map("settings")
+}
+
+/// A shipping zone. Its id is a slug (`denmark`), carried by checkout.
+model ShippingZone {
+  id        String   @id @db.VarChar(80)
+  name      String   @db.VarChar(80)
+  position  Int      @default(0)
+  /// Country names; empty for the catch-all zone.
+  countries String[] @default([]) @db.VarChar(80)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  methods ShippingMethod[]
+
+  @@map("shipping_zones")
+}
+
+/// A shipping method. Its id (`denmark-express`) is carried by checkout.
+model ShippingMethod {
+  id        String   @id @db.VarChar(160)
+  zoneId    String   @map("zone_id") @db.VarChar(80)
+  name      String   @db.VarChar(80)
+  detail    String   @default("") @db.VarChar(80)
+  rateCents Int      @map("rate_cents")
+  position  Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  zone ShippingZone @relation(fields: [zoneId], references: [id], onDelete: Cascade)
+
+  @@index([zoneId, position])
+  @@map("shipping_methods")
+}
+
+/// A tax rate for one country (overrides the store default).
+model TaxRate {
+  id        Int      @id @default(autoincrement())
+  /// Country name as used in addresses, e.g. "Denmark".
+  country   String   @unique @db.VarChar(80)
+  /// Fraction (0.25 = 25 %).
+  rate      Decimal  @db.Decimal(6, 4)
+  name      String   @default("VAT") @db.VarChar(40)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@map("tax_rates")
+}
+
+// ---------------------------------------------------------------- orders (D4)
+
+/// A shop order (VAREL `Order`; `orders` belongs to the template's payments).
+/// Public key: `number` (`VRL-24817`), looked up with the order email or by its owner.
+model ShopOrder {
+  id                    Int      @id @default(autoincrement())
+  number                String   @unique @db.VarChar(20)
+  userId                Int?     @map("user_id")
+  email                 String   @db.VarChar(254)
+  phone                 String?  @db.VarChar(40)
+  /// `Paid` | `Pending` | `Refunded` | `Failed`.
+  payment               String   @default("Paid") @db.VarChar(10)
+  /// `Unfulfilled` | `Processing` | `Shipped` | `Delivered` | `Returned` | `Cancelled`.
+  fulfillment           String   @default("Unfulfilled") @db.VarChar(12)
+  /// Progress step shown to the customer (1–4).
+  stage                 Int      @default(1)
+  carrier               String?  @db.VarChar(80)
+  tracking              String?  @db.VarChar(120)
+  trackingUrl           String?  @map("tracking_url") @db.VarChar(2000)
+  /// Shipping method snapshot ("Express · 1–2 business days").
+  method                String   @db.VarChar(200)
+  /// Shipping address snapshot `{name, line1, line2, city, zip, country}`.
+  address               Json?    @db.JsonB
+  billingSameAsShipping Boolean  @default(true) @map("billing_same_as_shipping")
+  billingAddress        Json?    @map("billing_address") @db.JsonB
+  cardBrand             String?  @map("card_brand") @db.VarChar(20)
+  cardLast4             String?  @map("card_last4") @db.VarChar(4)
+  subtotalCents         Int      @map("subtotal_cents")
+  /// Snapshot of the code used.
+  discountCode          String?  @map("discount_code") @db.VarChar(64)
+  discountId            Int?     @map("discount_id")
+  /// Discount usage given back when the payment failed (redemptions + unique code),
+  /// restored if it is paid late.
+  releasedDiscounts     Json?    @map("released_discounts") @db.JsonB
+  discountCents         Int      @default(0) @map("discount_cents")
+  shippingCents         Int      @default(0) @map("shipping_cents")
+  taxCents              Int      @default(0) @map("tax_cents")
+  totalCents            Int      @map("total_cents")
+  currency              String   @default("USD") @db.Char(3)
+  /// Language the order was placed in (emails use it).
+  locale                String   @default("en") @db.VarChar(10)
+  pricesIncludeTax      Boolean  @default(false) @map("prices_include_tax")
+  /// Rate applied (country rate or default), as a fraction.
+  taxRate               Decimal? @map("tax_rate") @db.Decimal(6, 4)
+  /// Order note entered by the customer at checkout.
+  customerNote          String?  @map("customer_note") @db.VarChar(500)
+  /// `simulated` | `stripe`.
+  paymentProvider       String   @default("simulated") @map("payment_provider") @db.VarChar(20)
+  /// Internal staff note.
+  note                  String?  @db.VarChar(2000)
+  placedAt              DateTime @default(now()) @map("placed_at") @db.Timestamptz(3)
+  createdAt             DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt             DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  user          User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
+  discountRef   Discount?            @relation(fields: [discountId], references: [id], onDelete: SetNull)
+  items         ShopOrderItem[]
+  returns       ReturnRequest[]
+  events        ShopOrderEvent[]
+  redemptions   DiscountRedemption[]
+  discountCodes DiscountCode[]
+  payments      ShopPayment[]
+
+  @@index([userId, placedAt(sort: Desc), id(sort: Desc)])
+  @@index([email, placedAt(sort: Desc)])
+  @@index([placedAt(sort: Desc), id(sort: Desc)])
+  @@index([fulfillment, payment, placedAt(sort: Desc)])
+  @@index([payment, placedAt(sort: Desc)])
+  @@index([discountId])
+  @@map("shop_orders")
+}
+
+model ShopOrderItem {
+  id            Int      @id @default(autoincrement())
+  orderId       Int      @map("order_id")
+  /// Null once the product is deleted (the line keeps its snapshot).
+  productId     String?  @map("product_id") @db.VarChar(120)
+  name          String   @db.VarChar(160)
+  category      String   @db.VarChar(80)
+  sku           String   @db.VarChar(64)
+  color         String?  @db.VarChar(60)
+  size          String?  @db.VarChar(60)
+  /// Custom option values at purchase, e.g. `{"Fabric": "Canvas"}`.
+  options       Json     @default("{}") @db.JsonB
+  qty           Int
+  priceCents    Int      @map("price_cents")
+  /// Allocated share of the order's discounts (whole line), in cents.
+  discountCents Int      @default(0) @map("discount_cents")
+  digital       Boolean  @default(false)
+  /// Photo snapshot.
+  image         Json     @db.JsonB
+  download      String?  @db.VarChar(200)
+  position      Int      @default(0)
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  order   ShopOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product?  @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([orderId, position])
+  @@index([productId])
+  @@map("shop_order_items")
+}
+
+/// Timeline of an order (admin). `by` is the acting staff member's name, null for the system.
+model ShopOrderEvent {
+  id      Int      @id @default(autoincrement())
+  orderId Int      @map("order_id")
+  /// `placed` | `status` | `tracking` | `refund` | `note` | `return`.
+  kind    String   @db.VarChar(10)
+  message String   @db.VarChar(2000)
+  by      String?  @db.VarChar(120)
+  at      DateTime @default(now()) @db.Timestamptz(3)
+
+  order ShopOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId, at])
+  @@map("shop_order_events")
+}
+
+model ReturnRequest {
+  id        Int      @id @default(autoincrement())
+  orderId   Int      @map("order_id")
+  email     String   @db.VarChar(254)
+  /// `Requested` | `Approved` | `Rejected` | `Received` | `Refunded`.
+  status    String   @default("Requested") @db.VarChar(10)
+  /// `[{lineId, qty, reason}]` (`lineId` = `shop_order_items.id`).
+  items     Json     @db.JsonB
+  note      String?  @db.VarChar(2000)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  order ShopOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([status, createdAt(sort: Desc)])
+  @@index([createdAt(sort: Desc), id(sort: Desc)])
+  @@map("return_requests")
+}
+
+/// A payment attempt of an order (VAREL `Payment`).
+model ShopPayment {
+  id             Int      @id @default(autoincrement())
+  orderId        Int      @map("order_id")
+  /// `stripe` | `simulated`.
+  provider       String   @db.VarChar(20)
+  /// Stripe PaymentIntent id.
+  providerRef    String?  @unique @map("provider_ref") @db.VarChar(255)
+  /// `requires_payment` | `succeeded` | `failed` | `canceled` | `refunded` | `partially_refunded`.
+  status         String   @db.VarChar(20)
+  amountCents    Int      @map("amount_cents")
+  refundedCents  Int      @default(0) @map("refunded_cents")
+  currency       String   @db.Char(3)
+  cardBrand      String?  @map("card_brand") @db.VarChar(20)
+  cardLast4      String?  @map("card_last4") @db.VarChar(4)
+  failureMessage String?  @map("failure_message") @db.VarChar(500)
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  order ShopOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId, createdAt])
+  @@index([status, createdAt])
+  @@map("shop_payments")
+}
+
+// ---------------------------------------------------------------- misc
+
+model NewsletterSubscriber {
+  id        Int      @id @default(autoincrement())
+  /// Trimmed and lower-cased.
+  email     String   @unique @db.VarChar(254)
+  /// Where they signed up: `footer`, `checkout`, `journal`, `signup`, `seed`…
+  source    String?  @db.VarChar(40)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@index([createdAt(sort: Desc), id(sort: Desc)])
+  @@map("newsletter_subscribers")
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(120)
+  email     String   @db.VarChar(254)
+  subject   String   @db.VarChar(200)
+  /// Order number the message is about, if any.
+  order     String?  @map("order_number") @db.VarChar(20)
+  message   String   @db.VarChar(5000)
+  read      Boolean  @default(false)
+  archived  Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@index([archived, read, createdAt(sort: Desc)])
+  @@map("contact_messages")
+}
+
+model Collection {
+  id             Int      @id @default(autoincrement())
+  /// URL name: `/collections/<slug>/`.
+  slug           String   @unique @db.VarChar(120)
+  title          String   @db.VarChar(160)
+  description    String   @default("") @db.VarChar(10000)
+  /// Photo `{src, credit, creditHref}`.
+  image          Json?    @db.JsonB
+  published      Boolean  @default(true)
+  featuredOnHome Boolean  @default(false) @map("featured_on_home")
+  position       Int      @default(0)
+  seoTitle       String?  @map("seo_title") @db.VarChar(160)
+  seoDescription String?  @map("seo_description") @db.VarChar(320)
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  products CollectionProduct[]
+
+  @@index([published, position])
+  @@map("collections")
+}
+
+model CollectionProduct {
+  collectionId Int    @map("collection_id")
+  productId    String @map("product_id") @db.VarChar(120)
+  position     Int    @default(0)
+
+  collection Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  product    Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@id([collectionId, productId])
+  @@index([productId])
+  @@map("collection_products")
+}
+
+/// A CMS page (`/pages/<slug>/`, and `privacy` / `terms`).
+model Page {
+  id             Int      @id @default(autoincrement())
+  slug           String   @unique @db.VarChar(120)
+  title          String   @db.VarChar(160)
+  /// PostBlock[].
+  body           Json     @db.JsonB
+  published      Boolean  @default(true)
+  seoTitle       String?  @map("seo_title") @db.VarChar(160)
+  seoDescription String?  @map("seo_description") @db.VarChar(320)
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@map("pages")
+}
+
+/// A navigation menu: `header`, `footer-shop`, `footer-help`, `footer-studio`.
+model Menu {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique @db.VarChar(40)
+  title     String   @db.VarChar(60)
+  /// `[{label, url}]` (≤ 20).
+  items     Json     @db.JsonB
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@map("menus")
+}
+
+/// Store activity (admin timeline): "Updated Atelier Wool Coat · price $395 → $420".
+model ActivityLog {
+  id        BigInt   @id @default(autoincrement())
+  userId    Int?     @map("user_id")
+  /// Snapshot of the actor's name.
+  actorName String   @map("actor_name") @db.VarChar(120)
+  /// `product.update`, `order.refund`, `settings.update`…
+  action    String   @db.VarChar(60)
+  /// `product`, `order`, `settings`…
+  entity    String   @db.VarChar(40)
+  entityId  String?  @map("entity_id") @db.VarChar(120)
+  summary   String   @db.VarChar(500)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt(sort: Desc), id(sort: Desc)])
+  @@index([entity, entityId])
+  @@index([userId, id])
+  @@map("activity_logs")
+}
+
+/// A transactional email template: `order_confirmation`, `order_shipped`…
+model EmailTemplate {
+  key       String   @id @db.VarChar(60)
+  subject   String   @db.VarChar(200)
+  /// Plain text with `{{variables}}`; rendered into the branded HTML layout.
+  body      String   @db.VarChar(20000)
+  enabled   Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@map("email_templates")
+}
+
+/// An email the store sent or stored (outbox).
+model EmailMessage {
+  id          Int       @id @default(autoincrement())
+  template    String?   @db.VarChar(60)
+  to          String    @db.VarChar(254)
+  subject     String    @db.VarChar(300)
+  html        String
+  text        String
+  /// Provider that handled it (`outbox` = stored only).
+  provider    String    @db.VarChar(20)
+  /// `queued` | `sent` | `failed` | `stored`.
+  status      String    @default("queued") @db.VarChar(10)
+  error       String?   @db.VarChar(2000)
+  providerId  String?   @map("provider_id") @db.VarChar(255)
+  /// `order`, `user`, `cart`…
+  relatedType String?   @map("related_type") @db.VarChar(40)
+  relatedId   String?   @map("related_id") @db.VarChar(60)
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  sentAt      DateTime? @map("sent_at") @db.Timestamptz(3)
+
+  @@index([createdAt(sort: Desc), id(sort: Desc)])
+  @@index([to])
+  @@index([relatedType, relatedId])
+  @@index([status, createdAt])
+  @@map("email_messages")
+}
+
+/// A product review. `name`/`email` are the reviewer's own (guests may review).
+model Review {
+  id               Int      @id @default(autoincrement())
+  productId        String   @map("product_id") @db.VarChar(120)
+  userId           Int?     @map("user_id")
+  name             String   @db.VarChar(80)
+  email            String   @db.VarChar(254)
+  /// 1–5.
+  rating           Int
+  title            String   @db.VarChar(120)
+  body             String   @db.VarChar(5000)
+  /// `pending` | `approved` | `rejected`.
+  status           String   @default("pending") @db.VarChar(10)
+  verifiedPurchase Boolean  @default(false) @map("verified_purchase")
+  /// Public staff reply.
+  reply            String?  @db.VarChar(2000)
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([productId, status, createdAt(sort: Desc)])
+  @@index([status, createdAt(sort: Desc)])
+  @@index([userId])
+  @@map("reviews")
+}
+
+/// First-party analytics (consent-gated beacon). Append-heavy: no foreign keys.
+model AnalyticsEvent {
+  id         BigInt   @id @default(autoincrement())
+  /// `page_view` | `product_view` | `add_to_cart` | `checkout_start` | `purchase` | `search`.
+  type       String   @db.VarChar(20)
+  /// Analytics session (visitor id or a random id), not an auth session.
+  sessionId  String?  @map("session_id") @db.VarChar(64)
+  userId     Int?     @map("user_id")
+  productId  String?  @map("product_id") @db.VarChar(120)
+  orderId    Int?     @map("order_id")
+  /// Search term (lower-cased).
+  query      String?  @db.VarChar(120)
+  /// Search result count.
+  results    Int?
+  valueCents Int?     @map("value_cents")
+  path       String?  @db.VarChar(300)
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  @@index([type, createdAt])
+  @@index([productId, type])
+  @@map("analytics_events")
+}
+
+/// One translated field of one record. The source text lives on the record
+/// itself (default locale). `entity`: product | option | department | category |
+/// post | post_category | page | collection | menu | shipping_method | discount |
+/// email_template | setting | review_reply. `entityId` is the record's id as text
+/// ("1" for the settings row; the English value for `option` / `post_category`).
+model Translation {
+  id         Int      @id @default(autoincrement())
+  entity     String   @db.VarChar(32)
+  entityId   String   @map("entity_id") @db.VarChar(120)
+  /// e.g. `name`, `description`, `body`, `items`, `label`.
+  field      String   @db.VarChar(60)
+  locale     String   @db.VarChar(10)
+  /// Translated text; JSON-encoded for structured fields (post body blocks, menu items, homeHero).
+  value      String
+  /// `auto` | `manual` (manual is never overwritten by auto-translation).
+  source     String   @default("auto") @db.VarChar(10)
+  /// Hash of the source text it was translated from: differs from the current source = stale.
+  sourceHash String   @map("source_hash") @db.VarChar(64)
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt  DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@unique([entity, entityId, field, locale])
+  @@index([entity, locale])
+  @@index([locale, source])
+  @@map("translations")
 }
