@@ -1,0 +1,61 @@
+---
+/**
+ * `/shop/`: every product with the filter rail, sort and grid (port of VAREL src/pages/Shop.tsx).
+ * Server-rendered (filters live in the query string; `/da/shop/` reaches this file through the locale
+ * middleware). The first answer — the filtered list plus the base listing that feeds the filter panel
+ * (`base=dept`) — is read in-process in parallel with the page context, so the grid is in the HTML and
+ * the island needs no first fetch. Canonical is `/shop/` (the query is dropped by <Base>).
+ */
+import {CatalogCrumbs} from '@/components/catalog/CatalogCrumbs';
+import CatalogListing from '@/components/catalog/CatalogListing';
+import {type CatalogListing as CatalogListingData, parseListingSearch, sortItems, sortOf, toApiQuery} from '@/components/catalog/listing';
+import {dictsFor, serverText} from '@/components/layout/dictionaries';
+import Storefront from '@/layouts/Storefront.astro';
+import {homeLink} from '@/lib/links';
+import {backend, read} from '@/server/backend';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const locale = Astro.locals.locale ?? 'en';
+const search = parseListingSearch(Astro.url.searchParams, 'shop');
+const api = backend(Astro.request);
+const [ctx, list] = await Promise.all([
+  pageContext(Astro.request, Astro.response),
+  read<CatalogListingData>(
+    api.products.$get({query: toApiQuery(search, {}, 'dept')} as never, {headers: {'x-locale': locale}})
+  ),
+]);
+if (list) list.items = sortItems(list.items, sortOf(search));
+else Astro.response.status = 503;
+
+const t = serverText(locale);
+const tc = (key: string, vars?: Record<string, string | number>) => t('catalog', key, vars);
+const dicts = dictsFor(locale, {catalog: true, product: ['tile'], common: true, layout: ['ui']});
+const crumbDicts = dictsFor(locale, {layout: ['ui']});
+const initial = {search, list: list ? {...list, base: undefined} : null, base: list?.base ?? null};
+---
+
+<Storefront
+  api={ctx.api}
+  site={ctx.site}
+  viewer={ctx.viewer}
+  title={tc('shop.title')}
+  description={tc('shop.meta')}
+  noindex={!list}>
+  <div class="mx-auto max-w-page">
+    <div class="px-6 pt-6 md:px-12">
+      <CatalogCrumbs locale={locale} dicts={crumbDicts} items={[{label: tc('crumbs.home'), href: homeLink(locale)}, {label: tc('crumbs.shop')}]} />
+    </div>
+    <CatalogListing
+      client:load
+      mode="shop"
+      locale={locale}
+      dicts={dicts}
+      scope={{}}
+      initial={initial}
+      heading={tc('shop.heading')}
+      intro={tc('shop.intro')}
+    />
+  </div>
+</Storefront>

@@ -1,0 +1,14 @@
+---
+/** `/shop/<dept>/<category>/`: a department category (VAREL src/pages/Category.tsx). Reads and the 404/503
+    decision run here, in the page frontmatter, so the status and headers are set before streaming; markup:
+    CategoryPage.astro. */
+import {loadCategoryPage} from '@/components/catalog/category-page';
+import CategoryPage from '@/components/catalog/CategoryPage.astro';
+
+export const prerender = false;
+
+const {dept = '', category = ''} = Astro.params;
+const data = await loadCategoryPage(Astro, Astro.locals.locale ?? 'en', dept, category);
+---
+
+<CategoryPage data={data} />

@@ -1,0 +1,168 @@
+---
+/**
+ * A department page (`/shop/<dept>/`) or a department category (`/shop/<dept>/<cat>/`): port of VAREL
+ * src/pages/Category.tsx, shared by src/pages/shop/[dept]/index.astro and [dept]/[category]/index.astro.
+ *
+ * Server-rendered: the taxonomy decides 404 (unknown department, or a category not in THAT department) and
+ * 503 (the taxonomy read failed: never a 404 on an outage). Hero, department nav and the "about" section are
+ * plain HTML; the category chips, toolbar, active filters and grid are one island (`CatalogListing`,
+ * category mode). The reads and the status decision are loadCategoryPage() (category-page.ts), run in the page.
+ */
+import {CatalogCrumbs} from '@/components/catalog/CatalogCrumbs';
+import CatalogListing, {type CategoryChip} from '@/components/catalog/CatalogListing';
+import {type CategoryPageData, categoryTitle, COPY_SLUGS, META_SLUGS} from '@/components/catalog/category-page';
+import {dictsFor, serverText} from '@/components/layout/dictionaries';
+import {CatalogNotice} from '@/components/catalog/CatalogNotice';
+import {Img, type Photo} from '@/components/varel';
+import Storefront from '@/layouts/Storefront.astro';
+import {categoryLink, deptLink, homeLink, journalLink, shopLink} from '@/lib/links';
+import {cn} from '@/lib/utils';
+
+interface Props {
+  /** From loadCategoryPage(), called in the page frontmatter (it sets the status and headers) */
+  data: CategoryPageData;
+}
+
+/* Editorial imagery from the prototype (not commerce data). */
+const HERO: Photo = {
+  src: 'https://images.unsplash.com/photo-1518575139326-8c3b3d3d074c',
+  credit: 'Photo by Velizar Ivanov on Unsplash',
+  creditHref: 'https://unsplash.com/@lycan',
+};
+const EDITORIAL: Photo = {
+  src: 'https://images.unsplash.com/photo-1646270968752-c2cbdb8e7f73',
+  credit: 'Photo by Meg MacDonald on Unsplash',
+  creditHref: 'https://unsplash.com/@missmeg_mac',
+};
+
+const {data} = Astro.props;
+const {ctx, state, deptSlug, catSlug, search, taxonomy, dept, category, list} = data;
+const locale = Astro.locals.locale ?? 'en';
+const scope = {dept: deptSlug, category: catSlug};
+
+const t = serverText(locale);
+const tc = (key: string, vars?: Record<string, string | number>) => t('catalog', key, vars);
+
+const deptName = dept?.name ?? deptSlug;
+const catName = catSlug ? (category?.name ?? catSlug) : undefined;
+const copy = COPY_SLUGS.includes(deptSlug) ? tc(`category.copy.${deptSlug}`) : undefined;
+const title = categoryTitle(data, tc);
+const description = state === 'ready' ? (META_SLUGS.includes(deptSlug) ? tc(`category.meta.${deptSlug}`) : copy) : undefined;
+
+const crumbs = [
+  {label: tc('crumbs.home'), href: homeLink(locale)},
+  {label: tc('crumbs.shop'), href: shopLink(locale)},
+  {label: deptName, href: catName ? deptLink(deptSlug, locale) : undefined},
+  ...(catName ? [{label: catName}] : []),
+];
+const chips: CategoryChip[] = dept
+  ? [
+      {label: tc('category.all', {name: dept.name, lower: dept.name.toLowerCase()}), path: deptLink(dept.slug, locale), current: !catSlug},
+      ...dept.categories.map(c => ({label: `${c.name} (${c.count})`, path: categoryLink(dept.slug, c.slug, locale), current: c.slug === catSlug})),
+    ]
+  : [];
+const count = list ? tc('pieces', {count: list.total}) : ' ';
+
+const dicts = dictsFor(locale, {catalog: true, product: ['tile'], common: true, layout: ['ui']});
+const crumbDicts = dictsFor(locale, {layout: ['ui']});
+const initial = {search, list: list ? {...list, base: undefined} : null, base: list?.base ?? null};
+const navCls = (on: boolean) =>
+  cn(
+    'border-0 border-b-2 pb-2 text-label-md tracking-label uppercase',
+    on
+      ? 'border-ink-900 text-text-primary hover:border-ink-900 hover:text-text-primary'
+      : 'border-transparent text-text-muted hover:border-transparent hover:text-text-primary'
+  );
+---
+
+<Storefront api={ctx.api} site={ctx.site} viewer={ctx.viewer} title={title} description={description} noindex={state !== 'ready' || !list}>
+  {
+    state === 'not-found' && (
+      <div class="mx-auto max-w-page px-6 pt-10 pb-24 md:px-12">
+        <CatalogNotice
+          title={tc('category.notFoundTitle')}
+          description={tc('category.notFoundBody')}
+          actionLabel={tc('category.allProducts')}
+          actionHref={shopLink(locale)}
+        />
+      </div>
+    )
+  }
+  {
+    state === 'unavailable' && (
+      <div class="mx-auto max-w-page px-6 pt-10 pb-24 md:px-12">
+        <CatalogNotice
+          title={tc('results.errorTitle')}
+          description={tc('results.errorBody')}
+          actionLabel={tc('results.tryAgain')}
+          actionHref={Astro.url.pathname + Astro.url.search}
+        />
+      </div>
+    )
+  }
+  {
+    state === 'ready' && dept && (
+      <div class="mx-auto max-w-page">
+        <div class="px-6 pt-6 md:px-12">
+          <CatalogCrumbs locale={locale} dicts={crumbDicts} items={crumbs} />
+        </div>
+
+        <section class="mt-6 grid grid-cols-1 items-stretch gap-[2px] lg:grid-cols-[1fr_1.15fr]">
+          <div class="flex flex-col justify-center gap-5 bg-chalk px-6 py-14 md:px-12 md:py-20">
+            <span class="text-label-sm tracking-label text-text-muted uppercase">{tc('category.eyebrow')}</span>
+            <h1 class="m-0 font-display text-[44px] leading-[1.06] font-normal tracking-display md:text-[60px]">{deptName}</h1>
+            {copy && <p class="m-0 max-w-[44ch] text-body-md text-text-secondary">{copy}</p>}
+            <span aria-live="polite" data-catalog-count class="text-label-md tracking-label text-text-muted uppercase">
+              {count}
+            </span>
+          </div>
+          <div class="relative min-h-[320px] bg-ink-100 md:min-h-[520px]">
+            <Img
+              photo={HERO}
+              ratio="fill"
+              width={1600}
+              sizes="(min-width: 1024px) 54vw, 100vw"
+              priority
+              alt={tc('category.heroAlt', {name: deptName})}
+            />
+          </div>
+        </section>
+
+        <nav aria-label={tc('category.departments')} class="flex flex-wrap gap-x-6 gap-y-3 px-6 pt-8 md:px-12">
+          {
+            taxonomy!.map(d => (
+              <a href={deptLink(d.slug, locale)} aria-current={d.slug === deptSlug ? 'page' : undefined} class={navCls(d.slug === deptSlug)}>
+                {d.name}
+              </a>
+            ))
+          }
+        </nav>
+
+        <CatalogListing
+          client:load
+          mode="category"
+          locale={locale}
+          dicts={dicts}
+          scope={scope}
+          initial={initial}
+          chips={chips}
+          shopHref={shopLink(locale)}
+        />
+
+        <section class="grid grid-cols-1 items-center gap-12 border-t border-hairline px-6 pt-14 pb-24 md:px-12 md:pt-[72px] lg:grid-cols-2 lg:gap-16">
+          <div class="flex flex-col gap-[18px]">
+            <span class="text-label-sm tracking-label text-text-muted uppercase">{tc('category.aboutEyebrow')}</span>
+            <h2 class="m-0 font-display text-[32px] leading-[1.06] font-normal md:text-[40px]">{tc('category.aboutTitle', {name: deptName})}</h2>
+            <p class="m-0 max-w-[52ch] text-[15px] leading-body text-text-secondary">{tc('category.aboutBody')}</p>
+            <a
+              href={journalLink(locale)}
+              class="self-start border-0 border-b border-strong pb-1 text-label-sm tracking-label uppercase hover:border-strong">
+              {tc('category.journal')}
+            </a>
+          </div>
+          <Img photo={EDITORIAL} ratio="4/5" width={1200} sizes="(min-width: 1024px) 50vw, 100vw" alt={tc('category.detailAlt', {name: deptName})} />
+        </section>
+      </div>
+    )
+  }
+</Storefront>
