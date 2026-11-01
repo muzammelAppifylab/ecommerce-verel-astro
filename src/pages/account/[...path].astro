@@ -1,0 +1,92 @@
+---
+/**
+ * The customer account app (PLAN.md D6, WP-13): every `/account/*` URL that is not a sign-in page renders this
+ * page; the TanStack Router app inside it (src/account/) picks the screen in the browser. `/da/account/…` reaches
+ * it through the locale rewrite (src/middleware.ts) with `Astro.locals.locale = 'da'`.
+ *
+ * The static sign-in pages next to this file (login, register, forgot, reset, verify, confirm-email) win over
+ * this catch-all. The ONLY `.astro` of the app: never one per screen.
+ *
+ * Signed-in only: a guest is sent to sign in with `?next=` (VAREL AccountGuard). The Site API checks again on
+ * every call; a later 401 also sends the visitor to sign in (src/account/AccountApp.tsx). In the editor Preview
+ * the gateway drops cookies, so the page cannot see the session there: the app starts anyway and its first
+ * siteFetch carries it.
+ */
+import AccountApp from '@/account/AccountApp';
+import {ACCOUNT_NAMESPACES} from '@/account/namespaces';
+import {isAccountPath} from '@/account/paths';
+import type {Overview} from '@/account/queries';
+import Storefront from '@/layouts/Storefront.astro';
+import {localizedPath} from '@/lib/i18n/locales';
+import {dictionary, t} from '@/lib/i18n/server';
+import {loginLink} from '@/lib/links';
+import {config} from '@/platform/config';
+import {read} from '@/server/backend';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const sub = Astro.params.path ?? '';
+if (!isAccountPath(sub)) {
+  return Astro.rewrite('/404/');
+}
+
+const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
+const locale = (Astro.locals as {locale?: string}).locale ?? 'en';
+const signedIn = viewer.state === 'user';
+
+if (!signedIn && !config.preview) {
+  // Back to the URL the visitor asked for, language prefix included (`Astro.originPathname` keeps `/da/`).
+  const next = `${Astro.originPathname || Astro.url.pathname}${Astro.url.search}`;
+  return Astro.redirect(loginLink(next), 302);
+}
+
+const initialOverview = signedIn ? await read<Overview>(api.account.overview.$get()) : null;
+const basepath = localizedPath('/account/', locale).replace(/\/$/, '');
+const dict = dictionary(locale, [...ACCOUNT_NAMESPACES]);
+
+const section = sub.split('/')[0] ?? '';
+const TITLES: Record<string, string> = {
+  '': 'title',
+  orders: 'nav.orders',
+  details: 'nav.details',
+  addresses: 'nav.addresses',
+  downloads: 'nav.downloads',
+  privacy: 'privacy.title',
+};
+const title = t(locale, 'account', TITLES[section] ?? 'title');
+const siteName = site?.name ?? 'VAREL';
+---
+
+<Storefront site={site} viewer={viewer} api={api} title={title} noindex>
+  <AccountApp
+    client:only="react"
+    dict={dict}
+    locale={locale}
+    basepath={basepath}
+    siteName={siteName}
+    initialOverview={initialOverview}
+  >
+    <div slot="fallback" class="mx-auto w-full max-w-page px-6 pt-6 pb-24 md:px-12" aria-busy="true">
+      <div class="h-4 w-40 animate-pulse bg-ink-100"></div>
+      <div class="mt-8 grid grid-cols-1 items-start gap-8 lg:mt-10 lg:grid-cols-[248px_minmax(0,1fr)] lg:gap-14 xl:gap-20">
+        <div class="hidden flex-col gap-3 lg:flex">
+          <div class="h-12 animate-pulse bg-ink-100"></div>
+          <div class="h-64 animate-pulse bg-ink-100"></div>
+        </div>
+        <div class="flex flex-col gap-14">
+          <div class="flex flex-col gap-3 border-b border-hairline pb-6">
+            <div class="h-11 w-72 max-w-full animate-pulse bg-ink-100"></div>
+            <div class="h-4 w-48 animate-pulse bg-ink-100"></div>
+          </div>
+          <div class="h-[300px] animate-pulse bg-ink-100"></div>
+        </div>
+      </div>
+    </div>
+  </AccountApp>
+  <noscript>
+    <p class="mx-auto max-w-page px-6 py-16 text-[15px] text-text-secondary md:px-12">
+      {t(locale, 'account', 'title')}: JavaScript is needed for your account.
+    </p>
+  </noscript>
+</Storefront>

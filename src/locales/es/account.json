@@ -70,7 +70,8 @@
       "line1": "Introduce una dirección",
       "zip": "Introduce un código postal",
       "city": "Introduce una ciudad",
-      "country": "Elige un país"
+      "country": "Elige un país",
+      "tooLong": "Mantenlo por debajo de {{max}} caracteres"
     }
   },
   "confirm": {
@@ -88,9 +89,14 @@
     "errors": {
       "firstName": "Introduce tu nombre",
       "lastName": "Introduce tus apellidos",
-      "email": "Introduce un correo electrónico válido"
+      "email": "Introduce un correo electrónico válido",
+      "firstNameLong": "Mantén tu nombre por debajo de 80 caracteres",
+      "lastNameLong": "Mantén tu apellido por debajo de 80 caracteres",
+      "phoneLong": "Mantén el teléfono por debajo de 40 caracteres"
     },
-    "description": "Se usa en tus pedidos, recibos y avisos de entrega."
+    "description": "Se usa en tus pedidos, recibos y avisos de entrega.",
+    "emailHint": "Para cambiar tu correo, enviamos un enlace a la nueva dirección.",
+    "changeEmail": "Cambiar correo"
   },
   "privacy": {
     "title": "Privacidad",
@@ -117,7 +123,11 @@
       "warning": "Te enviaremos una confirmación por correo y cerraremos tu sesión. Tus pedidos se conservan para la contabilidad con tu correo oculto. No se puede deshacer.",
       "password": "Contraseña",
       "enterPassword": "Introduce tu contraseña",
-      "deleted": "Tu cuenta se ha eliminado"
+      "deleted": "Tu cuenta se ha eliminado",
+      "confirmLabel": "Escribe DELETE para confirmar",
+      "errors": {
+        "confirm": "Escribe DELETE en mayúsculas para confirmar"
+      }
     },
     "description": "Descarga tus datos, elige las cookies o cierra tu cuenta."
   },
@@ -166,7 +176,7 @@
     "current": "Contraseña actual",
     "new": "Nueva contraseña",
     "confirm": "Confirma la nueva contraseña",
-    "rule": "Al menos 8 caracteres.",
+    "rule": "Al menos 10 caracteres.",
     "show": "Mostrar contraseñas",
     "save": "Cambiar contraseña",
     "saving": "Cambiando…",
@@ -174,9 +184,15 @@
     "forgot": "¿Has olvidado tu contraseña?",
     "errors": {
       "current": "Introduce tu contraseña actual",
-      "length": "Usa al menos 8 caracteres",
-      "match": "Las contraseñas no coinciden"
-    }
+      "length": "Usa al menos 10 caracteres",
+      "match": "Las contraseñas no coinciden",
+      "tooLong": "Usa como máximo 128 caracteres",
+      "email": "No uses tu dirección de correo en la contraseña"
+    },
+    "showOne": "Mostrar contraseña",
+    "hideOne": "Ocultar contraseña",
+    "noPassword": "Inicias sesión con un código que te enviamos por correo. Para añadir una contraseña, pide un enlace.",
+    "setLink": "Crear una contraseña"
   },
   "preferences": {
     "title": "Comunicaciones",
@@ -185,5 +201,25 @@
     "newsletterBody": "Nuevas colecciones, historias del journal y eventos del estudio, más o menos una vez al mes.",
     "on": "Estás suscrito al boletín",
     "off": "Has cancelado la suscripción al boletín"
-  }
+  },
+  "email": {
+    "title": "Cambiar correo",
+    "new": "Correo nuevo",
+    "password": "Contraseña actual",
+    "send": "Enviar enlace",
+    "sending": "Enviando…",
+    "errors": {
+      "email": "Introduce un correo válido",
+      "password": "Introduce tu contraseña actual",
+      "same": "Ese ya es tu correo"
+    }
+  },
+  "downloading": "Preparando la descarga…",
+  "downloadError": "Este archivo no está disponible ahora. Contacta con el estudio.",
+  "ordersMore": "99+",
+  "notFound": {
+    "title": "Esta página no existe",
+    "action": "Volver a tu cuenta"
+  },
+  "ordersComingSoon": "Tus pedidos llegarán pronto a esta página. Consulta el último en el resumen."
 }
