@@ -1,24 +1,12 @@
-import {ScreenPlaceholder} from '../../ui';
-
 /**
- * journal screens — STUB from F5 (the screen registry). WP-06 owns this folder and
- * replaces these bodies with the port of VAREL `src/pages/admin/journal/*`, keeping the
- * export names (src/portal/routes.tsx imports them lazily). Split into files as
- * needed and re-export them here; the screen's CSS goes in `./screen.css`
- * (src/layouts/App.astro bundles every screen.css under src/portal/screens).
+ * Journal screens (WP-06): port of VAREL `src/pages/admin/journal/*`. `src/portal/routes.tsx` lazy-loads
+ * `JournalList`, `NewPost` and `EditPost` from here; the screen CSS is `./screen.css` (bundled by
+ * src/layouts/App.astro). WP-07 (CMS pages) may import `BlockEditor`, `PreviewBody` and the form helpers.
  */
-
-/** `/dashboard/journal`. */
-export function JournalList() {
-  return <ScreenPlaceholder title="Journal" description="Editorial posts on the storefront." />;
-}
-
-/** `/dashboard/journal/new`. */
-export function NewPost() {
-  return <ScreenPlaceholder title="New post" description="Title, body blocks, cover and SEO." />;
-}
-
-/** `/dashboard/journal/$slug`. */
-export function EditPost() {
-  return <ScreenPlaceholder title="Post" description="Title, body blocks, cover and SEO." />;
-}
+export {JournalList} from './JournalList';
+export {NewPost} from './NewPost';
+export {EditPost} from './EditPost';
+export {BlockEditor, BLOCK_TYPES} from './BlockEditor';
+export {Preview, PreviewBody} from './Preview';
+export {ImageSource} from './ImageSource';
+export {blockFromPost, blockToPost, emptyBlock, type EditorBlock, type FieldErrors} from './form';
