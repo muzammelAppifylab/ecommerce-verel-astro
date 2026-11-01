@@ -14,11 +14,5 @@
     "contact": "Contact"
   },
   "alt": "Coin d’atelier vide à la lumière du jour",
-  "picks": "En ce moment à l’atelier",
-  "error": {
-    "title": "Une erreur est survenue",
-    "heading": "Cette page n’a pas pu s’afficher",
-    "body": "Réessayez dans une minute.",
-    "home": "Retour à l’accueil"
-  }
+  "picks": "En ce moment à l’atelier"
 }

@@ -14,11 +14,5 @@
     "contact": "Kontakt"
   },
   "alt": "Tomt hjørne af studiet i dagslys",
-  "picks": "I studiet lige nu",
-  "error": {
-    "title": "Noget gik galt",
-    "heading": "Siden kunne ikke vises",
-    "body": "Prøv igen om et øjeblik.",
-    "home": "Tilbage til forsiden"
-  }
+  "picks": "I studiet lige nu"
 }

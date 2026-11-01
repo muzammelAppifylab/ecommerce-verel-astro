@@ -14,11 +14,5 @@
     "contact": "Kontakt"
   },
   "alt": "Leere Studioecke im Tageslicht",
-  "picks": "Jetzt im Studio",
-  "error": {
-    "title": "Etwas ist schiefgelaufen",
-    "heading": "Diese Seite konnte nicht angezeigt werden",
-    "body": "Versuchen Sie es in einer Minute erneut.",
-    "home": "Zur Startseite"
-  }
+  "picks": "Jetzt im Studio"
 }

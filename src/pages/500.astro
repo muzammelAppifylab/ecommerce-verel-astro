@@ -1,37 +1,39 @@
 ---
 /**
  * What a visitor sees when a page fails on the server (an error thrown while rendering), instead of an
- * empty answer. Astro renders it with a 500 status. It reads NOTHING (no brand, no visitor, no database,
- * no menus): whatever broke the page must not break this one too. Storefront look (storefront.css) with
- * the type-set wordmark; words from the bundled catalogs (`notfound:error.*`) in the URL's language.
- * The error itself is never shown here; it is in the Worker's log.
+ * empty answer. Astro renders it with a 500 status. VAREL `layout/RouteError.tsx`: the storefront chrome
+ * around a bordered empty state, "Try again" (this same address again) and "Shop the collection".
+ *
+ * It reads no visitor and no page data: only the chrome, which falls back to VAREL's built-in copy and
+ * menus when its reads fail (database down), so whatever broke the page does not break this one.
+ * Words from the bundled `layout:error.*` catalog in the URL's language. The error itself is never shown
+ * here; it is in the Worker's log.
  *
  * In `npm run dev` and the editor Preview you see Astro's error overlay instead, with the stack trace.
  */
-import '../styles/storefront.css';
-
-import Wordmark from '@/components/varel/Wordmark.astro';
-import Base from '@/layouts/Base.astro';
+import {buttonClasses} from '@/components/varel/Button';
+import Storefront from '@/layouts/Storefront.astro';
 import {t} from '@/lib/i18n/server';
 import {href} from '@/lib/links';
 import {GUEST} from '@/platform/auth';
 
 const locale = (Astro.locals as {locale?: string} | undefined)?.locale ?? 'en';
-const home = href('/', locale);
+// "Try again" loads the address that failed (with its locale prefix and query), like VAREL's router.invalidate().
+const again = `${Astro.originPathname ?? Astro.url.pathname}${Astro.url.search}`;
+const shop = href('/shop/', locale);
 ---
 
-<Base site={null} viewer={GUEST} title={t(locale, 'notfound', 'error.title')} noindex chrome="none" locale={locale}>
-  <div class="flex min-h-screen w-full flex-col bg-surface-page">
-    <header class="flex h-16 items-center justify-center border-b border-hairline px-6">
-      <Wordmark href={home} size={22} />
-    </header>
-    <main id="main" tabindex="-1" class="mx-auto flex w-full max-w-page flex-1 flex-col items-start justify-center gap-6 px-6 py-24 md:px-12">
-      <span class="font-display text-[72px] leading-none text-text-muted md:text-[96px]" aria-hidden="true">500</span>
-      <h1 class="m-0 font-display text-[36px] leading-tight font-normal tracking-display md:text-[48px]">{t(locale, 'notfound', 'error.heading')}</h1>
-      <p class="m-0 max-w-[42ch] text-body-md text-text-secondary">{t(locale, 'notfound', 'error.body')}</p>
-      <a href={home} class="text-label-sm tracking-label uppercase border-0 bg-ink-900 px-6 py-[15px] text-text-inverse hover:bg-ink-700 hover:text-text-inverse">
-        {t(locale, 'notfound', 'error.home')}
-      </a>
-    </main>
+<Storefront site={null} viewer={GUEST} title={t(locale, 'layout', 'error.title')} noindex>
+  <div class="mx-auto w-full max-w-page px-6 py-24 md:px-12">
+    <div class="flex flex-col items-center gap-4 border border-hairline px-6 py-16 text-center md:px-12 md:py-24">
+      <h1 class="m-0 font-display text-display-4 font-normal">{t(locale, 'layout', 'error.heading')}</h1>
+      <p class="m-0 max-w-[40ch] text-[15px] text-text-secondary">{t(locale, 'layout', 'error.body')}</p>
+      <div class="mt-2">
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href={again} class={buttonClasses({variant: 'outline'})} rel="nofollow">{t(locale, 'layout', 'error.tryAgain')}</a>
+          <a href={shop} class={buttonClasses()}>{t(locale, 'layout', 'error.shop')}</a>
+        </div>
+      </div>
+    </div>
   </div>
-</Base>
+</Storefront>
