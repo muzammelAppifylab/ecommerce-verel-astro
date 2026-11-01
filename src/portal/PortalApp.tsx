@@ -6,6 +6,7 @@ import {postJson} from '../lib/form';
 import {siteFetch} from '../platform/browser';
 
 import {ApiError} from './api';
+import {parseSearch, stringifySearch} from './queries/search-params';
 import {RouteError, RoutePending, routeTree} from './routes';
 
 /**
@@ -41,6 +42,9 @@ const router = createRouter({
   // Show the pending state only when a screen is slow (no flash on fast ones).
   defaultPendingMs: 300,
   defaultErrorComponent: RouteError,
+  // Plain query strings, as VAREL's admin wrote them (?payment=Paid,Pending&page=2): no JSON in the URL.
+  parseSearch,
+  stringifySearch,
 });
 
 declare module '@tanstack/react-router' {

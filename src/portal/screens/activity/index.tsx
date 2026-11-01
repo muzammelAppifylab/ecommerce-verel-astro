@@ -1,8 +1,8 @@
 import {useInfiniteQuery} from '@tanstack/react-query';
 
-import type {AuditRow} from '../../lib/types';
-import {auditQuery} from '../queries';
-import {ago, when} from '../shared';
+import type {AuditRow} from '../../../lib/types';
+import {auditQuery} from '../../queries';
+import {ago, when} from '../../shared';
 import {
   Card,
   EmptyState,
@@ -12,7 +12,7 @@ import {
   LoadingBlock,
   LoadMore,
   PageHeader,
-} from '../ui';
+} from '../../ui';
 
 type Tone = 'brand' | 'warning' | 'danger' | undefined;
 

@@ -11,6 +11,11 @@
 import '../styles/global.css';
 import '../styles/app.css';
 
+// Each admin screen's own stylesheet (`src/portal/screens/<area>/screen.css`, owned by the
+// package that builds the screen), bundled into the dashboard's CSS after app.css. Never
+// loaded by the website.
+import.meta.glob('../portal/screens/**/screen.css', {eager: true});
+
 import type {Site, Viewer} from '../lib/types';
 
 interface Props {
@@ -32,6 +37,8 @@ const name = site?.name ?? 'My site';
     <title>{`${title} · ${name}`}</title>
     <!-- Signed-in screens are never search results. -->
     <meta name="robots" content="noindex" />
+    <!-- The dashboard's text face (VAREL: Lato), self-hosted in public/fonts/ like the storefront's. -->
+    <link rel="preload" href="/fonts/lato-400.woff2" as="font" type="font/woff2" crossorigin />
     {site?.favIcon ? <link rel="icon" href={site.favIcon} /> : <link rel="icon" href="/favicon.svg" type="image/svg+xml" />}
   </head>
   <body class="app-body" data-viewer={viewer.state}>
