@@ -53,7 +53,21 @@ export default defineConfig({
   // Tailwind v4 compiles at build time into the storefront's stylesheet
   // (src/styles/storefront.css imports it); nothing inline, so the CSP holds.
   vite: {plugins: [tailwindcss()]},
-  redirects: {'/account': '/account/login/'},
+  // Old VAREL and template addresses (docs/migration/PLAN.md D12, D13), permanent. `/account/` itself
+  // is the customer account app (D6: src/pages/account/[...path].astro), so it is not redirected.
+  redirects: {
+    // VAREL sign-in pages → the template's, under /account/ (a VAREL reset token is not valid here:
+    // the visitor asks for a new link).
+    '/login': {status: 301, destination: '/account/login/'},
+    '/signup': {status: 301, destination: '/account/register/'},
+    '/reset-password': {status: 301, destination: '/account/forgot/'},
+    // VAREL admin → the dashboard, same sub-path.
+    '/admin': {status: 301, destination: '/dashboard/'},
+    '/admin/[...path]': {status: 301, destination: '/dashboard/[...path]'},
+    // The template blog (removed) → the journal.
+    '/blog': {status: 301, destination: '/journal/'},
+    '/blog/[...slug]': {status: 301, destination: '/journal/'},
+  },
   // No Markdown code blocks here; Shiki's inline styles would break the CSP.
   markdown: {syntaxHighlight: false},
   security: {

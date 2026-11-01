@@ -38,8 +38,7 @@ export interface NavItem {
  */
 export const NAV: NavItem[] = [
   {label: 'Home', href: '/'},
-  {label: 'Blog', href: '/blog/'},
-  {label: 'Jobs', href: '/jobs/', prefetch: false},
+  {label: 'Journal', href: '/journal/', prefetch: false},
   {label: 'About', href: '/about/'},
 ];
 
@@ -59,7 +58,7 @@ export const HOME = {
     /** Guests: create an account, or jump down the page. */
     guest: {primary: 'Create an account', secondary: 'See how it works'},
     /** Signed-in visitors. */
-    user: {primary: 'Open your dashboard', secondary: 'Read the blog'},
+    user: {primary: 'Open your dashboard', secondary: 'Read the journal'},
   },
   /** The dashboard picture next to the headline: illustrative only, hidden from screen readers. */
   visual: {
