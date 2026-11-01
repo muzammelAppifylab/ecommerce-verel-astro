@@ -11,7 +11,7 @@ import {formatDateLong, minusMoney, money} from '@/lib/format';
 import type {TFunction} from '@/lib/i18n';
 import type {Order} from '@/lib/types/orders';
 
-import {countryName} from './_shared/countries';
+import {countryName} from '@/components/checkout/countries';
 import {appliedDiscounts, merchandiseDiscounts} from './_shared/discounts';
 import {useOrdersLocale, useOrdersT} from './host';
 import {taxPercent} from './order-utils';

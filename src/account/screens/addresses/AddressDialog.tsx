@@ -8,7 +8,7 @@ import type { Address, AddressInput } from '@/lib/types/account'
 import { useAccountContext, useAccountT } from '../../i18n'
 import { countriesQuery, useCreateAddress, useUpdateAddress } from '../../queries'
 import { addressMax, addressProblems, firstProblem, type AddressFieldName } from '../../rules'
-import { countryOptions } from '../../ui/countries'
+import { countryOptions } from '@/components/checkout/countries'
 import { outlineAction, solidAction } from '../../ui/recipes'
 import { focusField, hasFieldError, useFormErrors } from '../../useFormErrors'
 
