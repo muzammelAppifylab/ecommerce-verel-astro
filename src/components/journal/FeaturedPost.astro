@@ -1,0 +1,31 @@
+---
+/** Lead entry on the journal index: 16/9 image left, copy right (VAREL PostCards `FeaturedPost`). */
+import {Img} from '@/components/varel/Img';
+import {dotJoin} from '@/lib/format';
+import {postLink} from '@/lib/links';
+import type {Post} from '@/lib/types/content';
+
+import {META} from './shared';
+
+interface Props {
+  post: Post;
+  locale: string;
+  /** journal:readPiece */
+  readLabel: string;
+}
+
+const {post, locale, readLabel} = Astro.props;
+---
+
+<a
+  href={postLink(post.slug, locale)}
+  data-card
+  class="grid grid-cols-1 items-center gap-8 border-0 text-text-primary hover:text-text-primary md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] md:gap-12">
+  <Img photo={post.image} alt={post.title} ratio="16/9" width={1200} sizes="(min-width: 768px) 56vw, 100vw" priority />
+  <div class="flex flex-col gap-[18px]">
+    <span class={META}>{dotJoin(post.categoryLabel ?? post.category, post.date, post.read)}</span>
+    <h2 class="m-0 font-display text-[34px] font-normal leading-tight tracking-display md:text-[44px]">{post.title}</h2>
+    <p class="m-0 max-w-[46ch] text-body-md text-text-secondary">{post.excerpt}</p>
+    <span class="self-start border-b border-strong pb-1 text-[11px] leading-snug tracking-label uppercase">{readLabel}</span>
+  </div>
+</a>

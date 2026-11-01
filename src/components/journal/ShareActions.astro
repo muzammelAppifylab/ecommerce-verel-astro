@@ -1,0 +1,46 @@
+---
+/**
+ * Share / Print in the article byline (VAREL BlogPost `share`). A plain script on `astro:page-load`
+ * instead of a React island: `navigator.share` when there is one, else copy the link and show the
+ * storefront toast ("Link copied", F2 toast store, shown by the layout's <Toaster>). A dismissed
+ * share sheet or a blocked clipboard reports nothing (VAREL).
+ */
+import {SMALL_LINK} from './shared';
+
+interface Props {
+  title: string;
+  excerpt: string;
+  labels: {share: string; print: string; linkCopied: string};
+}
+
+const {title, excerpt, labels} = Astro.props;
+---
+
+<span class="ml-auto flex gap-4" data-journal-share data-title={title} data-text={excerpt} data-copied={labels.linkCopied}>
+  <button type="button" class={SMALL_LINK} data-share>{labels.share}</button>
+  <button type="button" class={SMALL_LINK} data-print>{labels.print}</button>
+</span>
+
+<script>
+  import {toastStore} from '@/lib/stores/toast';
+
+  document.addEventListener('astro:page-load', () => {
+    const root = document.querySelector<HTMLElement>('[data-journal-share]');
+    if (!root || root.dataset.bound) return;
+    root.dataset.bound = '1';
+    root.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+    root.querySelector('[data-share]')?.addEventListener('click', async () => {
+      const url = window.location.href;
+      try {
+        if (navigator.share) {
+          await navigator.share({title: root.dataset.title ?? document.title, text: root.dataset.text ?? '', url});
+          return;
+        }
+        await navigator.clipboard.writeText(url);
+        toastStore.show({message: root.dataset.copied ?? 'Link copied', tone: 'ink', icon: 'check', duration: 4000});
+      } catch {
+        // Dismissed share sheet or blocked clipboard — nothing to report.
+      }
+    });
+  });
+</script>

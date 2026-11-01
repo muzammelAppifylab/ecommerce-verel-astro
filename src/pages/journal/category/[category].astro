@@ -1,0 +1,107 @@
+---
+/**
+ * /journal/category/<slug>/ — entries in one category, listed as rows (port of VAREL
+ * src/pages/BlogCategory.tsx). An unknown category answers 404 + noindex (VAREL answered 200 with
+ * the empty state; a crawlable empty page is a soft 404). A failed read answers 503.
+ */
+import CategoryChips from '@/components/journal/CategoryChips.astro';
+import {JournalState, Trail} from '@/components/journal/parts';
+import PostRow from '@/components/journal/PostRow.astro';
+import {CATEGORY_SLUG_RE, GUTTER, META, PAGE_TITLE, unslug} from '@/components/journal/shared';
+import {dictsFor} from '@/components/layout/dictionaries';
+import Storefront from '@/layouts/Storefront.astro';
+import {slugify} from '@/lib/format';
+import {tFor} from '@/lib/i18n/server';
+import {homeLink, journalLink} from '@/lib/links';
+import type {Post, PostCategory} from '@/lib/types/content';
+import {cn} from '@/lib/utils';
+import {backend, read} from '@/server/backend';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const locale = (Astro.locals as {locale?: string}).locale ?? 'en';
+const t = tFor(locale, 'journal');
+const slug = (Astro.params.category ?? '').toLowerCase();
+const valid = CATEGORY_SLUG_RE.test(slug);
+const posts = backend(Astro.request).posts;
+const [{api, site, viewer}, categories, list] = await Promise.all([
+  pageContext(Astro.request, Astro.response),
+  valid ? read<PostCategory[]>(posts.categories.$get()) : Promise.resolve([] as PostCategory[]),
+  valid ? read<Post[]>(posts.$get({query: {category: slug}})) : Promise.resolve([] as Post[]),
+]);
+
+const failed = !categories || !list;
+const match = categories?.find(c => slugify(c.name) === slug);
+const first = list?.[0];
+const name = match ? (match.label ?? match.name) : first ? (first.categoryLabel ?? first.category) : unslug(slug);
+const known = !!match || !!first;
+const items = list ?? [];
+const blurb = valid ? t(`categoryBlurb.${slug}`, {defaultValue: ''}) : '';
+
+if (failed) {
+  Astro.response.status = 503;
+  Astro.response.headers.set('Retry-After', '60');
+} else if (!known) {
+  Astro.response.status = 404;
+}
+const trailDicts = dictsFor(locale, {layout: ['ui']});
+---
+
+<Storefront
+  site={site}
+  viewer={viewer}
+  api={api}
+  title={t('category.pageTitle', {name})}
+  description={blurb || t('metaDescription')}
+  noindex={failed || !known}>
+  <div class="mx-auto w-full max-w-page">
+    <Trail
+      className={cn('pt-6', GUTTER)}
+      locale={locale}
+      dicts={trailDicts}
+      items={[{label: t('home'), href: homeLink(locale)}, {label: t('title'), href: journalLink(locale)}, {label: name}]}
+    />
+
+    <header class={cn('grid grid-cols-1 items-end gap-6 pt-6 pb-10 md:grid-cols-[1fr_auto] md:gap-12', GUTTER)}>
+      <div class="flex flex-col gap-3.5">
+        <span class={META}>{t('category.eyebrow')}</span>
+        <h1 class={PAGE_TITLE}>{name}</h1>
+        {blurb && <p class="m-0 max-w-[52ch] text-body-md text-text-secondary">{blurb}</p>}
+      </div>
+      <span class="text-[12px] leading-snug tracking-label text-text-muted uppercase">
+        {failed ? ' ' : t('category.entries', {count: items.length})}
+      </span>
+    </header>
+
+    <CategoryChips
+      categories={categories ?? []}
+      active={slug}
+      locale={locale}
+      label={t('categoriesLabel')}
+      allLabel={t('allEntries')}
+    />
+
+    <div class={cn('flex flex-col py-12', GUTTER)}>
+      {
+        failed ? (
+          <JournalState
+            title={t('category.errorTitle')}
+            description={t('loadErrorDescription')}
+            actionLabel={t('tryAgain')}
+            actionHref={Astro.originPathname}
+          />
+        ) : items.length === 0 ? (
+          <JournalState
+            title={t('category.emptyTitle')}
+            description={t('category.emptyDescription')}
+            actionLabel={t('allEntries')}
+            actionHref={journalLink(locale)}
+          />
+        ) : (
+          items.map(p => <PostRow post={p} locale={locale} />)
+        )
+      }
+    </div>
+  </div>
+</Storefront>

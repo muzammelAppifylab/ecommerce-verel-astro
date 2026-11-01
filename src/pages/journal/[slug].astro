@@ -1,0 +1,189 @@
+---
+/**
+ * /journal/<slug>/ — article with contents, body blocks and related entries (port of VAREL
+ * src/pages/BlogPost.tsx + the `/journal/:slug` head of worker/routes/html.ts). Drafts, scheduled
+ * and unknown posts answer 404 + noindex; a failed read answers 503 (never a 404). The only page JS
+ * is the share / print script.
+ */
+import {JournalState, Trail} from '@/components/journal/parts';
+import PostBody from '@/components/journal/PostBody.astro';
+import PostCard from '@/components/journal/PostCard.astro';
+import ShareActions from '@/components/journal/ShareActions.astro';
+import {headingsOf} from '@/components/journal/headings';
+import {articleJsonLd, clip, shareImage} from '@/components/journal/seo';
+import {AUTHOR_ROLE_KEY, GUTTER, META, POST_SLUG_RE} from '@/components/journal/shared';
+import {Img} from '@/components/varel/Img';
+import {dictsFor} from '@/components/layout/dictionaries';
+import Storefront from '@/layouts/Storefront.astro';
+import {dotJoin} from '@/lib/format';
+import {tFor} from '@/lib/i18n/server';
+import {homeLink, journalCategoryLink, journalLink, postLink} from '@/lib/links';
+import type {PostDetail} from '@/lib/types/content';
+import {cn} from '@/lib/utils';
+import {backend} from '@/server/backend';
+import {pageContext} from '@/server/page';
+
+export const prerender = false;
+
+const locale = (Astro.locals as {locale?: string}).locale ?? 'en';
+const t = tFor(locale, 'journal');
+const slug = Astro.params.slug ?? '';
+
+/** The answer's status as well as its body: a 404 is "not found", anything else is "did not load". */
+async function loadPost(): Promise<{post: PostDetail | null; status: number}> {
+  if (slug.length > 120 || !POST_SLUG_RE.test(slug)) return {post: null, status: 404};
+  try {
+    const res = await backend(Astro.request).posts[':slug'].$get({param: {slug}});
+    return {post: res.ok ? ((await res.json()) as PostDetail) : null, status: res.status};
+  } catch {
+    return {post: null, status: 503};
+  }
+}
+
+const [{api, site, viewer}, {post, status}] = await Promise.all([pageContext(Astro.request, Astro.response), loadPost()]);
+const missing = !post && status === 404;
+if (!post) {
+  Astro.response.status = missing ? 404 : 503;
+  if (!missing) Astro.response.headers.set('Retry-After', '60');
+}
+
+const trailDicts = dictsFor(locale, {layout: ['ui']});
+const headings = post ? headingsOf(post.body) : [];
+const roleKey = post ? AUTHOR_ROLE_KEY[post.author] : undefined;
+const role = roleKey ? t(`authorRole.${roleKey}`) : null;
+const categoryLabel = post ? (post.categoryLabel ?? post.category) : '';
+const description = post ? clip(post.seoDescription || post.excerpt || t('metaDescription')) : undefined;
+const image = post ? shareImage(post.image.src) : null;
+const seo = post
+  ? {
+      title: post.seoTitle || t('post.pageTitle', {title: post.title}),
+      description,
+      image,
+      imageAlt: post.title,
+      type: 'article' as const,
+      publishedAt: new Date(post.publishedAt),
+      updatedAt: post.updatedAt ? new Date(post.updatedAt) : undefined,
+      jsonLd: articleJsonLd({
+        title: post.title,
+        description: description ?? '',
+        locale,
+        image,
+        publishedAt: post.publishedAt,
+        updatedAt: post.updatedAt,
+        section: categoryLabel,
+        author: post.author,
+        publisher: site?.name ?? 'VAREL',
+        canonicalPath: postLink(post.slug, locale),
+      }),
+    }
+  : {title: t('title'), noindex: true};
+---
+
+<Storefront site={site} viewer={viewer} api={api} {...seo}>
+  {
+    !post ? (
+      <div class="mx-auto w-full max-w-page">
+        <Trail
+          className={cn('pt-6', GUTTER)}
+          locale={locale}
+          dicts={trailDicts}
+          items={[{label: t('home'), href: homeLink(locale)}, {label: t('title'), href: journalLink(locale)}]}
+        />
+        <div class={cn('py-12 md:pb-24', GUTTER)}>
+          {missing ? (
+            <JournalState
+              title={t('post.notFoundTitle')}
+              description={t('post.notFoundDescription')}
+              actionLabel={t('allEntries')}
+              actionHref={journalLink(locale)}
+            />
+          ) : (
+            <JournalState
+              title={t('post.errorTitle')}
+              description={t('loadErrorDescription')}
+              actionLabel={t('tryAgain')}
+              actionHref={Astro.originPathname}
+            />
+          )}
+        </div>
+      </div>
+    ) : (
+      <div class="mx-auto w-full max-w-page">
+        <Trail
+          className={cn('pt-6', GUTTER)}
+          locale={locale}
+          dicts={trailDicts}
+          items={[
+            {label: t('home'), href: homeLink(locale)},
+            {label: t('title'), href: journalLink(locale)},
+            {label: categoryLabel, href: journalCategoryLink(post.category, locale)},
+            {label: post.title},
+          ]}
+        />
+
+        <article>
+          <header class={cn('flex max-w-[900px] flex-col gap-5 pt-8 pb-10', GUTTER)}>
+            <span class={META}>{dotJoin(categoryLabel, post.date, post.read)}</span>
+            <h1 class="m-0 font-display text-[40px] font-normal leading-tight tracking-display text-pretty md:text-[60px]">
+              {post.title}
+            </h1>
+            <p class="m-0 max-w-[58ch] text-[17px] leading-[1.55] text-text-secondary md:text-[19px]">{post.excerpt}</p>
+            <div class="flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-hairline pt-5 text-body-xs text-text-muted">
+              <span class="text-text-primary">{post.author}</span>
+              {role && <span>{role}</span>}
+              <ShareActions
+                title={post.title}
+                excerpt={post.excerpt}
+                labels={{share: t('post.share'), print: t('post.print'), linkCopied: t('post.linkCopied')}}
+              />
+            </div>
+          </header>
+
+          <Img photo={post.image} alt={post.title} ratio="16/9" width={1800} sizes="100vw" priority />
+
+          <div
+            class={cn(
+              'grid grid-cols-1 items-start gap-10 pt-12 pb-16 md:pt-16 md:pb-24 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-14',
+              GUTTER
+            )}>
+            {headings.length > 0 ? (
+              <nav aria-label={t('post.contents')} class="flex flex-col gap-3.5 lg:sticky lg:top-24">
+                <span class={META}>{t('post.contents')}</span>
+                {headings.map(h => (
+                  <a href={`#${h.id}`} class="self-start border-0 text-body-sm leading-[1.5]">
+                    {h.text}
+                  </a>
+                ))}
+              </nav>
+            ) : (
+              <div class="hidden lg:block" />
+            )}
+            <PostBody body={post.body} />
+          </div>
+        </article>
+
+        {post.related.length > 0 && (
+          <section
+            aria-labelledby="keep-reading"
+            class={cn('flex flex-col gap-8 border-t border-hairline pt-14 pb-16 md:pt-[72px] md:pb-24', GUTTER)}>
+            <div class="flex items-baseline justify-between gap-8">
+              <h2 id="keep-reading" class="m-0 font-display text-[28px] font-normal tracking-normal md:text-[34px]">
+                {t('post.keepReading')}
+              </h2>
+              <a
+                href={journalLink(locale)}
+                class="border-b border-strong pb-1 text-[11px] leading-snug tracking-label whitespace-nowrap uppercase">
+                {t('allEntries')}
+              </a>
+            </div>
+            <div class="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+              {post.related.map(p => (
+                <PostCard post={p} locale={locale} compact />
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+    )
+  }
+</Storefront>
