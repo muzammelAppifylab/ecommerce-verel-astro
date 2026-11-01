@@ -1,0 +1,150 @@
+/* Customers screens (WP-20; VAREL pages/admin/customers/*). Bundled by src/layouts/App.astro. */
+
+.screen-customers .nowrap {
+  white-space: nowrap;
+}
+
+.screen-customers .customers-name {
+  color: var(--ink);
+  text-underline-offset: 4px;
+}
+
+.screen-customers .customers-email,
+.screen-customers .customers-break {
+  word-break: break-all;
+}
+
+.screen-customers .customers-check {
+  display: inline-flex;
+  color: var(--ink);
+}
+
+.screen-customers .customers-search {
+  flex: 1 1 18rem;
+  max-width: 20rem;
+}
+
+.screen-customers .customers-search .search-input {
+  width: 100%;
+}
+
+.screen-customers .customers-sort .select {
+  min-width: 10rem;
+}
+
+.screen-customers .customers-updating {
+  font-size: 0.75rem;
+}
+
+.screen-customers .customers-retry {
+  margin-top: 0.75rem;
+}
+
+.screen-customers .customers-bulk-spacer {
+  height: 4rem;
+}
+
+.customers-filter {
+  min-width: 11rem;
+}
+
+.customers-filter .customers-filter-options {
+  display: grid;
+  gap: 0.375rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Detail */
+
+.screen-customers .customers-back {
+  align-self: flex-start;
+  gap: 0.25rem;
+}
+
+.screen-customers .customers-headline {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.screen-customers .customers-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.screen-customers .customers-columns {
+  display: grid;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.screen-customers .customers-column {
+  display: grid;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .screen-customers .customers-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .screen-customers .customers-columns {
+    grid-template-columns: minmax(0, 1fr) 340px;
+  }
+}
+
+.screen-customers .customers-empty {
+  margin: 0;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  font-size: 0.8125rem;
+}
+
+.screen-customers .customers-addresses {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .screen-customers .customers-addresses {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.screen-customers .customers-address {
+  display: grid;
+  gap: 0.125rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  font-size: 0.8125rem;
+  font-style: normal;
+  line-height: 1.6;
+}
+
+.screen-customers .customers-address-label {
+  margin-bottom: 0.25rem;
+  color: var(--muted);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.screen-customers .customers-address-primary {
+  color: var(--ink);
+}
+
+.customers-note {
+  margin: 0.75rem 0 0;
+  font-size: 0.75rem;
+}
+
+.customers-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
