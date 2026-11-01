@@ -114,9 +114,9 @@ describe('Stripe REST client', () => {
 
   it('wraps Stripe errors as 502 with Stripe’s message and no key', async () => {
     answers.push(fail(400, `Invalid API Key provided: ${SECRET}`));
-    const err = await stripeProvider()
+    const err = (await stripeProvider()
       .refund({ref: 'pi_4', amountCents: 500, currency: 'USD', idempotencyKey: 'refund-1-order'})
-      .catch(e => e as {status: number; code: string; message: string});
+      .catch((e: unknown) => e)) as {status: number; code: string; message: string};
     expect(err).toMatchObject({status: 502, code: 'PAYMENT_PROVIDER_ERROR'});
     expect(err.message).toMatch(/^Stripe: Invalid API Key provided/);
     expect(err.message).not.toContain(SECRET);
