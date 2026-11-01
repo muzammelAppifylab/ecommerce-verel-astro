@@ -3,7 +3,7 @@
 import type {TFunction} from '@/lib/i18n';
 import type {Order, OrderItem} from '@/lib/types/orders';
 
-import {countryName} from './_shared/countries';
+import {countryName} from '@/components/checkout/countries';
 
 /** Payment status → token text class (Order History / Order Details `payColors`). */
 export function payTextClass(payment: Order['payment']): string {

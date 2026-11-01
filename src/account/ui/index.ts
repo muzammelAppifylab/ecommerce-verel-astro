@@ -1,7 +1,7 @@
 /* The account app's shared kit (also used by WP-14's order screens): `import {ConfirmDialog, outlineAction} from '@/account/ui'`. */
 export * from './recipes'
 export * from './orderUtils'
-export { countryName, countryOptions } from './countries'
+export { countryName, countryOptions } from '@/components/checkout/countries'
 export { StatusChip } from './StatusChip'
 export { ConfirmDialog, type ConfirmDialogProps } from './ConfirmDialog'
 export { ProfileField, type ProfileFieldProps } from './ProfileField'
