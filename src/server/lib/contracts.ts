@@ -2,6 +2,7 @@ import type {MiddlewareHandler} from 'hono';
 
 import type {Prisma, PrismaClient} from '../../generated/prisma/client';
 import type {EventType} from '../../lib/types/events';
+import {sendTemplateImpl} from './email/send';
 
 /**
  * Cross-package contracts (PLAN.md §4–5): functions one Wave 1 package calls and ANOTHER package
@@ -47,16 +48,18 @@ export interface SendTemplateOptions {
  * (`order_confirmation`, `abandoned_cart`, `account_deleted`, …) with `vars`, records it in the
  * outbox (`EmailMessage`) and queues the provider send as a background job. Never throws.
  *
- * WP-22 implements. Stub: logs and does nothing.
+ * WP-22 implements (src/server/lib/email/send.ts): outbox → `stored`; a provider → `queued` + a
+ * `send-email` job when `requestUrl` is given, else delivered inline (from jobs). Call it AFTER your
+ * transaction commits.
  */
 export async function sendTemplate(
-  _db: Db,
+  db: Db,
   key: string,
   to: string,
-  _vars: EmailVars,
-  _opts: SendTemplateOptions = {}
+  vars: EmailVars,
+  opts: SendTemplateOptions = {}
 ): Promise<void> {
-  console.info(`[email] ${key} → ${to.replace(/^(.).*(@.*)$/, '$1***$2')} (not sent: email is not built yet)`);
+  return sendTemplateImpl(db, key, to, vars, opts);
 }
 
 // ─── Payments (WP-11) ─────────────────────────────────────────────────────────
