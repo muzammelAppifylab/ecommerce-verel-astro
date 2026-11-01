@@ -26,6 +26,7 @@ export interface ChromeSettings {
   vatNumber?: string;
   businessAddress?: string;
   socialLinks?: Partial<Record<SocialKey, string>>;
+  logoUrl?: string | null;
   cookieConsent?: boolean;
   analyticsEnabled?: boolean;
   defaultLocale?: string;

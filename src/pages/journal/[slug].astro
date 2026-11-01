@@ -18,6 +18,7 @@ import Storefront from '@/layouts/Storefront.astro';
 import {dotJoin} from '@/lib/format';
 import {tFor} from '@/lib/i18n/server';
 import {homeLink, journalCategoryLink, journalLink, postLink} from '@/lib/links';
+import {breadcrumbJsonLd} from '@/lib/seo';
 import type {PostDetail} from '@/lib/types/content';
 import {cn} from '@/lib/utils';
 import {backend} from '@/server/backend';
@@ -63,18 +64,30 @@ const seo = post
       type: 'article' as const,
       publishedAt: new Date(post.publishedAt),
       updatedAt: post.updatedAt ? new Date(post.updatedAt) : undefined,
-      jsonLd: articleJsonLd({
-        title: post.title,
-        description: description ?? '',
-        locale,
-        image,
-        publishedAt: post.publishedAt,
-        updatedAt: post.updatedAt,
-        section: categoryLabel,
-        author: post.author,
-        publisher: site?.name ?? 'VAREL',
-        canonicalPath: postLink(post.slug, locale),
-      }),
+      jsonLd: [
+        articleJsonLd({
+          title: post.title,
+          description: description ?? '',
+          locale,
+          image,
+          publishedAt: post.publishedAt,
+          updatedAt: post.updatedAt,
+          section: categoryLabel,
+          author: post.author,
+          publisher: site?.name ?? 'VAREL',
+          canonicalPath: postLink(post.slug, locale),
+        }),
+        // The trail the page shows (Home › Journal › category › post).
+        breadcrumbJsonLd(
+          [
+            {label: t('home'), href: homeLink(locale)},
+            {label: t('title'), href: journalLink(locale)},
+            {label: categoryLabel, href: journalCategoryLink(post.category, locale)},
+            {label: post.title},
+          ],
+          postLink(post.slug, locale)
+        ),
+      ],
     }
   : {title: t('title'), noindex: true};
 ---

@@ -69,10 +69,12 @@ export function ProductResults({
 
   return (
     <ProductGrid columns={3} className={cn('transition-opacity duration-200', isFetching && 'opacity-60')}>
-      {items.map(p => (
+      {items.map((p, i) => (
         <ProductGridItem
           key={p.id}
           product={p}
+          // The first row on a phone (two tiles) is above the fold: the likely LCP image, so not lazy.
+          priority={i < 2}
           href={localizeHref(locale, `/product/${encodeURIComponent(p.id)}/`)}
           meta={meta(p)}
           selectedColor={p.swatches.find(w => selectedColors.includes(w.name))?.name ?? null}

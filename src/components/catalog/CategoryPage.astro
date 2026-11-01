@@ -16,6 +16,7 @@ import {CatalogNotice} from '@/components/catalog/CatalogNotice';
 import {Img, type Photo} from '@/components/varel';
 import Storefront from '@/layouts/Storefront.astro';
 import {categoryLink, deptLink, homeLink, journalLink, shopLink} from '@/lib/links';
+import {breadcrumbJsonLd} from '@/lib/seo';
 import {cn} from '@/lib/utils';
 
 interface Props {
@@ -75,7 +76,14 @@ const navCls = (on: boolean) =>
   );
 ---
 
-<Storefront api={ctx.api} site={ctx.site} viewer={ctx.viewer} title={title} description={description} noindex={state !== 'ready' || !list}>
+<Storefront
+  api={ctx.api}
+  site={ctx.site}
+  viewer={ctx.viewer}
+  title={title}
+  description={description}
+  noindex={state !== 'ready' || !list}
+  jsonLd={breadcrumbJsonLd(crumbs, catSlug ? categoryLink(deptSlug, catSlug, locale) : deptLink(deptSlug, locale))}>
   {
     state === 'not-found' && (
       <div class="mx-auto max-w-page px-6 pt-10 pb-24 md:px-12">

@@ -1,22 +1,49 @@
-import {useEffect, useState} from 'react';
+import {lazy, Suspense, useEffect, useState} from 'react';
 
 import {IconButton} from '@/components/varel/IconButton';
 import {isActivePath} from '@/components/varel/href';
 import {TextProvider, useText} from '@/components/varel/text';
 import {Wordmark} from '@/components/varel/Wordmark';
 import {bag, useBag} from '@/lib/stores/bag';
-import {ui} from '@/lib/stores/ui';
+import {ui, useUI} from '@/lib/stores/ui';
 import {cn} from '@/lib/utils';
 
-import {BagDrawer} from './BagDrawer';
 import type {Chrome} from './chrome';
 import {LanguageSwitcher} from './LanguageSwitcher';
 import {MenuLink} from './MenuLink';
-import {MobileMenu} from './MobileMenu';
 
 export type SiteHeaderProps = Pick<Chrome, 'header' | 'links' | 'signedIn' | 'languages' | 'locale' | 'path' | 'dicts'>;
 
 const navLink = 'border-0 text-text-primary transition-hover';
+
+/* The two drawers (mobile menu, bag) and the dialog code under them (Radix Dialog) load on first use, not with
+   the header (I1: they were most of every public page's first-load JS). Pointing at or focusing the Menu / Bag
+   button starts the download, so the drawer is usually ready by the click; an add-to-bag elsewhere opens the
+   bag through the store and loads it then. Once loaded they stay mounted (close animations, focus return). */
+const loadMenu = () => import('./MobileMenu');
+const loadBag = () => import('./BagDrawer');
+const MobileMenu = lazy(() => loadMenu().then(m => ({default: m.MobileMenu})));
+const BagDrawer = lazy(() => loadBag().then(m => ({default: m.BagDrawer})));
+const preload = (load: () => Promise<unknown>) => () => void load().catch(() => null);
+const intent = (load: () => Promise<unknown>) => ({onPointerEnter: preload(load), onFocus: preload(load), onTouchStart: preload(load)});
+
+function Layers(props: SiteHeaderProps) {
+  const {menuOpen, bagOpen} = useUI();
+  const [menu, setMenu] = useState(false);
+  const [bagShown, setBagShown] = useState(false);
+  useEffect(() => {
+    if (menuOpen) setMenu(true);
+  }, [menuOpen]);
+  useEffect(() => {
+    if (bagOpen) setBagShown(true);
+  }, [bagOpen]);
+  return (
+    <Suspense fallback={null}>
+      {menu && <MobileMenu {...props} />}
+      {bagShown && <BagDrawer links={props.links} />}
+    </Suspense>
+  );
+}
 
 /**
  * The storefront header island (client:load): the sticky header, the mobile menu and the bag drawer frame.
@@ -28,8 +55,7 @@ export function SiteHeader(props: SiteHeaderProps) {
   return (
     <TextProvider locale={props.locale} dicts={props.dicts}>
       <HeaderBar {...props} />
-      <MobileMenu {...props} />
-      <BagDrawer links={props.links} />
+      <Layers {...props} />
     </TextProvider>
   );
 }
@@ -63,7 +89,7 @@ function HeaderBar({header, links, signedIn, languages, locale, path}: SiteHeade
           ))}
         </nav>
         <div className="-ml-2.5 lg:hidden">
-          <IconButton name="menu" label={t('header.openMenu')} size={40} onClick={ui.openMenu} />
+          <IconButton name="menu" label={t('header.openMenu')} size={40} onClick={ui.openMenu} {...intent(loadMenu)} />
         </div>
 
         {/* centre */}
@@ -86,6 +112,7 @@ function HeaderBar({header, links, signedIn, languages, locale, path}: SiteHeade
           <button
             type="button"
             onClick={ui.openBag}
+            {...intent(loadBag)}
             aria-haspopup="dialog"
             className="border-0 bg-transparent p-0 tracking-label uppercase transition-hover hover:underline hover:underline-offset-5">
             {t('header.bag', {count})}
@@ -99,6 +126,7 @@ function HeaderBar({header, links, signedIn, languages, locale, path}: SiteHeade
           <button
             type="button"
             onClick={ui.openBag}
+            {...intent(loadBag)}
             aria-haspopup="dialog"
             aria-label={t('header.openBag', {count})}
             className="relative inline-flex h-10 items-center gap-1 border-0 bg-transparent px-2.5 font-sans text-label-md tracking-label whitespace-nowrap uppercase">

@@ -38,7 +38,7 @@ import BrandMark from '../components/BrandMark.astro';
 import {NAV, SITE, withName} from '../content/site';
 import type {Site, Viewer} from '../lib/types';
 import {initials} from '../lib/format';
-import {absoluteUrl, type JsonLd, jsonLdText, siteJsonLd} from '../lib/seo';
+import {absoluteUrl, type JsonLd, jsonLdText, ogLocale, type SiteIdentity, siteJsonLd} from '../lib/seo';
 import {config} from '../platform/config';
 import {DEFAULT_LOCALE, localizeHref, stripLocale} from '../components/varel/href';
 
@@ -69,13 +69,15 @@ interface Props {
   /** The page URL carries a secret (a reset or confirmation token): send no Referer. */
   secretInUrl?: boolean;
   /** The page's own structured data (src/lib/seo.ts): `postJsonLd(…)`, `jobJsonLd(…)`. */
-  jsonLd?: JsonLd;
+  jsonLd?: JsonLd | (JsonLd | null | undefined)[] | null;
   /** `site`: the template header/footer + global.css. `none`: the page draws its own (storefront layouts). */
   chrome?: 'site' | 'none';
   /** The page language (`da`); default `Astro.locals.locale`, else `SITE.lang`. */
   locale?: string;
   /** The same page in each enabled language, for `hreflang` (`href` is a path like `/da/shop/`). */
   alternates?: {code: string; href: string}[];
+  /** More about who runs the site for the home page's `Organization` (the storefront passes the store's settings). */
+  identity?: Partial<SiteIdentity>;
 }
 
 const {
@@ -95,9 +97,11 @@ const {
   chrome = 'site',
   locale: localeProp,
   alternates = [],
+  identity,
 } = Astro.props;
 const locale = localeProp ?? (Astro.locals as {locale?: string}).locale ?? SITE.lang;
-const name = site?.name ?? 'My site';
+// The storefront passes the store's own name (settings `storeName`, VAREL's titles); else the platform's brand.
+const name = identity?.name || site?.name || 'My site';
 const fullTitle = title ? `${title} · ${name}` : name;
 const description = pageDescription ?? withName(SITE.description, name);
 const path = Astro.url.pathname;
@@ -126,8 +130,14 @@ const hydrate = isStatic || (config.preview && viewer.state !== 'user');
 // The home page tells search engines the site's name; other pages bring their own.
 const indexable = !noindex && !secretInUrl;
 const structured = indexable
-  ? [...(stripLocale(path) === '/' ? [siteJsonLd({name, logo: site?.logo}, description, locale)] : []), ...(jsonLd ? [jsonLd] : [])]
+  ? [
+      ...(stripLocale(path) === '/' ? [siteJsonLd({logo: site?.logo, ...identity, name}, description, locale)] : []),
+      ...(Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter((data): data is JsonLd => !!data),
+    ]
   : [];
+// Open Graph language: this page's, plus the other languages it exists in.
+const ogLanguage = ogLocale(locale);
+const ogAlternates = canonical ? [...new Set(alternates.map(a => ogLocale(a.code)))].filter(l => l !== ogLanguage) : [];
 ---
 
 <!doctype html>
@@ -145,6 +155,8 @@ const structured = indexable
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title ?? name} />
     <meta property="og:description" content={description} />
+    <meta property="og:locale" content={ogLanguage} />
+    {ogAlternates.map(l => <meta property="og:locale:alternate" content={l} />)}
     {canonical && <meta property="og:url" content={canonical} />}
     {socialImage && <meta property="og:image" content={socialImage} />}
     {socialImage && imageAlt && <meta property="og:image:alt" content={imageAlt} />}
@@ -157,7 +169,7 @@ const structured = indexable
     {chrome === 'site' && <meta name="color-scheme" content="light dark" />}
     {chrome === 'site' && <link rel="stylesheet" href={globalCssUrl} />}
     {site?.favIcon ? <link rel="icon" href={site.favIcon} /> : <link rel="icon" href="/favicon.svg" type="image/svg+xml" />}
-    <link rel="alternate" type="application/rss+xml" title={`${name} blog`} href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${name} Journal`} href="/rss.xml" />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     {structured.map(data => <script type="application/ld+json" set:html={jsonLdText(data)} />)}
     <slot name="head" />
