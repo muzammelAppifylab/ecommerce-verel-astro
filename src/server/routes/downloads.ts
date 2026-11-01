@@ -7,6 +7,7 @@ import {normEmail} from '../lib/format';
 import {apiError} from '../lib/http';
 import {normalizeOrderNumber, ownedBy} from '../lib/orders';
 import {query} from '../lib/validate';
+import {rateLimit} from '../lib/rate-limit';
 
 /**
  * Digital downloads (WP-13, PLAN.md §5, D8). Port of VAREL worker/routes/downloads.ts.
@@ -81,6 +82,8 @@ export const downloadRoutes = new Hono().get('/:file', query(downloadQuery), wit
     allowed = !!hit;
   }
   if (!allowed && order && email) {
+    // Guest links (order number + email) are guessable: limited per IP (I2).
+    await rateLimit(c, db, 'download');
     const o = await db.shopOrder.findUnique({
       where: {number: normalizeOrderNumber(order)},
       select: {id: true, email: true, payment: true},

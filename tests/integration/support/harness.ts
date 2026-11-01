@@ -146,7 +146,7 @@ export async function resetDatabase() {
       '"posts", "carts", "cart_lines", "wishlist_items", "discounts", "discount_codes", "discount_redemptions", "settings", ' +
       '"shipping_zones", "shipping_methods", "tax_rates", "shop_orders", "shop_order_items", "shop_order_events", ' +
       '"return_requests", "shop_payments", "newsletter_subscribers", "contact_messages", "collections", "collection_products", ' +
-      '"pages", "menus", "activity_logs", "email_templates", "email_messages", "reviews", "analytics_events", "translations" ' +
+      '"pages", "menus", "activity_logs", "email_templates", "email_messages", "reviews", "analytics_events", "translations", "rate_hits" ' +
       'RESTART IDENTITY CASCADE'
   );
   // The store settings singleton always exists (as after the migration).

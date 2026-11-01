@@ -58,7 +58,7 @@ export async function localeSettings(db: Db | null | undefined): Promise<LocaleS
     cached = { at: Date.now(), value }
     return value
   } catch (e) {
-    console.error('[locale] could not read settings', e)
+    console.error('[locale] could not read settings', e instanceof Error ? e.message : 'unknown error')
     return { defaultLocale: DEFAULT_LOCALE, locales: FALLBACK_LOCALES }
   }
 }

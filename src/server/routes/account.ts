@@ -17,6 +17,7 @@ import {orderInclude, serializeAddress, serializeOrder, serializeUser, splitName
 import {getSettings} from '../lib/settings';
 import {json, params, requiredText} from '../lib/validate';
 import {readVisitorId, VISITOR_COOKIE, visitorCookieOptions} from '../lib/visitor';
+import {rateLimit} from '../lib/rate-limit';
 
 /**
  * Customer account (WP-13, PLAN.md §5). Port of VAREL worker/routes/account.ts.
@@ -353,6 +354,7 @@ export const accountRoutes = new Hono()
   .get('/export', withViewer, requireAuth, withDb, async c => {
     const db = c.var.db;
     const id = c.var.viewer.id!;
+    await rateLimit(c, db, 'export', {userId: id});
     const [user, access] = await Promise.all([
       db.user.findUnique({where: {id}, select: {id: true, email: true, name: true, createdAt: true, updatedAt: true}}),
       getAccess(c.req.raw),

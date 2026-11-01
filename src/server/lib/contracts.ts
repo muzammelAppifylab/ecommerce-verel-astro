@@ -188,7 +188,7 @@ export async function localize<T extends {id: string | number}>(
       return out as T;
     });
   } catch (e) {
-    console.error(`[i18n] could not localize ${entity}`, e);
+    console.error(`[i18n] could not localize ${entity}`, e instanceof Error ? e.message : 'unknown error');
     return rows;
   }
 }
@@ -229,7 +229,7 @@ export async function queueEntityTranslation(
     const {enqueueTranslation} = await import('./i18n/translate');
     await enqueueTranslation(db, entity, id, opts);
   } catch (e) {
-    console.error(`[i18n] could not queue ${entity}:${String(id)}`, e);
+    console.error(`[i18n] could not queue ${entity}:${String(id)}`, e instanceof Error ? e.message : 'unknown error');
   }
 }
 

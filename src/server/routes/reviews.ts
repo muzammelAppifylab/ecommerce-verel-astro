@@ -14,6 +14,7 @@ import type {
 } from '../../lib/types/reviews';
 import type {Db} from '../lib/db';
 import {HttpError, conflict, forbidden, notFound} from '../lib/errors';
+import {rateLimit} from '../lib/rate-limit';
 import {apiError, cursorDate, decodeCursor, encodeCursor, publicCache} from '../lib/http';
 import {DELETED_NAME} from '../lib/privacy';
 import {SETTINGS_ID} from '../lib/settings';
@@ -298,6 +299,8 @@ export const reviewRoutes = new Hono()
     const db = c.var.db;
     const viewer = c.var.viewer;
     const input = c.req.valid('json');
+    // Attempts per account, failed ones too (I2); the 5-per-hour cap on posted reviews follows below.
+    await rateLimit(c, db, 'review', {userId: viewer.id});
     const product = await publishedProduct(db, c.req.param('slug'));
     const settings = await reviewSettings(db);
     if (!settings.enabled) throw forbidden('Reviews are closed at the moment');

@@ -9,6 +9,7 @@ import {loadProductPromotions} from '../lib/promotions-loader';
 import {categoryName, departmentName, type PostTr, serializePost, serializeProduct} from '../lib/serializers';
 import {getSettings} from '../lib/settings';
 import {query} from '../lib/validate';
+import {rateLimit} from '../lib/rate-limit';
 
 /**
  * Search (WP-08). Port of VAREL worker/routes/search.ts.
@@ -66,6 +67,8 @@ const PRIVATE_CACHE = 'private, max-age=30';
 
 /** Mounted at `/site-api/search` (src/server/app.ts). */
 export const searchRoutes = new Hono().get('/', query(searchQuery), withDb, async c => {
+  // Each search loads the catalogue: limited per IP (I2, WP-08 request).
+  await rateLimit(c, c.var.db, 'search');
   const {q} = c.req.valid('query');
   if (!q) {
     // An empty term never reaches the database.

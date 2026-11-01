@@ -363,16 +363,16 @@ export async function mergeGuestIntoUser(db: DbClient, visitorId: string, userId
       if (guestCart) await tx.cart.delete({ where: { id: guestCart.id } })
 
       const guestWish = await tx.wishlistItem.findMany({ where: { visitorId }, orderBy: { createdAt: 'asc' }, take: 100 })
-      for (const w of guestWish) {
-        await tx.wishlistItem.upsert({
-          where: { userId_productId: { userId, productId: w.productId } },
-          create: { userId, productId: w.productId },
-          update: {},
+      // One statement, not one upsert per item (I2: no query per row); existing items are kept.
+      if (guestWish.length) {
+        await tx.wishlistItem.createMany({
+          data: guestWish.map((w) => ({ userId, productId: w.productId })),
+          skipDuplicates: true,
         })
       }
       await tx.wishlistItem.deleteMany({ where: { visitorId } })
     })
   } catch (err) {
-    console.error('[varel] could not merge guest bag into account', err)
+    console.error('[varel] could not merge guest bag into account', err instanceof Error ? err.message : 'unknown error')
   }
 }

@@ -4,6 +4,7 @@ import {z} from 'zod';
 import {withDb} from '../../platform/guards';
 import type {Db} from '../lib/db';
 import {apiError} from '../lib/http';
+import {rateLimit} from '../lib/rate-limit';
 import {emailField, json, optionalText} from '../lib/validate';
 
 /**
@@ -14,7 +15,7 @@ import {emailField, json, optionalText} from '../lib/validate';
  *
  * Visitor-independent: no `withViewer`. The app-wide `sameOrigin`, `csrf` and body limit apply.
  * The same 204 answers a new and an existing address (no enumeration); an existing row keeps its
- * original `source` and date. Per-IP limits are I2's; a global flood guard refuses a burst.
+ * original `source` and date. A per-IP limit (`rateLimit` 'newsletter', I2) and a global flood guard refuse a burst.
  *
  * `subscribe` / `unsubscribe` are the writes every other writer of `newsletter_subscribers` should
  * reuse (checkout, account preferences, sign-up onboarding), so the subscriber row and the account's
@@ -54,6 +55,7 @@ export async function unsubscribe(db: Db, email: string): Promise<number> {
 export const newsletterRoutes = new Hono().post('/', json(newsletterBody), withDb, async c => {
   const {email, source} = c.req.valid('json');
   const db = c.var.db;
+  await rateLimit(c, db, 'newsletter');
   const recent = await db.newsletterSubscriber.findMany({
     where: {createdAt: {gt: new Date(Date.now() - FLOOD_WINDOW_MS)}},
     select: {id: true},

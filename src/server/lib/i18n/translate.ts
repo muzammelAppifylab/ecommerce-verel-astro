@@ -279,6 +279,6 @@ export async function enqueueTranslation(
     })
   } catch (e) {
     if (e instanceof JobRejected) console.warn(`[i18n] ${entity}:${entityId} not queued (${e.code}); the hourly backfill picks it up`)
-    else console.error(`[i18n] could not queue ${entity}:${entityId}`, e)
+    else console.error(`[i18n] could not queue ${entity}:${entityId}`, e instanceof Error ? e.message : 'unknown error')
   }
 }
