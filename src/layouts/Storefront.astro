@@ -1,0 +1,101 @@
+---
+/**
+ * The storefront page layout (VAREL `layout/SiteLayout.tsx`): skip link, navigation progress, announcement
+ * bar, sticky header (+ mobile menu + bag drawer frame), the page in <main id="main">, footer, cookie banner.
+ * Wraps <Base chrome="none"> so every SEO behaviour of Base holds (title, description, canonical, Open Graph,
+ * JSON-LD, ClientRouter, session refresh), plus `lang` and `hreflang` for the page language (D7).
+ *
+ *   ---
+ *   const {api, site, viewer} = await pageContext(Astro.request, Astro.response);
+ *   ---
+ *   <Storefront site={site} viewer={viewer} api={api} title="Shop" description="…">…</Storefront>
+ *
+ * A prerendered page passes `isStatic` (and no `api`): the chrome is read at build time, the visitor is filled
+ * in the browser. The chrome reads `GET /site-api/settings/public` and `GET /site-api/menus` in-process
+ * (src/components/layout/chrome.ts) and falls back to VAREL's built-in copy and menus when they fail.
+ *
+ * Styles: src/styles/storefront.css (Tailwind v4) only; the template's global.css is not linked here.
+ */
+import '../styles/storefront.css';
+
+import type {ComponentProps} from 'astro/types';
+
+import AnnouncementBar from '@/components/layout/AnnouncementBar.astro';
+import {buildChrome, readChromeData} from '@/components/layout/chrome';
+import {CookieBanner} from '@/components/layout/CookieBanner';
+import {serverText} from '@/components/layout/dictionaries';
+import Footer from '@/components/layout/Footer.astro';
+import NavigationProgress from '@/components/layout/NavigationProgress.astro';
+import {SiteHeader} from '@/components/layout/SiteHeader';
+import {DEFAULT_LOCALE} from '@/components/varel/href';
+import {setMoneyContext} from '@/components/varel/support';
+import {backend} from '@/server/backend';
+
+import {Toaster} from '@/components/varel/Toast';
+
+import Base from './Base.astro';
+
+type BaseProps = ComponentProps<typeof Base>;
+
+interface Props extends Omit<BaseProps, 'chrome' | 'locale' | 'alternates'> {
+  /** The page's in-process Site API client (`pageContext().api`); one is made when omitted. */
+  api?: unknown;
+  /** Hide the newsletter + footer (rare: a bare editorial page). Default false. */
+  hideFooter?: boolean;
+}
+
+const {api, hideFooter = false, ...base} = Astro.props;
+const locale = (Astro.locals as {locale?: string}).locale ?? DEFAULT_LOCALE;
+const {settings, menus} = await readChromeData(api ?? backend(Astro.request), locale);
+const chrome = buildChrome({
+  settings,
+  menus,
+  locale,
+  pathname: Astro.url.pathname,
+  search: base.isStatic ? '' : Astro.url.search,
+  signedIn: base.viewer.state === 'user',
+});
+setMoneyContext(chrome.currency, locale);
+const t = serverText(locale);
+const alternates = chrome.languages.map(l => ({code: l.code, href: l.href}));
+const headerProps = {
+  header: chrome.header,
+  links: chrome.links,
+  signedIn: chrome.signedIn,
+  languages: chrome.languages,
+  locale: chrome.locale,
+  path: chrome.path,
+  dicts: {layout: chrome.dicts.layout ?? {}, i18n: chrome.dicts.i18n ?? {}, common: chrome.dicts.common ?? {}},
+};
+const cookieDicts = {privacy: chrome.dicts.privacy ?? {}, common: chrome.dicts.common ?? {}};
+---
+
+<Base {...base} chrome="none" locale={locale} alternates={alternates}>
+  <Fragment slot="head">
+    <meta name="theme-color" content="#FFFFFF" />
+    <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <slot name="head" />
+  </Fragment>
+  <div class="flex min-h-screen w-full flex-col bg-surface-page" data-store-currency={chrome.currency}>
+    <a
+      href="#main"
+      class="sr-only z-50 border-0 bg-ink-900 px-4 py-3 text-label-sm tracking-label text-text-inverse uppercase focus:not-sr-only focus:fixed focus:top-2 focus:left-2">
+      {t('layout', 'skipLink')}
+    </a>
+    <NavigationProgress />
+    <Toaster client:idle />
+    <AnnouncementBar text={chrome.announcement} />
+    <SiteHeader client:load {...headerProps} />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    {!hideFooter && <Footer chrome={chrome} />}
+    <CookieBanner
+      client:idle
+      required={chrome.cookieConsent}
+      privacyHref={chrome.links.privacy}
+      locale={chrome.locale}
+      dicts={cookieDicts}
+    />
+  </div>
+</Base>
