@@ -276,6 +276,7 @@ async function writeOrder(
             create: [
               {
                 kind: 'placed',
+                at: new Date(now), // one clock for both events, so "delivered" always sorts after "placed"
                 message: `Order placed${user ? '' : ' as a guest'} · ${plural(units, 'item')}${pending ? ' · awaiting payment' : ''}`,
               },
               ...(delivered ? [{kind: 'status', message: `${DELIVERED_EVENT} · digital delivery`, at: new Date(now + 1)}] : []),
