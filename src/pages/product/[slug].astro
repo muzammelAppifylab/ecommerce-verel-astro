@@ -5,7 +5,7 @@
  * its related pieces and the store's SEO settings read in parallel through the in-process Site API.
  *
  *   200  gallery (island, client:visible) · buy column (island, client:load) + accordion (server HTML) ·
- *        reviews (WP-04 slot) · related (server HTML)
+ *        reviews (WP-04 island, client:visible) · related (server HTML)
  *   404  unknown, draft, archived or malformed slug (noindex)
  *   503  the read failed (Retry-After: 60, noindex): an outage must never look like a missing page
  */
@@ -16,6 +16,8 @@ import {ProductBreadcrumb} from '@/components/product/ProductBreadcrumb';
 import {ProductGalleryIsland} from '@/components/product/ProductGallery';
 import ProductStates from '@/components/product/ProductStates.astro';
 import RelatedProducts from '@/components/product/RelatedProducts.astro';
+import {loadReviews} from '@/components/reviews/load';
+import ReviewsSection from '@/components/reviews/ReviewsSection.astro';
 import {absImage, metaDescription, productJsonLd} from '@/components/product/seo';
 import {DEFAULT_LOCALE} from '@/components/varel/href';
 import Storefront from '@/layouts/Storefront.astro';
@@ -47,10 +49,11 @@ async function readProduct(): Promise<Product | 'missing' | 'failed'> {
   }
 }
 
-const [answer, related, settings] = await Promise.all([
+const [answer, related, settings, reviews] = await Promise.all([
   readProduct(),
   read<Product[]>(api.products[':slug'].related.$get({param: {slug}, query: {limit: '4'}})),
   read<Partial<PublicSettings>>(api.settings.public.$get()),
+  loadReviews(api, slug),
 ]);
 
 const st = serverText(locale);
@@ -141,7 +144,7 @@ const view = product
           </div>
         </div>
 
-        {/* WP-04 slot: the reviews island (<ProductReviews client:visible slug={view.p.id} name={view.p.name} … />). */}
+        <ReviewsSection slug={view.p.id} name={view.p.name} initial={reviews} />
 
         <RelatedProducts items={related} locale={locale} t={t} />
       </div>
