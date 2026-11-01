@@ -30,7 +30,8 @@ const locale = (Astro.locals as {locale?: string}).locale ?? DEFAULT_LOCALE;
 const hidden = !!initial && !initial.settings.enabled && initial.summary.count === 0;
 const dict = dictionary(locale, ['reviews']);
 const back = `${localizedPath(`/product/${slug}/`, locale)}#reviews`;
-const loginHref = `/account/login/?next=${encodeURIComponent(back)}`;
+// The sign-in page in the visitor's language, as the header's "Sign in" links it (`/da/account/login/`).
+const loginHref = `${localizedPath('/account/login/', locale)}?next=${encodeURIComponent(back)}`;
 ---
 
 {!hidden && <ProductReviews client:visible slug={slug} name={name} initial={initial} dict={dict} locale={locale} loginHref={loginHref} />}
