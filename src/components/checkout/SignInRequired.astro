@@ -1,0 +1,27 @@
+---
+/** Guest checkout off and nobody signed in (port of `SignInRequired` in VAREL src/pages/Checkout.tsx). No JS. */
+import {serverText} from '@/components/layout/dictionaries';
+import {cartLink, checkoutLink, loginLink, registerLink} from '@/lib/links';
+
+import {OUTLINE_CTA, SOLID_CTA} from './ui';
+
+interface Props {
+  locale: string;
+}
+
+const {locale} = Astro.props;
+const t = serverText(locale);
+const next = checkoutLink(locale);
+---
+
+<div class="mx-auto flex w-full max-w-page flex-col items-start gap-6 px-6 py-24 md:px-12">
+  <h1 class="m-0 font-display text-[36px] leading-tight font-normal tracking-display md:text-display-3">
+    {t('checkout', 'signIn.title')}
+  </h1>
+  <p class="m-0 max-w-[48ch] text-body-md leading-body text-text-secondary">{t('checkout', 'signIn.body')}</p>
+  <div class="flex flex-wrap gap-3 max-sm:w-full">
+    <a href={loginLink(next)} class:list={[SOLID_CTA, 'px-8 py-[16px] max-sm:w-full']}>{t('checkout', 'signIn.signIn')}</a>
+    <a href={registerLink(next)} class:list={[OUTLINE_CTA, 'px-8 py-[15px] max-sm:w-full']}>{t('checkout', 'signIn.create')}</a>
+  </div>
+  <a href={cartLink(locale)} class="text-body-sm">{t('checkout', 'signIn.back')}</a>
+</div>
